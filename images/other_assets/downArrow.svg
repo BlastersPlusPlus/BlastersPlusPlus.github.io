@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+     height="32" width="50"
+     viewBox="0 0 50 32">
+
+    <path fill="black"
+          d="M 15 5 L 25 15 35 5 A 7.071 7.071 0 0 1 45 15
+            L 35 25 A 14.142 14.142 0 0 1 15 25
+            L 5 15 A 7.071 7.071 0 0 1 15 5Z"/>
+
+</svg>

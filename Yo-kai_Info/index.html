@@ -1,0 +1,324 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>Blasters++: Yo-kai Info</title>
+        <meta charset="utf-8">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../style-global.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="../backgrounds.css">
+        <script rel="text/javascript" src="./yokaiInfo.js"></script>
+        <noscript>
+            <style>.noJS {display: none}</style>
+        </noscript>
+    </head>
+    <body>
+        <header>
+            <img src="/images/logos/logo.png" alt="Blasters++ Logo">
+        </header>
+
+        <div class="bodyContents">
+            <noscript>
+                <div class="whiteOverWindow">
+                    JavaScript is disabled in your browser.<br>
+                    To view this page, please enable JavaScript.
+                </div>
+            </noscript>
+            <main id="yokaiGrid"></main>
+
+            <div id="screenCover">
+                <div id="closePopupContainer">
+                    <button id="closePopup" onclick="closeInfoPopup()"></button>
+                </div>
+                <div id="yokaiInfo" class="normal">
+                    <div id="yokaiInfoPaddingContainer">
+                        <p id="yokaiInfoTitle"><span class="numberComponents"><span id="yokaiNumber">#001</span> — </span><span id="yokaiInfoName">Pandle</span></p>
+                        <img id="yokaiMedal" loading="lazy" src="../images/yokaiMedalsLarge/y101000.png" alt="Yo-kai Pandle's Medal" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                        <div id="rankTribeAttributes">
+                            <div><img id="yokaiInfoRankIcon" loading="lazy" src="../images/rankIcons/all_text_rank01_e.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                                <p id="yokaiInfoRank">E Rank</p></div>
+                            <div id="role">
+                                <div><img id="yokaiInfoRoleIcon" loading="lazy" src="../images/roleText/Fighter.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')"></div>
+                                <p id="yokaiInfoRole">Fighter Role</p></div>
+
+                            <div><img id="yokaiInfoTribeIcon" loading="lazy" src="../images/tribeIcons/Brave.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                                <p id="yokaiInfoTribe">Brave</p></div>
+                        </div>
+
+                        <div id="medalliumBio" class="noBio">
+                            A careless Yo-kai who enters battle wearing only a loincloth... and a pan on his head. Try not to take after him so much.
+                        </div>
+
+                        <div id="statsSkill">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat" id="yokaiHP">417</div>
+                                <hr>
+                            </div>
+                            <div class="elements">
+                                <div class="strongEL">Str.</div>
+                                <img id="strongElement" loading="lazy" src="../images/attributeIcons/attributeFire.png" alt="Fire Attribute" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                                <hr class="strongEL">
+                                <div class="weakEL">Wk.</div>
+                                <img id="weakElement" loading="lazy" src="../images/attributeIcons/attributeWater.png" alt="Water Attribute" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                                <hr class="weakEL">
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat" id="yokaiSTR">145</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat" id="yokaiSPR">589</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat" id="yokaiDEF">184</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPD">
+                                <div class="hexagonTitle SPD">SPD</div>
+                                <div class="stat" id="yokaiSPD">Normal</div>
+                                <hr>
+                            </div>
+                            <div class="skillTitle">
+                                <div class="hexagonTitle Skill">SKILL</div>
+                                <div id="skillName">Careless</div>
+                                <hr>
+                            </div>
+                            <div id="skillDescription">
+                                30% more likely to cause and take critical hits
+                            </div>
+                        </div>
+
+
+                        <div id="movesSoultimateWrapper">
+                            <div id="Movelist">
+                                <div class="move" id="AMove">
+                                    <div class="moveHexagonBorder"></div>
+                                    <div class="moveIconContainer">
+                                        <img class="moveIcon" loading="lazy" id="AMoveIcon" src="../images/moveIcons/image1x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="AMoveText">Attack</div>
+                                    </div>
+                                </div>
+                                <div class="move" id="XMove">
+                                    <div class="moveHexagonBorder"></div>
+                                    <div class="moveIconContainer">
+                                        <img class="moveIcon" loading="lazy" id="XMoveIcon" src="../images/moveIcons/image4x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="XMoveText">Power Attack</div>
+                                    </div>
+                                </div>
+                                <div class="move" id="YMove">
+                                    <div class="moveHexagonBorder"></div>
+                                    <div class="moveIconContainer">
+                                        <img class="moveIcon" loading="lazy" id="YMoveIcon" src="../images/moveIcons/image12x6.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="YMoveText">Dodge</div>
+                                    </div>
+                                </div>
+                                <div class="move learnableMove">
+                                    <div class="moveHexagonBorder"></div>
+                                    <div class="moveIconContainer">
+                                        <img class="moveIcon" loading="lazy" id="LearnMove1Icon" src="../images/moveIcons/image3x2.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="LearnMove1Text">Fire</div>
+                                    </div>
+                                </div>
+                                <div id="move4" class="move learnableMove noMove">
+                                    <div class="moveHexagonBorder"></div>
+                                    <div class="moveIconContainer">
+                                        <img class="moveIcon" loading="lazy" id="LearnMove2Icon" src="../images/moveIcons/image6x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="LearnMove2Text"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="soultimateMoveData" class="">
+                                <div class="moveTitle" id="SoultimateMoveTitle">
+                                    <div class="SoultimateIconWrapper">
+                                        <div class="soultimateIconBorder"></div>
+                                        <div class="SoultimateIconContainer">
+                                            <img class="moveIcon" id="SoultimateIcon" src="../images/other_assets/soultimateWispGlow.png">
+                                            <div class="SoultimateIconText">
+                                                Soultimate
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="moveNameContainer">
+                                        <div class="moveName" id="soultimateMoveName">Kelpy Hospitality</div>
+                                    </div>
+                                </div>
+                                <div class="moveDescription" id="soultimateMoveDescription">
+                                    Casts water magic that hurts foes and heals allies.
+                                </div>
+
+                                <div class="soultimateMoveDetails">
+                                    <div class="soultimateMoveInfo">
+                                        <div class="infoTitle">Class</div>
+                                        <div class="infoValue text" id="soultimateMoveClass">Attack/Heal</div>
+                                    </div>
+
+                                    <div class="soultimateMoveInfo">
+                                        <div class="infoTitle">Gauge</div>
+                                        <div class="infoValue numeric" id="soultimateMoveCharge">500</div>
+                                    </div>
+
+                                    <div class="soultimateMoveInfo notStatus">
+                                        <div class="infoTitle">Power</div>
+                                        <div class="infoValue numeric" id="soultimateMovePower">37.5x8/100</div>
+                                    </div>
+
+                                    <div class="soultimateMoveInfo notStatus notHeal">
+                                        <div class="infoTitle">Crit Rate</div>
+                                        <div class="infoValue numeric" id="soultimateMoveCritRate">10%</div>
+                                    </div>
+
+                                    <div class="soultimateMoveInfo notStatus">
+                                        <div class="infoTitle">Scaling</div>
+                                        <div class="infoValue text" id="soultimateMoveScaling">Spirit</div>
+                                    </div>
+
+                                    <div class="soultimateMoveInfo notStatus notHeal">
+                                        <div class="infoTitle">Attribute</div>
+                                        <div class="infoValue text" id="soultimateMoveAttribute">Water</div>
+                                    </div>
+                                </div>
+
+                                <div class="inspirit" id="soultimateInspirit">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div id="footerLeftSide" class="footerHalf">
+                <div id="footerLogoContainer">
+                    <img id="footerLogo" src="/images/logos/smallLogo.png" aria-hidden="true">
+                </div>
+                <div id="backgroundSelector">
+                    <div class="footerTitle">Background</div>
+                    <div id="backgroundContainer">
+                        <select id="background" onChange="
+                            localStorage.setItem('bgType', this.value);
+                            if(this.value === 'random') {
+                                bgType = Math.floor(Math.random() * 14);
+                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType == 3 ? 'a' : bgType == 4 ? 'b' : '');
+                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                            }">
+                            <option value="random" class="noJS">Random</option>
+                            <option value="plain" selected>Plain</option>
+                            <option value="0">FluffBlast</option>
+                            <option value="1">Cool Star</option>
+                            <option value="2">Heart</option>
+                            <option value="3a">Red Cat</option>
+                            <option value="3b">White Dog</option>
+                            <option value="4">Sergeant</option>
+                            <option value="5">Sparkling</option>
+                            <option value="6">Stilldark?</option>
+                            <option value="7">Cool&starf;KJ</option>
+                            <option value="8">Chase!</option>
+                            <option value="9">Momotaro</option>
+                            <option value="10">G of Enma</option>
+                            <option value="11">Sunshine</option>
+                            <option value="12">King</option>
+                        </select>
+                    </div>
+                    <div class="checkboxContainer">
+                        <input checked id="animateBG" type="checkbox" onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                        <label for="animateBG">Animate Background</label>
+                    </div>
+                </div>
+            </div>
+            <div id="footerRightSide" class="footerHalf">
+                <div id="footerNavigationContainer" class="footerContainer">
+                    <div class="footerTitle">The Mod</div>
+                    <nav class="socials">
+                        <div class="navItem"><a class="noIcon" href="/">Home</a></div>
+                        <div class="navItem"><a class="noIcon" href="/About">About</a></div>
+                        <div class="navItem"><a class="noIcon" href="/Meet_the_Team">Meet the Team!</a></div>
+                        <div class="navItem"><a class="noIcon" target="_blank"
+                                                href="https://gamebanana.com/mods/457241">Download</a>
+                        </div>
+                    </nav>
+                </div>
+                <div id="footerResourcesContainer" class="footerContainer">
+                    <div class="footerTitle">Resources</div>
+                    <nav class="socials">
+                        <div class="navItem"><a class="noIcon" href="/FAQ">FAQ</a></div>
+                        <div class="navItem"><a class="noIcon" href="/Guides">Guides</a></div>
+                        <div class="navItem"><a class="noIcon" href="/Yo-kai_Info">Yo-kai Info</a></div>
+                        <div class="navItem"><a class="noIcon" target="_blank"
+                                                href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">B++ Spreadsheet</a></div>
+                    </nav>
+                </div>
+                <div id="footerSocialsContainer" class="footerContainer">
+                    <div class="footerTitle">Socials</div>
+                    <nav class="socials">
+                        <div class="navItem"><a class="discord" target="_blank"
+                                                href="https://discord.gg/nxCvVJ6fgt"></a></div>
+                        <div class="navItem"><a class="twitter" target="_blank"
+                                                href="https://x.com/Blastersplusmod"></a></div>
+                        <div class="navItem"><a class="bsky" target="_blank"
+                                                href="https://bsky.app/profile/blastersplusmod.bsky.social"></a></div>
+                        <div class="navItem"><a class="youtube" target="_blank"
+                                                href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="footerNotice">
+                Yo-kai Watch Blasters ++ 2023-2025
+            </div>
+
+            <script>
+                let bgType = localStorage.getItem("bgType") ?? "random";
+                let bgAnimate = localStorage.getItem("bgAnimate") ?? true;
+
+                console.log(bgAnimate);
+
+                if(bgAnimate === 'true') {
+                    document.documentElement.classList.add("animatedBG");
+                    document.getElementById("animateBG").checked = true;
+                    console.log('puchaina')
+                } else {
+                    document.getElementById("animateBG").checked = false;
+                    console.log('pusi')
+                }
+
+                if(bgType !== "random") {
+                    document.documentElement.classList.add("bg"+bgType);
+                    document.getElementById("background").value = bgType;
+                    console.log('set BG');
+                } else {
+                    document.getElementById("background").value = "random";
+                    bgType = Math.floor(Math.random() * 14);
+                    bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType == 3 ? 'a' : bgType == 4 ? 'b' : '');
+                    document.documentElement.classList.add("bg"+bgType);
+                    console.log('random BG');
+                }
+
+                console.log(bgType);
+
+
+            </script>
+        </footer>
+    </body>
+</html>

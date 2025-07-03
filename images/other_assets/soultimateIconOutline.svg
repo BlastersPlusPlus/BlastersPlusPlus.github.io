@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg>
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="180" height="100" viewBox="0 0 180 100">
+
+  <path id="RegularHexagon"
+        fill="white"
+        d="M 80,50
+           L 105,6.7 155,6.7 180,50 155,93.3 105,93.3
+           Z" />
+  <path id="StretchedHexagon"
+        fill="white"
+        d="M 4.35,71.65
+           L 25,50 105,50 105,93.3 25,93.3
+           Z"/>
+</svg>

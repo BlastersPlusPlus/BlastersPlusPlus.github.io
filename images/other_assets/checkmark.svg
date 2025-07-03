@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg>
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+     height="100" width="100"
+     viewBox="0 0 100 100"
+     preserveAspectRatio="xMidYMid meet">
+<path fill="white"
+      d="M 45,70 L 85,30 A 7.071 7.071 0 0 0 75 20
+        L 35,60 25,50 A 7.071 7.071 0 0 0 15 60
+        L 25 70 A 14.142 14.142 0 0 0 45 70 Z"/>
+</svg>

@@ -1,0 +1,98 @@
+html {
+    background-size: 100vw 100vh !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0 0;
+
+    &.bgplain, &:has(select#background > option[value="plain"]:checked) {background-image: linear-gradient(167deg, rgba(255,191,140,1) 0%, rgba(255,255,140,1) 42%, rgba(180,229,248,1) 100%);}
+    &.bg0, &:has(select#background > option[value="0"]:checked) {background-image: linear-gradient(45deg, #fff5a2 0%, #b5dede 50%, #baaaff 100%);}
+    &.bg1, &:has(select#background > option[value="1"]:checked) {background-image: linear-gradient(20deg, #bbfdfd 0%, #7ea0ff 100%);}
+    &.bg2, &:has(select#background > option[value="2"]:checked) {background-image: linear-gradient(30deg, #ffeee6 0%, #e87da6 100%);}
+    &.bg3a, &:has(select#background > option[value="3a"]:checked) {background-image: linear-gradient(30deg, #f65959 0%, #ffbfbf 100%);}
+    &.bg3b, &:has(select#background > option[value="3b"]:checked) {background-image: linear-gradient(5deg, #498bde 0%, #e0f1ff 100%);}
+    &.bg4, &:has(select#background > option[value="4"]:checked) {background-image: linear-gradient(0deg, #d3ecba 0%, #82ddcc 50%, #75a765 70%, #6dd05c 100%);}
+    &.bg5, &:has(select#background > option[value="5"]:checked) {background-image: linear-gradient(0deg, #cdeef6 0%, #46c2db 100%);}
+    &.bg6, &:has(select#background > option[value="6"]:checked) {background-image: linear-gradient(0deg, #59598a 0%, #bdbdc5 100%);}
+    &.bg7, &:has(select#background > option[value="7"]:checked) {background-image: linear-gradient(45deg, #b56961 0%, #ffe356 100%);}
+    &.bg8, &:has(select#background > option[value="8"]:checked) {background-image: linear-gradient(0deg, #ffec4e 0%, #f09d42 50%, #ffec4e 100%);}
+    &.bg9, &:has(select#background > option[value="9"]:checked) {
+        background-image: linear-gradient(90deg, transparent 0%, #dab056 100%),
+        linear-gradient(0deg, #68cece 0%, #eac9c1 100%);
+    }
+    &.bg10, &:has(select#background > option[value="10"]:checked) {
+        background-image: linear-gradient(90deg, transparent 0%, #a55050 100%),
+        linear-gradient(0deg, #d5cd7a 0%, #b83333 100%);
+    }
+    &.bg11, &:has(select#background > option[value="11"]:checked) {background-image: linear-gradient(0deg, #b44069 0%, #673e98 100%);}
+    &.bg12, &:has(select#background > option[value="12"]:checked) {
+        background-image: radial-gradient(#becfb6 0%, transparent 40%),
+                linear-gradient(0deg, #164869 0%, #eaf2b9 100%);
+    }
+
+    &:has(select#background > option[value="plain"]:checked)::before {background-image: none;}
+    &.bg0::before, &:has(select#background > option[value="0"]:checked)::before {background-image: url("/backgrounds/003.000.png");}
+    &.bg1::before, &:has(select#background > option[value="1"]:checked)::before {background-image: url("/backgrounds/003.001.png");}
+    &.bg2::before, &:has(select#background > option[value="2"]:checked)::before {background-image: url("/backgrounds/003.002.png");}
+    &.bg3a::before, &:has(select#background > option[value="3a"]:checked)::before {background-image: url("/backgrounds/003.003a.png");}
+    &.bg3b::before, &:has(select#background > option[value="3b"]:checked)::before {background-image: url("/backgrounds/003.003b.png");}
+    &.bg4::before, &:has(select#background > option[value="4"]:checked)::before {background-image: url("/backgrounds/003.004.png");}
+    &.bg5::before, &:has(select#background > option[value="5"]:checked)::before {background-image: url("/backgrounds/003.005.png");}
+    &.bg6::before, &:has(select#background > option[value="6"]:checked)::before {background-image: url("/backgrounds/003.006.png");}
+    &.bg7::before, &:has(select#background > option[value="7"]:checked)::before {background-image: url("/backgrounds/003.007.png");}
+    &.bg8::before, &:has(select#background > option[value="8"]:checked)::before {background-image: url("/backgrounds/003.008.png");}
+    &.bg9::before, &:has(select#background > option[value="9"]:checked)::before {background-image: url("/backgrounds/003.009.png");}
+    &.bg10::before, &:has(select#background > option[value="10"]:checked)::before {background-image: url("/backgrounds/003.0010.png");}
+    &.bg11::before, &:has(select#background > option[value="11"]:checked)::before {background-image: url("/backgrounds/003.0011.png");}
+    &.bg12::before, &:has(select#background > option[value="12"]:checked)::before {background-image: url("/backgrounds/003.0012.png");}
+
+    &.animatedBG::before, &:has(input#animateBG:checked)::before {
+        animation: AnimateDiagonal 15s linear infinite;
+    }
+
+    &.animatedBG::after, &:has(input#animateBG:checked)::after {
+        animation: AnimateVertical 15s linear infinite;
+    }
+}
+
+html::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: -2;
+}
+
+html::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    background-color: transparent;
+    background-image: url("/backgrounds/bg_stripes.png");
+    z-index: -2;
+}
+
+
+
+@keyframes AnimateDiagonal {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 128px 128px;
+    }
+}
+
+@keyframes AnimateVertical {
+    from {background-position: 0 0;}
+    to {background-position: 0 -32px;}
+}

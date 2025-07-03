@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg>
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="16" height="36" viewBox="0 0 16 36">
+
+  <path id="Hexagon"
+        fill="white"
+        d="M 0,0
+           L 0,28 8,36 16,28 16,0
+           Z" />
+</svg>
