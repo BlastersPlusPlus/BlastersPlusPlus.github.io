@@ -15,9 +15,8 @@
 }
 
 html {
-    min-width: fit-content;
-    width: 100lvw;
-    height: 100lvh;
+    min-width: 100%;
+    min-height: 100vh;
 }
 
 body {
@@ -37,6 +36,7 @@ header,footer {
 }
 
 header {
+    display: none;
     margin-bottom: 50px;
     width: 100vw;
     min-width: fit-content;
@@ -72,27 +72,22 @@ footer {
         grid-template-columns: 1fr 2fr;
         grid-template-rows: 1fr auto;*/
         row-gap:20px;
-        border: 3px solid white;
     }
 
     #footerRightSide {
-        border: 2px solid red;
-        .socials a:active {color: cyan}
         width: max-content;
         min-width: 60%;
         flex-grow: 2;
         flex-shrink: 0;
         flex-basis: 0;
 
-        >#footerRightSideContents {
-            min-width: 100%;
-            border: 1px solid blue;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            grid-auto-flow: row;
-            grid-auto-rows: auto;
-            gap: 20px;
-        }
+        .socials a:active {color: cyan}
+
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-auto-flow: row;
+        grid-auto-rows: auto;
+        gap: 20px;
     }
 
     #footerLeftSide {
@@ -116,7 +111,6 @@ footer {
     }
 
     #footerLogoContainer {
-        justify-self: flex-start;
         align-self: flex-start;
         #footerLogo {
             max-width: 80px;
@@ -125,7 +119,6 @@ footer {
 
     #backgroundSelector {
         margin-right: 60px;
-        justify-self: flex-end;
         align-self: flex-start;
         display: flex;
         flex-direction: column;
