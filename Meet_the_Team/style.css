@@ -1,7 +1,46 @@
-body {min-width: fit-content;}
+@media screen and (max-device-width: 600px) {
+    main {
+        grid-template-columns: repeat(auto-fill, 90vw);
+        grid-auto-rows: 1fr;
+        min-width: fit-content;
+        padding-inline: 30px;
+    }
+
+    .pfpContainer {
+        aspect-ratio: auto;
+    }
+
+    .pfp {
+        max-height: 80px;
+        margin-left: 10px;
+    }
+    .work, .teamLinks {
+        font-size: 1em;
+    }
+    .teamLinks {
+        flex-grow: 0;
+        >a::after {display: none;}
+    }
+    .name {
+        font-size: 1.5em;
+        line-height: 1.25em;
+    }
+}
+
+@media screen and (min-device-width: 600px) {
+    main {grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+        grid-auto-rows: 150px;
+        max-width: 90vw;}
+    .pfpContainer {aspect-ratio: 1;}
+    .teamLinks {flex-grow: 1;}
+    .name {font-size: 2em;
+        line-height: 1.5em;}
+    .work {font-size: 1.1em;}
+    .teamLinks {font-size: 1.25em;}
+}
 
 @media screen and (min-device-width: 1080px) {
-    main {grid-template-rows: 200px;}
+    main {grid-template-columns: 1fr 1fr;grid-template-rows: 200px;}
     .younes.grid-item {
         grid-column: 1/-1;
         border-radius: 200px;
@@ -21,16 +60,19 @@ body {min-width: fit-content;}
         .teamLinks {
             font-size: 1.75em;
         }
+
+        .Description {
+            flex-grow: 6;
+        }
     }
 }
 
 main {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-    grid-auto-rows: 150px;
     grid-gap: 20px;
 
-    width: min(95%,1000px);
+    width: min(90%,1000px);
+    box-sizing: border-box;
     margin: auto;
 }
 
@@ -75,7 +117,6 @@ p {
 
 .pfpContainer {
     height: 100%;
-    aspect-ratio: 1;
     position: relative;
     display: flex;
     align-items: center;
@@ -91,8 +132,6 @@ p {
 .name {
     font-family: YurukaStd, sans-serif;
     font-weight: 700;
-    font-size: 2em;
-    line-height: 1.5em;
     text-align: center;
 }
 
@@ -101,7 +140,9 @@ p {
     flex-direction: column;
     align-items: stretch;
     align-self: stretch;
-    flex-grow: 1;
+    flex-grow: 4;
+    flex-shrink: 1;
+    flex-basis: 0;
     margin-top: 5px;
     margin-bottom: 5px;
 }
@@ -124,14 +165,20 @@ p {
 
 .teamLinks {
     font-size: 1.25em;
-    min-width: fit-content;
-    width: 90px;
-    flex-basis: 90px;
+    flex-shrink: 1;
+    flex-basis: 0;
     margin-right: 3%;
     margin-left: 5px;
     height: auto;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-
+    text-overflow: ellipsis;
+    >a {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        /*text-wrap: wrap;
+        overflow: hidden;*/
+    }
 }
