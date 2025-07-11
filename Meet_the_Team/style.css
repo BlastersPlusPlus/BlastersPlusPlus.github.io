@@ -6,6 +6,10 @@
         padding-inline: 30px;
     }
 
+    .work.longDescription {
+        display: none;
+    }
+
     .pfpContainer {
         aspect-ratio: auto;
     }
@@ -15,7 +19,7 @@
         margin-left: 10px;
     }
     .work, .teamLinks {
-        font-size: 1em;
+        font-size: 16px;
     }
     .teamLinks {
         flex-grow: 0;
@@ -31,6 +35,7 @@
     main {grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
         grid-auto-rows: 150px;
         max-width: 90vw;}
+    .work.shortDescription {display: none;}
     .pfpContainer {aspect-ratio: 1;}
     .teamLinks {flex-grow: 1;}
     .name {font-size: 2em;
