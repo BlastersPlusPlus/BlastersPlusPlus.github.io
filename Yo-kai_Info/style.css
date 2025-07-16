@@ -96,13 +96,15 @@ body {
         }
         &:has(:focus-visible) {outline: var(--focus-outline);}
     }
+
+    scrollbar-color: white transparent;
 }
 
 body:has(#screenCover.open) {overflow: hidden;}
 
-#screenCover::-webkit-scrollbar {
+/*#screenCover::-webkit-scrollbar {
     background: transparent;
-    width: 10px;
+    width: auto;
 }
 
 #screenCover::-webkit-scrollbar-thumb {
@@ -111,7 +113,7 @@ body:has(#screenCover.open) {overflow: hidden;}
 }
 
 #screenCover::-webkit-scrollbar-thumb:hover {background: #cccccc;}
-#screenCover::-webkit-scrollbar-thumb:active {background: #999999;}
+#screenCover::-webkit-scrollbar-thumb:active {background: #999999;}*/
 
 #yokaiGrid {
     width: min(90%, 1200px);
