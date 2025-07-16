@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
@@ -215,12 +215,12 @@
                         <div class="footerTitle">Background</div>
                         <div id="backgroundContainer">
                             <select id="background" onChange="
-                                localStorage.setItem('bgType', this.value);
-                                if(this.value === 'random') {
-                                    bgType = Math.floor(Math.random() * 14);
-                                    bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType == 3 ? 'a' : bgType == 4 ? 'b' : '');
-                                    document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
-                                }">
+                            localStorage.setItem('bgType', this.value);
+                            if(this.value === 'random') {
+                                bgType = Math.floor(Math.random() * 14);
+                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
+                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                            }">
                                 <option value="random" class="noJS">Random</option>
                                 <option value="plain" selected>Plain</option>
                                 <option value="0">FluffBlast</option>
@@ -240,49 +240,64 @@
                             </select>
                         </div>
                         <div class="checkboxContainer">
-                            <input checked id="animateBG" type="checkbox" onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                            <input checked id="animateBG" type="checkbox"
+                                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
                             <label for="animateBG">Animate Background</label>
                         </div>
                     </div>
                 </div>
                 <div id="footerRightSide" class="footerHalf">
-                    <div id="footerNavigationContainer" class="footerContainer">
-                        <div class="footerTitle">The Mod</div>
-                        <nav class="socials">
-                            <div class="navItem"><a class="noIcon" href="/">Home</a></div>
-                            <div class="navItem"><a class="noIcon" href="/About">About</a></div>
-                            <div class="navItem"><a class="noIcon" href="/Meet_the_Team">Meet the Team!</a></div>
-                            <div class="navItem"><a class="noIcon" target="_blank"
-                                                    href="https://gamebanana.com/mods/457241">Download</a>
-                            </div>
-                        </nav>
+                    <div id="footerNavigation">
+                        <div id="footerNavigationContainer" class="footerContainer">
+                            <div class="footerTitle">The Mod</div>
+                            <nav class="socials">
+                                <div class="navItem"><a class="noIcon" href="/"><span
+                                        class="socialsLinkText">Home</span></a></div>
+                                <div class="navItem"><a class="noIcon" href="/About"><span
+                                        class="socialsLinkText">About</span></a></div>
+                                <div class="navItem"><a class="noIcon" href="/Meet_the_Team"><span
+                                        class="socialsLinkText">Meet the Team!</span></a></div>
+                                <div class="navItem"><a class="noIcon" target="_blank"
+                                                        href="https://gamebanana.com/mods/457241"><span
+                                        class="socialsLinkText">Download</span></a>
+                                </div>
+                            </nav>
+                        </div>
+                        <div id="footerResourcesContainer" class="footerContainer">
+                            <div class="footerTitle">Resources</div>
+                            <nav class="socials">
+                                <div class="navItem"><a class="noIcon" href="/FAQ"><span
+                                        class="socialsLinkText">FAQ</span></a></div>
+                                <div class="navItem"><a class="noIcon" href="/Guides"><span class="socialsLinkText">Guides</span></a>
+                                </div>
+                                <div class="navItem"><a class="noIcon" href="/Yo-kai_Info"><span
+                                        class="socialsLinkText">Yo-kai Info</span></a></div>
+                                <div class="navItem"><a class="noIcon" target="_blank"
+                                                        href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    <span class="socialsLinkText">B++ Spreadsheet</span></a></div>
+                            </nav>
+                        </div>
                     </div>
-                    <div id="footerResourcesContainer" class="footerContainer">
-                        <div class="footerTitle">Resources</div>
-                        <nav class="socials">
-                            <div class="navItem"><a class="noIcon" href="/FAQ">FAQ</a></div>
-                            <div class="navItem"><a class="noIcon" href="/Guides">Guides</a></div>
-                            <div class="navItem"><a class="noIcon" href="/Yo-kai_Info">Yo-kai Info</a></div>
-                            <div class="navItem"><a class="noIcon" target="_blank"
-                                                    href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">B++ Spreadsheet</a></div>
-                        </nav>
-                    </div>
-                    <div id="footerSocialsContainer" class="footerContainer">
-                        <div class="footerTitle">Socials</div>
-                        <nav class="socials">
-                            <div class="navItem"><a class="discord" target="_blank"
-                                                    href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                            <div class="navItem"><a class="twitter" target="_blank"
-                                                    href="https://x.com/Blastersplusmod"></a></div>
-                            <div class="navItem"><a class="bsky" target="_blank"
-                                                    href="https://bsky.app/profile/blastersplusmod.bsky.social"></a></div>
-                            <div class="navItem"><a class="youtube" target="_blank"
-                                                    href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
-                            </div>
-                        </nav>
-                    </div>
-                    <div id="footerLogoContainer">
-                        <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters++ Logo" aria-hidden="true">
+                    <div id="footerSocialsLogo">
+                        <div id="footerSocialsContainer" class="footerContainer">
+                            <div class="footerTitle">Socials</div>
+                            <nav class="socials">
+                                <div class="navItem"><a class="discord" target="_blank"
+                                                        href="https://discord.gg/nxCvVJ6fgt"></a></div>
+                                <div class="navItem"><a class="twitter" target="_blank"
+                                                        href="https://x.com/Blastersplusmod"></a></div>
+                                <div class="navItem"><a class="bsky" target="_blank"
+                                                        href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
+                                </div>
+                                <div class="navItem"><a class="youtube" target="_blank"
+                                                        href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+                                </div>
+                            </nav>
+                        </div>
+                        <div id="footerLogoContainer">
+                            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
+                                 aria-hidden="true">
+                        </div>
                     </div>
                 </div>
             </div>
