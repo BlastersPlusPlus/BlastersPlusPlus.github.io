@@ -39,6 +39,22 @@ header,footer {
     flex-shrink: 0;
 }
 
+@media screen and (max-width: 650px) {
+    header {
+        .headerNavigationTitle{font-size: 1.5em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1em;}
+        .headerNavigationSection.wide{display: none;}
+    }
+}
+
+@media screen and (min-width: 650px) {
+    header {
+        .headerNavigationTitle{font-size: 2em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1.5em;}
+        .headerNavigationSection.small{display: none;}
+    }
+}
+
 header {
     --header-height: 100px;
     color: white;
@@ -91,13 +107,12 @@ header {
         display: flex;
         justify-self: end;
         align-items: center;
-        gap: 20px;
+        gap: 30px;
         margin-right: 50px;
         >.headerNavigationSection {
             position: relative;
             .headerNavigationTitle {
                 font-family: var(--font-yuruka), sans-serif;
-                font-size: 2em;
                 margin-block: 0;
                 cursor: pointer;
                 a {color: inherit;text-decoration: none;}
@@ -116,6 +131,7 @@ header {
                 }
 
                 position: absolute;
+                right: 0;
                 min-width: 100%;
                 padding-top: 0;
                 transition: height 0.3s ease;
@@ -130,13 +146,16 @@ header {
             }
             h1:hover + .headerNavigationPopupContainer,
             .headerNavigationPopupContainer:hover {
+                border: 1px solid red;
                 height: 100px;
                 min-height: min-content;
+                nav {height: min-content;}
             }
 
             .headerNavigationPopupContainer:has(:focus-visible) {
-                height: 100px !important;
-                min-height: min-content;
+                height: min-content !important;
+                min-height: min-content !important;
+                nav {height: min-content;}
             }
         };
     }
