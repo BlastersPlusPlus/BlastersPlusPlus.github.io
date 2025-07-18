@@ -16,11 +16,61 @@
     </head>
     <body>
         <header>
-            <div class="headerLogoContainer">
-                <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+        <div class="headerLogoContainer">
+            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+        </div>
+        <nav class="headerNavigationContainer">
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle">
+                    <a href="https://gamebanana.com/mods/457241">Download</a>
+                </h1>
             </div>
-        </header>
-
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">About</h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/About">About</a></li>
+                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/FAQ">FAQ</a></li>
+                            <li><a href="/Guides">Guides</a></li>
+                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection small">
+                <button disabled onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger closed"></button>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/About">About</a></li>
+                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                            <li><a href="/FAQ">FAQ</a></li>
+                            <li><a href="/Guides">Guides</a></li>
+                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+        <script src="/script-header.js" defer></script>
+    </header>
         <div class="bodyContents">
             <noscript>
                 <div class="whiteOverWindow">
@@ -32,7 +82,7 @@
 
             <div id="screenCover">
 
-                <div id="yokaiInfoPopupContainer">
+                <div id="yokaiInfoPopupContainer" tabindex="-1">
                     <div id="closePopupContainer">
                         <button id="closePopup" onclick="closeInfoPopup()"></button>
                     </div>
@@ -249,14 +299,13 @@
                 </div>
             </div>
         </div>
-
         <footer>
             <div id="footerContents">
                 <div id="footerLeftSide" class="footerHalf">
                     <div id="backgroundSelector">
-                        <div class="footerTitle">Background</div>
+                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
                         <div id="backgroundContainer">
-                            <select id="background" onChange="
+                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
                             localStorage.setItem('bgType', this.value);
                             if(this.value === 'random') {
                                 bgType = Math.floor(Math.random() * 14);
@@ -293,30 +342,23 @@
                         <div id="footerNavigationContainer" class="footerContainer">
                             <div class="footerTitle">The Mod</div>
                             <nav class="links">
-                                <div class="navItem"><a class="noIcon" href="/"><span
-                                        class="socialsLinkText">Home</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/About"><span
-                                        class="socialsLinkText">About</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/Meet_the_Team"><span
-                                        class="socialsLinkText">Meet the Team!</span></a></div>
-                                <div class="navItem"><a class="noIcon" target="_blank"
-                                                        href="https://gamebanana.com/mods/457241"><span
-                                        class="socialsLinkText">Download</span></a>
+                                <div class="navItem"><a href="/">Home</a></div>
+                                <div class="navItem"><a href="/About">About</a></div>
+                                <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+                                <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
                                 </div>
                             </nav>
                         </div>
                         <div id="footerResourcesContainer" class="footerContainer">
                             <div class="footerTitle">Resources</div>
                             <nav class="links">
-                                <div class="navItem"><a class="noIcon" href="/FAQ"><span
-                                        class="socialsLinkText">FAQ</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/Guides"><span class="socialsLinkText">Guides</span></a>
+                                <div class="navItem"><a href="/FAQ">FAQ</a></div>
+                                <div class="navItem"><a href="/Guides">Guides</a>
                                 </div>
-                                <div class="navItem"><a class="noIcon" href="/Yo-kai_Info"><span
-                                        class="socialsLinkText">Yo-kai Info</span></a></div>
-                                <div class="navItem"><a class="noIcon" target="_blank"
+                                <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                                <div class="navItem"><a target="_blank"
                                                         href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                    <span class="socialsLinkText">B++ Spreadsheet</span></a></div>
+                                    B++ Spreadsheet</a></div>
                             </nav>
                         </div>
                     </div>
@@ -324,14 +366,14 @@
                         <div id="footerSocialsContainer" class="footerContainer">
                             <div class="footerTitle">Socials</div>
                             <nav class="links">
-                                <div class="navItem"><a class="discord" target="_blank"
+                                <div class="navItem"><a class="icon discord" target="_blank"
                                                         href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                                <div class="navItem"><a class="twitter" target="_blank"
+                                <div class="navItem"><a class="icon twitter" target="_blank"
                                                         href="https://x.com/Blastersplusmod"></a></div>
-                                <div class="navItem"><a class="bsky" target="_blank"
+                                <div class="navItem"><a class="icon bsky" target="_blank"
                                                         href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
                                 </div>
-                                <!--div class="navItem"><a class="youtube" target="_blank"
+                                <!--div class="navItem"><a class="icon youtube" target="_blank"
                                                         href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
                                 </div-->
                             </nav>
@@ -343,39 +385,11 @@
                     </div>
                 </div>
             </div>
+            <script src="/script-footer.js"></script>
             <div class="footerNotice">
                 Yo-kai Watch Blasters ++ 2023-2025
             </div>
 
-            <script>
-                let bgType = localStorage.getItem("bgType") ?? "random";
-                let bgAnimate = localStorage.getItem("bgAnimate") ?? true;
-
-                console.log(bgAnimate);
-
-                if(bgAnimate === 'true') {
-                    document.documentElement.classList.add("animatedBG");
-                    document.getElementById("animateBG").checked = true;
-                } else {
-                    document.getElementById("animateBG").checked = false;
-                }
-
-                if(bgType !== "random") {
-                    document.documentElement.classList.add("bg"+bgType);
-                    document.getElementById("background").value = bgType;
-                    console.log('set BG');
-                } else {
-                    document.getElementById("background").value = "random";
-                    bgType = Math.floor(Math.random() * 14);
-                    bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType == 3 ? 'a' : bgType == 4 ? 'b' : '');
-                    document.documentElement.classList.add("bg"+bgType);
-                    console.log('random BG');
-                }
-
-                console.log(bgType);
-
-
-            </script>
         </footer>
     </body>
 </html>

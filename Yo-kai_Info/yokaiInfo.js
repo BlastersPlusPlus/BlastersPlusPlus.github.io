@@ -57,8 +57,9 @@ document.addEventListener('keydown', function(e){
     if (e.key === 'Tab' && screenCover.classList.contains('open')) {
         e.preventDefault();
         let closePopup = document.getElementById("closePopup");
-        console.log(closePopup, document.activeElement);
-        (closePopup === document.activeElement ? screenCover : closePopup)?.focus()
+        let elementToClose = closePopup === document.activeElement ? document.getElementById("yokaiInfoPopupContainer") : closePopup;
+        console.log(elementToClose);
+        elementToClose.focus();
     }
 })
 

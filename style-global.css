@@ -65,7 +65,7 @@ header {
     --header-height: 100px;
     color: white;
     z-index: 1;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     width: 100%;
     min-width: fit-content;
     height: var(--header-height);
@@ -165,6 +165,10 @@ header {
                 }
             }
 
+            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible) {
+                transform: rotate(180deg);
+            }
+
             @media (scripting: enabled) {
                 .headerNavigationPopupTrigger.headerDownArrow.open {
                     transform: rotate(180deg);
@@ -172,8 +176,7 @@ header {
             }
             
             @media (scripting: none) {
-                .headerNavigationPopupTrigger.headerDownArrow,
-                .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible)*/ {
+                .headerNavigationPopupTrigger.headerDownArrow {
                     transform: rotate(180deg);
                 }
                 .headerNavigationPopupTrigger:hover + .headerNavigationPopupContainer {
