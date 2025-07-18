@@ -8,6 +8,10 @@
     src: url("./fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
 }
 
+@media (scripting: none) {
+    .noJS {display: none}
+}
+
 * {-webkit-tap-highlight-color: transparent;}
 
 :focus-visible {
@@ -39,11 +43,12 @@ header,footer {
     flex-shrink: 0;
 }
 
-@media all and (max-width: 649px) {
+@media all and (max-width: 650px) {
     header {
         .headerNavigationTitle{font-size: 1.5em;}
         .headerNavigationPopupContainer ul>li {font-size: 1em;}
         .headerNavigationSection.wide{display: none;}
+        .headerNavigationSection.small{display: block}
     }
 }
 
@@ -52,6 +57,7 @@ header,footer {
         .headerNavigationTitle{font-size: 2em;}
         .headerNavigationPopupContainer ul>li {font-size: 1.5em;}
         .headerNavigationSection.small{display: none;}
+        .headerNavigationSection.wide{display: block;}
     }
 }
 
@@ -159,15 +165,26 @@ header {
                 }
             }
 
-            .headerNavigationPopupTrigger.headerDownArrow:hover,
-            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible) {
-                transform: rotate(180deg);
+            @media (scripting: enabled) {
+                .headerNavigationPopupTrigger.headerDownArrow.open {
+                    transform: rotate(180deg);
+                }
+            }
+            
+            @media (scripting: none) {
+                .headerNavigationPopupTrigger.headerDownArrow,
+                .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible)*/ {
+                    transform: rotate(180deg);
+                }
+                .headerNavigationPopupTrigger:hover + .headerNavigationPopupContainer {
+                    height: 200px;
+                    min-height: min-content;
+                    nav {height: min-content;}
+                }
             }
 
-            /*,
-            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:has(:focus-visible))*/
-
-            .headerNavigationPopupTrigger:hover + .headerNavigationPopupContainer,
+            .headerNavigationTitle:hover + .headerNavigationPopupContainer,
+            .headerNavigationPopupTrigger.open + .headerNavigationPopupContainer,
             .headerNavigationPopupContainer:has(nav:hover) {
                 height: 200px;
                 min-height: min-content;

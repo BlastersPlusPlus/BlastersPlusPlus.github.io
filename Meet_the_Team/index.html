@@ -13,9 +13,6 @@
         <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../backgrounds.css">
-        <noscript>
-            <style>.noJS {display: none}</style>
-        </noscript>
     </head>
     <body>
         <header>
@@ -54,13 +51,14 @@
                     </div>
                 </div>
                 <div class="headerNavigationSection small">
-                    <div class="headerDownArrow headerNavigationPopupTrigger"></div>
+                    <button onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger closed"></button>
                     <div class="headerNavigationPopupContainer">
                         <nav class="whiteOverWindow links">
                             <ul>
-                                <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                                <li><a href="/">Home</a></li>
                                 <li><a href="/About">About</a></li>
                                 <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                                <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
                                 <li><a href="/FAQ">FAQ</a></li>
                                 <li><a href="/Guides">Guides</a></li>
                                 <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
@@ -335,9 +333,9 @@
             <div id="footerContents">
                 <div id="footerLeftSide" class="footerHalf">
                     <div id="backgroundSelector">
-                        <div class="footerTitle">Background</div>
+                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
                         <div id="backgroundContainer">
-                            <select id="background" onChange="
+                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
                             localStorage.setItem('bgType', this.value);
                             if(this.value === 'random') {
                                 bgType = Math.floor(Math.random() * 14);
