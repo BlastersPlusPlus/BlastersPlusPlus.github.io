@@ -39,7 +39,7 @@ header,footer {
     flex-shrink: 0;
 }
 
-@media screen and (max-width: 650px) {
+@media all and (max-width: 649px) {
     header {
         .headerNavigationTitle{font-size: 1.5em;}
         .headerNavigationPopupContainer ul>li {font-size: 1em;}
@@ -47,7 +47,7 @@ header,footer {
     }
 }
 
-@media screen and (min-width: 650px) {
+@media all and (min-width: 650px) {
     header {
         .headerNavigationTitle{font-size: 2em;}
         .headerNavigationPopupContainer ul>li {font-size: 1.5em;}

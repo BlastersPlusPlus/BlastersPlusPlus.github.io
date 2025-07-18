@@ -1,9 +1,9 @@
 
-@media all and (max-width: 800px) {
+@media all and (max-width: 799px) {
     #yokaiInfo #Movelist {grid-template-columns: 1fr;}
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 599px) {
     #yokaiInfo {
         #yokaiInfoTitle {font-size: 1.5em;}
         #medalliumBio {font-size: 1em;}
