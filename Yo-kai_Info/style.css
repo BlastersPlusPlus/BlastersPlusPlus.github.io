@@ -54,50 +54,62 @@ body {
 }
 
 #screenCover {
-    z-index: 1;
     opacity: 0;
-    background-color: rgba(0,0,0,0.75);
+    z-index: 1;
     position: fixed;
-    width: 100%;
-    min-height: 100vh;
-    height: 100vh;
     top: 0;
     left: 0;
-    overflow-y: scroll;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.75);
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
     visibility: hidden;
     &:focus {outline: none;}
     &.open {animation: fadeIn 0.5s forwards;}
     &.closed {animation: fadeOut 0.5s forwards; pointer-events: none;}
 
-    #closePopupContainer{
+    #yokaiInfoPopupContainer {
         position: fixed;
-        --min-size: min(5vw, 5vh);
-        top: calc(var(--min-size)/2);
-        right: calc(var(--min-size)/2 + 10px);
-        height: var(--min-size);
-        width: var(--min-size);
-        border-radius: var(--min-size);
+        width: 100%;
+        min-height: 100vh;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        overflow-y: scroll;
 
-        z-index: 3;
+        #closePopupContainer{
+            position: fixed;
+            --min-size: min(5vw, 5vh);
+            top: calc(var(--min-size)/2);
+            right: calc(var(--min-size)/2 + 10px);
+            height: var(--min-size);
+            width: var(--min-size);
+            border-radius: var(--min-size);
 
-        #closePopup {
-            height: 100%;
-            width: 100%;
-            cursor: pointer;
-            transform: rotate(45deg);
-            mask-image: url("/images/other_assets/cross.svg");
-            mask-size: 100% 100%;
-            appearance: unset;
-            border: none;
-            box-shadow: var(--standard-shadow);
-            &:hover {filter: brightness(0.8);}
-            &:active {filter: brightness(0.7);}
-            &:focus-visible {outline: none;}
+            z-index: 3;
+
+            #closePopup {
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+                transform: rotate(45deg);
+                mask-image: url("/images/other_assets/cross.svg");
+                mask-size: 100% 100%;
+                appearance: unset;
+                border: none;
+                box-shadow: var(--standard-shadow);
+                &:hover {filter: brightness(0.8);}
+                &:active {filter: brightness(0.7);}
+                &:focus-visible {outline: none;}
+            }
+            &:has(:focus-visible) {outline: var(--focus-outline);}
         }
-        &:has(:focus-visible) {outline: var(--focus-outline);}
-    }
 
-    scrollbar-color: white transparent;
+        scrollbar-color: white transparent;
+    }
 }
 
 body:has(#screenCover.open) {overflow: hidden;}

@@ -4,6 +4,7 @@
         <title>Blasters++: Yo-kai Info</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
@@ -18,7 +19,9 @@
     </head>
     <body>
         <header>
-            <!--img src="/images/logos/logo.png" alt="Blasters++ Logo"-->
+            <div class="headerLogoContainer">
+                <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+            </div>
         </header>
 
         <div class="bodyContents">
@@ -31,175 +34,217 @@
             <main id="yokaiGrid"></main>
 
             <div id="screenCover">
-                <div id="closePopupContainer">
-                    <button id="closePopup" onclick="closeInfoPopup()"></button>
-                </div>
-                <div id="yokaiInfo" class="normal">
-                    <div id="yokaiInfoPaddingContainer">
-                        <p id="yokaiInfoTitle"><span class="numberComponents"><span id="yokaiNumber">#001</span> — </span><span id="yokaiInfoName">Pandle</span></p>
-                        <img id="yokaiMedal" loading="lazy" src="../images/yokaiMedalsLarge/y101000.png" alt="Yo-kai Pandle's Medal" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                        <div id="rankTribeAttributes">
-                            <div><img id="yokaiInfoRankIcon" loading="lazy" src="../images/rankIcons/all_text_rank01_e.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                                <p id="yokaiInfoRank">E Rank</p></div>
-                            <div id="role">
-                                <div><img id="yokaiInfoRoleIcon" loading="lazy" src="../images/roleText/Fighter.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')"></div>
-                                <p id="yokaiInfoRole">Fighter Role</p></div>
 
-                            <div><img id="yokaiInfoTribeIcon" loading="lazy" src="../images/tribeIcons/Brave.png" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                                <p id="yokaiInfoTribe">Brave</p></div>
-                        </div>
+                <div id="yokaiInfoPopupContainer">
+                    <div id="closePopupContainer">
+                        <button id="closePopup" onclick="closeInfoPopup()"></button>
+                    </div>
+                    <div id="yokaiInfo" class="normal">
+                        <div id="yokaiInfoPaddingContainer">
+                            <p id="yokaiInfoTitle"><span class="numberComponents"><span id="yokaiNumber"></span> — </span><span
+                                    id="yokaiInfoName"></span></p>
+                            <img id="yokaiMedal" loading="lazy" src="../images/yokaiMedalsLarge/y101000.png"
+                                 alt="Yo-kai Pandle's Medal" onload="this.classList.remove('loading')"
+                                 onerror="this.classList.remove('loading')">
+                            <div id="rankTribeAttributes">
+                                <div><img id="yokaiInfoRankIcon" loading="lazy"
+                                          src="../images/rankIcons/all_text_rank01_e.png"
+                                          alt="E Rank"
+                                          onload="this.classList.remove('loading')"
+                                          onerror="this.classList.remove('loading')">
+                                    <p id="yokaiInfoRank">E Rank</p></div>
+                                <div id="role">
+                                    <div><img id="yokaiInfoRoleIcon" loading="lazy" src="../images/roleText/Fighter.png"
+                                              alt="Fighter"
+                                              onload="this.classList.remove('loading')"
+                                              onerror="this.classList.remove('loading')"></div>
+                                    <p id="yokaiInfoRole">Fighter Role</p></div>
 
-                        <div id="medalliumBio" class="noBio">
-                            A careless Yo-kai who enters battle wearing only a loincloth... and a pan on his head. Try not to take after him so much.
-                        </div>
+                                <div><img id="yokaiInfoTribeIcon" loading="lazy" src="../images/tribeIcons/Brave.png"
+                                          alt="Brave"
+                                          onload="this.classList.remove('loading')"
+                                          onerror="this.classList.remove('loading')">
+                                    <p id="yokaiInfoTribe">Brave</p></div>
+                            </div>
 
-                        <div id="statsSkill">
-                            <div class="statData HP">
-                                <div class="hexagonTitle HP">HP</div>
-                                <div class="stat" id="yokaiHP">417</div>
-                                <hr>
-                            </div>
-                            <div class="elements">
-                                <div class="strongEL">Str.</div>
-                                <img id="strongElement" loading="lazy" src="../images/attributeIcons/attributeFire.png" alt="Fire Attribute" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                                <hr class="strongEL">
-                                <div class="weakEL">Wk.</div>
-                                <img id="weakElement" loading="lazy" src="../images/attributeIcons/attributeWater.png" alt="Water Attribute" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                                <hr class="weakEL">
-                            </div>
-                            <div class="statData STR">
-                                <div class="hexagonTitle STR">STR</div>
-                                <div class="stat" id="yokaiSTR">145</div>
-                                <hr>
-                            </div>
-                            <div class="statData SPR">
-                                <div class="hexagonTitle SPR">SPR</div>
-                                <div class="stat" id="yokaiSPR">589</div>
-                                <hr>
-                            </div>
-                            <div class="statData DEF">
-                                <div class="hexagonTitle DEF">DEF</div>
-                                <div class="stat" id="yokaiDEF">184</div>
-                                <hr>
-                            </div>
-                            <div class="statData SPD">
-                                <div class="hexagonTitle SPD">SPD</div>
-                                <div class="stat" id="yokaiSPD">Normal</div>
-                                <hr>
-                            </div>
-                            <div class="skillTitle">
-                                <div class="hexagonTitle Skill">SKILL</div>
-                                <div id="skillName">Careless</div>
-                                <hr>
-                            </div>
-                            <div id="skillDescription">
-                                30% more likely to cause and take critical hits
-                            </div>
-                        </div>
+                            <div id="medalliumBio" class="noBio">
 
+                            </div>
 
-                        <div id="movesSoultimateWrapper">
-                            <div id="Movelist">
-                                <div class="move" id="AMove">
-                                    <div class="moveHexagonBorder"></div>
-                                    <div class="moveIconContainer">
-                                        <img class="moveIcon" loading="lazy" id="AMoveIcon" src="../images/moveIcons/image1x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.remove('loading')">
-                                    </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="AMoveText">Attack</div>
-                                    </div>
+                            <div id="statsSkill">
+                                <div class="statData HP">
+                                    <div class="hexagonTitle HP">HP</div>
+                                    <div class="stat" id="yokaiHP"></div>
+                                    <hr>
                                 </div>
-                                <div class="move" id="XMove">
-                                    <div class="moveHexagonBorder"></div>
-                                    <div class="moveIconContainer">
-                                        <img class="moveIcon" loading="lazy" id="XMoveIcon" src="../images/moveIcons/image4x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
-                                    </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="XMoveText">Power Attack</div>
-                                    </div>
+                                <div class="elements">
+                                    <div class="strongEL">Str.</div>
+                                    <img id="strongElement" loading="lazy"
+                                         src="../images/attributeIcons/attribute-.png" alt="No Attribute"
+                                         onload="this.classList.remove('loading')"
+                                         onerror="this.classList.remove('loading')">
+                                    <hr class="strongEL">
+                                    <div class="weakEL">Wk.</div>
+                                    <img id="weakElement" loading="lazy"
+                                         src="../images/attributeIcons/attribute-.png" alt="No Attribute"
+                                         onload="this.classList.remove('loading')"
+                                         onerror="this.classList.remove('loading')">
+                                    <hr class="weakEL">
                                 </div>
-                                <div class="move" id="YMove">
-                                    <div class="moveHexagonBorder"></div>
-                                    <div class="moveIconContainer">
-                                        <img class="moveIcon" loading="lazy" id="YMoveIcon" src="../images/moveIcons/image12x6.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
-                                    </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="YMoveText">Dodge</div>
-                                    </div>
+                                <div class="statData STR">
+                                    <div class="hexagonTitle STR">STR</div>
+                                    <div class="stat" id="yokaiSTR"></div>
+                                    <hr>
                                 </div>
-                                <div class="move learnableMove">
-                                    <div class="moveHexagonBorder"></div>
-                                    <div class="moveIconContainer">
-                                        <img class="moveIcon" loading="lazy" id="LearnMove1Icon" src="../images/moveIcons/image3x2.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
-                                    </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="LearnMove1Text">Fire</div>
-                                    </div>
+                                <div class="statData SPR">
+                                    <div class="hexagonTitle SPR">SPR</div>
+                                    <div class="stat" id="yokaiSPR"></div>
+                                    <hr>
                                 </div>
-                                <div id="move4" class="move learnableMove noMove">
-                                    <div class="moveHexagonBorder"></div>
-                                    <div class="moveIconContainer">
-                                        <img class="moveIcon" loading="lazy" id="LearnMove2Icon" src="../images/moveIcons/image6x1.png" aria-label="hidden" onload="this.classList.remove('loading')" onerror="this.classList.add('loading')">
-                                    </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="LearnMove2Text"></div>
-                                    </div>
+                                <div class="statData DEF">
+                                    <div class="hexagonTitle DEF">DEF</div>
+                                    <div class="stat" id="yokaiDEF"></div>
+                                    <hr>
+                                </div>
+                                <div class="statData SPD">
+                                    <div class="hexagonTitle SPD">SPD</div>
+                                    <div class="stat" id="yokaiSPD"></div>
+                                    <hr>
+                                </div>
+                                <div class="skillTitle">
+                                    <div class="hexagonTitle Skill">SKILL</div>
+                                    <div id="skillName"></div>
+                                    <hr>
+                                </div>
+                                <div id="skillDescription">
                                 </div>
                             </div>
 
-                            <div id="soultimateMoveData" class="">
-                                <div class="moveTitle" id="SoultimateMoveTitle">
-                                    <div class="SoultimateIconWrapper">
-                                        <div class="soultimateIconBorder"></div>
-                                        <div class="SoultimateIconContainer">
-                                            <img class="moveIcon" id="SoultimateIcon" src="../images/other_assets/soultimateWispGlow.png">
-                                            <div class="SoultimateIconText">
-                                                Soultimate
-                                            </div>
+
+                            <div id="movesSoultimateWrapper">
+                                <div id="Movelist">
+                                    <div class="move" id="AMove">
+                                        <div class="moveHexagonBorder"></div>
+                                        <div class="moveIconContainer">
+                                            <img class="moveIcon" loading="lazy" id="AMoveIcon"
+                                                 alt="Attack"
+                                                 src="../images/moveIcons/image1x1.png" aria-label="hidden"
+                                                 onload="this.classList.remove('loading')"
+                                                 onerror="this.classList.remove('loading')">
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="AMoveText"></div>
                                         </div>
                                     </div>
-                                    <div class="moveNameContainer">
-                                        <div class="moveName" id="soultimateMoveName">Kelpy Hospitality</div>
+                                    <div class="move" id="XMove">
+                                        <div class="moveHexagonBorder"></div>
+                                        <div class="moveIconContainer">
+                                            <img class="moveIcon" loading="lazy" id="XMoveIcon"
+                                                 alt="Attack"
+                                                 src="../images/moveIcons/image1x1.png" aria-label="hidden"
+                                                 onload="this.classList.remove('loading')"
+                                                 onerror="this.classList.add('loading')">
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="XMoveText"></div>
+                                        </div>
+                                    </div>
+                                    <div class="move" id="YMove">
+                                        <div class="moveHexagonBorder"></div>
+                                        <div class="moveIconContainer">
+                                            <img class="moveIcon" loading="lazy" id="YMoveIcon"
+                                                 alt="Attack"
+                                                 src="../images/moveIcons/image1x1.png" aria-label="hidden"
+                                                 onload="this.classList.remove('loading')"
+                                                 onerror="this.classList.add('loading')">
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="YMoveText"></div>
+                                        </div>
+                                    </div>
+                                    <div class="move learnableMove">
+                                        <div class="moveHexagonBorder"></div>
+                                        <div class="moveIconContainer">
+                                            <img class="moveIcon" loading="lazy" id="LearnMove1Icon"
+                                                 alt="Attack"
+                                                 src="../images/moveIcons/image1x1.png" aria-label="hidden"
+                                                 onload="this.classList.remove('loading')"
+                                                 onerror="this.classList.add('loading')">
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="LearnMove1Text"></div>
+                                        </div>
+                                    </div>
+                                    <div id="move4" class="move learnableMove noMove">
+                                        <div class="moveHexagonBorder"></div>
+                                        <div class="moveIconContainer">
+                                            <img class="moveIcon" loading="lazy" id="LearnMove2Icon"
+                                                 alt="Attack"
+                                                 src="../images/moveIcons/image1x1.png" aria-label="hidden"
+                                                 onload="this.classList.remove('loading')"
+                                                 onerror="this.classList.add('loading')">
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="LearnMove2Text"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="moveDescription" id="soultimateMoveDescription">
-                                    Casts water magic that hurts foes and heals allies.
-                                </div>
 
-                                <div class="soultimateMoveDetails">
-                                    <div class="soultimateMoveInfo">
-                                        <div class="infoTitle">Class</div>
-                                        <div class="infoValue text" id="soultimateMoveClass">Attack/Heal</div>
+                                <div id="soultimateMoveData" class="">
+                                    <div class="moveTitle" id="SoultimateMoveTitle">
+                                        <div class="SoultimateIconWrapper">
+                                            <div class="soultimateIconBorder"></div>
+                                            <div class="SoultimateIconContainer">
+                                                <img class="moveIcon" id="SoultimateIcon"
+                                                     alt="Soultimate"
+                                                     src="../images/other_assets/soultimateWispGlow.png">
+                                                <div class="SoultimateIconText">
+                                                    Soultimate
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="moveNameContainer">
+                                            <div class="moveName" id="soultimateMoveName"></div>
+                                        </div>
+                                    </div>
+                                    <div class="moveDescription" id="soultimateMoveDescription">
                                     </div>
 
-                                    <div class="soultimateMoveInfo">
-                                        <div class="infoTitle">Gauge</div>
-                                        <div class="infoValue numeric" id="soultimateMoveCharge">500</div>
+                                    <div class="soultimateMoveDetails">
+                                        <div class="soultimateMoveInfo">
+                                            <div class="infoTitle">Class</div>
+                                            <div class="infoValue text" id="soultimateMoveClass"></div>
+                                        </div>
+
+                                        <div class="soultimateMoveInfo">
+                                            <div class="infoTitle">Gauge</div>
+                                            <div class="infoValue numeric" id="soultimateMoveCharge"></div>
+                                        </div>
+
+                                        <div class="soultimateMoveInfo notStatus">
+                                            <div class="infoTitle">Power</div>
+                                            <div class="infoValue numeric" id="soultimateMovePower"></div>
+                                        </div>
+
+                                        <div class="soultimateMoveInfo notStatus notHeal">
+                                            <div class="infoTitle">Crit Rate</div>
+                                            <div class="infoValue numeric" id="soultimateMoveCritRate"></div>
+                                        </div>
+
+                                        <div class="soultimateMoveInfo notStatus">
+                                            <div class="infoTitle">Scaling</div>
+                                            <div class="infoValue text" id="soultimateMoveScaling"></div>
+                                        </div>
+
+                                        <div class="soultimateMoveInfo notStatus notHeal">
+                                            <div class="infoTitle">Attribute</div>
+                                            <div class="infoValue text" id="soultimateMoveAttribute"></div>
+                                        </div>
                                     </div>
 
-                                    <div class="soultimateMoveInfo notStatus">
-                                        <div class="infoTitle">Power</div>
-                                        <div class="infoValue numeric" id="soultimateMovePower">37.5x8/100</div>
+                                    <div class="inspirit" id="soultimateInspirit">
+
                                     </div>
-
-                                    <div class="soultimateMoveInfo notStatus notHeal">
-                                        <div class="infoTitle">Crit Rate</div>
-                                        <div class="infoValue numeric" id="soultimateMoveCritRate">10%</div>
-                                    </div>
-
-                                    <div class="soultimateMoveInfo notStatus">
-                                        <div class="infoTitle">Scaling</div>
-                                        <div class="infoValue text" id="soultimateMoveScaling">Spirit</div>
-                                    </div>
-
-                                    <div class="soultimateMoveInfo notStatus notHeal">
-                                        <div class="infoTitle">Attribute</div>
-                                        <div class="infoValue text" id="soultimateMoveAttribute">Water</div>
-                                    </div>
-                                </div>
-
-                                <div class="inspirit" id="soultimateInspirit">
-
                                 </div>
                             </div>
                         </div>
@@ -250,7 +295,7 @@
                     <div id="footerNavigation">
                         <div id="footerNavigationContainer" class="footerContainer">
                             <div class="footerTitle">The Mod</div>
-                            <nav class="socials">
+                            <nav class="links">
                                 <div class="navItem"><a class="noIcon" href="/"><span
                                         class="socialsLinkText">Home</span></a></div>
                                 <div class="navItem"><a class="noIcon" href="/About"><span
@@ -265,7 +310,7 @@
                         </div>
                         <div id="footerResourcesContainer" class="footerContainer">
                             <div class="footerTitle">Resources</div>
-                            <nav class="socials">
+                            <nav class="links">
                                 <div class="navItem"><a class="noIcon" href="/FAQ"><span
                                         class="socialsLinkText">FAQ</span></a></div>
                                 <div class="navItem"><a class="noIcon" href="/Guides"><span class="socialsLinkText">Guides</span></a>
@@ -281,7 +326,7 @@
                     <div id="footerSocialsLogo">
                         <div id="footerSocialsContainer" class="footerContainer">
                             <div class="footerTitle">Socials</div>
-                            <nav class="socials">
+                            <nav class="links">
                                 <div class="navItem"><a class="discord" target="_blank"
                                                         href="https://discord.gg/nxCvVJ6fgt"></a></div>
                                 <div class="navItem"><a class="twitter" target="_blank"

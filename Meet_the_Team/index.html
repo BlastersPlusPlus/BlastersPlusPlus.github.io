@@ -4,10 +4,12 @@
         <title>Blasters++: Meet the Team!</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="light">
+        <meta name="description" content="Get to know the people who have contributed to Blasters++">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../backgrounds.css">
@@ -17,11 +19,46 @@
     </head>
     <body>
         <header>
-
+            <div class="headerLogoContainer">
+                <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+            </div>
+            <nav class="headerNavigationContainer">
+                <div class="headerNavigationSection">
+                    <h1 class="headerNavigationTitle">
+                        <a href="https://gamebanana.com/mods/457241" target="_blank">Download</a>
+                    </h1>
+                </div>
+                <div class="headerNavigationSection">
+                    <h1 class="headerNavigationTitle">About</h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/About">About</a></li>
+                                <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="headerNavigationSection">
+                    <h1 class="headerNavigationTitle">Resources</h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/FAQ">FAQ</a></li>
+                                <li><a href="/Guides">Guides</a></li>
+                                <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+            <script src="/script-header.js" defer></script>
         </header>
         <div class="bodyContents">
             <main>
-                <div class="grid-item younes">
+                <div class="grid-item younes" id="Younes">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/YounesPFP.jpg" alt="Younes' profile picture. It shows Emperor Usapyon with a white outline over a background with silhouettes with glowing yellow eyes."></div>
                     <div class="Description">
                         <p class="name">Younes</p>
@@ -33,15 +70,15 @@
                             Creator and director of the mod. Implements all changes.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://x.com/Younesplusplus"></a>
-                        <a class="bsky" target="_blank"
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/Younesplusplus"></a>
+                        <a class="icon bsky" target="_blank"
                            href="https://bsky.app/profile/younesplusplus.bsky.social"></a>
-                        <a class="youtube" target="_blank"
+                        <a class="icon youtube" target="_blank"
                            href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="J4">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/J4PFP.png" alt="J4's profile picture. It's a very beatiful photograph of a chestnut-fronted macaw, a species of parrot, cropped to only show the bird's face. The bird has green plumage and a black beak, and the skin around its eyes is white. The photo is stunningly beautiful, showing the bird coated in amber golden light from the early hours of the morning in the Amazon jungle. I'm totally not writing all of this to boost my own ego, but you should totally go check out my other very cool website over at https://jbirding.com - J4."></div>
                     <div class="Description">
                         <p class="name">J4</p>
@@ -53,13 +90,13 @@
                             Balancer and Yo-kai and equipment designer. I also made this site!
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/jbirding.bsky.social"></a>
-                        <a class="instagram" target="_blank" href="https://instagram.com/_erithacus_rubecula"></a>
-                        <a class="jbirding" target="_blank" href="https://jbirding.com/en"></a>
+                    <div class="teamLinks links">
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/jbirding.bsky.social"></a>
+                        <a class="icon instagram" target="_blank" href="https://instagram.com/_erithacus_rubecula"></a>
+                        <a class="icon jbirding" target="_blank" href="https://jbirding.com/en"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Fren">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/FrenPFP.png" alt="Fren's profile picture. It's a stylized cartoon axolotl curving along the image's rounded edge. The background is baby blue."></div>
                     <div class="Description">
                         <p class="name">A. Fren</p>
@@ -71,11 +108,11 @@
                             Moveset and equipment designer, helps with creative concepts.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/a-fren.bsky.social"></a>
+                    <div class="teamLinks links">
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/a-fren.bsky.social"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="JoJo">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/JoJoPFP.jpg" alt="JoJo's profile picture. It's a still from the Yo-kai Watch anime showing the character Emma blushing and happy."></div>
                     <div class="Description">
                         <p class="name">JoJo</p>
@@ -83,12 +120,12 @@
                             Emma Daiouji IRL, Artist who draws some of the things you'll be seeing in the mod :)
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://x.com/SquishyBlooper"></a>
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/squishyblooper.bsky.social"></a>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/SquishyBlooper"></a>
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/squishyblooper.bsky.social"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Stitches">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/Stitches.png" alt="Stitches' profile picture. It's a medal they drew for Goku (Extreme) Blizzaria in the style of Yo-kai Watch 3's dream medals."></div>
                     <div class="Description">
                         <p class="name">Stitches</p>
@@ -97,13 +134,13 @@
                             mod.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://x.com/PlushShooter"></a>
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/stitchesplush.bsky.social"></a>
-                        <a class="tumblr" target="_blank" href="https://www.tumblr.com/stitchesplus?source=share"></a>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/PlushShooter"></a>
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/stitchesplush.bsky.social"></a>
+                        <a class="icon tumblr" target="_blank" href="https://www.tumblr.com/stitchesplus?source=share"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Komabassador">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/KomabassadorPFP.png" alt="Komabassador's profile picture. It shows a penguin-looking character facing the camera while holding a sign. In the background, there are height markers. It looks like a suspect recognition scene. The image has the frame of a Shady Tribe Yo-kai Medal."></div>
                     <div class="Description">
                         <p class="name">Komabassador</p>
@@ -115,12 +152,12 @@
                             Runs the Blasters++ Twitter & Bluesky accounts and helps with creative concepts.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://twitter.com/Komabassador"></a>
-                        <a class="youtube" target="_blank" href="https://www.youtube.com/@komabassador"></a>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://twitter.com/Komabassador"></a>
+                        <a class="icon youtube" target="_blank" href="https://www.youtube.com/@komabassador"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Opal">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/OpalPFP.png" alt="Opal's profile picture. It depitcs a stylized cartoon caracter resembling some sort of furry animal. It's brown with purple accents, and its eyes are large with white, vertical pupils. Its left eye is orange, and its right eye is purple"></div>
                     <div class="Description">
                         <p class="name">OpalKitsune</p>
@@ -128,14 +165,14 @@
                             Helps with creative concepts and ideas.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/opalfoxxo.bsky.social"></a>
-                        <a class="instagram" target="_blank" href="https://www.instagram.com/opal_kitsune_"></a>
-                        <a class="youtube" target="_blank"
+                    <div class="teamLinks links">
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/opalfoxxo.bsky.social"></a>
+                        <a class="icon instagram" target="_blank" href="https://www.instagram.com/opal_kitsune_"></a>
+                        <a class="icon youtube" target="_blank"
                            href="https://m.youtube.com/channel/UC0oTagoRaVbp-mGawEKEXLA"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Memelord">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/MemelordPFP.jpg" alt="Memelord's profile picture. I am sorry if you're using a screen reader or the images didn't load but it's 2 am and I have no idea what these people's pictures are."></div>
                     <div class="Description">
                         <p class="name">Memelord</p>
@@ -147,13 +184,13 @@
                             Modeler and animator for new and reworked Yo-kai.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/litememeland.bsky.social"></a>
-                        <a class="youtube" target="_blank"
+                    <div class="teamLinks links">
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/litememeland.bsky.social"></a>
+                        <a class="icon youtube" target="_blank"
                            href="https://www.youtube.com/channel/UCDOSZUi9EFVOUY2RGjZ0faw"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Whisperito">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/Whisperito.png" alt="Whisperito's profile picture. It's Whisper"></div>
                     <div class="Description">
                         <p class="name">Whisperito</p>
@@ -165,11 +202,11 @@
                             Admin of the Blasters++ Discord server who set up most of it.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://x.com/GantDeFer_"></a>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/GantDeFer_"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Light">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/LightPFPjpg.jpg" alt="Light's profile picture."></div>
                     <div class="Description">
                         <p class="name">Light</p>
@@ -181,12 +218,12 @@
                             Creator of the English YKW4 fan translation. Translates descriptions from Japanese.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="bsky" target="_blank" href="https://bsky.app/profile/light8227.bsky.social"></a>
-                        <a class="gamebanana" target="_blank" href="https://gamebanana.com/members/2075635"></a>
+                    <div class="teamLinks links">
+                        <a class="icon bsky" target="_blank" href="https://bsky.app/profile/light8227.bsky.social"></a>
+                        <a class="icon gamebanana" target="_blank" href="https://gamebanana.com/members/2075635"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Kat">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/KatPFP.png" alt="Kat's profile picture. It shows Mikettio from Yo-kai Watch."></div>
                     <div class="Description">
                         <p class="name">Kat</p>
@@ -194,11 +231,11 @@
                             Talented artist who has drawn some of the images you see in the mod.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="tumblr" target="_blank" href="https://dreamerkitty.tumblr.com"></a>
+                    <div class="teamLinks links">
+                        <a class="icon tumblr" target="_blank" href="https://dreamerkitty.tumblr.com"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Orochi">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/OrochiPFP.png" alt="Orochi's profile picture."></div>
                     <div class="Description">
                         <p class="name">Orochi</p>
@@ -209,12 +246,12 @@
                             Talented artist who has drawn a lot of the medals you see in the mod.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="twitter" target="_blank" href="https://x.com/SeiryuOrochi"></a>
-                        <a class="fankai" target="_blank" href="https://fankai.fandom.com/fr/wiki/Catégorie:Orochi_Seiryû"></a>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/SeiryuOrochi"></a>
+                        <a class="icon fankai" target="_blank" href="https://fankai.fandom.com/fr/wiki/Catégorie:Orochi_Seiryû"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="UnderScore">
                     <div class="pfpContainer"><img class="pfp" src="./pfps/UnderScorePFP.png" alt="UnderScore's profile picture."></div>
                     <div class="Description">
                         <p class="name">UnderScore</p>
@@ -225,11 +262,11 @@
                             Comes up with creative concepts and writes text for the mod.
                         </div>
                     </div>
-                    <div class="teamLinks socials">
-                        <a class="youtube" target="_blank" href="https://youtube.com/@underscore404?si=V53XHlscIbQpLB71"></a>
+                    <div class="teamLinks links">
+                        <a class="icon youtube" target="_blank" href="https://youtube.com/@underscore404?si=V53XHlscIbQpLB71"></a>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Argo">
                     <div class="Description">
                         <p class="name">Argo</p>
                         <div class="work">
@@ -237,20 +274,39 @@
                         </div>
                     </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="Sofuto">
+                    <div class="pfpContainer"><img class="pfp" src="./pfps/SofutoPFP.jpg" alt="Sofuto's profile picture."></div>
                     <div class="Description">
                         <p class="name">Sofuto</p>
                         <div class="work">
                             Talented artist who has drawn some of the Yo-kai icons and B medals you see in the mod.
                         </div>
                     </div>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/SofutoTW"></a>
+                        <a class="icon youtube" target="_blank" href="https://www.youtube.com/channel/UC0D3wv-CAIXO3BDv4Xr_1Wg"></a>
+                    </div>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" id="FrostShogunyan">
                     <div class="Description">
                         <p class="name">Frost Shogunyan</p>
                         <div class="work">
                             Talented artist who has drawn art and Yo-kai medals for mod.
                         </div>
+                    </div>
+                </div>
+                <div class="grid-item" id="Math">
+                    <div class="pfpContainer"><img class="pfp" src="./pfps/Math.png" alt="Math's profile picture."></div>
+                    <div class="Description">
+                        <p class="name">Math</p>
+                        <div class="work">
+                            Artist and popular YKW Modder that is helping with model ports and is making his own Yo-kai Watch 3 Mod
+                        </div>
+                    </div>
+                    <div class="teamLinks links">
+                        <a class="icon twitter" target="_blank" href="https://x.com/oisouomatho"></a>
+                        <a class="icon youtube" target="_blank" href="https://www.youtube.com/@OiSouOMatho"></a>
+                        <a class="icon gamebanana" target="_blank" href="https://gamebanana.com/members/2056987"></a>
                     </div>
                 </div>
             </main>
@@ -297,46 +353,40 @@
                     <div id="footerNavigation">
                         <div id="footerNavigationContainer" class="footerContainer">
                             <div class="footerTitle">The Mod</div>
-                            <nav class="socials">
-                                <div class="navItem"><a class="noIcon" href="/"><span
-                                        class="socialsLinkText">Home</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/About"><span
-                                        class="socialsLinkText">About</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/Meet_the_Team"><span
-                                        class="socialsLinkText">Meet the Team!</span></a></div>
-                                <div class="navItem"><a class="noIcon" target="_blank"
-                                                        href="https://gamebanana.com/mods/457241"><span
-                                        class="socialsLinkText">Download</span></a>
+                            <nav class="links">
+                                <div class="navItem"><a href="/">Home</a></div>
+                                <div class="navItem"><a href="/About">About</a></div>
+                                <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+                                <div class="navItem"><a target="_blank"
+                                                        href="https://gamebanana.com/mods/457241">Download</a>
                                 </div>
                             </nav>
                         </div>
                         <div id="footerResourcesContainer" class="footerContainer">
                             <div class="footerTitle">Resources</div>
-                            <nav class="socials">
-                                <div class="navItem"><a class="noIcon" href="/FAQ"><span
-                                        class="socialsLinkText">FAQ</span></a></div>
-                                <div class="navItem"><a class="noIcon" href="/Guides"><span class="socialsLinkText">Guides</span></a>
+                            <nav class="links">
+                                <div class="navItem"><a href="/FAQ">FAQ</a></div>
+                                <div class="navItem"><a href="/Guides">Guides</a>
                                 </div>
-                                <div class="navItem"><a class="noIcon" href="/Yo-kai_Info"><span
-                                        class="socialsLinkText">Yo-kai Info</span></a></div>
-                                <div class="navItem"><a class="noIcon" target="_blank"
+                                <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                                <div class="navItem"><a target="_blank"
                                                         href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                    <span class="socialsLinkText">B++ Spreadsheet</span></a></div>
+                                    B++ Spreadsheet</a></div>
                             </nav>
                         </div>
                     </div>
                     <div id="footerSocialsLogo">
                         <div id="footerSocialsContainer" class="footerContainer">
                             <div class="footerTitle">Socials</div>
-                            <nav class="socials">
-                                <div class="navItem"><a class="discord" target="_blank"
+                            <nav class="links">
+                                <div class="navItem"><a class="icon discord" target="_blank"
                                                         href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                                <div class="navItem"><a class="twitter" target="_blank"
+                                <div class="navItem"><a class="icon twitter" target="_blank"
                                                         href="https://x.com/Blastersplusmod"></a></div>
-                                <div class="navItem"><a class="bsky" target="_blank"
+                                <div class="navItem"><a class="icon bsky" target="_blank"
                                                         href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
                                 </div>
-                                <!--div class="navItem"><a class="youtube" target="_blank"
+                                <!--div class="navItem"><a class="icon youtube" target="_blank"
                                                         href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
                                 </div-->
                             </nav>
@@ -348,39 +398,11 @@
                     </div>
                 </div>
             </div>
+            <script src="/script-footer.js"></script>
             <div class="footerNotice">
                 Yo-kai Watch Blasters ++ 2023-2025
             </div>
 
-            <script>
-                let bgType = localStorage.getItem("bgType") ?? "random";
-                let bgAnimate = localStorage.getItem("bgAnimate") ?? true;
-
-                console.log(bgAnimate);
-
-                if(bgAnimate === 'true') {
-                    document.documentElement.classList.add("animatedBG");
-                    document.getElementById("animateBG").checked = true;
-                } else {
-                    document.getElementById("animateBG").checked = false;
-                }
-
-                if(bgType !== "random") {
-                    document.documentElement.classList.add("bg"+bgType);
-                    document.getElementById("background").value = bgType;
-                    console.log('set BG');
-                } else {
-                    document.getElementById("background").value = "random";
-                    bgType = Math.floor(Math.random() * 14);
-                    bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType == 3 ? 'a' : bgType == 4 ? 'b' : '');
-                    document.documentElement.classList.add("bg"+bgType);
-                    console.log('random BG');
-                }
-
-                console.log(bgType);
-
-
-            </script>
         </footer>
     </body>
 </html>
