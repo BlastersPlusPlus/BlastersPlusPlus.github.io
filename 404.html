@@ -1,0 +1,168 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>Page Not Found</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="only light">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="./style-global.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="./backgrounds.css">
+    </head>
+    <body>
+        <header>
+        <div class="headerLogoContainer">
+            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+        </div>
+        <nav class="headerNavigationContainer">
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle">
+                    <a href="https://gamebanana.com/mods/457241">Download</a>
+                </h1>
+            </div>
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">About</h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/About">About</a></li>
+                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/FAQ">FAQ</a></li>
+                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection small">
+                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/About">About</a></li>
+                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                            <li><a href="/FAQ">FAQ</a></li>
+                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+        <script src="/script-header.js" defer></script>
+    </header>
+        <div class="bodyContents">
+            <div class="whiteOverWindow" style="margin-inline: auto; text-align: center; max-width: 90vw; width: 600px; padding: 2em; border-radius: 50px;">
+                <h1 style="line-height: 1.5;margin-block: 0;">404</h1>
+                <p style="font-size: 2em;margin-block: 0;">Page not found.</p>
+            </div>
+        </div>
+        <footer>
+            <div id="footerContents">
+                <div id="footerLeftSide" class="footerHalf">
+                    <div id="backgroundSelector">
+                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
+                        <div id="backgroundContainer">
+                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
+                            localStorage.setItem('bgType', this.value);
+                            if(this.value === 'random') {
+                                bgType = Math.floor(Math.random() * 14);
+                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
+                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                            }">
+                                <option value="random" class="noJS">Random</option>
+                                <option value="plain" selected>Plain</option>
+                                <option value="0">FluffBlast</option>
+                                <option value="1">Cool Star</option>
+                                <option value="2">Heart</option>
+                                <option value="3a">Red Cat</option>
+                                <option value="3b">White Dog</option>
+                                <option value="4">Sergeant</option>
+                                <option value="5">Sparkling</option>
+                                <option value="6">Stilldark?</option>
+                                <option value="7">Cool&starf;KJ</option>
+                                <option value="8">Chase!</option>
+                                <option value="9">Momotaro</option>
+                                <option value="10">G of Enma</option>
+                                <option value="11">Sunshine</option>
+                                <option value="12">King</option>
+                            </select>
+                        </div>
+                        <div class="checkboxContainer">
+                            <input checked id="animateBG" type="checkbox"
+                                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                            <label for="animateBG">Animate Background</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="footerRightSide" class="footerHalf">
+                    <div id="footerNavigation">
+                        <div id="footerNavigationContainer" class="footerContainer">
+                            <div class="footerTitle">The Mod</div>
+                            <nav class="links">
+                                <div class="navItem"><a href="/">Home</a></div>
+                                <div class="navItem"><a href="/About">About</a></div>
+                                <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+                                <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
+                                </div>
+                            </nav>
+                        </div>
+                        <div id="footerResourcesContainer" class="footerContainer">
+                            <div class="footerTitle">Resources</div>
+                            <nav class="links">
+                                <div class="navItem"><a href="/FAQ">FAQ</a></div>
+                                <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                                <div class="navItem"><a target="_blank"
+                                                        href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div id="footerSocialsLogo">
+                        <div id="footerSocialsContainer" class="footerContainer">
+                            <div class="footerTitle">Socials</div>
+                            <nav class="links">
+                                <div class="navItem"><a class="icon discord" target="_blank"
+                                                        href="https://discord.gg/nxCvVJ6fgt"></a></div>
+                                <div class="navItem"><a class="icon twitter" target="_blank"
+                                                        href="https://x.com/Blastersplusmod"></a></div>
+                                <div class="navItem"><a class="icon bsky" target="_blank"
+                                                        href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
+                                </div>
+                                <!--div class="navItem"><a class="icon youtube" target="_blank"
+                                                        href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+                                </div-->
+                            </nav>
+                        </div>
+                        <div id="footerLogoContainer">
+                            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
+                                 aria-hidden="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="/script-footer.js"></script>
+            <div class="footerNotice">
+                Yo-kai Watch Blasters ++ 2023-2025
+            </div>
+
+        </footer>
+    </body>
+</html>
