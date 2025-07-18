@@ -71,7 +71,9 @@ header {
     &.nav-up {top: -100px; }
     &:has(:focus-visible) {top:0;}
 
-    &.stuck.nav-up {.headerNavigationPopupContainer {height: 0 !important;}}
+    &.stuck.nav-up {
+        .headerNavigationPopupContainer {height: 0 !important; min-height: 0 !important; nav{min-height: 0 !important;}}
+    }
 
     box-sizing: border-box;
     padding-top: 10px;
@@ -120,6 +122,19 @@ header {
                 a:active {color: cyan};
             }
 
+            .headerDownArrow {
+                width: 2em;
+                height: 3em;
+                background-color: white;
+                appearance: none;
+                border: none;
+                mask-image: url("/images/other_assets/downArrow.svg");
+                mask-repeat: no-repeat;
+                mask-size: contain;
+                mask-position: center;
+                transition: transform 0.3s ease;
+            }
+
             .headerNavigationPopupContainer {
                 height: 0;
                 overflow: hidden;
@@ -131,7 +146,7 @@ header {
                 }
 
                 position: absolute;
-                right: 0;
+                right: -20px;
                 min-width: 100%;
                 padding-top: 0;
                 transition: height 0.3s ease;
@@ -141,20 +156,27 @@ header {
                     margin: 0;
                     border: none;
                     * {border: none;}
-                    li {font-size: 1.5em;}
                 }
             }
-            h1:hover + .headerNavigationPopupContainer,
-            .headerNavigationPopupContainer:hover {
-                border: 1px solid red;
-                height: 100px;
+
+            .headerNavigationPopupTrigger.headerDownArrow:hover,
+            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible) {
+                transform: rotate(180deg);
+            }
+
+            /*,
+            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:has(:focus-visible))*/
+
+            .headerNavigationPopupTrigger:hover + .headerNavigationPopupContainer,
+            .headerNavigationPopupContainer:has(nav:hover) {
+                height: 200px;
                 min-height: min-content;
                 nav {height: min-content;}
             }
 
             .headerNavigationPopupContainer:has(:focus-visible) {
-                height: min-content !important;
-                min-height: min-content !important;
+                height: 200px !important;
+                min-height: min-content;
                 nav {height: min-content;}
             }
         };
