@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         name.classList.add('name');
         gridItem.appendChild(name);
 
-        if(element.number != "-") {
+        if(element.number !== "-") {
             let number = document.createElement('div');
             number.innerText = '#'+element.number.toLocaleString(undefined, {minimumIntegerDigits: 3});
             number.classList.add('number');
@@ -40,28 +40,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 window.addEventListener('hashchange', () => {
     console.log(location.hash);
-    let screenCover = document.getElementById('screenCover');
-    if(!location.hash) {screenCover.className = 'closed'; return;}
+    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+    if(!location.hash) {yokaiInfoContainer.className = 'closed'; return;}
 
     let yokai = document.getElementById(location.hash.replace('#',''))?.yokai;
-    if(yokai && (screenCover.yokaiId !== yokai.id || screenCover.className!=='open')) {openInfoPopup(yokai);}
+    if(yokai && (yokaiInfoContainer.yokaiId !== yokai.id || yokaiInfoContainer.className!=='open')) {openInfoPopup(yokai);}
 
 })
 
 document.addEventListener('keydown', function(e){
-    let screenCover = document.getElementById('screenCover');
-    if(e.code === 'Escape' && screenCover.classList.contains('open')){
+    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+    if(e.code === 'Escape' && yokaiInfoContainer.classList.contains('open')){
         closeInfoPopup();
-    }
-
-    if (e.key === 'Tab' && screenCover.classList.contains('open')) {
-        e.preventDefault();
-        let closePopup = document.getElementById("closePopup");
-        let elementToClose = closePopup === document.activeElement ? document.getElementById("yokaiInfoPopupContainer") : closePopup;
-        console.log(elementToClose);
-        elementToClose.focus();
-    }
-})
+    }})
 
 function openInfoPopup(yokai) {
     history.replaceState(null, null, '#'+yokai.name.replace(/\s/g, ''));
@@ -154,16 +145,24 @@ function openInfoPopup(yokai) {
     else soultInspirit.classList.remove('empty');
 
 
-    let screenCover = document.getElementById("screenCover");
+    /*let screenCover = document.getElementById("screenCover");
     screenCover.yokaiId = yokai.id;
     screenCover.scrollTop = 0;
     screenCover.className = 'open';
-    screenCover.focus();
+    screenCover.focus();*/
+
+    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+    yokaiInfoContainer.yokaiId = yokai.id;
+    yokaiInfoContainer.scrollTop = 0;
+    yokaiInfoContainer.showModal();
+    yokaiInfoContainer.classList.add('open');
 }
 
 function closeInfoPopup() {
-    let screenCover = document.getElementById('screenCover');
-    screenCover.className = 'closed';
-    delete screenCover.onkeydown;
+    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+    yokaiInfoContainer.addEventListener('transitionend', function () {
+        this.close();
+    },{once:true});
+    yokaiInfoContainer.classList.remove('open');
     history.replaceState(null, null, '#');
 }

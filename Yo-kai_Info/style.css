@@ -53,79 +53,74 @@ body {
     min-width: fit-content;
 }
 
-#screenCover {
+#yokaiInfoPopupContainer {
+    display: block;
+    visibility: hidden;
     opacity: 0;
-    z-index: 1;
     position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0,0,0,0.75);
+    overflow-y: scroll;
 
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    --transition-speed: 0.5s;
 
-    visibility: hidden;
     &:focus {outline: none;}
-    &.open {animation: fadeIn 0.5s forwards;}
-    &.closed {animation: fadeOut 0.5s forwards; pointer-events: none;}
+    &[open].open, &[open].open::backdrop {opacity: 1; visibility: visible;}
+    &:not([open]) {opacity: 0; visibility: hidden; pointer-events: none;}
 
-    #yokaiInfoPopupContainer {
-        position: fixed;
-        width: 100%;
-        min-height: 100vh;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        overflow-y: scroll;
+    transition-property: opacity, visibility;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
+    transition-delay: 0s;
 
-        #closePopupContainer{
-            position: fixed;
-            --min-size: min(5vw, 5vh);
-            top: calc(var(--min-size)/2);
-            right: calc(var(--min-size)/2 + 10px);
-            height: var(--min-size);
-            width: var(--min-size);
-            border-radius: var(--min-size);
-
-            z-index: 3;
-
-            #closePopup {
-                height: 100%;
-                width: 100%;
-                cursor: pointer;
-                transform: rotate(45deg);
-                mask-image: url("/images/other_assets/cross.svg");
-                mask-size: 100% 100%;
-                appearance: unset;
-                border: none;
-                box-shadow: var(--standard-shadow);
-                &:hover {filter: brightness(0.8);}
-                &:active {filter: brightness(0.7);}
-                &:focus-visible {outline: none;}
-            }
-            &:has(:focus-visible) {outline: var(--focus-outline);}
-        }
-
-        scrollbar-color: white transparent;
+    background-color: transparent;
+    border: none;
+    &::backdrop {
+        display: block;
+        opacity: 0;
+        backdrop-filter: blur(5px) brightness(0.25);
+        -webkit-backdrop-filter: blur(5px) brightness(0.25);
+        transition-property: opacity;
+        transition-duration: var(--transition-speed);
+        transition-timing-function: ease;
+        transition-delay: 0s;
     }
+
+    #closePopupContainer{
+        position: fixed;
+        --min-size: min(5vw, 5vh);
+        top: calc(var(--min-size)/2);
+        right: calc(var(--min-size)/2 + 10px);
+        height: var(--min-size);
+        width: var(--min-size);
+        border-radius: var(--min-size);
+
+        z-index: 3;
+
+        #closePopup {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            transform: rotate(45deg);
+            mask-image: url("/images/other_assets/cross.svg");
+            mask-size: 100% 100%;
+            appearance: unset;
+            border: none;
+            box-shadow: var(--standard-shadow);
+            &:hover {filter: brightness(0.8);}
+            &:active {filter: brightness(0.7);}
+            &:focus-visible {outline: none;}
+        }
+        &:has(:focus-visible) {outline: var(--focus-outline);}
+    }
+
+    scrollbar-color: white transparent;
 }
 
-body:has(#screenCover.open) {overflow: hidden;}
-
-/*#screenCover::-webkit-scrollbar {
-    background: transparent;
-    width: auto;
-}
-
-#screenCover::-webkit-scrollbar-thumb {
-    background: white;
-    border-radius: 10px;
-}
-
-#screenCover::-webkit-scrollbar-thumb:hover {background: #cccccc;}
-#screenCover::-webkit-scrollbar-thumb:active {background: #999999;}*/
+body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
 
 #yokaiGrid {
     width: min(90%, 1200px);
