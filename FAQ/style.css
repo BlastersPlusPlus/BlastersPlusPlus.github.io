@@ -45,6 +45,9 @@ main {
         iframe {width: 0;}
     }
 }
+@media (scripting: none) {
+    .downArrow {display: none;}
+}
 
 .FAQQuestion {
     padding: 2em;

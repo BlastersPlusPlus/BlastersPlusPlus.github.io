@@ -6,6 +6,7 @@
 @media all and (max-width: 600px) {
     #yokaiInfo {
         #yokaiInfoTitle {font-size: 1.5em;}
+        #yokaiInfoPaddingContainer {margin-inline: 5%;}
         #medalliumBio {font-size: 1em;}
         #statsSkill {
             .statData {font-size: 1em;}
@@ -30,6 +31,7 @@
 @media all and (min-width: 600px) {
     #yokaiInfo {
         #yokaiInfoTitle {font-size: 2em;}
+        #yokaiInfoPaddingContainer {margin-inline: 10%;}
         #medalliumBio {font-size: 1.3em;}
         #statsSkill {
             .statData {font-size: 1.5em;}
@@ -293,7 +295,7 @@ body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
 #yokaiInfo {
     position: relative;
     background-color: white;
-    width: min(80%, 800px);
+    width: min(95%, 800px);
     margin: 50px auto 50px auto;
     border-radius: 50px;
     padding-block: 40px;
@@ -301,7 +303,6 @@ body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
     img.loading {visibility: hidden};
 
     #yokaiInfoPaddingContainer {
-        margin-inline: 15%;
         display: flex;
         flex-direction: column;
         align-items: center;
