@@ -150,6 +150,7 @@ header {
                     box-sizing: content-box;
                     box-shadow: none;
                     padding: 1em;
+                    border-radius: 25px;
                 }
 
                 position: absolute;
@@ -386,12 +387,14 @@ footer {
 .whiteOverWindow {
     background-color: rgb(255, 255, 255, 0.85);
     color: black;
-    border-radius: 25px;
-    box-shadow: var(--standard-shadow);
     font-family: var(--font-marugo), sans-serif;
     border: 3px solid white;
     h1,h2,h3,h4,h5,h6 {font-family: var(--font-yuruka), sans-serif;}
-    h1 {font-size: 5em;}
+}
+
+.whiteOverWindow.shadow {
+    box-shadow: var(--standard-shadow);
+    background-color: rgb(255, 255, 255, 0.7);
 }
 
 noscript.whiteOverWindow {
@@ -399,6 +402,7 @@ noscript.whiteOverWindow {
     margin-inline: auto;
     font-family: var(--font-marugo), sans-serif;
     padding: 2em;
+    border-radius: 50px;
     div {
         margin-top: 1em;
         width: fit-content;

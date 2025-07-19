@@ -1,0 +1,112 @@
+@media all and (max-width: 600px) {
+    .FAQQuestion>.FAQQuestionHeader{
+        &>h1{font-size: 1.5em;}
+        &>.downArrow{width: 1.5em;}
+    }
+}
+
+@media all and (min-width: 600px) {
+    .FAQQuestion>.FAQQuestionHeader{
+        &>h1{font-size: 2em;}
+        &>.downArrow{width: 2em;}
+    }
+}
+
+main {
+    width: min(800px, 80vw);
+    margin-inline: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (scripting: enabled) {
+    .FAQQuestion>.answerContainer, .FAQQuestion iframe {
+        /* fade out, then shrink */
+        transition: opacity .25s,
+        font-size .25s .25s,
+        margin .25s .25s,
+        padding .25s .25s,
+        width .25s .25s;
+    }
+    .FAQQuestion.open>.answerContainer, .FAQQuestion iframe {
+        transition: font-size .25s,
+        margin .25s,
+        padding .25s,
+        width .5s,
+        opacity .5s .25s;
+    }
+    .FAQQuestion:not(.open)>.answerContainer {
+        font-size: 0;
+        margin: 0;
+        opacity: 0;
+        padding: 0;
+        iframe {width: 0;}
+    }
+}
+
+.FAQQuestion {
+    padding: 2em;
+    border-radius: 50px;
+    font-family: var(--font-standard), sans-serif;
+    height: min-content;
+    >.FAQQuestionHeader {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        >h1 {
+            text-align: center; margin-block: 0;
+            margin-inline: 1em;
+        };
+        >.downArrow {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            appearance: none;
+            cursor: inherit;
+
+            transition: transform 0.5s ease-in-out;
+
+            background: black;
+            mask-image: url("/images/other_assets/downArrow.svg");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+    }
+    &.open .downArrow {
+        transform: rotate(180deg);
+    }
+    >.answerContainer {
+        text-align: justify;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap:2em;
+
+        >section {
+            font-size: 1em;
+            min-height: min-content;
+            &>h2:first-child {margin-block: 0}
+            &>:last-child {margin-block-end: 0}
+            &>p {line-height: 1.5;}
+            ul {list-style-type: disc;}
+            code {font-size: 1.25em; word-break: break-all;}
+        }
+
+        iframe {
+            display: block;
+            width: 560px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            margin-inline: auto;
+        }
+    }
+}
+
+
+

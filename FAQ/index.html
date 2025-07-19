@@ -1,0 +1,328 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>Blasters++: FAQ</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="only light">
+        <meta name="description" content="Get the answer to the most common questions regarding Blasters++">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../style-global.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="../backgrounds.css">
+    </head>
+    <body>
+        <header>
+            <div class="headerLogoContainer">
+                <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters++ Logo" aria-hidden="true"></a>
+            </div>
+            <nav class="headerNavigationContainer">
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle">
+                        <a href="https://gamebanana.com/mods/457241">Download</a>
+                    </h1>
+                </div>
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle headerNavigationPopupTrigger">About</h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/About">About</a></li>
+                                <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/FAQ">FAQ</a></li>
+                                <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="headerNavigationSection small">
+                    <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/About">About</a></li>
+                                <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                                <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                                <li><a href="/FAQ">FAQ</a></li>
+                                <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+            <script src="/script-header.js" defer></script>
+        </header>
+
+        <div class="bodyContents">
+            <main class="FAQContainer">
+                <article id="InstallMod" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>How do I install the mod?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section><h2>3DS</h2>
+                            <p>You will need a modded console with Custom Firmware (CFW) for this. For information on 3DS CFW and how to install it or know if you already have it, visit <a href="https://3ds.hacks.guide">3ds.hacks.guide</a></p>
+                            <ol>
+                                <li><a href="https://gamebanana.com/mods/457241" target="_blank">Download the mod file</a> and access your 3DS's SD Card. This can be done by placing it into
+                                    your PC, or, on New 3DS consoles, accessing it via the Internet through System Settings
+                                    → Data Management.</li>
+                                <li>Navigate through your 3DS's SD Card by going to 'luma/titles.' In short, you should be
+                                    inside the titles folder, with your full folder path being '[SD Card]/luma/titles.'</li>
+                                <li>Locate your YO-KAI WATCH BLASTERS titleID. This can vary depending on the version and
+                                    region you have. If the titleID folder you need does not exist, create one with the
+                                    titleID you need. Here are the titleIDs for the international releases of the game:
+                                    <ul>
+                                        <li>RCC PAL: 00040000001CEC00</li>
+                                        <li>RCC NA: 00040000001CEB00</li>
+                                        <li>WDS PAL: 00040000001CF000</li>
+                                        <li>WDS NA: 00040000001CEF00</li>
+                                    </ul>
+                                    Once you've located or created your titleID
+                                    folder, go inside this folder.</li>
+                                <li>Open the mod file that you downloaded earlier using an appropiate program such as WinRAR. Inside it there will be a 'romfs' folder. Drag
+                                    this folder into the folder you're in.</li>
+                                <li>Power off your console. With the SD card inserted, hold SELECT while powering it on. This should open the Luma menu.
+                                    Make sure 'Enable game patching' is set (marked as (x)). If it's not, enable it and save the changes.</li>
+                            </ol>
+                        </section>
+                        <section><h2>Citra</h2>
+                            <ol>
+                                <li>Download the mod file.</li>
+                                <li>Open Citra, and right-click on your copy of YO-KAI WATCH BLASTERS.
+                                    Select the option that says 'Open Mods Location.'</li>
+                                <li>Open the mod file that you downloaded earlier with an appropiate program. Inside it there will be a 'romfs' folder. Drag
+                                    this folder into the folder that Citra has just opened.</li>
+                                <li>Make sure you don't have any mods in your mods folder.</li>
+                            </ol>
+                        </section>
+                        <section>
+                            <p>If successful, when starting the game, the Level5 intro will be replaced by a custom one.</p>
+                        </section>
+                        <section><p>For both platforms, <a href="/Meet_the_Team/index.html#Argo">Argo</a> has a helpful, step-by-step video guide which you can find here:</p>
+                            <iframe src="https://www.youtube.com/embed/3ppkZOkNu10?si=M657fCpQ2lx6dyDP"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </section>
+                    </div>
+                </article>
+                <article id="ModNotWorking" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>My mod isn't working, how do I fix it?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <p>Make sure the following are true for your platform.</p>
+                        <section><h2>3DS</h2>
+                            <ol>
+                                <li>Your console is modded and has CFW.</li>
+                                <li>Game Patching is enabled in Luma Settings (access the Luma menu by holding SELECT while powering on the console).</li>
+                                <li>You are using the correct title ID for your game (e.g. use title ID 00040000001CEB00 for Red Cat Corps North American version).</li>
+                                <li>Your file path looks as follows: <code>root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</code></li>
+                                <li>You are playing on Moon Rabbit Crew.</li>
+                            </ol>
+                        </section>
+                        <section><h2>Citra</h2>
+                            <ol>
+                                <li>You placed the "romfs" folder into the game's mods folder</li>
+                            </ol>
+                        </section>
+                        <section>
+                            <p>If the above doesn't work, you can ask for support in <a target="_blank" href="https://discord.gg/nxCvVJ6fgt">our Discord server</a>.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="UpdateMod" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>How do you update the mod?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>To update the mod simply drag the romfs folder from the latest update into the title ID folder and replace any existing files</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="TurnOffMod" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>If I turn off the mod, will I lose my Yo-kai?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>Yes, you will lose your Blasters++ Yo-kai. Without the mod active, the game can’t identify the modded Yo-kai as Yo-kai, so it deletes them. The game only deletes the Blasters++ Yo-Kai when you boot the game and save, so if game patching is disabled but the game wasn’t saved the Yo-kai should be fine.</p>
+                            <p>Additionally, if the Yo-kai are deleted from the game by turning off the mod and saving, the game will still register the medal as taking up a medal slot, meaning a medal slot will be lost forever.</p>
+                        </section>
+                        <section>
+                            <p>The same applies to other content introduced by the mod, such as new items. We recommend keeping two separate save files if you plan to alternate between using and not using Blasters++.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="PlayOnline" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>Can I play the mod online?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <h2>3DS</h2>
+                            <p>The 3DS online servers shut down in April of 2024, but there are custom-built servers for several games.
+                                For Blasters, there is Level256 network, which disables game patching, meaning that <strong>you cannot regularly use Blasters++ and Level256 at the same</strong>.<br>
+                                At the time of writing, Pretendo Network does <b>not</b> support Blasters yet.</p>
+                        </section>
+                        <section>
+                            <h2>Citra</h2>
+                            <p>You can play online on Citra by changing some configurations to enable the use of different lobbies</p>
+                            <p>In order to do this, you need to open the <code>qt-config.ini</code> Citra configuration file.
+                                On Windows, this file is found at <code>C:\Users\&lt;your username&gt;\AppData\Roaming\Citra\config</code>.
+                                Open it using Notepad and search for WebService (you can do this with the shortcut Ctrl+F if your device is in English).
+                                Replace the <code>web_api_url</code> lines with the following:</p>
+                            <p><code>web_api_url\default=false<br>
+                                    web_api_url=http:/88.198.47.46:5000</code></p>
+                            <p>After saving your changes (and ensuring the save was succesful!), you should be able to join multiplayer rooms. If Citra is currently open, you will need to close and reopen it to let the changes take place.</p>
+                            <p>To play with others, you will need to join a room. In the multiplayer menu, you can either browse public rooms or directly join one given its address and port. Once in the room, you can open the game and go to <strong>local multiplayer</strong> to start playing.</p>
+                        </section>
+                        <section>
+                            <p>Note that, when playing with others without the mod, they won't be able to see Blasters++ Yo-kai. Depending on who hosts the room, other behaviors will also change.<br>
+                            When playing Blasters++ online, make sure to avoid playing with users without the mod (or with different versions of it) so as to not ruin their experience. Likewise, follow the guidelines of whatever online service you are using.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="JibanyanKomasanB" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>I don't have access to Jibanyan B and Komasan B after beating Whisped Cream</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>This is normal. The mod changes the unlock condition of both to be <strong>beating Captain Thunder's story mission</strong>, the same as Usapyon B. This is because it's the only way to make them unlock for both versions without overcomplicating the installation process.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="Level256" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>Blasters++ doesn't work with Level256 or after installing it</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>Your console has the game update (Moon Rabbit Crew) installed which has several resources within it that make the game work.
+                                In the mod romfs folder there are additional and modified files that contain the new content added by Blasters++.
+                                The usual method to play the mod relies on the console loading these external assets when loading the game, and applying them over the existing files within the update installed on the console, but the <code>boot.firm</code> required to use the Level256 plugin disables this.
+                                To use this method again, you need to replace the Level256 <code>boot.firm</code> with the one from Luma, which you can find inside <code>Luma3DS.zip</code> from <a href="https://github.com/LumaTeam/Luma3DS/releases/latest">the Github repository</a>.</p>
+                        </section>
+                    </div>
+                </article>
+            </main>
+        </div>
+
+        <footer>
+            <div id="footerContents">
+                <div id="footerLeftSide" class="footerHalf">
+                    <div id="backgroundSelector">
+                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
+                        <div id="backgroundContainer">
+                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
+                            localStorage.setItem('bgType', this.value);
+                            if(this.value === 'random') {
+                                bgType = Math.floor(Math.random() * 14);
+                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
+                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                            }">
+                                <option value="random" class="noJS">Random</option>
+                                <option value="plain" selected>Plain</option>
+                                <option value="0">FluffBlast</option>
+                                <option value="1">Cool Star</option>
+                                <option value="2">Heart</option>
+                                <option value="3a">Red Cat</option>
+                                <option value="3b">White Dog</option>
+                                <option value="4">Sergeant</option>
+                                <option value="5">Sparkling</option>
+                                <option value="6">Stilldark?</option>
+                                <option value="7">Cool&starf;KJ</option>
+                                <option value="8">Chase!</option>
+                                <option value="9">Momotaro</option>
+                                <option value="10">G of Enma</option>
+                                <option value="11">Sunshine</option>
+                                <option value="12">King</option>
+                            </select>
+                        </div>
+                        <div class="checkboxContainer">
+                            <input checked id="animateBG" type="checkbox"
+                                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                            <label for="animateBG">Animate Background</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="footerRightSide" class="footerHalf">
+                    <div id="footerNavigation">
+                        <div id="footerNavigationContainer" class="footerContainer">
+                            <div class="footerTitle">The Mod</div>
+                            <nav class="links">
+                                <div class="navItem"><a href="/">Home</a></div>
+                                <div class="navItem"><a href="/About">About</a></div>
+                                <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+                                <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
+                                </div>
+                            </nav>
+                        </div>
+                        <div id="footerResourcesContainer" class="footerContainer">
+                            <div class="footerTitle">Resources</div>
+                            <nav class="links">
+                                <div class="navItem"><a href="/FAQ">FAQ</a></div>
+                                <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                                <div class="navItem"><a target="_blank"
+                                                        href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></div>
+                            </nav>
+                        </div>
+                    </div>
+                    <div id="footerSocialsLogo">
+                        <div id="footerSocialsContainer" class="footerContainer">
+                            <div class="footerTitle">Socials</div>
+                            <nav class="links">
+                                <div class="navItem"><a class="icon discord" target="_blank"
+                                                        href="https://discord.gg/nxCvVJ6fgt"></a></div>
+                                <div class="navItem"><a class="icon twitter" target="_blank"
+                                                        href="https://x.com/Blastersplusmod"></a></div>
+                                <div class="navItem"><a class="icon bsky" target="_blank"
+                                                        href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
+                                </div>
+                                <!--div class="navItem"><a class="icon youtube" target="_blank"
+                                                        href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+                                </div-->
+                            </nav>
+                        </div>
+                        <div id="footerLogoContainer">
+                            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
+                                 aria-hidden="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="/script-footer.js"></script>
+            <div class="footerNotice">
+                Yo-kai Watch Blasters ++ 2023-2025
+            </div>
+
+        </footer>
+    </body>
+</html>
