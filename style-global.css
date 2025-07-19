@@ -18,6 +18,8 @@
     outline: var(--focus-outline);
 }
 
+.focus-inside:has(:focus-visible) {outline: var(--focus-outline);}
+
 html {
     min-width: 100%;
     min-height: 100lvh;
@@ -338,8 +340,6 @@ footer {
             gap: 0.5em;
 
             label, input {cursor: pointer};
-
-            &:has(:focus-visible) {outline: var(--focus-outline);}
 
             input[type=checkbox] {
                 appearance: unset;

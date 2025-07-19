@@ -30,14 +30,14 @@ main {
         padding .25s .25s,
         width .25s .25s;
     }
-    .FAQQuestion.open>.answerContainer, .FAQQuestion iframe {
+    .FAQQuestion.open>.answerContainer, .FAQQuestion>.answerContainer:has(:focus-visible), .FAQQuestion iframe {
         transition: font-size .25s,
         margin .25s,
         padding .25s,
         width .5s,
         opacity .5s .25s;
     }
-    .FAQQuestion:not(.open)>.answerContainer {
+    .FAQQuestion:not(.open)>.answerContainer:not(:has(:focus-visible)) {
         font-size: 0;
         margin: 0;
         opacity: 0;
@@ -78,6 +78,9 @@ main {
             mask-size: contain;
             mask-repeat: no-repeat;
             mask-position: center;
+        }
+        &:has(~ .answerContainer :focus-visible) {
+            >.downArrow {transform: rotate(180deg);}
         }
     }
     &.open .downArrow {
