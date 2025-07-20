@@ -59,6 +59,10 @@ header,footer {
         .headerNavigationSection.wide{display: none;}
         .headerNavigationSection.small{display: block}
     }
+
+    footer {
+        .navItem {font-size: 1em};
+    }
 }
 
 @media all and (min-width: 650px) {
@@ -67,6 +71,10 @@ header,footer {
         .headerNavigationPopupContainer ul>li {font-size: 1.5em;}
         .headerNavigationSection.small{display: none;}
         .headerNavigationSection.wide{display: block;}
+    }
+
+    footer {
+        .navItem {font-size: 1.25em};
     }
 }
 
@@ -376,7 +384,6 @@ footer {
     .footerContainer {
         width: 100%;
         nav {margin-left: 1em};
-        .navItem {font-size: 1.25em};
         justify-self: center;
         margin-inline-start: 10px;
 
