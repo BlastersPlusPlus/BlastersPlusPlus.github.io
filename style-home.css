@@ -24,9 +24,9 @@ body {
     margin-inline: auto;
     text-align: center;
     padding: 2em;
-    border-radius: 20px;
+    border-radius: 50px;
     box-sizing: border-box;
-    margin-block: 50px;
+    margin-block: 20px;
 }
 
 main {
