@@ -1,0 +1,79 @@
+
+
+.bodyContents {
+    border: 1px solid green;
+}
+main {
+    width: min(600px,75vw);
+    border: 1px solid red;
+    margin-inline: auto;
+    margin-block: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap:150px;
+
+
+    >.pageLinkSection{
+        position: relative;
+        border: 1px solid blue;
+        width: 100%;
+        height: 200px;
+
+        backdrop-filter: brightness(1);
+        >a {
+            display: flex;
+            border: 5px solid rgba(255,171,0,1);
+            background-image: linear-gradient(167deg, rgba(255,221,150,0.7) 0%, rgba(255,255,150,0.7) 42%, rgba(200,249,255,0.7) 100%);
+
+            box-sizing: border-box;
+
+            width: 100%;
+            height: 100%;
+            border-radius: 200px;
+            color: black;
+            text-decoration: none;
+            line-height: 100%;
+            font-size: 4em;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-yuruka),sans-serif;
+
+            mix-blend-mode: screen;
+
+            backdrop-filter: brightness(0);
+
+            transition: transform 0.25s ease;
+
+            &:hover, &:active, &:focus-visible {transform: scale(1.1)}
+        }
+        >.images-container {
+            z-index: -1;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >img {
+                position: absolute;
+                top: var(--top);
+                right: var(--right);
+                left: var(--left);
+                bottom: var(--bottom);
+                height: var(--height);
+                width: auto;
+
+                transition: transform 0.25s ease;
+                transform: rotate(var(--angle));
+            }
+
+            &:has(~a:hover, ~a:active, ~a:focus-visible)>img {
+                transform: translate(calc(var(--distance) * cos(var(--angle-move))), calc(var(--distance) * sin(var(--angle-move)))) rotate(var(--angle)) scale(var(--scale));
+            }
+            /*background: red;*/
+        }
+    }
+}
