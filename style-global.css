@@ -8,6 +8,13 @@
     src: url("./fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
 }
 
+@font-face {
+    font-family: Bukotsu;
+    src: url("./fonts/HOT-Bukotsu Std U.otf");
+}
+
+.bukotsu {font-family: Bukotsu, YurukaStd, sans-serif; }
+
 @media (scripting: none) {
     .noJS {display: none}
 }

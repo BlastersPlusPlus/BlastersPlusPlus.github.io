@@ -1,32 +1,55 @@
 
-
-.bodyContents {
-    border: 1px solid green;
+body {
+    overflow-x: hidden;
 }
-main {
-    width: min(600px,75vw);
-    border: 1px solid red;
+
+@media (max-width: 600px) {
+    main>.pageLinkSection {
+        --link-height: 100px;
+        >a {font-size: 2em}
+    }
+}
+
+@media (min-width: 600px) {
+    main>.pageLinkSection {
+        --link-height: 200px;
+        >a {font-size: 4em}
+    }
+}
+
+.welcomeNotice {
+    width: min(800px,80vw);
     margin-inline: auto;
-    margin-block: 80px;
+    text-align: center;
+    padding: 2em;
+    border-radius: 50px;
+}
+
+main {
+    width: min(600px,70vw);
+    margin-inline: auto;
+    margin-block: 50px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap:150px;
+    gap:50px;
 
 
     >.pageLinkSection{
         position: relative;
-        border: 1px solid blue;
         width: 100%;
-        height: 200px;
+
+        height: var(--link-height);
 
         backdrop-filter: brightness(1);
         >a {
             display: flex;
             border: 5px solid rgba(255,171,0,1);
-            background-image: linear-gradient(167deg, rgba(255,221,150,0.7) 0%, rgba(255,255,150,0.7) 42%, rgba(200,249,255,0.7) 100%);
+            background-image: linear-gradient(167deg, rgba(255,221,150,0.6) 0%, rgba(255,255,150,0.6) 42%, rgba(200,249,255,0.6) 100%);
 
             box-sizing: border-box;
+
+            padding-inline: calc(var(--link-height) / 2);
 
             width: 100%;
             height: 100%;
@@ -34,7 +57,6 @@ main {
             color: black;
             text-decoration: none;
             line-height: 100%;
-            font-size: 4em;
             text-align: center;
             align-items: center;
             justify-content: center;
@@ -51,12 +73,12 @@ main {
         >.images-container {
             z-index: -1;
             position: absolute;
-            top: 0;
             height: 100%;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            &.meet-the-team>img {border-radius: 100%};
             >img {
                 position: absolute;
                 top: var(--top);
@@ -71,7 +93,7 @@ main {
             }
 
             &:has(~a:hover, ~a:active, ~a:focus-visible)>img {
-                transform: translate(calc(var(--distance) * cos(var(--angle-move))), calc(var(--distance) * sin(var(--angle-move)))) rotate(var(--angle)) scale(var(--scale));
+                transform: translate(calc(var(--distance) * cos(var(--angle-move))), calc(var(--distance) * sin(var(--angle-move)))) rotate(calc(var(--angle) + var(--angle-rotate))) scale(var(--scale));
             }
             /*background: red;*/
         }
