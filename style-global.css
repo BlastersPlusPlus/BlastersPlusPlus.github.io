@@ -63,6 +63,7 @@ header,footer {
     footer {
         .navItem {font-size: 1em};
         .footerTitle {font-size: 1.25em;}
+        #background {font-size: 1em;min-height: 2em;line-height: 2em;}
     }
 }
 
@@ -77,6 +78,7 @@ header,footer {
     footer {
         .navItem {font-size: 1.25em};
         .footerTitle {font-size: 1.5em;}
+        #background {font-size: 1.5em;min-height: 2em;line-height: 2em;}
     }
 }
 
@@ -321,9 +323,6 @@ footer {
         #background {
             font-family: var(--font-marugo), sans-serif;
             border-radius: 3em;
-            font-size: 1.5em;
-            min-height: 2em;
-            line-height: 2em;
             padding-inline: 1em;
             text-align: center;
             width: 100%;

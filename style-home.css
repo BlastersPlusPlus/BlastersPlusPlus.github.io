@@ -7,7 +7,7 @@ body {
     main{gap:25px;}
     main>.pageLinkSection {
         --link-height: 100px;
-        >a {font-size: 2em}
+        >a {font-size: 1.5em}
     }
 }
 
@@ -15,7 +15,7 @@ body {
     main{gap:50px;}
     main>.pageLinkSection {
         --link-height: 200px;
-        >a {font-size: 4em}
+        >a {font-size: 3.5em}
     }
 }
 
@@ -51,7 +51,7 @@ main {
 
             box-sizing: border-box;
 
-            padding-inline: calc(var(--link-height) / 2);
+            padding-inline: calc(var(--link-height) * 0.75);
 
             width: 100%;
             height: 100%;
