@@ -4,6 +4,10 @@
 }
 
 @media all and (max-width: 600px) {
+    #yokaiGrid>.gridItem {
+        .name {font-size: 1.5em;}
+        .number {font-size: 1em;}
+    }
     #yokaiInfo {
         #yokaiInfoTitle {font-size: 1.5em;}
         #yokaiInfoPaddingContainer {margin-inline: 5%;}
@@ -32,6 +36,10 @@
 }
 
 @media all and (min-width: 600px) {
+    #yokaiGrid>.gridItem {
+        .name {font-size: 2em;}
+        .number {font-size: 1.25em;}
+    }
     #yokaiInfo {
         #yokaiInfoTitle {font-size: 2em;}
         #yokaiInfoPaddingContainer {margin-inline: 10%;}
@@ -99,7 +107,7 @@ body {
 
     #closePopupContainer{
         position: fixed;
-        --min-size: min(5vw, 5vh);
+        --min-size: 5vmin;
         top: calc(var(--min-size)/2);
         right: calc(var(--min-size)/2 + 10px);
         height: var(--min-size);
@@ -154,8 +162,10 @@ body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
     display: flex;
     gap: 10px;
     align-items: center;
-    justify-content: space-between;
-    border-radius: 65px;
+    justify-content: center;
+    border-radius: 10em;
+    box-sizing: border-box;
+    padding-inline: 2em;
     cursor: pointer;
     box-shadow: var(--standard-shadow);
     overflow: hidden;
@@ -226,16 +236,13 @@ body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
     img {
         height: 60%;
         width: auto;
-        margin-right: 24px;
         pointer-events: none;
         user-select: none;
     }
 
     .name {
         font-family: var(--font-marugo), sans-serif;
-        font-size: 1.7em;
-        line-height: 1.3em;
-        margin-left: 24px;
+        line-height: 1;
         width: auto;
         text-align: left;
         flex-grow: 1;
@@ -246,12 +253,9 @@ body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
     .number {
         font-family: var(--font-yuruka), sans-serif;
         position: absolute;
-        width: 100%;
-        font-size: 1.3em;
-        font-weight: 300;
-        align-self: flex-end;
+        align-self: end;
+        justify-self: stretch;
         margin-bottom: 5px;
-        border: none;
     }
 }
 
