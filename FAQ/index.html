@@ -13,6 +13,14 @@
         <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../backgrounds.css">
+        <script defer>
+            document.addEventListener('DOMContentLoaded', () => {
+                let question;
+                if(!location.hash) return;
+                question = document.getElementById(location.hash.replace('#',''));
+                question?.classList.add('open');
+            })
+        </script>
     </head>
     <body>
         <header>
@@ -75,7 +83,7 @@
             <main class="FAQContainer">
                 <article id="InstallMod" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
-                        <h1>How do I install the mod?</h1>
+                        <h1>How do I install Blasters <span class="bukotsu">++</span>?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
@@ -125,9 +133,22 @@
                         </section>
                     </div>
                 </article>
+                <article id="GameVersions" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>What game versions does Blasters <span class="bukotsu">++</span> support?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>Blasters ++ is supported in the NA (North America) and PAL (rest of the world, excluding Korea and Japan) versions of the game.
+                            The mod is only supported in English —playing in any other language will result in issues, including game crashes.
+                            To play Blasters ++, you must be using the latest update available for your region.</p>
+                        </section>
+                    </div>
+                </article>
                 <article id="ModNotWorking" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
-                        <h1>My mod isn't working, how do I fix it?</h1>
+                        <h1>Blasters <span class="bukotsu">++</span> isn't working, how do I fix it?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
@@ -138,7 +159,7 @@
                                 <li>Game Patching is enabled in Luma Settings (access the Luma menu by holding SELECT while powering on the console).</li>
                                 <li>You are using the correct title ID for your game (e.g. use title ID 00040000001CEB00 for Red Cat Corps North American version).</li>
                                 <li>Your file path looks as follows: <code>root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</code></li>
-                                <li>You are playing on Moon Rabbit Crew.</li>
+                                <li>You are playing on the latest update.</li>
                             </ol>
                         </section>
                         <section><h2>Citra</h2>
@@ -153,7 +174,7 @@
                 </article>
                 <article id="UpdateMod" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
-                        <h1>How do you update the mod?</h1>
+                        <h1>How do I update Blasters <span class="bukotsu">++</span>?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
@@ -164,7 +185,7 @@
                 </article>
                 <article id="TurnOffMod" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
-                        <h1>If I turn off the mod, will I lose my Yo-kai?</h1>
+                        <h1>If I turn off Blasters <span class="bukotsu">++</span>, will I lose my Yo-kai?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
@@ -179,7 +200,7 @@
                 </article>
                 <article id="PlayOnline" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
-                        <h1>Can I play the mod online?</h1>
+                        <h1>Can I play Blasters <span class="bukotsu">++</span> online?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
@@ -204,6 +225,20 @@
                         <section>
                             <p>Note that, when playing with others without the mod, they won't be able to see Blasters ++ Yo-kai. Depending on who hosts the room, other behaviors will also change.<br>
                             When playing Blasters ++ online, make sure to avoid playing with users without the mod (or with different versions of it) so as to not ruin their experience. Likewise, follow the guidelines of whatever online service you are using.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="NewMedalliumEntries" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.classList.toggle('open');">
+                        <h1>Why can't I see the new Yo-kai in the Medallium?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>This game has some internal limitations regarding things like the Medallium.
+                                In particular, Medallium numbers over 511 cause issues, including crashes.
+                                Due to this, we are not able to add any more entries.
+                                However, you can find all the information you'd see in the Medallium (including the Medallium Bio) and more at <a href="/Yo-kai_Info">Yo-kai Info</a>!</p>
                         </section>
                     </div>
                 </article>

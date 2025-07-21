@@ -22,7 +22,7 @@ main {
 }
 
 @media (scripting: enabled) {
-    .FAQQuestion>.answerContainer, .FAQQuestion iframe {
+    .FAQQuestion>.answerContainer, .FAQQuestion iframe/*, .FAQQuestion>.answerContainer code*/ {
         /* fade out, then shrink */
         transition: opacity .25s,
         font-size .25s .25s,
@@ -30,7 +30,12 @@ main {
         padding .25s .25s,
         width .25s .25s;
     }
-    .FAQQuestion.open>.answerContainer, .FAQQuestion>.answerContainer:has(:focus-visible), .FAQQuestion iframe {
+    .FAQQuestion.open>.answerContainer,
+    .FAQQuestion>.answerContainer:has(:focus-visible),
+    .FAQQuestion.open iframe,
+    .FAQQuestion>.answerContainer:has(:focus-visible) iframe/*,
+    .FAQQuestion.open>.answerContainer code,
+    .FAQQuestion>.answerContainer:has(:focus-visible) code*/ {
         transition: font-size .25s,
         margin .25s,
         padding .25s,
