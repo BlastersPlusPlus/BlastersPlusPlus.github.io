@@ -107,7 +107,7 @@
                         <img style="--height: 70px; --top: unset; --right: -10px; --left: unset; --bottom: -10px; --angle: 130deg; --angle-move: 45deg; --distance: 50px; --scale: 1.5;" src="images/yokaiArt/Necronyan.png" alt="Yo-kai art of Necronyan">
                         <img style="--height: 50px; --top: unset; --right: 100px; --left: unset; --bottom: -40px; --angle: 180deg; --angle-move: 90deg; --distance: 30px; --scale: 1.2;" src="images/yokaiArt/DON-CHAN.png" alt="Yo-kai art of DON-CHAN"-->
                         <!--img style="--height: 50%; --top: unset; --right: unset; --left: 50px; --bottom: unset; --angle: 0deg; --angle-move: 180deg; --distance: 160%; --scale: 1.3;" src="images/yokaiArt/Witch_Blizz.png" alt="Yo-kai art of Witch Girl Blizzaria"-->
-                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 20deg; --distance: 175%; --scale: 2;" src="/images/yokaiArt/Usapyon_Emperor.png" alt="Yo-kai art of Emperor Usapyon">
+                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 20deg; --distance: 175%; --scale: 2;" src="/images/yokaiArt/Emp._Usapyon.png" alt="Yo-kai art of Emperor Usapyon">
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: -20deg; --distance: 175%; --scale: 2;" src="/images/yokaiArt/Necronyan.png" alt="Yo-kai art of Necronyan">
                     </div>
                     <a href="/Yo-kai_Info">
@@ -115,15 +115,15 @@
                     </a>
                     <script>
                         console.log();
-                        let element = document.getElementById("yokai-info-images");
-                        let randomImages = ['Tanbo','Emp. Usapyon','Witch Girl Blizzaria', 'Halloween Jibanyan', 'Li\'l Devil Komasan', 'Li\'l Devil Komajiro', 'Halloween Josper', 'Witch Insomni', 'Trick Hidabat', 'Vampire Kyubi', 'Horror Venoct', 'Count Dracunyan', 'Demon King Usapyon', 'Immortal Zomboy', 'Pumpkin Damona', 'Halloween Komasan', 'Demon Count Cavity', 'Bewitched Unkaind', 'Frankenstein Manjimutt', 'Wolf Komajiro', 'Lantern Bloominoko','Necronyan','Necrosnartle']
+                        let yokaiInfoElement = document.getElementById("yokai-info-images");
+                        let yokaiInfoImages = ['Tanbo','Emp. Usapyon','Witch Girl Blizzaria', 'Halloween Jibanyan', 'Li\'l Devil Komasan', 'Li\'l Devil Komajiro', 'Halloween Josper', 'Witch Insomni', 'Trick Hidabat', 'Vampire Kyubi', 'Horror Venoct', 'Count Dracunyan', 'Demon King Usapyon', 'Immortal Zomboy', 'Pumpkin Damona', 'Halloween Komasan', 'Demon Count Cavity', 'Bewitched Unkaind', 'Frankenstein Manjimutt', 'Wolf Komajiro', 'Lantern Bloominoko','Necronyan','Necrosnartle']
 
                         for(let i=0; i<=1; i++) {
-                            let randomNumber = Math.floor(Math.random() * randomImages.length);
-                            let image = randomImages.splice(randomNumber, 1)[0];
+                            let randomNumber = Math.floor(Math.random() * yokaiInfoImages.length);
+                            let image = yokaiInfoImages.splice(randomNumber, 1)[0];
                             console.log(image);
-                            element.children[i].src = '/images/yokaiArt/'+image.replace(/\s+/g, '_')+'.png';
-                            element.children[i].alt = 'Yo-kai Art of '+image[1];
+                            yokaiInfoElement.children[i].src = '/images/yokaiArt/'+image.replace(/\s+/g, '_')+'.png';
+                            yokaiInfoElement.children[i].alt = 'Yo-kai Art of '+image[1];
                         }
                     </script>
                 </div>
@@ -133,16 +133,20 @@
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/YounesPFP.jpg" alt="Younes's profile picture">
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: 180deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/StitchesPFP.png" alt="Stiches' profile picture">
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: 135deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/JoJoPFP.jpg" alt="JoJo's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: 90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/KomabassadorPFP.png" alt="JoJo's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/OpalPFP.png" alt="JoJo's profile picture">
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/J4PFP.png" alt="J4's profile picture">
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 0deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/FrenPFP.png" alt="Fren's profile picture">
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 45deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/LightPFP.jpg" alt="Light's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/MemelordPFP.jpg" alt="Light's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/Meet_the_Team/pfps/UnderScorePFP.png" alt="Light's profile picture">
                     </div>
                     <a href="/Meet_the_Team">
                         Meet the Team!
                     </a>
                     <script>
-                        let element = document.getElementById("meet-the-team-images");
-                        let randomImages = [
+                        let mttElement = document.getElementById("meet-the-team-images");
+                        let mttImages = [
                             ['ArgoPFP.png','Argo'],
                             ['DulaPeeplupPFP.png','Dula Peeplup'],
                             ['FrenPFP.png','A.Fren'],
@@ -162,12 +166,12 @@
                             ['WhisperitoPFP.png','Whisperito']
                         ]
 
-                        for(let i=1; i<=5; i++) {
-                            let randomNumber = Math.floor(Math.random() * randomImages.length);
-                            let image = randomImages.splice(randomNumber, 1)[0];
+                        for(let i=1; i<=9; i++) {
+                            let randomNumber = Math.floor(Math.random() * mttImages.length);
+                            let image = mttImages.splice(randomNumber, 1)[0];
                             console.log(image);
-                            element.children[i].src = '/Meet_the_Team/pfps/'+image[0];
-                            element.children[i].alt = image[1]+"'s profile picture";
+                            mttElement.children[i].src = '/Meet_the_Team/pfps/'+image[0];
+                            mttElement.children[i].alt = image[1]+"'s profile picture";
                         }
                     </script>
                 </div>
