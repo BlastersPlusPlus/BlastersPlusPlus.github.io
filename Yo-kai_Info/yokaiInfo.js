@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     if(location.hash) yokai = document.getElementById(location.hash.replace('#',''))?.yokai;
     console.log(yokai);
     if(yokai) openInfoPopup(yokai);
-
 })
 
 window.addEventListener('hashchange', () => {
@@ -47,12 +46,6 @@ window.addEventListener('hashchange', () => {
     if(yokai && (yokaiInfoContainer.yokaiId !== yokai.id || yokaiInfoContainer.className!=='open')) {openInfoPopup(yokai);}
 
 })
-
-document.addEventListener('keydown', function(e){
-    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
-    if(e.code === 'Escape' && yokaiInfoContainer.classList.contains('open')){
-        closeInfoPopup();
-    }})
 
 function openInfoPopup(yokai) {
     history.replaceState(null, null, '#'+yokai.name.replace(/\s/g, ''));
