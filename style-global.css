@@ -460,6 +460,30 @@ a.fankai::after{content:"Fan-kai"}
 a.discord::before{background-image: url("./images/socialIcons/discord.svg");}
 a.discord::after{content:"Discord"}
 
+.glade1, .glade2, .glade3 {
+    position: relative;
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        background-size: 100% 100%;
+    }
+}
+.glade1::after {
+    background: url("/images/itemIcons/glade/item_glade01.00.png") no-repeat center center fixed;
+}
+.glade2::after {
+    background: url("/images/itemIcons/glade/item_glade02.00.png") no-repeat center center fixed;
+}
+.glade3::after {
+    background: url("/images/itemIcons/glade/item_glade03.00.png") no-repeat center center fixed;
+}
+
 .hexagonTitle {
     color: white;
     font-family: YurukaStd, sans-serif;

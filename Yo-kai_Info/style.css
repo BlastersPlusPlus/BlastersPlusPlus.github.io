@@ -136,7 +136,7 @@ body {
     scrollbar-color: white transparent;
 }
 
-body:has(#yokaiInfoPopupContainer[open]) {overflow: hidden;}
+body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
 
 #yokaiGrid {
     width: min(90%, 1200px);

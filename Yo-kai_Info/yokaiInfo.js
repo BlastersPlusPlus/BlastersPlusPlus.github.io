@@ -47,6 +47,13 @@ window.addEventListener('hashchange', () => {
 
 })
 
+document.addEventListener('keydown', function(e){
+        let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+        if(e.code === 'Escape' && yokaiInfoContainer.classList.contains('open')){
+            closeInfoPopup();
+        }
+})
+
 function openInfoPopup(yokai) {
     history.replaceState(null, null, '#'+yokai.name.replace(/\s/g, ''));
     console.log(document.getElementById(location.hash.replace('#','')).getBoundingClientRect().top);
