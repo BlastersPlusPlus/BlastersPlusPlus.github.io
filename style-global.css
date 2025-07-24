@@ -121,7 +121,7 @@ header {
         height: 100%;
         background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
         background-size: 100% 100%;
-        mask-image: url("/images/other_assets/yokaiInfoTopDecoration.svg"), linear-gradient(white, white);
+        mask-image: url("/images/other_assets/topDecoration.svg"), linear-gradient(white, white);
         mask-repeat: repeat-x;
         mask-size: auto 50px, 100% calc(100% - 40px);
         mask-position: center bottom, top center;
@@ -471,17 +471,19 @@ a.discord::after{content:"Discord"}
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        background-size: 100% 100%;
+        background-size: auto 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
     }
 }
 .glade1::after {
-    background: url("/images/itemIcons/glade/item_glade01.00.png") no-repeat center center fixed;
+    background-image: url("/images/itemIcons/glade/item_glade01.00.png");
 }
 .glade2::after {
-    background: url("/images/itemIcons/glade/item_glade02.00.png") no-repeat center center fixed;
+    background-image: url("/images/itemIcons/glade/item_glade02.00.png");
 }
 .glade3::after {
-    background: url("/images/itemIcons/glade/item_glade03.00.png") no-repeat center center fixed;
+    background-image: url("/images/itemIcons/glade/item_glade03.00.png");
 }
 
 .hexagonTitle {

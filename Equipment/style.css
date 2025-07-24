@@ -10,19 +10,8 @@
         #rankTribeAttributes {
             --image-size: 2.5em;
         }
-        #statsSkill {
-            .statData {font-size: 1em;}
-            .elements {font-size: 1em; img {height: 1.5em};}
-            .skillTitle {font-size: 1em;}
-            #skillDescription {font-size: 1em;}
-        }
-        #Movelist, #soultimateMoveData {
-            --move-height: 3em;
-        }
-        .moveName {font-size: 1.2em;}
-        .moveDescription, .inspirit {font-size: 1em;}
-        .SoultimateIconText {font-size: 0.7em;}
-        .soultimateMoveInfo .infoValue {font-size: 1em;}
+        #stats { .statData {font-size: 1em;} }
+        #skillDescription {font-size: 1em;}
     }
 }
 
@@ -38,12 +27,8 @@
         #rankTribeAttributes {
             --image-size: 4em;
         }
-        #statsSkill {
-            .statData {font-size: 1.5em;}
-            .elements {font-size: 1.2em;img {height: 2em};}
-            .skillTitle {font-size: 1.5em;}
-            #skillDescription {font-size: 1.2em;}
-        }
+        #stats { .statData {font-size: 1.5em;} }
+        #skillDescription {font-size: 1.2em;}
         #Movelist, #soultimateMoveData {
             --move-height: 4em;
         }
@@ -162,11 +147,28 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
     overflow: hidden;
     &:active{box-shadow: none;}
 
-    img {
+    appearance: none;
+
+    border-width: 5px;
+    border-style: solid;
+    background-color: transparent;
+
+    &.rank1 {background: rgba(255,255,255,0.7); border-color: black}
+    &.rank2 {background-image: linear-gradient(to bottom, rgba(245,228,75,0.7), rgba(255,251,183,0.7)); border-color: black;}
+    &.rank3 {background-image: linear-gradient(to bottom, rgba(251,166,64,0.7), rgba(255,255,174,0.7)); border-color: black;}
+    &.rank4 {background-image: linear-gradient(to bottom, rgba(242,106,106,0.7), rgba(243,203,203,0.7)); border-color: black;}
+    &.rank5 {background-image: linear-gradient(to bottom, rgba(166,115,217,0.7), rgba(225,208,242,0.7)); border-color: black;}
+    &.rank6 {background-image: linear-gradient(to bottom, rgba(2,18,67,0.7), rgba(0,9,149,0.7)); border-color: #3ce6ff; color: white;}
+
+    >.equipmentIconContainer {
         height: 60%;
         width: auto;
         pointer-events: none;
         user-select: none;
+        img {
+            height: 100%;
+            width: 100%;
+        }
     }
 
     .name {
@@ -179,13 +181,6 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
 
     }
 
-    .number {
-        font-family: var(--font-yuruka), sans-serif;
-        position: absolute;
-        align-self: end;
-        justify-self: stretch;
-        margin-bottom: 5px;
-    }
 }
 
 #equipmentInfo::before, #equipmentInfo::after {
@@ -194,12 +189,22 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
     height: 50px;
     position: absolute;
 
+
+    background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
+    background-size: 100% auto;
+
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    mask: url("/images/other_assets/yokaiInfoTopDecoration.svg");
+    mask: url("/images/other_assets/topDecoration.svg");
     mask-repeat: repeat-x;
     mask-size: auto 50px;
 }
+
+#equipmentInfo.rank2::before, #equipmentInfo.rank2::after {background-image: linear-gradient(to bottom, black 20%, rgba(245,228,75,1))}
+#equipmentInfo.rank3::before, #equipmentInfo.rank3::after {background-image: linear-gradient(to bottom, black 20%, rgba(251,166,64,1))}
+#equipmentInfo.rank4::before, #equipmentInfo.rank4::after {background-image: linear-gradient(to bottom, black 20%, rgba(242,106,106,1))}
+#equipmentInfo.rank5::before, #equipmentInfo.rank5::after {background-image: linear-gradient(to bottom, black 20%, rgba(166,115,217,1))}
+#equipmentInfo.rank6::before, #equipmentInfo.rank6::after {background-image: linear-gradient(to bottom, black, rgba(2,18,67,1) 30%, rgba(0,9,149,1))}
 
 #equipmentInfo::before {
     top: -1px;
@@ -210,25 +215,6 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
     bottom: -1px;
     right: -0.1%;
     transform: rotate(180deg);
-}
-
-#equipmentInfo.normal::before, #equipmentInfo.normal::after {
-    background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
-}
-
-#equipmentInfo.rare::before, #equipmentInfo.rare::after {
-    background-image:
-            linear-gradient(0deg, #fbd92f 10%, black 80%, #391849 100%);
-}
-
-#equipmentInfo.legend::before, #equipmentInfo.legend::after {
-    background-image:
-            conic-gradient(#500ea3 90deg, #5210ce 135deg, #330a9e 225deg, #440a96 315deg),
-            conic-gradient(#2b12b7 0deg, #2121be 45deg, #6bc5ff 135deg, #346ed9 225deg, #2f1fd4 315deg, #2919ce 360deg),
-            conic-gradient(#49acf6 0deg, #3d90e2 45deg, #4ec2fb 315deg, #49acf6 360deg);
-    background-size: 22.22px 22.22px;
-    background-position: 0 -9px, 0 12px, 0 34px;
-    background-repeat: repeat-x;
 }
 
 #equipmentInfo {
@@ -258,52 +244,53 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
         z-index:2;
     }
 
-    #equipmentIcon {
-        width: min(120px,100%);
+    #equipmentIconContainer {
+        width: min(80px,100%);
         height: auto;
         z-index: 1;
+        >#equipmentIcon {width: 100%}
     }
 
-    #rankTribeAttributes {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        align-items: center;
-        justify-items: center;
-        column-gap: 20px;
+    .rankContainer {
+        position: relative;
+        font-family: var(--font-yuruka),sans-serif;
+        font-size: 1.5em;
 
-        img {
-            width: var(--image-size);
-            max-width: 100%;
-        }
-        #role {
-            div {
-                height: var(--image-size);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            img {
-                width: calc(var(--image-size) * 2);
-                max-width: 100%;
-                object-fit: cover;
-            }
-            grid-column-start: 2;
-            grid-column-end: 4;
+        z-index: 0;
 
+        &::before {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            text-shadow: 2px 2px 0 black;
+            z-index: -1;
         }
-        div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-wrap: nowrap;
-            gap: 0;
-            p {
-                font-size: 1em;
-                font-style: italic;
-                margin-block: 0;
-            }
-        }
-        z-index: 2;
+
+        &:has(#rank.rank1)::before{content:"Rank 1"}
+        &:has(#rank.rank2)::before{content:"Rank 2"}
+        &:has(#rank.rank3)::before{content:"Rank 3"}
+        &:has(#rank.rank4)::before{content:"Rank 4"}
+        &:has(#rank.rank5)::before{content:"Rank 5"}
+        &:has(#rank.rank6)::before{content:"Rank 6"; text-shadow: 2px 2px 0 #3d6483}
+
+    }
+
+    #rank {
+        background-size: auto 100%;
+        background-clip: text;
+        color: black;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-fill-color: transparent;
+        z-index: 0;
+
+        &.rank1 {background-image: linear-gradient(white, white);}
+        &.rank2 {background-image: linear-gradient(to bottom, #f5e44b, #fffbb7)}
+        &.rank3 {background-image: linear-gradient(to bottom, #fba640, #ffe1ae)}
+        &.rank4 {background-image: linear-gradient(to bottom, #f26a6a, #fecbcb)}
+        &.rank5 {background-image: linear-gradient(to bottom, #a673d9, #e1d0f2)}
+        &.rank6 {background-image: linear-gradient(to bottom, #021243, #000995); -webkit-text-stroke-color: #3ce6ff}
+
     }
 
     #equipmentDescription {
@@ -312,7 +299,7 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
     }
 
 
-    #statsSkill {
+    #stats {
         width: auto;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -334,7 +321,7 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
             font-family: var(--font-yuruka), sans-serif;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            line-height: 1;
+            line-height: 1.3;
             align-items: stretch;
             justify-items: stretch;
             :not(hr) {z-index: 1};
@@ -344,35 +331,13 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
             &.STR hr{background: #a01818;}
             &.SPR hr{background: #6d18a0;}
             &.DEF hr{background: #093cb3;}
-            &.SPD hr{background: #139b8a;}
-            &.Skill hr{background: #a46207;}
-
-            &.SPD .stat {letter-spacing: -0.05em;}
         }
-        .skillTitle {
-            font-family: var(--font-marugo),sans-serif;
-            position: relative;
-            line-height: 1;
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            #skillName {
-                grid-column: span 3;
-                font-weight: 500;
-                text-align: left;
-                margin-left: 20px;
-            }
-            :not(hr) {z-index: 1};
-            hr {position: absolute; bottom: 0; left:5.5%; width: 89%; z-index: 0; height: 3px; border-radius: 3px;
-                border: none; margin: 0; background: #a46207;}
-        }
-        #skillDescription {
-            font-family: var(--font-marugo), sans-serif;
-            grid-column: span 2;
-            text-wrap: wrap;
-        }
+    }
 
-
+    #skillDescription {
+        font-family: var(--font-marugo), sans-serif;
+        grid-column: span 2;
+        text-wrap: wrap;
     }
 
 }

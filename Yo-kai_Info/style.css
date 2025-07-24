@@ -267,7 +267,7 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
 
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    mask: url("/images/other_assets/yokaiInfoTopDecoration.svg");
+    mask: url("/images/other_assets/topDecoration.svg");
     mask-repeat: repeat-x;
     mask-size: auto 50px;
 }

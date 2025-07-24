@@ -8,12 +8,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         name.innerHTML = element.name //.replace(/(.+?)(\s|$)/g, '<nobr>$1</nobr>$2');
         name.classList.add('name');
         gridItem.appendChild(name);
+        gridItem.classList.add('rank'+element.rank);
+
+        let imageContainer = document.createElement('div');
+        imageContainer.classList.add('equipmentIconContainer');
+        if(element.rank === 6) imageContainer.classList.add('glade3');
 
         let image = document.createElement('img');
         let imageNumber = element.iconRow*16 + element.iconCol + 1;
         image.src = '/images/itemIcons/item_1'+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
-        gridItem.appendChild(image);
         image.loading = 'lazy';
+
+        imageContainer.appendChild(image);
+
+        gridItem.appendChild(imageContainer);
 
         gridItem.setAttribute('id',element.name.replace(/\s/g, ''));
 
@@ -48,90 +56,39 @@ document.addEventListener('keydown', function(e){
 })
 
 function openInfoPopup(equipment) {
-    /*history.replaceState(null, null, '#'+equipment.name.replace(/\s/g, ''));
-    console.log(document.getElementById(location.hash.replace('#','')).getBoundingClientRect().top);
+    history.replaceState(null, null, '#'+equipment.name.replace(/\s/g, ''));
 
-    document.getElementById('equipmentInfo').className = equipment.isLegend ? 'legend' : (equipment.isRare ? 'rare' : 'normal');
+    document.getElementById('equipmentInfo').className = 'rank'+equipment.rank;
 
-    document.getElementById('equipmentInfoTitle').className = equipment.number === '-' ? 'noNumber' : '';
-    document.getElementById('equipmentNumber').innerText = '#'+equipment.number.toLocaleString(undefined, {minimumIntegerDigits: 3});
-    document.getElementById('equipmentInfoName').innerText = equipment.name;
+    document.getElementById('equipmentName').innerText = equipment.name;
 
-    let medal = document.getElementById("equipmentMedal");
-    medal.classList.add("loading");
-    medal.src = "/images/equipmentMedalsLarge/"+equipment.largeMedal+".png";
-    medal.alt = "Yo-kai "+equipment.name+"'s Medal";
+    let icon = document.getElementById("equipmentIcon");
+    icon.classList.add("loading");
+    let imageNumber = equipment.iconRow*16 + equipment.iconCol + 1;
+    icon.src = '/images/itemIcons/item_1'+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
+    icon.alt = equipment.name+"'s Icon";
+    icon.parentElement.className = equipment.rank === 6 ? 'glade3' : '';
 
-    let rankIcon = document.getElementById("equipmentInfoRankIcon");
-    rankIcon.classList.add('loading');
-    rankIcon.src = "/images/rankIcons/all_text_rank01_"+equipment.rank.toLowerCase()+".png";
-    rankIcon.alt = equipment.rank+" Rank";
+    let rank = document.getElementById('rank');
+    rank.textContent = 'Rank '+equipment.rank;
+    rank.className = 'rank'+equipment.rank;
 
-    document.getElementById('equipmentInfoRank').textContent = equipment.rank+" Rank";
+    let bio = document.getElementById("equipmentDescription");
+    bio.innerText = equipment.description;
 
-    let roleIcon = document.getElementById("equipmentInfoRoleIcon");
-    roleIcon.classList.add('loading');
-    roleIcon.src = "/images/roleText/"+equipment.role+".png";
-    roleIcon.alt = equipment.role+" Role";
+    let hpElement = document.getElementById('equipmentHP');
+    hpElement.innerText = equipment.hp; hpElement.parentElement.style.display = equipment.hp !== 0 ? '' : 'none';
 
-    document.getElementById('equipmentInfoRole').textContent = equipment.role;
+    let strElement = document.getElementById('equipmentSTR');
+    strElement.innerText = equipment.str; strElement.parentElement.style.display = equipment.str !== 0 ? '' : 'none';
 
-    let tribeIcon = document.getElementById('equipmentInfoTribeIcon');
-    tribeIcon.classList.add('loading');
-    tribeIcon.src = "/images/tribeIcons/"+equipment.tribe+".png";
-    tribeIcon.alt = equipment.tribe+" Tribe";
+    let sprElement = document.getElementById('equipmentSPR');
+    sprElement.innerText = equipment.spr; sprElement.parentElement.style.display = equipment.spr !== 0 ? '' : 'none';
 
-    document.getElementById('equipmentInfoTribe').textContent = equipment.tribe;
+    let defElement = document.getElementById('equipmentDEF');
+    defElement.innerText = equipment.def; defElement.parentElement.style.display = equipment.def !== 0 ? '' : 'none';
 
-    let bio = document.getElementById("medalliumBio");
-    bio.className = equipment.bio === "" ? 'noBio' : '';
-    bio.innerText = equipment.bio;
-
-    let strongAtt = document.getElementById('strongElement')
-    strongAtt.classList.add('loading');
-    strongAtt.src = "/images/attributeIcons/attribute"+equipment.strongTo+".png"
-    strongAtt.alt = equipment.strongTo+" Attribute";
-    strongAtt.title = equipment.strongTo+" Attribute";
-
-    let weakAtt = document.getElementById('weakElement')
-    weakAtt.classList.add('loading');
-    weakAtt.src = "/images/attributeIcons/attribute"+equipment.weakTo+".png"
-    weakAtt.alt = equipment.weakTo+" Attribute";
-    weakAtt.title = equipment.weakTo+" Attribute";
-
-    document.getElementById('equipmentHP').innerText = equipment.hp;
-    document.getElementById('equipmentSTR').innerText = equipment.str;
-    document.getElementById('equipmentSPR').innerText = equipment.spr;
-    document.getElementById('equipmentDEF').innerText = equipment.def;
-    document.getElementById('equipmentSPD').innerText = equipment.spd;
-    document.getElementById('skillName').innerText = equipment.skill.name;
-    document.getElementById('skillDescription').innerText = equipment.skill.effect;
-
-    document.getElementById('AMoveIcon').src = "/images/moveIcons/image"+equipment.moves[0].icon+".png"
-    document.getElementById('AMoveText').innerText = equipment.moves[0].name;
-    document.getElementById('XMoveIcon').src = "/images/moveIcons/image"+equipment.moves[1].icon+".png"
-    document.getElementById('XMoveText').innerText = equipment.moves[1].name;
-    document.getElementById('YMoveIcon').src = "/images/moveIcons/image"+equipment.moves[2].icon+".png"
-    document.getElementById('YMoveText').innerText = equipment.moves[2].name;
-    document.getElementById('LearnMove1Icon').src = "/images/moveIcons/image"+equipment.moves[3].icon+".png"
-    document.getElementById('LearnMove1Text').innerText = equipment.moves[3].name;
-    if (equipment.moves[4].name === 'No Move') document.getElementById('move4').classList.add('noMove')
-    else document.getElementById('move4').classList.remove('noMove');
-    document.getElementById('LearnMove2Icon').src = "/images/moveIcons/image"+equipment.moves[4].icon+".png"
-    document.getElementById('LearnMove2Text').innerText = equipment.moves[4].name;
-
-    document.getElementById('soultimateMoveName').textContent = equipment.soultimate.name;
-    let soultDesc = document.getElementById('soultimateMoveDescription')
-    soultDesc.textContent = equipment.soultimate.description;
-    if(equipment.soultimate.description === "") soultDesc.classList.add('empty')
-    else soultDesc.classList.remove('empty');
-    document.getElementById('soultimateMoveData').className = equipment.soultimate.class;*/
-    //document.getElementById('soultimateMovePower').textContent = equipment.soultimate.power.replaceAll(/\s*\+\s*/g,"/");
-    //document.getElementById('soultimateMoveClass').textContent = equipment.soultimate.class;
-    //document.getElementById('soultimateMoveCharge').textContent = equipment.soultimate.gauge;
-    //document.getElementById('soultimateMoveCritRate').textContent = equipment.soultimate.critRate;
-    //document.getElementById('soultimateMoveScaling').textContent = equipment.soultimate.scaling.replaceAll(/\s*\|\s*/g,"/");
-    //document.getElementById('soultimateMoveAttribute').textContent = equipment.soultimate.attribute.replaceAll(/\s*\|\s*/g,"/");
+    document.getElementById('skillDescription').innerText = equipment.skill;
 
 
     /*let screenCover = document.getElementById("screenCover");
