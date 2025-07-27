@@ -12,6 +12,8 @@
         }
         #stats { .statData {font-size: 1em;} }
         #skillDescription {font-size: 1em;}
+        #craftingDataContainer .materialData {--mat-height: 3em;        }
+        #craftingDataContainer .baseItem .iconContainer, #craftingDataContainer .upgrade .iconContainer {height: 3em; width: 3em;}
     }
 }
 
@@ -29,13 +31,8 @@
         }
         #stats { .statData {font-size: 1.5em;} }
         #skillDescription {font-size: 1.2em;}
-        #Movelist, #soultimateMoveData {
-            --move-height: 4em;
-        }
-        .moveName {font-size: 1.5em;}
-        .moveDescription, .inspirit {font-size: 1.2em;}
-        .SoultimateIconText {font-size: 1em;}
-        .soultimateMoveInfo .infoValue {font-size: 1.5em;}
+        #craftingDataContainer .materialData {--mat-height: 4em;}
+        #craftingDataContainer .baseItem .iconContainer, #craftingDataContainer .upgrade .iconContainer {height: 4em; width: 4em;}
     }
 }
 
@@ -510,7 +507,7 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
         }
     }
 
-    .baseItem {
+    .baseItem, .upgrade {
         font-family: var(--font-marugo), sans-serif;
         display: flex;
         align-items: center;
@@ -557,29 +554,6 @@ body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
         flex-direction: column;
         gap: 1em;
         h1 {font-family: var(--font-yuruka), sans-serif; margin-block: 0; text-align: center;}
-        .upgrade {
-            font-family: var(--font-marugo), sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            a {
-                color: inherit;
-                text-decoration: none;
-                &:active, &:focus, &:hover {
-                    text-decoration: underline;
-                }
-            };
-
-            .iconContainer {
-                display: inline-block;
-                height: 4em;
-                width: 4em;
-                img {height: 100%;}
-                vertical-align: middle;
-                margin-inline-start: 1em;
-            }
-        }
     }
 }
 

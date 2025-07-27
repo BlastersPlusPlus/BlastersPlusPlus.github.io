@@ -16,60 +16,62 @@
     </head>
     <body>
         <header>
-        <div class="headerLogoContainer">
-            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
-        </div>
-        <nav class="headerNavigationContainer">
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle">
-                    <a href="https://gamebanana.com/mods/457241">Download</a>
-                </h1>
+            <div class="headerLogoContainer">
+                <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
             </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/About">About</a></li>
-                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
-                        </ul>
-                    </nav>
+            <nav class="headerNavigationContainer">
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle">
+                        <a href="https://gamebanana.com/mods/457241">Download</a>
+                    </h1>
                 </div>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/FAQ">FAQ</a></li>
-                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/About">About</a></li>
+                                <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-            <div class="headerNavigationSection small">
-                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/About">About</a></li>
-                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
-                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
-                            <li><a href="/FAQ">FAQ</a></li>
-                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
+                <div class="headerNavigationSection wide">
+                    <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/FAQ">FAQ</a></li>
+                                <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                                <li><a href="/Equipment">Equipment</a></li>
+                                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <script src="/script-header.js" defer></script>
-    </header>
+                <div class="headerNavigationSection small">
+                    <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
+                    <div class="headerNavigationPopupContainer">
+                        <nav class="whiteOverWindow links">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/About">About</a></li>
+                                <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                                <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                                <li><a href="/FAQ">FAQ</a></li>
+                                <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                                <li><a href="/Equipment">Equipment</a></li>
+                                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                    B++ Spreadsheet</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+            <script src="/script-header.js" defer></script>
+        </header>
 
         <div class="bodyContents">
             <section class="whiteOverWindow welcomeNotice">
@@ -125,6 +127,36 @@
                             yokaiInfoElement.children[i].src = '/images/yokaiArt/'+image.replace(/\s+/g, '_')+'.png';
                             yokaiInfoElement.children[i].alt = 'Yo-kai Art of '+image[1];
                         }
+                    </script>
+                </div>
+
+                <div class="pageLinkSection">
+                    <div class="images-container" id="equipment-images">
+                        <div class="iconContainer" style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
+                            <img src="/images/itemIcons/item_1214.xi.00.png" alt="Oni Smasher Sky"></div>
+                        <div class="iconContainer" style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
+                            <img src="/images/itemIcons/item_1514.xi.00.png" alt="Imperial Launcher"></div>
+                    </div>
+                    <a href="/Equipment">
+                        Equipment
+                    </a>
+                    <script>
+                        console.log();
+                        let equipmentElement = document.getElementById("equipment-images");
+                        (async () => {
+                            let data = await fetch('/dataSources/Equipment/Equipment.json').then(response => response.json());
+                            for(let i=0; i<=1; i++) {
+                                let randomNumber = Math.floor(Math.random() * data.length);
+                                let equip = data.splice(randomNumber, 1)[0];
+                                console.log(equip);
+
+                                let imageNumber = equip.iconRow*16 + equip.iconCol + 1;
+                                equipmentElement.children[i].children[0].src = '/images/itemIcons/item_1'+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
+                                equipmentElement.children[i].children[0].alt = equip.name;
+
+                                if(equip.rank === 6) equipmentElement.children[i].classList.add('glade3');
+                            }
+                        })();
                     </script>
                 </div>
 
@@ -233,6 +265,7 @@
                             <nav class="links">
                                 <div class="navItem"><a href="/FAQ">FAQ</a></div>
                                 <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                                <div class="navItem"><a href="/Equipment">Equipment</a></div>
                                 <div class="navItem"><a target="_blank"
                                                         href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
                                     B++ Spreadsheet</a></div>

@@ -82,7 +82,7 @@ main {
             justify-content: center;
             align-items: center;
             &.meet-the-team>img {border-radius: 100%};
-            >img {
+            >img, >.iconContainer {
                 position: absolute;
                 top: var(--top);
                 right: var(--right);
@@ -95,7 +95,11 @@ main {
                 transform: rotate(var(--angle));
             }
 
-            &:has(~a:hover, ~a:active, ~a:focus-visible)>img {
+            >.iconContainer {
+                >img {height: 100%};
+            }
+
+            &:has(~a:hover, ~a:active, ~a:focus-visible)>img, &:has(~a:hover, ~a:active, ~a:focus-visible)>.iconContainer {
                 transform: translate(calc(var(--distance) * cos(var(--angle-move))), calc(var(--distance) * sin(var(--angle-move)))) rotate(calc(var(--angle) + var(--angle-rotate))) scale(var(--scale));
             }
             /*background: red;*/
