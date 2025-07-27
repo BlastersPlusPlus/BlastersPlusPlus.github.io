@@ -474,6 +474,7 @@ a.discord::after{content:"Discord"}
         background-size: auto 100%;
         background-position: center center;
         background-repeat: no-repeat;
+        pointer-events: none;
     }
 }
 .glade1::after {

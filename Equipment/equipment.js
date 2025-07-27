@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    let data = await fetch('/dataSources/Equipment.json').then(response => response.json());
+    let data = await fetch('/dataSources/Equipment/Equipment.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
         let gridItem = document.createElement('button');
@@ -73,6 +73,27 @@ function openInfoPopup(equipment) {
     rank.textContent = 'Rank '+equipment.rank;
     rank.className = 'rank'+equipment.rank;
 
+    showEquipmentDetails(equipment.id);
+
+
+    /*let screenCover = document.getElementById("screenCover");
+    screenCover.equipmentId = equipment.id;
+    screenCover.scrollTop = 0;
+    screenCover.className = 'open';
+    screenCover.focus();*/
+
+    let equipmentInfoContainer = document.getElementById('equipmentInfoPopupContainer');
+    equipmentInfoContainer.equipmentId = equipment.id;
+    equipmentInfoContainer.scrollTop = 0;
+    equipmentInfoContainer.showModal();
+    equipmentInfoContainer.classList.add('open');
+}
+
+async function showEquipmentDetails(id) {
+
+    let equipment = await fetch('/dataSources/Equipment/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
+    console.log(equipment);
+
     let bio = document.getElementById("equipmentDescription");
     bio.innerText = equipment.description;
 
@@ -90,18 +111,90 @@ function openInfoPopup(equipment) {
 
     document.getElementById('skillDescription').innerText = equipment.skill;
 
+    let createSection = document.getElementById('createSection');
+    if(equipment.createData) {
+        createSection.classList.remove('noContent')
+        createSection.innerHTML = "<h2>Create</h2>"
 
-    /*let screenCover = document.getElementById("screenCover");
-    screenCover.equipmentId = equipment.id;
-    screenCover.scrollTop = 0;
-    screenCover.className = 'open';
-    screenCover.focus();*/
+        equipment.createData.forEach((data) => {
+            let materialData = document.createElement("div");
+            materialData.classList.add('materialData');
+            createSection.appendChild(materialData);
 
-    let equipmentInfoContainer = document.getElementById('equipmentInfoPopupContainer');
-    equipmentInfoContainer.equipmentId = equipment.id;
-    equipmentInfoContainer.scrollTop = 0;
-    equipmentInfoContainer.showModal();
-    equipmentInfoContainer.classList.add('open');
+            data.materials.forEach((material) => {materialData.appendChild(generateMaterialElement(material));});
+
+            let oniOrbs = document.createElement('p');
+            oniOrbs.classList.add('oniOrbs');
+            oniOrbs.textContent = 'Oni Orbs x'+data.oniOrbs;
+            createSection.appendChild(oniOrbs);
+        })
+
+    } else(createSection.classList.add('noContent'))
+
+    let strengthenSection = document.getElementById('strengthenSection');
+    if(equipment.upgradeData) {
+        strengthenSection.classList.remove('noContent')
+        strengthenSection.innerHTML = "<h2>Strengthen</h2>"
+
+        equipment.upgradeData.forEach((data) => {
+            let baseItem = document.createElement("div");
+            baseItem.classList.add('baseItem');
+            let anchor = document.createElement("a");
+            anchor.href = '#'+data.baseItem.name.replace(/\s/g, '');
+            anchor.innerText = data.baseItem.name;
+            baseItem.appendChild(anchor);
+            let iconContainer = document.createElement("div");
+            iconContainer.classList.add('iconContainer');
+            if(data.baseItem.rank === 6) iconContainer.classList.add('glade3');
+            anchor.appendChild(iconContainer);
+            let image = document.createElement("img");
+            let imageNumber = data.baseItem.iconRow*16 + data.baseItem.iconCol + 1;
+            image.src = '/images/itemIcons/item_1'+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
+            iconContainer.appendChild(image);
+
+            strengthenSection.appendChild(baseItem);
+
+
+
+            let materialData = document.createElement("div");
+            materialData.classList.add('materialData');
+            strengthenSection.appendChild(materialData);
+
+            data.materials.forEach((material) => {materialData.appendChild(generateMaterialElement(material));});
+
+
+            let oniOrbs = document.createElement('p');
+            oniOrbs.classList.add('oniOrbs');
+            oniOrbs.textContent = 'Oni Orbs x'+data.oniOrbs;
+            strengthenSection.appendChild(oniOrbs);
+        })
+    } else(strengthenSection.classList.add('noContent'))
+
+    let upgradesElement = document.getElementById('upgrades');
+    if(equipment.upgradesInto.length) {
+        upgradesElement.classList.remove('noContent')
+        upgradesElement.innerHTML = "<h2>Upgrades</h2>"
+
+        equipment.upgradesInto.forEach((data) => {
+            let item = document.createElement("div");
+            item.classList.add('baseItem');
+            let anchor = document.createElement("a");
+            anchor.href = '#'+data.name.replace(/\s/g, '');
+            anchor.innerText = data.name;
+            item.appendChild(anchor);
+            let iconContainer = document.createElement("div");
+            iconContainer.classList.add('iconContainer');
+            if(data.rank === 6) iconContainer.classList.add('glade3');
+            anchor.appendChild(iconContainer);
+            let image = document.createElement("img");
+            let imageNumber = data.iconRow*16 + data.iconCol + 1;
+            image.src = '/images/itemIcons/item_1'+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
+            iconContainer.appendChild(image);
+
+            upgradesElement.appendChild(item);
+        })
+    } else(upgradesElement.classList.add('noContent'))
+
 }
 
 function closeInfoPopup() {
@@ -111,4 +204,73 @@ function closeInfoPopup() {
     },{once:true});
     equipmentInfoContainer.classList.remove('open');
     history.replaceState(null, null, '#');
+}
+
+
+
+function generateMaterialElement(material) {
+    /*<div class="material">
+        <div class="hexagonImageContainer">
+            <div class="hexagonBorder"></div>
+            <div class="hexagonBackground"></div>
+            <div class="iconContainer glade1">
+                <img class="materialIcon" loading="lazy" id="AMoveIcon"
+                     alt="Attack"
+                     src="../images/itemIcons/item_1048.xi.00.png" aria-label="hidden"
+                     onload="this.classList.remove('loading')"
+                     onerror="this.classList.remove('loading')">
+            </div>
+        </div>
+        <div class="materialNameContainer">
+            <div class="materialName" id="material1Text"><p>Sexy time <span class="materialQuantity">x10</span></p></div>
+        </div>
+    </div>*/
+
+    let materialElement = document.createElement('div');
+    materialElement.classList.add('material');
+
+    let hexagonImageContainer = document.createElement('div');
+    hexagonImageContainer.classList.add('hexagonImageContainer');
+    materialElement.appendChild(hexagonImageContainer);
+
+    let hexagonBorder = document.createElement('div')
+    hexagonBorder.classList.add('hexagonBorder');
+    hexagonImageContainer.appendChild(hexagonBorder);
+
+    let hexagonBackground = document.createElement('div')
+    hexagonBackground.classList.add('hexagonBackground');
+    hexagonImageContainer.appendChild(hexagonBackground);
+
+    let iconContainer = document.createElement('div');
+    iconContainer.classList.add('iconContainer');
+    if(material.glade) iconContainer.classList.add('glade'+material.glade);
+    hexagonImageContainer.appendChild(iconContainer);
+
+    let materialIcon = document.createElement('img');
+    materialIcon.classList.add('materialIcon');
+    materialIcon.alt = material.name;
+
+    let imageNumber = material.iconRow*16 + material.iconCol + 1;
+    materialIcon.src = '/images/itemIcons/item_'+(material.type === 10 || material.type === 20 || material.type ===60 ? '0' : '1')+imageNumber.toLocaleString(undefined,{minimumIntegerDigits:3})+'.xi.00.png';
+    iconContainer.appendChild(materialIcon);
+
+
+    let materialNameContainer = document.createElement('div');
+    materialNameContainer.classList.add('materialNameContainer');
+    materialElement.appendChild(materialNameContainer);
+
+    let materialName = document.createElement('div');
+    materialName.classList.add('materialName');
+    materialNameContainer.appendChild(materialName);
+    let materialNameElement = document.createElement('p');
+    materialNameElement.innerText = material.name+' ';
+
+    let span = document.createElement('span');
+    span.classList.add('materialQuantity');
+    span.innerText = 'x'+material.quantity;
+    materialNameElement.appendChild(span);
+
+    materialName.appendChild(materialNameElement);
+
+    return materialElement;
 }
