@@ -1,5 +1,7 @@
+let data;
+
 document.addEventListener('DOMContentLoaded', async () => {
-    let data = await fetch('/dataSources/Equipment/Equipment.json').then(response => response.json());
+    data = await fetch('/dataSources/Equipment/Equipment.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
         let gridItem = document.createElement('button');
@@ -73,20 +75,14 @@ function openInfoPopup(equipment) {
     rank.textContent = 'Rank '+equipment.rank;
     rank.className = 'rank'+equipment.rank;
 
-    showEquipmentDetails(equipment.id);
-
-
-    /*let screenCover = document.getElementById("screenCover");
-    screenCover.equipmentId = equipment.id;
-    screenCover.scrollTop = 0;
-    screenCover.className = 'open';
-    screenCover.focus();*/
-
     let equipmentInfoContainer = document.getElementById('equipmentInfoPopupContainer');
     equipmentInfoContainer.equipmentId = equipment.id;
     equipmentInfoContainer.scrollTop = 0;
     equipmentInfoContainer.showModal();
     equipmentInfoContainer.classList.add('open');
+    equipmentInfoContainer.classList.remove('hasDetails')
+
+    showEquipmentDetails(equipment.id).then(function(){equipmentInfoContainer.classList.add('hasDetails')});
 }
 
 async function showEquipmentDetails(id) {
@@ -205,8 +201,6 @@ function closeInfoPopup() {
     equipmentInfoContainer.classList.remove('open');
     history.replaceState(null, null, '#');
 }
-
-
 
 function generateMaterialElement(material) {
     /*<div class="material">

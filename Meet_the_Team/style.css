@@ -152,16 +152,15 @@ p {
     margin-bottom: 5px;
 }
 
-.work, .teamLinks {
+.workContainer, .teamLinks {
     height: 100%;
 }
 
-.work {
+.workContainer {
     padding-inline: 5px;
     box-sizing: border-box;
     text-align: center;
     text-wrap: balance;
-    font-size: 1.1em;
     display: flex;
     align-items: center;
     min-width: fit-content;

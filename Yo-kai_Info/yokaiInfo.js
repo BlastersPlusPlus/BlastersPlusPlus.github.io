@@ -1,3 +1,5 @@
+let data;
+
 document.addEventListener('DOMContentLoaded', async () => {
     let data = await fetch('/dataSources/Yo-kaiInfo.json').then(response => response.json());
     let main = document.querySelector('main');
@@ -166,3 +168,15 @@ function closeInfoPopup() {
     yokaiInfoContainer.classList.remove('open');
     history.replaceState(null, null, '#');
 }
+
+/*let pusi = [];
+
+let rankValues = {'E': 0, 'D':1, 'C':2, 'B':3, 'A':4, 'S':5}
+
+function sortNumber(yokai1, yokai2, direction = 1) {return ((yokai1.number > yokai2.number ? 1 : -1) + (yokai1.fileIndex > yokai2.fileIndex ? 0.5 : -0.5))*direction}
+function sortName(yokai1, yokai2, direction = 1) {return yokai1.name.localeCompare(yokai2) * direction;}
+function sortHP(yokai1, yokai2, direction = 1) {return (yokai1.hp - yokai2.hp)*direction;}
+function sortSTR(yokai1, yokai2, direction = 1) {return (yokai1.str - yokai2.str)*direction;}
+function sortSPR(yokai1, yokai2, direction = 1) {return (yokai1.spr - yokai2.spr)*direction;}
+function sortDEF(yokai1, yokai2, direction = 1) {return (yokai1.def - yokai2.def)*direction;}*/
+

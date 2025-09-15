@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Blasters ++: Save File Converter</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="only light">
+  <meta name="description" content="This tool will let you keep playing Blasters ++ on your old save files.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="stylesheet" href="../style-global.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="../backgrounds.css">
+</head>
+<body>
+  <header>
+    <div class="headerLogoContainer">
+      <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
+    </div>
+    <nav class="headerNavigationContainer">
+      <div class="headerNavigationSection wide">
+        <h1 class="headerNavigationTitle">
+          <a href="https://gamebanana.com/mods/457241">Download</a>
+        </h1>
+      </div>
+      <div class="headerNavigationSection wide">
+        <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
+        <div class="headerNavigationPopupContainer">
+          <nav class="whiteOverWindow links">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/About">About</a></li>
+              <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="headerNavigationSection wide">
+        <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+        <div class="headerNavigationPopupContainer">
+          <nav class="whiteOverWindow links">
+            <ul>
+              <li><a href="/FAQ">FAQ</a></li>
+              <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+              <li><a href="/Equipment">Equipment</a></li>
+              <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                B++ Spreadsheet</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="headerNavigationSection small">
+        <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
+        <div class="headerNavigationPopupContainer">
+          <nav class="whiteOverWindow links">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/About">About</a></li>
+              <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+              <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+              <li><a href="/FAQ">FAQ</a></li>
+              <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+              <li><a href="/Equipment">Equipment</a></li>
+              <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                B++ Spreadsheet</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </nav>
+    <script src="/script-header.js" defer></script>
+  </header>
+  <div class="bodyContents">
+    <main>
+      <div class="fileConverterInputContainer">
+        <label for="fileConverterInput" class="saveFileLabel">Upload Save Files</label>
+        <input id="fileConverterInput" type="file" accept=".yw,.yw_g" multiple>
+      </div>
+
+      <div id="infoMessage" class="whiteOverWindow shadow">
+        <p>This tool lets you adapt your old save file to work with the latest version of Blasters ++.
+        To use it, simply extract the file from your game and upload them above.
+          If you don't know how to get the save files, follow the steps below.</p>
+        <section><h1>3DS</h1>
+          <p>You will need Checkpoint installed on your system. You can install it from <a
+                  href="https://github.com/BernardoGiordano/Checkpoint/releases/tag/v3.10.1">this link</a> by scanning
+            the QR code or by downloading and installing the cia or 3dsx file.
+            On your console, open Checkpoint and navigate to your title. Press A once to select it, then select
+            "New...". Press A to confirm, then input a name for the save backup. Your save will be in your SD card, on
+            <code>3ds/Checkpoint/saves/&lt;id&gt; &lt;name&gt;/&lt;your backup name&gt;</code>,
+            where <code>&lt;id&gt;</code> is the last five characters of the title id.</p>
+          <p>To load the converted files back, duplicate the folder with the save backup's name and rename it to whatever you'd like. This will ensure that if something goes wrong with the conversion, your data will not be lost.
+            Put the edited files in this new folder. Insert your SD card back into your console, open Checkpoint, select your title, and navigate to the new backup that should appear in the bottom screen.
+            Press A to restore the backup, and A again to confirm.</p>
+        </section>
+        <section><h1>Citra</h1>
+          <p>Right-click on your title and select 'Open Save Data Location'. Your file explorer should open at a
+            directory with the save files. We recommend storing a copy of them somewhere safe in case something goes wrong during the conversion.</p>
+          <p>To load the converted files, simply put them in the same directory you got them from, overwriting as necessary.</p></section>
+        <p>On both methods, there will be up to six save files, one for each save slot you have used in-game. They are named <code>game&lt;number&gt;.yw(_g)</code>.
+          The number matches the diary slot the file corresponds to, whereas the extension is <code>.yw</code> for Red Cat Corps and White Dog Squad files and <code>.yw_g</code> for Moon Rabbit Crew files.
+          We recommend converting all of them</p>
+        <p>If you need any help using the tool, you can ask in our <a href="https://discord.gg/nxCvVJ6fgt" target="_blank">Discord server</a>'s help forum.
+        Likewise, if something goes wrong with it, please report it in the server's bug report forum.</p>
+
+      </div>
+    </main>
+  </div>
+  <footer>
+    <div id="footerContents">
+      <div id="footerLeftSide" class="footerHalf">
+        <div id="backgroundSelector">
+          <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
+          <div id="backgroundContainer">
+            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
+                              localStorage.setItem('bgType', this.value);
+                              if(this.value === 'random') {
+                                  bgType = Math.floor(Math.random() * 14);
+                                  bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
+                                  document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                              }">
+              <option value="random" class="noJS">Random</option>
+              <option value="plain" selected>Plain</option>
+              <option value="0">FluffBlast</option>
+              <option value="1">Cool Star</option>
+              <option value="2">Heart</option>
+              <option value="3a">Red Cat</option>
+              <option value="3b">White Dog</option>
+              <option value="4">Sergeant</option>
+              <option value="5">Sparkling</option>
+              <option value="6">Stilldark?</option>
+              <option value="7">Cool&starf;KJ</option>
+              <option value="8">Chase!</option>
+              <option value="9">Momotaro</option>
+              <option value="10">G of Enma</option>
+              <option value="11">Sunshine</option>
+              <option value="12">King</option>
+            </select>
+          </div>
+          <div class="checkboxContainer focus-inside">
+            <input checked id="animateBG" type="checkbox"
+                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+            <label for="animateBG">Animate Background</label>
+          </div>
+        </div>
+      </div>
+      <div id="footerRightSide" class="footerHalf">
+        <div id="footerNavigation">
+          <div id="footerNavigationContainer" class="footerContainer">
+            <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
+            <nav class="links">
+              <div class="navItem"><a href="/">Home</a></div>
+              <div class="navItem"><a href="/About">About</a></div>
+              <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+              <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
+              </div>
+            </nav>
+          </div>
+          <div id="footerResourcesContainer" class="footerContainer">
+            <div class="footerTitle">Resources</div>
+            <nav class="links">
+              <div class="navItem"><a href="/FAQ">FAQ</a></div>
+              <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+              <div class="navItem"><a href="/Equipment">Equipment</a></div>
+              <div class="navItem"><a target="_blank"
+                                      href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                B++ Spreadsheet</a></div>
+            </nav>
+          </div>
+        </div>
+        <div id="footerSocialsLogo">
+          <div id="footerSocialsContainer" class="footerContainer">
+            <div class="footerTitle">Socials</div>
+            <nav class="links">
+              <div class="navItem"><a class="icon discord" target="_blank"
+                                      href="https://discord.gg/nxCvVJ6fgt"></a></div>
+              <div class="navItem"><a class="icon twitter" target="_blank"
+                                      href="https://x.com/Blastersplusmod"></a></div>
+              <div class="navItem"><a class="icon bsky" target="_blank"
+                                      href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
+              </div>
+              <!--div class="navItem"><a class="icon youtube" target="_blank"
+                                      href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+              </div-->
+            </nav>
+          </div>
+          <div id="footerLogoContainer">
+            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
+                 aria-hidden="true">
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/script-footer.js"></script>
+    <div class="footerNotice">
+      Yo-kai Watch Blasters ++ 2023-2025
+    </div>
+
+  </footer>
+</body>
+</html>

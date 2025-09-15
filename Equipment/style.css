@@ -115,6 +115,8 @@ body {
     }
 
     scrollbar-color: white transparent;
+
+    &:not(.hasDetails) .detail {display: none !important;};
 }
 
 body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
