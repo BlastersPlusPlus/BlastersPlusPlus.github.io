@@ -40,7 +40,7 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/About">About</a></li>
-                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            <li><a href="/meet-the-team">Meet the Team!</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -51,7 +51,7 @@
                     <nav class="whiteOverWindow links">
                         <ul>
                             <li><a href="/FAQ">FAQ</a></li>
-                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
                             <li><a href="/Equipment">Equipment</a></li>
                             <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
                                 B++ Spreadsheet</a></li>
@@ -66,10 +66,10 @@
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/About">About</a></li>
-                            <li><a href="/Meet_the_Team">Meet the Team!</a></li>
+                            <li><a href="/meet-the-team">Meet the Team!</a></li>
                             <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
                             <li><a href="/FAQ">FAQ</a></li>
-                            <li><a href="/Yo-kai_Info">Yo-kai Info</a></li>
+                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
                             <li><a href="/Equipment">Equipment</a></li>
                             <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
                                 B++ Spreadsheet</a></li>
@@ -127,7 +127,7 @@
                         <section>
                             <p>If successful, when starting the game, the Level5 intro will be replaced by a custom one.</p>
                         </section>
-                        <section><p>For both platforms, <a href="/Meet_the_Team/index.html#Argo">Argo</a> has a helpful, step-by-step video guide which you can find here:</p>
+                        <section><p>For both platforms, <a href="/meet-the-team/index.html#Argo">Argo</a> has a helpful, step-by-step video guide which you can find here:</p>
                             <iframe inert src="https://www.youtube.com/embed/3ppkZOkNu10?si=M657fCpQ2lx6dyDP"
                                     title="YouTube video player" frameborder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -160,7 +160,7 @@
                                 <li>Your console is modded and has CFW.</li>
                                 <li>Game Patching is enabled in Luma Settings (access the Luma menu by holding SELECT while powering on the console).</li>
                                 <li>You are using the correct title ID for your game (e.g. use title ID 00040000001CEB00 for Red Cat Corps North American version).</li>
-                                <li>Your file path looks as follows: <code>root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</code></li>
+                                <li>Your file path looks as follows: <span class="code">root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</span></li>
                                 <li>You are playing on the latest update.</li>
                             </ol>
                         </section>
@@ -215,12 +215,12 @@
                         <section>
                             <h2>Citra</h2>
                             <p>You can play online on Citra by changing some configurations to enable the use of different lobbies</p>
-                            <p>In order to do this, you need to open the <code>qt-config.ini</code> Citra configuration file.
-                                On Windows, this file is found at <code>C:\Users\&lt;your username&gt;\AppData\Roaming\Citra\config</code>.
+                            <p>In order to do this, you need to open the <span class="code">qt-config.ini</span> Citra configuration file.
+                                On Windows, this file is found at <span class="code">C:\Users\&lt;your username&gt;\AppData\Roaming\Citra\config</span>.
                                 Open it using Notepad and search for WebService (you can do this with the shortcut Ctrl+F if your device is in English).
-                                Replace the <code>web_api_url</code> lines with the following:</p>
-                            <p><code>web_api_url\default=false<br>
-                                    web_api_url=http:/88.198.47.46:5000</code></p>
+                                Replace the <span class="code">web_api_url</span> lines with the following:</p>
+                            <p><span class="code">web_api_url\default=false<br>
+                                    web_api_url=http:/88.198.47.46:5000</span></p>
                             <p>After saving your changes (and ensuring the save was succesful!), you should be able to join multiplayer rooms. If Citra is currently open, you will need to close and reopen it to let the changes take place.</p>
                             <p>To play with others, you will need to join a room. In the multiplayer menu, you can either browse public rooms or directly join one given its address and port. Once in the room, you can open the game and go to <strong>local multiplayer</strong> to start playing.</p>
                         </section>
@@ -240,7 +240,7 @@
                             <p>This game has some internal limitations regarding things like the Medallium.
                                 In particular, Medallium numbers over 511 cause issues, including crashes.
                                 Due to this, we are not able to add any more entries.
-                                However, you can find all the information you'd see in the Medallium (including the Medallium Bio) and more at <a href="/Yo-kai_Info">Yo-kai Info</a>!</p>
+                                However, you can find all the information you'd see in the Medallium (including the Medallium Bio) and more at <a href="/yo-kai-info">Yo-kai Info</a>!</p>
                         </section>
                     </div>
                 </article>
@@ -264,8 +264,8 @@
                         <section>
                             <p>Your console has the game update (Moon Rabbit Crew) installed which has several resources within it that make the game work.
                                 In the mod romfs folder there are additional and modified files that contain the new content added by Blasters ++.
-                                The usual method to play the mod relies on the console loading these external assets when loading the game, and applying them over the existing files within the update installed on the console, but the <code>boot.firm</code> required to use the Level256 plugin disables this.
-                                To use this method again, you need to replace the Level256 <code>boot.firm</code> with the one from Luma, which you can find inside <code>Luma3DS.zip</code> from <a href="https://github.com/LumaTeam/Luma3DS/releases/latest">the Github repository</a>.</p>
+                                The usual method to play the mod relies on the console loading these external assets when loading the game, and applying them over the existing files within the update installed on the console, but the <span class="code">boot.firm</span> required to use the Level256 plugin disables this.
+                                To use this method again, you need to replace the Level256 <span class="code">boot.firm</span> with the one from Luma, which you can find inside <span class="code">Luma3DS.zip</span> from <a href="https://github.com/LumaTeam/Luma3DS/releases/latest">the Github repository</a>.</p>
                         </section>
                     </div>
                 </article>
@@ -317,7 +317,7 @@
                         <nav class="links">
                             <div class="navItem"><a href="/">Home</a></div>
                             <div class="navItem"><a href="/About">About</a></div>
-                            <div class="navItem"><a href="/Meet_the_Team">Meet the Team!</a></div>
+                            <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
                             <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
                             </div>
                         </nav>
@@ -326,7 +326,7 @@
                         <div class="footerTitle">Resources</div>
                         <nav class="links">
                             <div class="navItem"><a href="/FAQ">FAQ</a></div>
-                            <div class="navItem"><a href="/Yo-kai_Info">Yo-kai Info</a></div>
+                            <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
                             <div class="navItem"><a href="/Equipment">Equipment</a></div>
                             <div class="navItem"><a target="_blank"
                                                     href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">

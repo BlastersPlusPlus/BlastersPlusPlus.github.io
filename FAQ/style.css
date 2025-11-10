@@ -1,7 +1,7 @@
 @media all and (max-width: 600px) {
     .FAQQuestion>.FAQQuestionHeader{
-        &>h1{font-size: 1.5em;}
-        &>.downArrow{width: 1.5em;}
+        &>h1{font-size: 1em;}
+        &>.downArrow{width: 1em;}
     }
 }
 
@@ -13,7 +13,7 @@
 }
 
 main {
-    width: min(800px, 80vw);
+    width: min(800px, 90vw);
     margin-inline: auto;
 
     display: flex;
@@ -22,7 +22,7 @@ main {
 }
 
 @media (scripting: enabled) {
-    .FAQQuestion>.answerContainer, .FAQQuestion iframe/*, .FAQQuestion>.answerContainer code*/ {
+    .FAQQuestion>.answerContainer, .FAQQuestion iframe, .FAQQuestion>.answerContainer .code {
         /* fade out, then shrink */
         transition: opacity .25s,
         font-size .25s .25s,
@@ -33,9 +33,9 @@ main {
     .FAQQuestion.open>.answerContainer,
     .FAQQuestion>.answerContainer:has(:focus-visible),
     .FAQQuestion.open iframe,
-    .FAQQuestion>.answerContainer:has(:focus-visible) iframe/*,
-    .FAQQuestion.open>.answerContainer code,
-    .FAQQuestion>.answerContainer:has(:focus-visible) code*/ {
+    .FAQQuestion>.answerContainer:has(:focus-visible) iframe,
+    .FAQQuestion.open>.answerContainer .code,
+    .FAQQuestion>.answerContainer:has(:focus-visible) .code {
         transition: font-size .25s,
         margin .25s,
         padding .25s,
@@ -48,6 +48,7 @@ main {
         opacity: 0;
         padding: 0;
         iframe {width: 0;}
+        .code {font-size: 0;}
     }
 }
 @media (scripting: none) {
@@ -55,7 +56,7 @@ main {
 }
 
 .FAQQuestion {
-    padding: 2em;
+    padding: 1em;
     border-radius: 50px;
     font-family: var(--font-standard), sans-serif;
     height: min-content;
@@ -68,6 +69,7 @@ main {
         >h1 {
             text-align: center; margin-block: 0;
             margin-inline: 1em;
+            text-wrap: balance;
         };
         >.downArrow {
             position: absolute;
@@ -105,7 +107,7 @@ main {
             &>:last-child {margin-block-end: 0}
             &>p {line-height: 1.5;}
             ul {list-style-type: disc;}
-            code {font-size: 1.25em; word-break: break-all;}
+            .code {font-size: 12px; font-family: monospace; word-break: break-all;}
         }
 
         iframe {

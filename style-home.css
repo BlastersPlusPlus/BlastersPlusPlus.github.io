@@ -20,17 +20,22 @@ body {
 }
 
 .welcomeNotice {
-    width: min(800px,80vw);
+    h1 {
+        font-family: var(--font-yuruka), sans-serif;
+        font-size: 3em;
+    }
+    width: min(600px,90vw);
     margin-inline: auto;
     text-align: center;
-    padding: 2em;
+    text-wrap: balance;
+    padding: 1em;
     border-radius: 50px;
     box-sizing: border-box;
     margin-block: 20px;
 }
 
 main {
-    width: min(600px,70vw);
+    width: min(600px,90vw);
     margin-inline: auto;
     margin-block: 30px;
     display: flex;

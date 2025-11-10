@@ -401,7 +401,7 @@ footer {
 }
 
 .whiteOverWindow {
-    background-color: rgb(255, 255, 255, 0.85);
+    background-color: white;
     color: black;
     font-family: var(--font-marugo), sans-serif;
     border: 3px solid white;
