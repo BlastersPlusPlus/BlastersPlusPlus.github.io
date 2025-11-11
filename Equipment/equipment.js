@@ -1,7 +1,7 @@
 let data;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    data = await fetch('/dataSources/Equipment/Equipment.json').then(response => response.json());
+    data = await fetch('/data-sources/Equipment/Equipment.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
         let gridItem = document.createElement('button');
