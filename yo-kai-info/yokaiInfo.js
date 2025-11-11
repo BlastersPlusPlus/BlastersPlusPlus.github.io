@@ -1,7 +1,7 @@
 let data;
 
 document.addEventListener('DOMContentLoaded', async () => {
-    let data = await fetch('/dataSources/yo-kai-info.json').then(response => response.json());
+    let data = await fetch('/data-sources/yo-kai-info.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
         let gridItem = document.createElement('button');
