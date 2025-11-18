@@ -87,7 +87,7 @@ function openInfoPopup(equipment) {
 
 async function showEquipmentDetails(id) {
 
-    let equipment = await fetch('/dataSources/Equipment/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
+    let equipment = await fetch('/data-sources/Equipment/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
     console.log(equipment);
 
     let bio = document.getElementById("equipmentDescription");
