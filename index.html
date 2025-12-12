@@ -172,7 +172,7 @@
                         console.log();
                         let equipmentElement = document.getElementById("equipment-images");
                         (async () => {
-                            let data = await fetch('/data-sources/Equipment/Equipment.json').then(response => response.json());
+                            let data = await fetch('/data-sources/equipment/equipment.json').then(response => response.json());
                             for(let i=0; i<=1; i++) {
                                 let randomNumber = Math.floor(Math.random() * data.length);
                                 let equip = data.splice(randomNumber, 1)[0];
