@@ -1,5 +1,5 @@
 @media screen and (max-width: 599px) {
-    main {
+    .grid-container {
         grid-template-columns: repeat(auto-fill, 90vw);
         grid-auto-rows: 1fr;
         min-width: fit-content;
@@ -31,7 +31,7 @@
 }
 
 @media screen and (min-width: 599px) {
-    main {grid-template-columns: repeat(auto-fill, minmax(40em, 1fr));
+    .grid-container {grid-template-columns: repeat(auto-fill, minmax(40em, 1fr));
         grid-auto-rows: 12.5em;
         max-width: 90vw;}
     .work.shortDescription {display: none;}
@@ -44,7 +44,7 @@
 }
 
 @media screen and (min-width: 1080px) {
-    main {grid-template-columns: 1fr 1fr;grid-template-rows: 17.5em;}
+    .grid-container {grid-template-columns: 1fr 1fr;&.team{grid-template-rows: 17.5em;}}
     .younes.grid-item {
         grid-column: 1/-1;
         border-radius: 200px;
@@ -71,11 +71,38 @@
     }
 }
 
-main {
+.bodyContents {
+    display: flex;
+    /*width: min-content;*/
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4em;
+}
+.creditsSection {
+    min-width: fit-content;
+    max-width: min(1000px,90vw);
+    box-sizing: border-box;
+    margin: auto;
+    .section-title {
+        border-radius: 3em;
+        padding-inline: 1em;
+        margin-inline: 1em;
+        box-sizing: border-box;
+        width: auto;
+        h1 {text-align: center}
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1em;
+}
+
+.grid-container {
     display: grid;
     grid-gap: 20px;
 
-    width: min(90%,1000px);
+    /*width: min(90%,1000px);*/
+    min-width: min-content;
     box-sizing: border-box;
     margin: auto;
 }
@@ -131,6 +158,8 @@ p {
     border-radius: 100%;
     height: 80%;
     width: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
 }
 
 .name {

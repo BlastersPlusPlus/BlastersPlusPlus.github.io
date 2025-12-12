@@ -1,0 +1,564 @@
+@media all and (max-width: 600px) {
+    #equipmentGrid>.gridItem {
+        .name {font-size: 1.5em;}
+        .number {font-size: 1em;}
+    }
+    #equipmentInfo {
+        #equipmentName {font-size: 1.5em;}
+        #equipmentInfoPaddingContainer {margin-inline: 5%;}
+        #equipmentDescription {font-size: 1em;}
+        #rankTribeAttributes {
+            --image-size: 2.5em;
+        }
+        #stats { .statData {font-size: 1em;} }
+        #skillDescription {font-size: 1em;}
+        #craftingDataContainer .materialData {--mat-height: 3em;        }
+        #craftingDataContainer .baseItem .iconContainer, #craftingDataContainer .upgrade .iconContainer {height: 3em; width: 3em;}
+    }
+}
+
+@media all and (min-width: 600px) {
+    #equipmentGrid>.gridItem {
+        .name {font-size: 2em;}
+        .number {font-size: 1.25em;}
+    }
+    #equipmentInfo {
+        #equipmentName {font-size: 2em;}
+        #equipmentInfoPaddingContainer {margin-inline: 10%;}
+        #equipmentDescription {font-size: 1.3em;}
+        #rankTribeAttributes {
+            --image-size: 4em;
+        }
+        #stats { .statData {font-size: 1.5em;} }
+        #skillDescription {font-size: 1.2em;}
+        #craftingDataContainer .materialData {--mat-height: 4em;}
+        #craftingDataContainer .baseItem .iconContainer, #craftingDataContainer .upgrade .iconContainer {height: 4em; width: 4em;}
+    }
+}
+
+@media all and (max-width: 800px) {
+    #craftingDataContainer .materialData {grid-template-columns: 1fr;}
+}
+
+@media all and (min-width: 800px) {
+    #craftingDataContainer .materialData {grid-template-columns: 1fr 1fr;}
+}
+
+
+
+body {
+    min-width: fit-content;
+}
+
+#equipmentInfoPopupContainer {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow-y: scroll;
+
+    --transition-speed: 0.5s;
+
+    &:focus {outline: none;}
+    &[open].open, &[open].open::backdrop {opacity: 1; visibility: visible;}
+    &:not([open]) {opacity: 0; visibility: hidden; pointer-events: none;}
+
+    transition-property: opacity, visibility;
+    transition-duration: var(--transition-speed);
+    transition-timing-function: ease;
+    transition-delay: 0s;
+
+    background-color: transparent;
+    border: none;
+    &::backdrop {
+        display: block;
+        opacity: 0;
+        backdrop-filter: blur(5px) brightness(0.25);
+        -webkit-backdrop-filter: blur(5px) brightness(0.25);
+        transition-property: opacity;
+        transition-duration: var(--transition-speed);
+        transition-timing-function: ease;
+        transition-delay: 0s;
+    }
+
+    #closePopupContainer{
+        position: fixed;
+        --min-size: 5vmin;
+        top: calc(var(--min-size)/2);
+        right: calc(var(--min-size)/2 + 10px);
+        height: var(--min-size);
+        width: var(--min-size);
+        border-radius: var(--min-size);
+
+        z-index: 3;
+
+        #closePopup {
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            transform: rotate(45deg);
+            mask-image: url("/images/other_assets/cross.svg");
+            mask-size: 100% 100%;
+            appearance: unset;
+            border: none;
+            box-shadow: var(--standard-shadow);
+            &:hover {filter: brightness(0.8);}
+            &:active {filter: brightness(0.7);}
+            &:focus-visible {outline: none;}
+        }
+        &:has(:focus-visible) {outline: var(--focus-outline);}
+    }
+
+    scrollbar-color: white transparent;
+
+    &:not(.hasDetails) .detail {display: none !important;};
+}
+
+body:has(#equipmentInfoPopupContainer.open) {overflow: hidden;}
+
+#equipmentGrid {
+    width: min(90%, 1200px);
+    margin: 15px auto 30px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(min(300px,100vw),1fr));
+    grid-auto-rows: 10em;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    * {text-align: center};
+}
+
+#equipmentGrid>.gridItem {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    box-sizing: border-box;
+    padding-inline: 2em;
+    cursor: pointer;
+    box-shadow: var(--standard-shadow);
+    overflow: hidden;
+    &:active{box-shadow: none;}
+    &.hidden{display: none;}
+
+    appearance: none;
+
+    border-width: 5px;
+    border-style: solid;
+    background-color: transparent;
+
+    &.rank1 {background: rgba(255,255,255,0.7); border-color: black}
+    &.rank2 {background-image: linear-gradient(to bottom, rgba(245,228,75,0.7), rgba(255,251,183,0.7)); border-color: black;}
+    &.rank3 {background-image: linear-gradient(to bottom, rgba(251,166,64,0.7), rgba(255,255,174,0.7)); border-color: black;}
+    &.rank4 {background-image: linear-gradient(to bottom, rgba(242,106,106,0.7), rgba(243,203,203,0.7)); border-color: black;}
+    &.rank5 {background-image: linear-gradient(to bottom, rgba(166,115,217,0.7), rgba(225,208,242,0.7)); border-color: black;}
+    &.rank6 {background-image: linear-gradient(to bottom, rgba(2,18,67,0.7), rgba(0,9,149,0.7)); border-color: #3ce6ff; color: white;}
+
+    >.equipmentIconContainer {
+        height: 60%;
+        width: auto;
+        pointer-events: none;
+        user-select: none;
+        aspect-ratio: 1;
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .name {
+        font-family: var(--font-marugo), sans-serif;
+        line-height: 1;
+        width: auto;
+        text-align: left;
+        flex-grow: 1;
+        font-weight: 600;
+
+    }
+
+}
+
+#equipmentInfo::before, #equipmentInfo::after {
+    content: "";
+    width: 100.2%;
+    height: 50px;
+    position: absolute;
+
+
+    background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
+    background-size: 100% auto;
+
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    mask: url("/images/other_assets/topDecoration.svg");
+    mask-repeat: repeat-x;
+    mask-size: auto 50px;
+}
+
+#equipmentInfo.rank2::before, #equipmentInfo.rank2::after {background-image: linear-gradient(to bottom, black 20%, rgba(245,228,75,1))}
+#equipmentInfo.rank3::before, #equipmentInfo.rank3::after {background-image: linear-gradient(to bottom, black 20%, rgba(251,166,64,1))}
+#equipmentInfo.rank4::before, #equipmentInfo.rank4::after {background-image: linear-gradient(to bottom, black 20%, rgba(242,106,106,1))}
+#equipmentInfo.rank5::before, #equipmentInfo.rank5::after {background-image: linear-gradient(to bottom, black 20%, rgba(166,115,217,1))}
+#equipmentInfo.rank6::before, #equipmentInfo.rank6::after {background-image: linear-gradient(to bottom, black, rgba(2,18,67,1) 30%, rgba(0,9,149,1))}
+
+#equipmentInfo::before {
+    top: -1px;
+    left: -0.1%;
+}
+
+#equipmentInfo::after {
+    bottom: -1px;
+    right: -0.1%;
+    transform: rotate(180deg);
+}
+
+#equipmentInfo {
+    position: relative;
+    background-color: white;
+    width: min(95%, 800px);
+    margin: 50px auto 50px auto;
+    border-radius: 50px;
+    padding-block: 40px;
+
+    img.loading {visibility: hidden};
+
+    #equipmentInfoPaddingContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-block: 30px;
+    }
+
+    #equipmentName {
+        margin-top: 0;
+        margin-bottom: 0;
+        text-align: center;
+        font-family: var(--font-marugo), sans-serif;
+        line-height: 1.5;
+        z-index:2;
+    }
+
+    #equipmentIconContainer {
+        width: min(80px,100%);
+        height: auto;
+        z-index: 1;
+        >#equipmentIcon {width: 100%}
+    }
+
+    .rankContainer {
+        position: relative;
+        font-family: var(--font-yuruka),sans-serif;
+        font-size: 1.5em;
+
+        z-index: 0;
+
+        &::before {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            text-shadow: 2px 2px 0 black;
+            z-index: -1;
+        }
+
+        &:has(#rank.rank1)::before{content:"Rank 1"}
+        &:has(#rank.rank2)::before{content:"Rank 2"}
+        &:has(#rank.rank3)::before{content:"Rank 3"}
+        &:has(#rank.rank4)::before{content:"Rank 4"}
+        &:has(#rank.rank5)::before{content:"Rank 5"}
+        &:has(#rank.rank6)::before{content:"Rank 6"; text-shadow: 2px 2px 0 #3d6483}
+
+    }
+
+    #rank {
+        background-size: auto 100%;
+        background-clip: text;
+        color: black;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-fill-color: transparent;
+        z-index: 0;
+
+        &.rank1 {background-image: linear-gradient(white, white);}
+        &.rank2 {background-image: linear-gradient(to bottom, #f5e44b, #fffbb7)}
+        &.rank3 {background-image: linear-gradient(to bottom, #fba640, #ffe1ae)}
+        &.rank4 {background-image: linear-gradient(to bottom, #f26a6a, #fecbcb)}
+        &.rank5 {background-image: linear-gradient(to bottom, #a673d9, #e1d0f2)}
+        &.rank6 {background-image: linear-gradient(to bottom, #021243, #000995); -webkit-text-stroke-color: #3ce6ff}
+
+    }
+
+    #equipmentDescription {
+        font-family: var(--font-marugo), sans-serif;
+        text-align: center;
+    }
+
+
+    #stats {
+        width: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        align-items: stretch;
+        justify-items: stretch;
+        text-align: center;
+        row-gap: 10px;
+
+        .hexagonTitle, .stat, #skillName {
+            display: flex;
+            align-items: center;
+
+            &.hexagonTitle, &.stat {justify-content: center}
+        }
+
+        .statData {
+            position: relative;
+            font-family: var(--font-yuruka), sans-serif;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            line-height: 1.3;
+            align-items: stretch;
+            justify-items: stretch;
+            :not(hr) {z-index: 1};
+            hr {position: absolute; bottom: 0; left:5.5%; width: 85%; z-index: 0; height: 3px; border-radius: 3px; border: none; margin: 0}
+            .stat {margin-right: 15px};
+            &.HP hr {background: rgb(22,158,0)}
+            &.STR hr{background: #a01818;}
+            &.SPR hr{background: #6d18a0;}
+            &.DEF hr{background: #093cb3;}
+        }
+    }
+
+    #skillDescription {
+        font-family: var(--font-marugo), sans-serif;
+        grid-column: span 2;
+        text-wrap: wrap;
+    }
+
+    #craftingDataContainer {
+
+        &:has(section.noContent ~ section.noContent ~ section.noContent) {display: none;}
+
+        h1, h2 {font-family: var(--font-yuruka), sans-serif; margin-block: 0; text-align: center;}
+        h1 {
+            line-height: 2;
+            > .signitonIconContainer {
+                border-radius: 100%;
+                height: 1.5em;
+                width: 1.5em;
+                aspect-ratio: 1;
+                display: inline-block;
+                vertical-align: text-bottom;
+                overflow: hidden;
+                border: 2px solid rgb(117,87,43);
+                >img {
+                    height: 115%;
+                    margin-top: -7.5%;
+                    margin-left: -7.5%;
+                }
+            }
+        }
+
+        min-width: 70%;
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            h2 {margin-block: 0;}
+            &.noContent {display: none};
+        }
+
+        hr:has(+section.noContent) {display: none;}
+
+        hr {
+            background-color: rgb(117,87,43);
+            height: 2px;
+            border: none;
+            border-radius: 2px;
+            width: 100%;
+        }
+    }
+
+    .materialData {
+        --mat-height: 4em;
+
+        display: grid;
+        grid-auto-rows: var(--mat-height);
+        row-gap: 10px;
+        column-gap: 20px;
+        min-width: 100%;
+
+        .material {
+            min-width: min-content;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            position: relative;
+            display: flex;
+            height: var(--mat-height);
+
+            .hexagonImageContainer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+
+                height: 100%;
+                aspect-ratio: 1;
+
+                z-index: 1;
+
+                .iconContainer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 80%;
+
+                    z-index: 2;
+
+                    img {height: 100%;}
+                }
+
+                .hexagonBackground {
+                    height: 100%;
+                    width: 100%;
+                    mask-image: url("/images/other_assets/regularHexagon.svg");
+                    mask-size: 100% 100%;
+                    mask-position: center center;
+                    mask-repeat: no-repeat;
+                    margin-right: 5px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 1;
+
+                    background-color: rgb(193,144,71);
+                }
+
+                .hexagonBorder {
+                    height: calc(100% + 0.5em);
+                    width: calc(100% + 0.5em);
+                    position: absolute;
+                    top: -0.25em;
+                    left: -0.25em;
+                    mask-image: url("/images/other_assets/regularHexagon.svg");
+                    mask-size: 100% 100%;
+                    mask-position: center center;
+                    mask-repeat: no-repeat;
+                    z-index: 1;
+
+                    background-color: rgb(117,87,43);
+                }
+            }
+
+            .materialNameContainer {
+                max-width: 100%;
+                text-overflow: ellipsis;
+                font-family: var(--font-marugo), sans-serif;
+                align-self: flex-end;
+                margin-left: calc(var(--mat-height) / 2);
+                margin-bottom: 1%;
+                min-width: calc(100% - var(--mat-height)/2);
+                height: 65%;
+                border-radius: 0 500px 500px 0;
+                z-index: 0;
+                background-image: url("/images/other_assets/moveDecoration.png");
+                background-size: auto 50%;
+                background-repeat: repeat-x;
+                background-position-y: bottom;
+
+                background-color: rgb(230,209,171);
+
+                .materialName {
+                    margin-left: calc(var(--mat-height) / 2 + 10px);;
+                    margin-right: 1em;
+                    max-width: 100%;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    height: 100%;
+                    line-height: 100%;
+                    box-sizing: border-box;
+
+                    p {width: 100%}
+
+                    .materialQuantity {
+                        float: right;
+                        font-family: var(--font-yuruka), sans-serif;
+                        margin-inline-start: 0.5em;
+                    }
+                }
+            }
+        }
+    }
+
+    .baseItem, .upgrade {
+        font-family: var(--font-marugo), sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            &:active, &:focus, &:hover {
+                text-decoration: underline;
+            }
+        };
+
+        .iconContainer {
+            display: inline-block;
+            height: 4em;
+            width: 4em;
+            img {height: 100%;}
+            vertical-align: middle;
+            margin-inline-start: 1em;
+        }
+    }
+
+    .oniOrbs {
+        margin-block: 0;
+        font-family: var(--font-yuruka), sans-serif;
+        text-align: center;
+        &::before {
+            content: "";
+            display: inline-block;
+            height: 1.5em;
+            width: 1.5em;
+            background-image: url("/images/other_assets/oniOrbIcon.png");
+            background-repeat: no-repeat;
+            background-size: 100% auto;
+            margin-inline-end: 0.5em;
+
+            vertical-align: text-bottom;
+        }
+    }
+
+    #upgrades {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        h1 {font-family: var(--font-yuruka), sans-serif; margin-block: 0; text-align: center;}
+    }
+}
+
+

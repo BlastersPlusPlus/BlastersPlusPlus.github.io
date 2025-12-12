@@ -16,6 +16,7 @@
             --image-size: 2.5em;
         }
         #statsSkill {
+            grid-template-columns: 1fr;
             .statData {font-size: 1em;}
             .elements {font-size: 1em; img {height: 1.5em};}
             .skillTitle {font-size: 1em;}
@@ -48,6 +49,7 @@
             --image-size: 4em;
         }
         #statsSkill {
+            grid-template-columns: 1fr 1fr;
             .statData {font-size: 1.5em;}
             .elements {font-size: 1.2em;img {height: 2em};}
             .skillTitle {font-size: 1.5em;}
@@ -170,6 +172,7 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
     box-shadow: var(--standard-shadow);
     overflow: hidden;
     &:active{box-shadow: none;}
+    &.hidden{display: none;}
 
     &.Brave {
         /*background: linear-gradient(160deg, var(--brave-color) 0%, transparent 160%);*/
@@ -233,11 +236,12 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
         border: #70003a solid 5px;
     }
 
-    img {
+    .yokaiMedal {
         height: 60%;
         width: auto;
         pointer-events: none;
         user-select: none;
+        &:not(.loaded) {visibility: hidden};
     }
 
     .name {
@@ -336,10 +340,8 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
         &.noNumber .numberComponents{display: none;}
     }
 
-    #yokaiMedal {
+    .yokaiMedal {
         width: min(120px,100%);
-        height: auto;
-        z-index: 1;
     }
 
     #rankTribeAttributes {
@@ -552,18 +554,18 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
             }
         }
 
-        #AMove {
+        .AMove {
             grid-column: 1/-1;
             .moveIconContainer {background-color: #f26635}
             .moveNameContainer {background-color: #eeb69f}
             .moveHexagonBorder {background-color: #994433;}
         }
-        #XMove {
+        .XMove {
             .moveIconContainer {background-color: #2fb3e5}
             .moveNameContainer {background-color: #6facee}
             .moveHexagonBorder {background-color: #1c7798;}
         }
-        #YMove {
+        .YMove {
             .moveIconContainer {background-color: #48c427}
             .moveNameContainer {background-color: #85e875};
             .moveHexagonBorder {background-color: #3c7e2b};
@@ -574,7 +576,7 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
             .moveHexagonBorder {background-color: #6a4489}
         }
         .noMove {
-            img {display: none;}
+            img, .moveName {display: none;}
             .moveIconContainer {background-color: #aaaaaa}
             .moveNameContainer { background-color: #cccccc;}
             .moveHexagonBorder {background-color: #888888}
@@ -726,6 +728,37 @@ body:has(#yokaiInfoPopupContainer.open) {overflow: hidden;}
 
     }
 
+
+    &:not(.hasDetails) .detail {display: none !important;};
+}
+
+.yokaiMedal {
+    aspect-ratio: 1;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        &.medalBackground, &.medalBorder {
+            user-select: none;
+            pointer-events: none;
+            width: calc(100% * 128 / 72);
+            top: 0;
+            left: 0;
+        }
+
+        &.medalFaceIcon {
+            width: calc(100% * 64 / 72);
+        }
+
+        user-select: none;
+        aspect-ratio: 1;
+        object-fit: cover;
+        position: absolute;
+    }
 }
 
 

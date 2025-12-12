@@ -1,0 +1,212 @@
+@media all and (max-width: 600px) {
+    main>h1 {font-size: 1.5em}
+    .equipmentSection>.equipmentSectionHeader{
+        &>h2{font-size: 1em;}
+        &>.downArrow{width: 1em;}
+    }
+}
+
+@media all and (min-width: 600px) {
+    main>h1 {font-size: 2.5em}
+    .equipmentSection>.equipmentSectionHeader{
+        &>h2{font-size: 1.5em;}
+        &>.downArrow{width: 1.5em;}
+    }
+}
+
+main {
+    width: min(800px, 90vw);
+    margin-inline: auto;
+
+    border-radius: 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    >hr {
+        width: 70%;
+        height: 2px;
+        background-color: gray;
+        border-radius: 2px;
+        border: none;
+
+
+        /*border-color: black;*/
+    }
+
+    >h1 {
+        margin-inline: 0.5em;
+        text-align: center;
+        text-wrap: balance;
+    }
+}
+
+
+@media (scripting: enabled) {
+    .equipmentSection>.answerContainer, .equipmentSection iframe, .equipmentSection>.answerContainer .code {
+        /* fade out, then shrink */
+        .stats {transition: row-gap .25s .25s;}
+        * {transition: margin .25s .25s, height .25s .25s;}
+        transition: opacity .25s,
+        font-size .25s .25s,
+        margin .25s .25s,
+        padding .25s .25s,
+        width .25s .25s,
+        height .25s .25s;
+    }
+    .equipmentSection.open>.answerContainer,
+    .equipmentSection>.answerContainer:has(:focus-visible),
+    .equipmentSection.open iframe,
+    .equipmentSection>.answerContainer:has(:focus-visible) iframe,
+    .equipmentSection.open>.answerContainer .code,
+    .equipmentSection>.answerContainer:has(:focus-visible) .code {
+        .stats {transition: row-gap .25s;}
+        * {transition: margin .25s, height .25s .25s;}
+        transition: font-size .25s,
+        margin .25s,
+        padding .25s,
+        width .5s,
+        opacity .5s .25s;
+    }
+    .equipmentSection:not(.open)>.answerContainer:not(:has(:focus-visible)) {
+        .stats {
+            gap: 0;
+            .stat {margin: 0;}
+            hr{height: 0;}
+        }
+        font-size: 0;
+        margin: 0;
+        opacity: 0;
+        padding: 0;
+
+        iframe {width: 0;}
+        .code {font-size: 0;}
+    }
+}
+@media (scripting: none) {
+    .downArrow {display: none;}
+}
+
+.equipmentSection {
+    padding: 1.5em;
+    border-radius: 50px;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+>.equipmentSectionHeader {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-self: stretch;
+        align-items: stretch;
+        justify-content: center;
+        >h2 {
+            text-align: center; margin-block: 0;
+            margin-inline: 1em;
+            text-wrap: balance;
+            font-family: var(--font-marugo), sans-serif;
+        };
+        >.downArrow {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            appearance: none;
+            cursor: inherit;
+
+            transition: transform 0.5s ease-in-out;
+
+            background: black;
+            mask-image: url("/images/other_assets/downArrow.svg");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        &:has(~ .answerContainer :focus-visible) {
+            >.downArrow {transform: rotate(180deg);}
+        }
+        &:has(a:focus-visible) {outline: none}
+    }
+    &.open .downArrow {
+        transform: rotate(180deg);
+    }
+    >.answerContainer {
+        min-width: 40%;
+        width: fit-content;
+
+        margin-block-start: 1em;
+        margin-inline: 2em;
+
+        text-align: justify;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        >section {
+            font-size: 1em;
+            min-height: min-content;
+            &>h2:first-child {margin-block: 0}
+            &>:last-child {margin-block-end: 0}
+            &>p {line-height: 1.5;}
+            ul {list-style-type: disc; padding-inline-start: 0 !important;}
+            .code {font-size: 12px; font-family: monospace; word-break: break-all;}
+        }
+
+        iframe {
+            display: block;
+            width: 560px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            margin-inline: auto;
+        }
+    }
+}
+
+.stats {
+    width: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    align-items: stretch;
+    justify-items: stretch;
+    text-align: center;
+    row-gap: 10px;
+    margin-block-end: 1em;
+
+    /*transition: row-gap .25s !important;*/
+
+    .hexagonTitle, .stat, .skillName {
+        display: flex;
+        align-items: center;
+
+        &.hexagonTitle, &.stat {justify-content: center}
+    }
+
+    .statData {
+        position: relative;
+        font-family: var(--font-yuruka), sans-serif;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        line-height: 1.3;
+        align-items: stretch;
+        justify-items: stretch;
+        :not(hr) {z-index: 1};
+        hr {position: absolute; bottom: 0; left:5.5%; width: 85%; z-index: 0; height: 3px; border-radius: 3px; border: none; margin: 0;
+            transition: height .25s;}
+        .stat {margin-right: 15px};
+        &.HP hr {background: rgb(22,158,0)}
+        &.STR hr{background: #a01818;}
+        &.SPR hr{background: #6d18a0;}
+        &.DEF hr{background: #093cb3;}
+    }
+}
+
+.skillDescription {
+    font-family: var(--font-marugo), sans-serif;
+    grid-column: span 2;
+    text-wrap: wrap;
+}
+
+
+

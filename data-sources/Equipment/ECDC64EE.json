@@ -1,1 +1,1 @@
-{"name":"Imperial Launcher","id":"EC DC 64 EE","iconCol":17,"iconRow":31,"rank":5,"description":"Emperor Usapyon's ultra high tech beam launcher.","hp":0,"str":300,"spr":0,"def":100,"skill":"Absorbs 10% of the damage dealt.","upgradesInto":[]}
+{"upgradeData":[],"upgradesInto":[],"def":100,"hp":0,"description":"Emperor Usapyon's ultra high tech beam launcher.","iconCol":17,"iconRow":31,"str":300,"createData":[],"spr":0,"skill":"Absorbs 10% of the damage dealt.","name":"Imperial Launcher","rank":5,"id":"EC DC 64 EE"}

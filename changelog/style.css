@@ -1,0 +1,157 @@
+@media all and (max-width: 600px) {
+    main>h1 {font-size: 1.5em}
+    .changelogSection>.changelogSectionHeader{
+        &>h2{font-size: 1em;}
+        &>.downArrow{width: 1em;}
+    }
+}
+
+@media all and (min-width: 600px) {
+    main>h1 {font-size: 2.5em}
+    .changelogSection>.changelogSectionHeader{
+        &>h2{font-size: 1.5em;}
+        &>.downArrow{width: 1.5em;}
+    }
+}
+
+main {
+    width: min(800px, 90vw);
+    margin-inline: auto;
+
+    border-radius: 50px;
+
+    display: flex;
+    flex-direction: column;
+
+    >hr {
+        width: 70%;
+        height: 2px;
+        background-color: gray;
+        border-radius: 2px;
+        border: none;
+
+
+        /*border-color: black;*/
+    }
+
+    >h1 {
+        margin-inline: 0.5em;
+        text-align: center;
+        text-wrap: balance;
+    }
+}
+
+
+@media (scripting: enabled) {
+    .changelogSection>.answerContainer, .changelogSection iframe, .changelogSection>.answerContainer .code {
+        /* fade out, then shrink */
+        transition: opacity .25s,
+        font-size .25s .25s,
+        margin .25s .25s,
+        padding .25s .25s,
+        width .25s .25s;
+    }
+    .changelogSection.open>.answerContainer,
+    .changelogSection>.answerContainer:has(:focus-visible),
+    .changelogSection.open iframe,
+    .changelogSection>.answerContainer:has(:focus-visible) iframe,
+    .changelogSection.open>.answerContainer .code,
+    .changelogSection>.answerContainer:has(:focus-visible) .code {
+        transition: font-size .25s,
+        margin .25s,
+        padding .25s,
+        width .5s,
+        opacity .5s .25s;
+    }
+    .changelogSection:not(.open)>.answerContainer:not(:has(:focus-visible)) {
+        font-size: 0;
+        margin: 0;
+        opacity: 0;
+        padding: 0;
+        iframe {width: 0;}
+        .code {font-size: 0;}
+    }
+}
+@media (scripting: none) {
+    .downArrow {display: none;}
+}
+
+.changelogSection {
+    padding: 1.5em;
+    border-radius: 50px;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    >.changelogSectionHeader {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-self: stretch;
+        align-items: stretch;
+        justify-content: center;
+        >h2 {
+            text-align: center; margin-block: 0;
+            margin-inline: 1em;
+            text-wrap: balance;
+        };
+        >.downArrow {
+            position: absolute;
+            right: 0;
+            height: 100%;
+            appearance: none;
+            cursor: inherit;
+
+            transition: transform 0.5s ease-in-out;
+
+            background: black;
+            mask-image: url("/images/other_assets/downArrow.svg");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        &:has(~ .answerContainer :focus-visible) {
+            >.downArrow {transform: rotate(180deg);}
+        }
+    }
+    &.open .downArrow {
+        transform: rotate(180deg);
+    }
+    >.answerContainer {
+        min-width: 40%;
+        width: fit-content;
+
+        margin-block-start: 1em;
+        margin-inline: 2em;
+
+        text-align: justify;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap:2em;
+
+        >section {
+            font-size: 1em;
+            min-height: min-content;
+            &>h2:first-child {margin-block: 0}
+            &>:last-child {margin-block-end: 0}
+            &>p {line-height: 1.5;}
+            ul {list-style-type: disc; padding-inline-start: 0 !important;}
+            .code {font-size: 12px; font-family: monospace; word-break: break-all;}
+        }
+
+
+
+        iframe {
+            display: block;
+            width: 560px;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 16/9;
+            margin-inline: auto;
+        }
+    }
+}
+
+
+

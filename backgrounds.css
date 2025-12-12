@@ -1,5 +1,4 @@
 html {
-    background-size: 100lvw 100lvh;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 0 0;
@@ -64,6 +63,7 @@ html::before {
     overflow: hidden;
     background-color: transparent;
     z-index: -2;
+    background-size: 10em;
 }
 
 html::after {
@@ -77,6 +77,7 @@ html::after {
     background-color: transparent;
     background-image: url("/backgrounds/bg_stripes.png");
     z-index: -2;
+    background-size: 3em;
 }
 
 
@@ -86,11 +87,11 @@ html::after {
         background-position: 0 0;
     }
     to {
-        background-position: 128px 128px;
+        background-position: 10em 10em;
     }
 }
 
 @keyframes AnimateVertical {
     from {background-position: 0 0;}
-    to {background-position: 0 -32px;}
+    to {background-position: 0 -3em;}
 }

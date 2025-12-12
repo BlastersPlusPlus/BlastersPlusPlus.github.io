@@ -1,42 +1,85 @@
-let data;
+let data, yokaiCache = {};
+let tribeNumbers = {
+    "Brave": 1,
+    "Mysterious": 2,
+    "Tough": 3,
+    "Charming": 4,
+    "Heartful": 5,
+    "Shady": 6,
+    "Eerie": 7,
+    "Slippery": 8,
+    "Wicked": 9,
+    "Enma": 9
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
-    let data = await fetch('/data-sources/yo-kai-info.json').then(response => response.json());
+    let data = await fetch('/data-sources/yo-kai-info/yo-kai-info.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
         let gridItem = document.createElement('button');
         gridItem.classList.add("gridItem");
         let name = document.createElement('p');
-        name.innerHTML = element.name //.replace(/(.+?)(\s|$)/g, '<nobr>$1</nobr>$2');
+        name.innerHTML = element.name ?? ''; //.replace(/(.+?)(\s|$)/g, '<nobr>$1</nobr>$2');
         name.classList.add('name');
         gridItem.appendChild(name);
 
-        if(element.number !== "-") {
+        if(element.appearsInMedallium && element.number) {
             let number = document.createElement('div');
             number.innerText = '#'+element.number.toLocaleString(undefined, {minimumIntegerDigits: 3});
             number.classList.add('number');
             gridItem.appendChild(number);
         }
 
-        let image = document.createElement('img');
-        image.src = '/images/yokaiMedalsSmall/image'+element.smallMedal+'.png';
-        gridItem.appendChild(image);
-        image.loading = 'lazy';
+        if(element.modelInfo) {
+            let medalContainer = document.createElement('div');
+            medalContainer.classList.add('yokaiMedal');
 
-        gridItem.setAttribute('id',element.name.replace(/\s/g, ''));
+
+            let medalFaceIcon = document.createElement('img');
+            medalFaceIcon.classList.add('medalFaceIcon');
+            medalFaceIcon.src = '/images/faceIcon/'+element.modelInfo+'.xi.00.png';
+            medalFaceIcon.loading = 'lazy';
+
+            let medalBorder = document.createElement('img');
+            medalBorder.classList.add('medalBorder');
+            medalBorder.src = "/images/medalParts/y_medal_"+ (element.isLegend?"lege":element.isRare?"rare":"nml") + "0" + tribeNumbers[element.tribe] +".xi.00.png";
+            medalBorder.alt = tribeNumbers[element.tribe]+" Tribe "+(element.isLegend?"Legendary":element.isRare?"Rare":"Normal")+" medal border";
+
+            medalFaceIcon.onload = function () {
+                this.parentElement.classList.add("loaded");
+            }
+
+
+            medalContainer.appendChild(document.getElementById("yokaiInfoMedalBackground")?.cloneNode(true));
+            medalContainer.appendChild(medalFaceIcon);
+            medalContainer.appendChild(medalBorder);
+
+            gridItem.appendChild(medalContainer);
+        }
+
+        gridItem.setAttribute('id',element.name?.replace(/\s/g, '') ?? element.id?.replace(/\s/g, '') ?? 'Yo-kai'+element.number);
         gridItem.classList.add(element.tribe);
 
-        main.appendChild(gridItem);
+        if(element.hidden) {
+            console.log(element);
+            console.log(localStorage);
+        }
+        if(element.hidden && (localStorage.getItem(element.id?.replace(/\s/g, '')) ?? "hidden") === "hidden")
+            gridItem.classList.add('hidden');
+
         gridItem.yokai = element;
+
+        main.appendChild(gridItem);
+
 
         gridItem.onclick = function(){openInfoPopup(this.yokai)};
     })
 
     console.log(location.hash);
-    let yokai;
-    if(location.hash) yokai = document.getElementById(location.hash.replace('#',''))?.yokai;
-    console.log(yokai);
-    if(yokai) openInfoPopup(yokai);
+    let foundYokai;
+    if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai;
+    console.log(foundYokai);
+    if(foundYokai) openInfoPopup(foundYokai);
 })
 
 window.addEventListener('hashchange', () => {
@@ -57,19 +100,37 @@ document.addEventListener('keydown', function(e){
 })
 
 function openInfoPopup(yokai) {
-    history.replaceState(null, null, '#'+yokai.name.replace(/\s/g, ''));
-    console.log(document.getElementById(location.hash.replace('#','')).getBoundingClientRect().top);
+    history.replaceState(null, null, '#'+yokai.name?.replace(/\s/g, ''));
+    console.log(yokai);
+
+    if(yokai.hidden) {
+        let DOMElement = document.getElementById(yokai.name?.replace(/\s/g, '')) ??
+            document.getElementById(yokai.id?.replace(/\s/g, '')) ?? document.getElementById('Yo-kai'+yokai.number);
+
+        DOMElement?.classList.remove('hidden');
+
+        localStorage.setItem(yokai.id?.replace(/\s/g, ''), "not-hidden");
+    }
 
     document.getElementById('yokaiInfo').className = yokai.isLegend ? 'legend' : (yokai.isRare ? 'rare' : 'normal');
-
-    document.getElementById('yokaiInfoTitle').className = yokai.number === '-' ? 'noNumber' : '';
+    document.getElementById('yokaiInfoTitle').className = yokai.appearsInMedallium && yokai.number ? '' : 'noNumber';
     document.getElementById('yokaiNumber').innerText = '#'+yokai.number.toLocaleString(undefined, {minimumIntegerDigits: 3});
     document.getElementById('yokaiInfoName').innerText = yokai.name;
 
-    let medal = document.getElementById("yokaiMedal");
-    medal.classList.add("loading");
-    medal.src = "/images/yokaiMedalsLarge/"+yokai.largeMedal+".png";
-    medal.alt = "Yo-kai "+yokai.name+"'s Medal";
+    //let medal = document.getElementById("yokaiMedal");
+    //medal.classList.add("loading");
+    //medal.src = "/images/yokaiMedalsLarge/"+yokai.largeMedal+".png";
+    //medal.alt = "Yo-kai "+yokai.name+"'s Medal";
+
+    let faceIcon = document.getElementById('yokaiInfoMedalFaceIcon');
+    faceIcon.classList.add('loading');
+    faceIcon.src = "/images/faceIcon/"+yokai.modelInfo+".xi.00.png"
+    faceIcon.alt = "Yo-kai "+yokai.name+"'s face icon";
+
+    let medalBorder = document.getElementById('yokaiInfoMedalBorder');
+
+    medalBorder.src = "/images/medalParts/y_medal_"+ (yokai.isLegend?"lege":yokai.isRare?"rare":"nml") + "0" + tribeNumbers[yokai.tribe] +".xi.00.png";
+    medalBorder.alt = tribeNumbers[yokai.tribe]+" Tribe "+(yokai.isLegend?"Legendary":yokai.isRare?"Rare":"Normal")+" medal border";
 
     let rankIcon = document.getElementById("yokaiInfoRankIcon");
     rankIcon.classList.add('loading');
@@ -92,59 +153,11 @@ function openInfoPopup(yokai) {
 
     document.getElementById('yokaiInfoTribe').textContent = yokai.tribe;
 
-    let bio = document.getElementById("medalliumBio");
-    bio.className = yokai.bio === "" ? 'noBio' : '';
-    bio.innerText = yokai.bio;
-
-    let strongAtt = document.getElementById('strongElement')
-    strongAtt.classList.add('loading');
-    strongAtt.src = "/images/attributeIcons/attribute"+yokai.strongTo+".png"
-    strongAtt.alt = yokai.strongTo+" Attribute";
-    strongAtt.title = yokai.strongTo+" Attribute";
-
-    let weakAtt = document.getElementById('weakElement')
-    weakAtt.classList.add('loading');
-    weakAtt.src = "/images/attributeIcons/attribute"+yokai.weakTo+".png"
-    weakAtt.alt = yokai.weakTo+" Attribute";
-    weakAtt.title = yokai.weakTo+" Attribute";;
-
     document.getElementById('yokaiHP').innerText = yokai.hp;
     document.getElementById('yokaiSTR').innerText = yokai.str;
     document.getElementById('yokaiSPR').innerText = yokai.spr;
     document.getElementById('yokaiDEF').innerText = yokai.def;
     document.getElementById('yokaiSPD').innerText = yokai.spd;
-    document.getElementById('skillName').innerText = yokai.skill.name;
-    document.getElementById('skillDescription').innerText = yokai.skill.effect;
-
-    document.getElementById('AMoveIcon').src = "/images/moveIcons/image"+yokai.moves[0].icon+".png"
-    document.getElementById('AMoveText').innerText = yokai.moves[0].name;
-    document.getElementById('XMoveIcon').src = "/images/moveIcons/image"+yokai.moves[1].icon+".png"
-    document.getElementById('XMoveText').innerText = yokai.moves[1].name;
-    document.getElementById('YMoveIcon').src = "/images/moveIcons/image"+yokai.moves[2].icon+".png"
-    document.getElementById('YMoveText').innerText = yokai.moves[2].name;
-    document.getElementById('LearnMove1Icon').src = "/images/moveIcons/image"+yokai.moves[3].icon+".png"
-    document.getElementById('LearnMove1Text').innerText = yokai.moves[3].name;
-    if (yokai.moves[4].name === 'No Move') document.getElementById('move4').classList.add('noMove')
-    else document.getElementById('move4').classList.remove('noMove');
-    document.getElementById('LearnMove2Icon').src = "/images/moveIcons/image"+yokai.moves[4].icon+".png"
-    document.getElementById('LearnMove2Text').innerText = yokai.moves[4].name;
-
-    document.getElementById('soultimateMoveName').textContent = yokai.soultimate.name;
-    let soultDesc = document.getElementById('soultimateMoveDescription')
-    soultDesc.textContent = yokai.soultimate.description;
-    if(yokai.soultimate.description === "") soultDesc.classList.add('empty')
-    else soultDesc.classList.remove('empty');
-    document.getElementById('soultimateMoveData').className = yokai.soultimate.class;
-    document.getElementById('soultimateMovePower').textContent = yokai.soultimate.power.replaceAll(/\s*\+\s*/g,"/");
-    document.getElementById('soultimateMoveClass').textContent = yokai.soultimate.class;
-    document.getElementById('soultimateMoveCharge').textContent = yokai.soultimate.gauge;
-    document.getElementById('soultimateMoveCritRate').textContent = yokai.soultimate.critRate;
-    document.getElementById('soultimateMoveScaling').textContent = yokai.soultimate.scaling.replaceAll(/\s*\|\s*/g,"/");
-    document.getElementById('soultimateMoveAttribute').textContent = yokai.soultimate.attribute.replaceAll(/\s*\|\s*/g,"/");
-    let soultInspirit = document.getElementById('soultimateInspirit');
-    soultInspirit.textContent = yokai.soultimate.inspiritEffects;
-    if(yokai.soultimate.inspiritEffects === "") soultInspirit.classList.add('empty')
-    else soultInspirit.classList.remove('empty');
 
 
     /*let screenCover = document.getElementById("screenCover");
@@ -157,7 +170,71 @@ function openInfoPopup(yokai) {
     yokaiInfoContainer.yokaiId = yokai.id;
     yokaiInfoContainer.scrollTop = 0;
     yokaiInfoContainer.showModal();
+
+    let yokaiInfoElement = document.getElementById('yokaiInfo');
+    yokaiInfoElement.classList.remove('hasDetails');
     yokaiInfoContainer.classList.add('open');
+
+    showYokaiDetails(yokai.id).then(function(){yokaiInfoElement.classList.add('hasDetails')});
+}
+
+async function showYokaiDetails(id) {
+    console.log(yokaiCache[id]);
+    let yokai;
+    if(!yokaiCache[id]) {
+        yokai = await fetch('/data-sources/yo-kai-info/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
+        yokaiCache[yokai.id] = yokai;
+    }
+    else yokai = yokaiCache[id];
+    console.log(yokai);
+
+
+    let bio = document.getElementById("medalliumBio");
+    bio.classList.toggle('noBio',!(yokai.bio && yokai.bio.length))
+    bio.innerText = yokai.bio;
+
+    let strongAtt = document.getElementById('strongElement')
+    strongAtt.classList.add('loading');
+    strongAtt.src = "/images/attributeIcons/attribute"+yokai.strongTo+".png"
+    strongAtt.alt = yokai.strongTo+" Attribute";
+    strongAtt.title = yokai.strongTo+" Attribute";
+
+    let weakAtt = document.getElementById('weakElement')
+    weakAtt.classList.add('loading');
+    weakAtt.src = "/images/attributeIcons/attribute"+yokai.weakTo+".png"
+    weakAtt.alt = yokai.weakTo+" Attribute";
+    weakAtt.title = yokai.weakTo+" Attribute";
+
+    document.getElementById('skillName').innerText = yokai.skill?.name ?? '';
+    document.getElementById('skillDescription').innerText = yokai.skill?.effect ?? '';
+
+    for(let i=0; i<5; i++) {
+        if (!yokai.moves || !yokai.moves[i] || yokai.moves[i]?.name === 'No Move') {
+            document.getElementById('move'+i).classList.add('noMove');
+            continue;
+        }
+        document.getElementById('move'+i).classList.remove('noMove');
+        document.getElementById('move'+i+'Icon').src = "/images/moveIcons/image"+yokai.moves[i]?.icon+".png"
+        document.getElementById('move'+i+'Text').innerText = yokai.moves[i]?.name;
+    }
+
+    document.getElementById('soultimateMoveName').textContent = yokai.soultimate?.name;
+    let soultDesc = document.getElementById('soultimateMoveDescription')
+    soultDesc.textContent = yokai.soultimate?.description;
+    if(yokai.soultimate.description === "") soultDesc.classList.add('empty')
+    else soultDesc.classList.remove('empty');
+    document.getElementById('soultimateMoveData').className = yokai.soultimate?.class;
+    document.getElementById('soultimateMovePower').textContent = yokai.soultimate?.power?.replaceAll(/\s*\+\s*/g,"/");
+    document.getElementById('soultimateMoveClass').textContent = yokai.soultimate?.class;
+    document.getElementById('soultimateMoveCharge').textContent = yokai.soultimate?.gauge;
+    document.getElementById('soultimateMoveCritRate').textContent = yokai.soultimate?.critRate;
+    document.getElementById('soultimateMoveScaling').textContent = yokai.soultimate?.scaling?.replaceAll(/\s*\|\s*/g,"/");
+    document.getElementById('soultimateMoveAttribute').textContent = yokai.soultimate?.attribute?.replaceAll(/\s*\|\s*/g,"/");
+    let soultInspirit = document.getElementById('soultimateInspirit');
+    soultInspirit.textContent = yokai.soultimate?.inspiritEffects;
+    if(yokai.soultimate?.inspiritEffects === "") soultInspirit.classList.add('empty')
+    else soultInspirit.classList.remove('empty');
+
 }
 
 function closeInfoPopup() {
@@ -166,7 +243,7 @@ function closeInfoPopup() {
         this.close();
     },{once:true});
     yokaiInfoContainer.classList.remove('open');
-    history.replaceState(null, null, '#');
+    history.replaceState(null,null,location.pathname+location.search);
 }
 
 /*let pusi = [];

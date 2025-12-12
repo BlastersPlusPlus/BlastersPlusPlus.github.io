@@ -1,0 +1,1476 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>Blasters Plus Plus: Changelog</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="only light">
+        <meta name="description" content="Details on all Equipment reworks in the Blasters ++ Unexpected Arrival update.">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="../../style-global.css">
+        <link rel="stylesheet" href="../../backgrounds.css">
+        <script defer>
+            HTMLElement.prototype.toggleOpen = function() {
+                this.classList.toggle('open');
+                if(this.classList.contains('open') && this.getAttribute('id') != null) {
+                    history.replaceState(null, null, '#'+this.getAttribute('id'));
+                } else {
+                    history.replaceState(null,null,location.pathname+location.search);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.equipmentSectionHeader a').forEach(a=>
+                    a.onclick = function(event) {
+                        event.stopPropagation();
+                })
+
+                let question;
+                if(!location.hash) return;
+                question = document.getElementById(location.hash.replace('#',''));
+                question?.classList.add('open');
+                console.log('found ' + location.hash);
+            })
+        </script>
+        <style>
+            @media all and (max-width: 600px) {
+                main>h1 {font-size: 1.5em}
+                .equipmentSection>.equipmentSectionHeader{
+                    &>h2{font-size: 1em;}
+                    &>.downArrow{width: 1em;}
+                }
+            }
+
+            @media all and (min-width: 600px) {
+                main>h1 {font-size: 2.5em}
+                .equipmentSection>.equipmentSectionHeader{
+                    &>h2{font-size: 1.5em;}
+                    &>.downArrow{width: 1.5em;}
+                }
+            }
+
+            main {
+                width: min(800px, 90vw);
+                margin-inline: auto;
+
+                border-radius: 50px;
+
+                display: flex;
+                flex-direction: column;
+
+                >hr {
+                    width: 70%;
+                    height: 2px;
+                    background-color: gray;
+                    border-radius: 2px;
+                    border: none;
+
+
+                    /*border-color: black;*/
+                }
+
+                >h1 {
+                    margin-inline: 0.5em;
+                    text-align: center;
+                    text-wrap: balance;
+                }
+            }
+
+
+            @media (scripting: enabled) {
+                .equipmentSection>.answerContainer, .equipmentSection iframe, .equipmentSection>.answerContainer .code {
+                    /* fade out, then shrink */
+                    .stats {transition: row-gap .25s .25s;}
+                    * {transition: margin-inline .25s .25s, margin-block .15s, height .15s;}
+                    transition: opacity .25s,
+                    font-size .25s .25s,
+                    margin .25s .25s,
+                    padding .25s .25s,
+                    width .25s .25s,
+                    height .25s .25s;
+                }
+                .equipmentSection.open>.answerContainer,
+                .equipmentSection>.answerContainer:has(:focus-visible),
+                .equipmentSection.open iframe,
+                .equipmentSection>.answerContainer:has(:focus-visible) iframe,
+                .equipmentSection.open>.answerContainer .code,
+                .equipmentSection>.answerContainer:has(:focus-visible) .code {
+                    .stats {transition: row-gap .25s;}
+                    * {transition: margin-inline .25s, margin-block .15s, height .15s;}
+                    transition: font-size .25s,
+                    margin .25s,
+                    padding .25s,
+                    width .5s,
+                    opacity .5s .25s;
+                }
+                .equipmentSection:not(.open)>.answerContainer:not(:has(:focus-visible)) {
+                    .stats {
+                        gap: 0;
+                        .stat {margin: 0;}
+                        hr{height: 0;}
+                    }
+                    font-size: 0;
+                    margin: 0;
+                    opacity: 0;
+                    padding: 0;
+
+                    iframe {width: 0;}
+                    .code {font-size: 0;}
+                }
+            }
+            @media (scripting: none) {
+                .downArrow {display: none;}
+            }
+
+            .equipmentSection {
+                padding: 1.5em;
+                border-radius: 50px;
+                height: min-content;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                >.equipmentSectionHeader {
+                    cursor: pointer;
+                    position: relative;
+                    display: flex;
+                    align-self: stretch;
+                    align-items: stretch;
+                    justify-content: center;
+                    >h2 {
+                        text-align: center; margin-block: 0;
+                        margin-inline: 1em;
+                        text-wrap: balance;
+                        font-family: var(--font-marugo), sans-serif;
+                        a{
+                            color: inherit;
+                            text-decoration: none;
+                            &:hover{text-decoration: underline;}
+                            &:active{text-decoration: underline; color: blue;}
+                        }
+                    };
+                    >.downArrow {
+                        position: absolute;
+                        right: 0;
+                        height: 100%;
+                        appearance: none;
+                        cursor: inherit;
+
+                        transition: transform 0.5s ease-in-out;
+
+                        background: black;
+                        mask-image: url("/images/other_assets/downArrow.svg");
+                        mask-size: contain;
+                        mask-repeat: no-repeat;
+                        mask-position: center;
+                    }
+                    &:has(~ .answerContainer :focus-visible) {
+                        >.downArrow {transform: rotate(180deg);}
+                    }
+                    &:has(a:focus-visible) {outline: none}
+                }
+                &.open .downArrow {
+                    transform: rotate(180deg);
+                }
+                >.answerContainer {
+                    min-width: 40%;
+                    width: fit-content;
+
+                    margin-block-start: 1em;
+                    margin-inline: 2em;
+
+                    text-align: justify;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    >section {
+                        font-size: 1em;
+                        min-height: min-content;
+                        &>h2:first-child {margin-block: 0}
+                        &>:last-child {margin-block-end: 0}
+                        &>p {line-height: 1.5;}
+                        ul {list-style-type: disc; padding-inline-start: 0 !important;}
+                        .code {font-size: 12px; font-family: monospace; word-break: break-all;}
+                    }
+
+                    iframe {
+                        display: block;
+                        width: 560px;
+                        max-width: 100%;
+                        height: auto;
+                        aspect-ratio: 16/9;
+                        margin-inline: auto;
+                    }
+                }
+            }
+
+            .stats {
+                width: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-auto-rows: auto;
+                align-items: stretch;
+                justify-items: stretch;
+                text-align: center;
+                row-gap: 10px;
+                margin-block-end: 1em;
+
+                /*transition: row-gap .25s !important;*/
+
+                .hexagonTitle, .stat, .skillName {
+                    display: flex;
+                    align-items: center;
+
+                    &.hexagonTitle, &.stat {justify-content: center}
+                }
+
+                .statData {
+                    position: relative;
+                    font-family: var(--font-yuruka), sans-serif;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    line-height: 1.3;
+                    align-items: stretch;
+                    justify-items: stretch;
+                    :not(hr) {z-index: 1};
+                    hr {position: absolute; bottom: 0; left:5.5%; width: 85%; z-index: 0; height: 3px; border-radius: 3px; border: none; margin: 0;
+                        transition: height .25s;}
+                    .stat {margin-right: 15px};
+                    &.HP hr {background: rgb(22,158,0)}
+                    &.STR hr{background: #a01818;}
+                    &.SPR hr{background: #6d18a0;}
+                    &.DEF hr{background: #093cb3;}
+                }
+            }
+
+            .skillDescription {
+                font-family: var(--font-marugo), sans-serif;
+                grid-column: span 2;
+                text-wrap: wrap;
+                text-align: center;
+                margin-block-end: 2em;
+            }
+        </style>
+    </head>
+    <body>
+    <header>
+        <div class="headerLogoContainer">
+            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
+        </div>
+        <nav class="headerNavigationContainer">
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle">
+                    <a href="https://gamebanana.com/mods/457241">Download</a>
+                </h1>
+            </div>
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/changelog">Changelog</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/meet-the-team">Meet the Team!</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection wide">
+                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
+                            <li><a href="/equipment">Equipment</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="headerNavigationSection small">
+                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
+                <div class="headerNavigationPopupContainer">
+                    <nav class="whiteOverWindow links">
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/about">About</a></li>
+                            <li><a href="/meet-the-team">Meet the Team!</a></li>
+                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
+                            <li><a href="/equipment">Equipment</a></li>
+                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+        <script src="/script-header.js" defer></script>
+    </header>
+
+        <div class="bodyContents">
+            <main class="whiteOverWindow shadow">
+                <p style="margin-block-end: 0; margin-inline-start: 2em;"><a href="./">← Back to changelog</a></p>
+                <h1 class="versionTitle">Blasters <span class="bukotsu">++</span> Unexpected Arrival Equipment Reworks</h1>
+                <section id="GeneralStatChanges" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2>General Stat Changes</h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        The following items all had subpar stats, which have been increased to match other rank 5 and 6 equipment.
+                        <ul>
+                            <li><a href="/equipment#OgreBreaker">Ogre Breaker <div class="inline-icon"><img src="/images/itemIcons/item_1_12_14.png" alt="Ogre Breaker's icon."></div></a></li>
+                            <li><a href="/equipment#ArcticBracelet">Arctic Bracelet <div class="inline-icon"><img src="/images/itemIcons/item_1_14_15.png" alt="Arctic Bracelet's icon."></div></a></li>
+                            <li><a href="/equipment#LegendBracelet">Legend Bracelet <div class="inline-icon"><img src="/images/itemIcons/item_1_15_0.png" alt="Legend Bracelet's icon."></div></a></li>
+                            <li><a href="/equipment#NeptuneBand">Neptune Band <div class="inline-icon"><img src="/images/itemIcons/item_1_14_13.png" alt="Neptune Band's icon."></div></a></li>
+                            <li><a href="/equipment#TerraManacle">Terra Manacle <div class="inline-icon"><img src="/images/itemIcons/item_1_15_3.png" alt="Terra Manacle's icon."></div></a></li>
+                            <li><a href="/equipment#HurricaneBracer">Hurricane Bracer <div class="inline-icon"><img src="/images/itemIcons/item_1_15_7.png" alt="Hurricane Bracer's icon."></div></a></li>
+                            <li><a href="/equipment#IncandescentArm">Incandescent Arm <div class="inline-icon"><img src="/images/itemIcons/item_1_15_4.png" alt="Incandescent Arm's icon."></div></a></li>
+                            <li><a href="/equipment#HypermagneticArm">Hypermagnetic Arm <div class="inline-icon"><img src="/images/itemIcons/item_1_15_6.png" alt="Hypermagnetic Arm's icon."></div></a></li>
+                            <li><a href="/equipment#MightyArmband">Mighty Armband <div class="inline-icon"><img src="/images/itemIcons/item_1_15_5.png" alt="Mighty Armband's icon."></div></a></li>
+                            <li><a href="/equipment#EdenBracelet">Eden Bracelet <div class="inline-icon"><img src="/images/itemIcons/item_1_28_7.png" alt="Eden Bracelet's icon."></div></a></li>
+                            <li><a href="/equipment#LegendRing">Legend Ring <div class="inline-icon"><img src="/images/itemIcons/item_1_20_3.png" alt="Legend Ring's icon."></div></a></li>
+                            <li><a href="/equipment#IncinerationRing">Incineration Ring <div class="inline-icon"><img src="/images/itemIcons/item_1_20_4.png" alt="Incineration Ring's icon."></div></a></li>
+                            <li><a href="/equipment#RingofErosion">Ring of Erosion <div class="inline-icon"><img src="/images/itemIcons/item_1_20_5.png" alt="Ring of Erosion's icon."></div></a></li>
+                            <li><a href="/equipment#LegendShield">Legend Shield <div class="inline-icon"><img src="/images/itemIcons/item_1_22_9.png" alt="Legend Shield's icon."></div></a></li>
+                            <li><a href="/equipment#WhirlpoolShield">Whirlpool Shield <div class="inline-icon"><img src="/images/itemIcons/item_1_22_7.png" alt="Whirlpool Shield's icon."></div></a></li>
+                            <li><a href="/equipment#BlazingPigbucket">Blazing Pigbucket <div class="inline-icon"><img src="/images/itemIcons/item_1_22_11.png" alt="Blazing Pigbucket's icon."></div></a></li>
+                            <li><a href="/equipment#AlluringPigbucket">Alluring Pigbucket <div class="inline-icon"><img src="/images/itemIcons/item_1_22_12.png" alt="Alluring Pigbucket's icon."></div></a></li>
+                            <li><a href="/equipment#StoneHogbucket">Stone Hogbucket <div class="inline-icon"><img src="/images/itemIcons/item_1_22_13.png" alt="Stone Hogbucket's icon."></div></a></li>
+                            <li><a href="/equipment#LidofIsolation">Lid of Isolation <div class="inline-icon"><img src="/images/itemIcons/item_1_22_15.png" alt="Lid of Isolation's icon."></div></a></li>
+                            <li><a href="/equipment#Windbreaker">Windbreaker <div class="inline-icon"><img src="/images/itemIcons/item_1_23_1.png" alt="Windbreaker's icon."></div></a></li>
+                            <li><a href="/equipment#DrainDampener">Drain Dampener <div class="inline-icon"><img src="/images/itemIcons/item_1_23_2.png" alt="Drain Dampener's icon."></div></a></li>
+                            <li><a href="/equipment#WhiteLunarShield">White Lunar Shield <div class="inline-icon glade3"><img src="/images/itemIcons/item_1_31_3.png" alt="White Lunar Shield's icon."></div></a></li>
+                            <li><a href="/equipment#ThunderCharm">Thunder Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_25_1.png" alt="Thunder Charm's icon."></div></a></li>
+                            <li><a href="/equipment#LegendCharm">Legend Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_25_2.png" alt="Legend Charm's icon."></div></a></li>
+                            <li><a href="/equipment#VolcanoCharm">Volcano Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_24_15.png" alt="Volcano Charm's icon."></div></a></li>
+                            <li><a href="/equipment#SwimmingBag">Swimming Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_4.png" alt="Swimming Bag's icon."></div></a></li>
+                            <li><a href="/equipment#EnduranceBag">Endurance Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_5.png" alt="Endurance Bag's icon."></div></a></li>
+                            <li><a href="/equipment#BlizzardBag">Blizzard Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_6.png" alt="Blizzard Bag's icon."></div></a></li>
+                            <li><a href="/equipment#RighteousBag">Righteous Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_7.png" alt="Righteous Bag's icon."></div></a></li>
+                            <li><a href="/equipment#ExorcistBag">Exorcist Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_8.png" alt="Exorcist Bag's icon."></div></a></li>
+                            <li><a href="/equipment#FairWindCharm">Fair Wind Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_25_9.png" alt="Fair Wind Charm's icon."></div></a></li>
+                            <li><a href="/equipment#BrightCharm">Bright Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_25_10.png" alt="Bright Charm's icon."></div></a></li>
+                            <li><a href="/equipment#AlpineSash">Alpine Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_10.png" alt="Alpine Sash's icon."></div></a></li>
+                            <li><a href="/equipment#ThunderSash">Thunder Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_12.png" alt="Thunder Sash's icon."></div></a></li>
+                            <li><a href="/equipment#SuccorSash">Succor Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_13.png" alt="Succor Sash's icon."></div></a></li>
+                            <li><a href="/equipment#SerenitySash">Serenity Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_15.png" alt="Serenity Sash's icon."></div></a></li>
+                            <li><a href="/equipment#SquallSash">Squall Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_28_2.png" alt="Squall Sash's icon."></div></a></li>
+                            <li><a href="/equipment#MidnightSunSash">Midnight Sun Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_28_1.png" alt="Midnight Sun Sash's icon."></div></a></li>
+                            <li><a href="/equipment#PlasmaCharm">Plasma Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_30_3.png" alt="Plasma Charm's icon."></div></a></li>
+                            <li><a href="/equipment#Hero'sCharm">Hero's Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_30_4.png" alt="Hero's Charm's icon."></div></a></li>
+                            <li><a href="/equipment#MountainGodBoon">Mountain God Boon <div class="inline-icon"><img src="/images/itemIcons/item_1_30_1.png" alt="Mountain God Boon's icon."></div></a></li>
+                            <li><a href="/equipment#BoatmanBauble">Boatman Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_6.png" alt="Boatman Bauble's icon."></div></a></li>
+                            <li><a href="/equipment#GlacierBauble">Glacier Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_8.png" alt="Glacier Bauble's icon."></div></a></li>
+                            <li><a href="/equipment#EvilBauble">Evil Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_10.png" alt="Evil Bauble's icon."></div></a></li>
+                            <li><a href="/equipment#SwirliousBauble">Swirlious Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_11.png" alt="Swirlious Bauble's icon."></div></a></li>
+                            <li><a href="/equipment#S.SwirliousBauble">S. Swirlious Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_12.png" alt="S. Swirlious Bauble's icon."></div></a></li>
+                            <li><a href="/equipment#RedPawsBauble">Red Paws Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_14.png" alt="Red Paws Bauble's icon."></div></a></li>
+                        </ul>
+                    </div>
+                </section>
+                <hr>
+                <section id="HammerofDespair" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#HammerofDespair">Hammer of Despair <div class="inline-icon"><img src="/images/itemIcons/item_1_13_2.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">370 → 390</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">-50</div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="skillDescription">
+                            Skill: Attack up by 30% when below 25% HP.
+                        </div>
+
+                        <div class="changeMotivation">
+                            <a href="/equipment#HorrorHammer">The other hammer in the line <div class="inline-icon"><img src="/images/itemIcons/item_1_13_1.png" alt="Horror Hammer's icon."></div></a> had already been buffed to have more STR, so this minor change was made to not have it fall behind.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="OniSmasher(Ult)" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#OniSmasher(Ult)">Oni Smasher (Ult) <div class="inline-icon"><img src="/images/itemIcons/item_1_13_4.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">-85</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">370 → 385</div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="skillDescription">
+                            Skill: Boosts damage to Oni-type foes by 15% for all allies.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Much like the Hammer of Despair, this equip had been left a bit behind compared to the others in its line.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="WaterDragonblade" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#WaterDragonblade">Water Dragonblade <div class="inline-icon"><img src="/images/itemIcons/item_1_28_4.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">320 → 370</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases the power of Soultimate Moves by 50%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Water Dragonblade always had quite a good skill, but an underwhelming STR stat. Now it's a quite good no-drawback equip.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="OniWarlordSword" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#OniWarlordSword">Oni Warlord Sword <div class="inline-icon"><img src="/images/itemIcons/item_1_28_5.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">340 → 350</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">0 → 30</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: 20% Atk 150% Def 40% MM boost 1 time when below 25% HP. →<br>Updated to match <a href="/yo-kai-info#MasterNyada">Master Nyada's <div class="inline-icon"><img src="/images/faceIcon/y275000.xi.00.png" alt="Master Nyada's face icon."></div></a> buffed skill.
+                        </div>
+                        <div class="changeMotivation">
+                            As was the case with Master Nyada himself, the skill only triggering once for 20 seconds made this sword rather middling, something that was only worsened by its mediocre stats. A bit more STR and some bulk to pair with the updated skill take care of that.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="MaliciousManacle" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#MaliciousManacle">Malicious Manacle <div class="inline-icon"><img src="/images/itemIcons/item_1_15_2.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">230 → 280</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">80 → 130</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Ignore the effects of foe’s guard. →<br>Cursed Skin
+                        </div>
+                        <div class="changeMotivation">
+                            Guard break is a bad skill. Cursed Skin, on the other hand, has some cool uses and fits the item a lot more. Buffed stats on top of that.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="MayhemManacle" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#MayhemManacle">Mayhem Manacle <div class="inline-icon"><img src="/images/itemIcons/item_1_15_1.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">260 → 280</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">80 → 130</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Strength & Defense up when in danger. →<br>15% STR & 105% DEF up when below 50% HP.
+                        </div>
+                        <div class="changeMotivation">
+                            A defense increase at below 25% HP is just not great. Increasing the HP threshold at which it triggers and the effect itself should make it so that this item (and skill) become significantly more relevant. Besides that, its stats were also bad.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="DemonBracer" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#DemonBracer">Demon Bracer <div class="inline-icon"><img src="/images/itemIcons/item_1_15_8.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">275 → 295</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">-40</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">85 → 95</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Criticals deal 75% more damage.
+                        </div>
+
+                        <div class="changeMotivation">
+                            This equipment was already quite good despite the low STR (crits are just really strong), but an extra 30 in its overall stats makes it match the strongest of its line.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="BlizzardBracer" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#BlizzardBracer">Blizzard Bracer <div class="inline-icon"><img src="/images/itemIcons/item_1_15_9.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                            <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">305</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">-40</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">85 → 95</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: ↑ damage to negatively Inspirited foes by 25%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            This item was good already, but its DEF was increased to match other bracelets.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="SunGodBracelet" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#SunGodBracelet">Sun God Bracelet <div class="inline-icon"><img src="/images/itemIcons/item_1_31_1.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                            <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">290</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">80 → 100</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases the power of X button moves by 40%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            80 DEF isn't enough for a STR stat below 300 —a little bump to that should help a bit.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="WandofFortune" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#WandofFortune">Wand of Fortune <div class="inline-icon"><img src="/images/itemIcons/item_1_17_11.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                            <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">105 → 120</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">200 → 333</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Attack up by 30% when below 25% HP.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Finally a suitable mage equip for skills like <a href="/yo-kai-info#DragonLord">Dragon Lord's <div class="inline-icon"><img src="/images/faceIcon/y214000.xi.00.png" alt="Dragon Lord's face icon."></div></a>!!! The HP is a bit counterproductive, but it's a big part of the original equip and now it matches the <a href="/equipment#DivineBlade">Divine Blade<div class="inline-icon"><img src="/images/itemIcons/item_1_12_11.png" alt="Divine Blade's icon."></div></a>.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="TripleFeverWand" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#TripleFeverWand">Triple Fever Wand <div class="inline-icon"><img src="/images/itemIcons/item_1_17_14.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                            <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">0 → 145</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">365</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases damage of Fire Element attacks by 25%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Slimamander <div class="inline-icon"><img src="/images/faceIcon/x101000.xi.00.png" alt="Slimamander's face icon."></div> and Ogralus <div class="inline-icon"><img src="/images/faceIcon/x002000.xi.00.png" alt="Ogralus's face icon."></div> go hand in hand in many ways —in particular, both their boss souls and playable forms lean strongly towards mixed sets. Wanting to improve options for mixed attackers in B++, we decided to also push that in their equip lines, making them parallels of each other. In particular, much like the <a href="/equipment#OniSmasher(Sea)">Oni Smasher (Sea) <div class="inline-icon"><img src="/images/itemIcons/item_1_12_15.png" alt="Oni Smasher (Sea)'s icon."></div></a> has some SPR, this equip now has some STR as well.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="StaffofHeaven" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#StaffofHeaven">Staff of Heaven <div class="inline-icon"><img src="/images/itemIcons/item_1_18_4.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">370 → 390</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">-50</div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="skillDescription">
+                            Skill: Increases effect of healing techniques by 30%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Thunder God Wand had been buffed prior —the SPR increase lets this equip not fall behind the other items in its line.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="LunarWand" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#LunarWand">Lunar Wand <div class="inline-icon"><img src="/images/itemIcons/item_1_18_4.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">370 → 400</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">-10 → -30</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases revival speed by 100%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            Minor stat tweaks to make it closer to Moon God Wand.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="Saint'sRing" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#Saint'sRing">Saint's Ring <div class="inline-icon"><img src="/images/itemIcons/item_1_20_6.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">0 → 90</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">220 → 270</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">100</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases effect of healing techniques by 30%.
+                        </div>
+
+                        <div class="changeMotivation">
+                            This was by no means a bad item on healers previously, but it definitely fell behind when compared to others. Now, however, it has a good tradeoff between bulk and power, being a stronger option than the baubles but considerably safer than the Lunar Wand.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="Goldenheart" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#Goldenheart">Goldenheart <div class="inline-icon"><img src="/images/itemIcons/item_1_20_9.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">260 → 270</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">70 → 160</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Spirit & Defense up when in danger. →<br>15% SPR & 105% DEF up when below 50% HP.
+                        </div>
+                        <div class="changeMotivation">
+                            Much like its physical counterpart in <a href="#MayhemManacle">Mayhem Manacle <div class="inline-icon"><img src="/images/itemIcons/item_1_15_1.png" alt="Mayhem Manacle's icon."></div></a>, this item's skill was quite bad, as were its stats. Both have been buffed though, making it a unique option that should suit some attackers.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="Blood-RedRing" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#Blood-RedRing">Blood-Red Ring <div class="inline-icon"><img src="/images/itemIcons/item_1_20_11.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">-40</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">275 → 305</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">85</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: 20% more likely to cause criticals.
+                        </div>
+
+                        <div class="changeMotivation">
+                            The skill was already great, but this item just needed a bit more oomph.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="FrostShield" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#FrostShield">Frost Shield <div class="inline-icon"><img src="/images/itemIcons/item_1_22_10.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">105</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">200 → 280</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces Ice Element damage. →<br>Reduces Ice Element damage by 50%.
+                        </div>
+                        <div class="changeMotivation">
+                            There were many equipment items that reduce attribute damage (4 for each attribute!), all by 30% each. This is just... not great. All these skills have been buffed to reduce damage by 50%. They also generally had quite bad stats, which we've taken care of.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="LavaHogbucket" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#LavaHogbucket">Lava Hogbucket <div class="inline-icon"><img src="/images/itemIcons/item_1_22_14.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                         <div class="stats">
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">310 → 385</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: ↑ the damage of counters and reflects by 30%. →<br>Mirror body
+                        </div>
+                        <div class="changeMotivation">
+                            This equipment's skill description was the same as Mirror Body's, but this description is separate from the skill itself.
+                            Internally, the skill is Bladed Body, which was changed along with <a href="/yo-kai-info#Cutta-nah">Cutta-nah <div class="inline-icon"><img src="/images/faceIcon/y106000.xi.00.png" alt="Cutta-nah's face icon."></div></a>.
+                            The equip has been fixed to use the correct skill and, on top of that, got some nice stat changes.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="AntigravityShield" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#AntigravityShield">Antigravity Shield <div class="inline-icon"><img src="/images/itemIcons/item_1_31_3.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">340 → 380</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: When HP falls to 0, will recover once only, at 1 HP. →<br>All allies' speed up by 8%
+                        </div>
+                        <div class="changeMotivation">
+                            You're running so fast it's like you don't feel the effects of gravity! Now this item has a reason to exist alongside <a href="/equipment#WhiteLunarShield">its rank 6 counterpart <div class="inline-icon glade3"><img src="/images/itemIcons/item_1_31_3.png" alt="White Lunar Shield's icon."></div></a> :)
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="QuantumShield" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#QuantumShield">Quantum Shield <div class="inline-icon"><img src="/images/itemIcons/item_1_31_4.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                         <div class="stats">
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">360 → 380</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Drops incoming damage by 20% and gives super armor.
+                        </div>
+
+                        <div class="changeMotivation">
+                            This item's skill was buffed along with <a href="/yo-kai-info#SirNyansalot">Sir Nyansalot's <div class="inline-icon"><img src="/images/faceIcon/y457000.xi.00.png" alt="Sir Nyansalot's face icon."></div></a>, but its description didn't reflect that... until now.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="Make-UpBag" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#Make-UpBag">Make-Up Bag <div class="inline-icon"><img src="/images/itemIcons/item_1_25_3.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">105 → 205</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">60 → 90</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">150 → 250</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces Earth Element damage. →<br>Increases area of effect for moves by 35%.
+                        </div>
+                        <div class="changeMotivation">
+                            There are far too many Equipment items that reduce attribute damage —four for each attribute— and most of them are both weak and repetitive.
+                            For many, given their design and description, it makes too much sense not to have a different skill, but fortunately that wasn't the case for this one.
+                            We decided on a skill that wasn't present on Equipment previously and that would work quite well with the support Yo-kai this item is geared towards.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="TranquilCharm" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#TranquilCharm">Tranquil Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_31_6.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">120 → 150</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">270 → 280</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Defense up by 105% when HP is full. →<br>Defense up by 140% when HP is full.
+                        </div>
+                        <div class="changeMotivation">
+                            The skill was buffed to match the improved Peak Condition, except with DEF instead of attack.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="RoyalSwirlCharm" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#RoyalSwirlCharm">Royal Swirl Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_31_7.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                         <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">120 → 150</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">290</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Strength up by 5% for 15 seconds for healed allies, at (Lv10). →<br>STR up by 10% for 15 seconds for healed allies.
+                        </div>
+                        <div class="changeMotivation">
+                            The main change here is to the skill, making it so that it parallels <a href="/yo-kai-info#PrincessPearl">Princess Pearl's <div class="inline-icon"><img src="/images/faceIcon/y648000.xi.00.png" alt="Princess Pearl's face icon."></div></a>.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="LegendSash" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#LegendSash">Legend Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_9.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">340 → 360</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">60 → 160</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Own HP recovers when an ally is defeated.
+                        </div>
+
+                        <div class="changeMotivation">
+                            This is one of the most unique defensive equips in the game, but previously it was hindered by mediocre stats. Now you can unleash its full potential with its added bulk.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="BlazingSash" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#BlazingSash">Blazing Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_11.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">335 → 430</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">70 → 110</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces Fire Element damage. →<br>Absorbs fire damage and recovers 30% of it as HP.
+                        </div>
+                        <div class="changeMotivation">
+                            "It's a glutton for flames" is a total lie. Well, was, because now you can eat a yummy fiery meal with this sash and, following video game logic, heal from it!
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="SeismicSash" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#SeismicSash">Seismic Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_27_14.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">485 → 500</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">0 → 45</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces Earth Element damage. →<br>I've got your back
+                        </div>
+                        <div class="changeMotivation">
+                            Much like other attribute resistance equips, we wanted to give it some other skill that would suit the item but be less repetitive. Channeling the power of the earth sounds like something that could totally be used to raise your team's stats, so we went with that.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="SalvationSash" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#SalvationSash">Salvation Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_28_0.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                         <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">510</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">20 → 50</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces the damage taken from drain techniques. →<br>Ascension rate ↓ 40%, max 90%.
+                        </div>
+                        <div class="changeMotivation">
+                            How many times am I gonna have to explain that too many equips that reduce elemental damage are repetitive... Anyways, instead of quite literally warding off the dead, this item makes your team not go to the realm of the dead (at least not quite so fast).
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="SovereignSash" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#SovereignSash">Sovereign Sash <div class="inline-icon"><img src="/images/itemIcons/item_1_28_3.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">510</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">-25</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">-25</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">100</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Own HP restores steadily.
+                        </div>
+                        <div class="changeMotivation">
+                            Similar to other equips, this item's skill was changed along with Sneaky Snacker, but item skill descriptions are separate (for whatever reason), so this wasn't reflected previously.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="LivingWorldCloth" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#LivingWorldCloth">Living World Cloth <div class="inline-icon"><img src="/images/itemIcons/item_1_31_9.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">500</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">80 → 90</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Attack up by 20% when HP is full. →<br>SPR up by 5% for all allies.
+                        </div>
+                        <div class="changeMotivation">
+                            A skill like the one this item previously had on a defensive equip is honestly baffling. You deal way too little damage for the increase to be meaningful, and being at full HP with such a large stat becomes much harder. We opted for a support skill instead, letting defensive Yo-kai still offensively contribute, even if just a little bit.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="FishermanBauble" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#FishermanBauble">Fisherman Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_5.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">215 → 333</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">61 → 100</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">61 → 100</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">61 → 100</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces Water Element damage. →<br>Absorbs water damage and recovers 30% of it as HP.
+                        </div>
+                        <div class="changeMotivation">
+                            I am SICK and TIRED of equip descriptions LYING to your face. No, a 30% damage reduction from water damage is not protecting you from all water damage. It's not a good skill either, so we fixed both issues.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <!--section id="BoatmanBauble" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#BoatmanBauble">Boatman Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_6.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">215 → 333</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">66 → 101</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">66 → 101</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">66 → 101</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Increases amount of HP absorbed by 25%. →<br>Lowers enemies' Attack by 15%.
+                        </div>
+                        <div class="changeMotivation">
+                            Sucking life from hostile beings sounds like it'd make those hostile beings deal less damage... just saying.
+                        </div>
+                    </div>
+                </section>
+                <hr-->
+                <section id="InvocationBauble" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#InvocationBauble">Invocation Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_7.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">275 → 333</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">66 → 108</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">66 → 108</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">66 → 108</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Negative Inspirit effects last 20% longer. →<br>Negative Inspirit effects last 20% longer on everyone.
+                        </div>
+                        <div class="changeMotivation">
+                            This was definitely a good equipment before for the skill alone, but the stats were too weak not to tweak them a bit. We also changed the skill to affect everyone because that just makes it more interesting while not being too strong.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="UnderworldBauble" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#UnderworldBauble">Underworld Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_9.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                                                    <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">250 → 212</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">74 → 212</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">74 → 212</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">74 → 212</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: Reduces the damage taken from drain techniques. →<br>Recovers own HP after defeating foes.
+                        </div>
+                        <div class="changeMotivation">
+                            Yadda yadda yadda elemental damage reduction bad. This new skill suits the item well while helping the user stay alive.
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section id="S.RedPawsBauble" class="equipmentSection">
+                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                        <h2><a href="/equipment#S.RedPawsBauble">S. Red Paws Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_15.png"></div></a></h2>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <div class="stats">
+                            <div class="statData HP">
+                                <div class="hexagonTitle HP">HP</div>
+                                <div class="stat">270 → 300</div>
+                                <hr>
+                            </div>
+                            <div class="statData STR">
+                                <div class="hexagonTitle STR">STR</div>
+                                <div class="stat">220</div>
+                                <hr>
+                            </div>
+                            <div class="statData SPR">
+                                <div class="hexagonTitle SPR">SPR</div>
+                                <div class="stat">150</div>
+                                <hr>
+                            </div>
+                            <div class="statData DEF">
+                                <div class="hexagonTitle DEF">DEF</div>
+                                <div class="stat">200</div>
+                                <hr>
+                            </div>
+                            </div>
+                        <div class="skillDescription">
+                            Skill: 12% Spd and 30% MM Spd boost when below 25% HP. →<br>All allies' STR up by 5%.
+                        </div>
+                        <div class="changeMotivation">
+                            I could go on for way too long for something like this, but, summarizing, the skill was bad before, and it's good now. It also suits the description <i>very</i> well, and the bauble's lower SPR stat makes it so that there's a tradeoff for healers that may want to use this. Definitely one of my favorite equip reworks!
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+    <footer>
+        <div id="footerContents">
+            <div id="footerLeftSide" class="footerHalf">
+                <div id="backgroundSelector">
+                    <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
+                    <div id="backgroundContainer">
+                        <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
+                            localStorage.setItem('bgType', this.value);
+                            if(this.value === 'random') {
+                                bgType = Math.floor(Math.random() * 14);
+                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
+                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
+                            }">
+                            <option value="random" class="noJS">Random</option>
+                            <option value="plain" selected>Plain</option>
+                            <option value="0">FluffBlast</option>
+                            <option value="1">Cool Star</option>
+                            <option value="2">Heart</option>
+                            <option value="3a">Red Cat</option>
+                            <option value="3b">White Dog</option>
+                            <option value="4">Sergeant</option>
+                            <option value="5">Sparkling</option>
+                            <option value="6">Stilldark?</option>
+                            <option value="7">Cool&starf;KJ</option>
+                            <option value="8">Chase!</option>
+                            <option value="9">Momotaro</option>
+                            <option value="10">G of Enma</option>
+                            <option value="11">Sunshine</option>
+                            <option value="12">King</option>
+                        </select>
+                    </div>
+                    <div class="checkboxContainer focus-inside">
+                        <input checked id="animateBG" type="checkbox"
+                               onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                        <label for="animateBG">Animate Background</label>
+                    </div>
+                </div>
+            </div>
+            <div id="footerRightSide" class="footerHalf">
+                <div id="footerNavigation">
+                    <div id="footerNavigationContainer" class="footerContainer">
+                        <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
+                        <nav class="links">
+                            <div class="navItem"><a href="/">Home</a></div>
+                            <div class="navItem"><a href="/about">About</a></div>
+                            <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
+                            <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
+                            </div>
+                        </nav>
+                    </div>
+                    <div id="footerResourcesContainer" class="footerContainer">
+                        <div class="footerTitle">Resources</div>
+                        <nav class="links">
+                            <div class="navItem"><a href="/faq">FAQ</a></div>
+                            <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
+                            <div class="navItem"><a href="/equipment">Equipment</a></div>
+                            <div class="navItem"><a target="_blank"
+                                                    href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
+                                B++ Spreadsheet</a></div>
+                        </nav>
+                    </div>
+                </div>
+                <div id="footerSocialsLogo">
+                    <div id="footerSocialsContainer" class="footerContainer">
+                        <div class="footerTitle">Socials</div>
+                        <nav class="links">
+                            <div class="navItem"><a class="icon discord" target="_blank"
+                                                    href="https://discord.gg/nxCvVJ6fgt"></a></div>
+                            <div class="navItem"><a class="icon twitter" target="_blank"
+                                                    href="https://x.com/Blastersplusmod"></a></div>
+                            <div class="navItem"><a class="icon bsky" target="_blank"
+                                                    href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
+                            </div>
+                            <!--div class="navItem"><a class="icon youtube" target="_blank"
+                                                    href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
+                            </div-->
+                        </nav>
+                    </div>
+                    <div id="footerLogoContainer">
+                        <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
+                             aria-hidden="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/script-footer.js"></script>
+        <div class="footerNotice">
+            Yo-kai Watch Blasters ++ 2023-2025
+        </div>
+
+    </footer>
+    </body>
+</html>
