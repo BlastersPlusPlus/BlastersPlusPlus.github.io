@@ -100,6 +100,11 @@
 
                             </div>
 
+                            <select id="costumeSelection" onchange="openInfoPopup(yokaiCache[this.value]);">
+                            </select>
+
+
+
                             <div id="rankTribeAttributes">
                                 <div><img id="yokaiInfoRankIcon" loading="lazy"
                                           onload="this.classList.remove('loading')"
@@ -117,7 +122,7 @@
                                     <p id="yokaiInfoTribe"></p></div>
                             </div>
 
-                            <div id="medalliumBio" class="noBio detail">
+                            <div id="medalliumBio" class="noBio">
                             </div>
 
                             <div id="statsSkill">
@@ -160,17 +165,18 @@
                                     <div class="stat" id="yokaiSPD"></div>
                                     <hr>
                                 </div>
-                                <div class="skillTitle detail">
+                                <div class="skillTitle">
                                     <div class="hexagonTitle Skill">SKILL</div>
                                     <div id="skillName"></div>
                                     <hr>
                                 </div>
-                                <div id="skillDescription" class="detail">
+                                <div id="skillDescriptionContainer">
+                                    <div id="skillDescription"></div>
                                 </div>
                             </div>
 
 
-                            <div id="movesSoultimateWrapper" class="detail">
+                            <div id="movesSoultimateWrapper">
                                 <div id="Movelist">
                                     <div class="move AMove" id="move0">
                                         <div class="moveHexagonBorder"></div>
@@ -229,7 +235,7 @@
                                     </div>
                                 </div>
 
-                                <div id="soultimateMoveData" class="">
+                                <div id="soultimateMoveData">
                                     <div class="moveTitle" id="SoultimateMoveTitle">
                                         <div class="SoultimateIconWrapper">
                                             <div class="soultimateIconBorder"></div>

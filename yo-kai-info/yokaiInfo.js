@@ -1,4 +1,4 @@
-let data, yokaiCache = {};
+let data, yokaiCache = {}, yokaiHashes = {};
 let tribeNumbers = {
     "Brave": 1,
     "Mysterious": 2,
@@ -16,10 +16,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     let data = await fetch('/data-sources/yo-kai-info/yo-kai-info.json').then(response => response.json());
     let main = document.querySelector('main');
     data.forEach(element => {
+        yokaiCache[element.id] = element;
+
+        let yokaiHash = element.costumeName ? element.name?.replace(/\s/g, '') + "(" + element.costumeName.replace(/\s/g, '') + ')' :
+            element.name?.replace(/\s/g, '') ?? element.id?.replace(/\s/g, '') ?? 'Yo-kai'+element.number;
+
+        if(element.costumeName && !yokaiHashes[element.name?.replace(/\s/g, '')]) {
+            yokaiHashes[yokaiHash] = element;
+            yokaiHash = element.name?.replace(/\s/g, '');
+        }
+        yokaiHashes[yokaiHash] = element;
+
+        if(element.costumeName && element.hidden) return;
+
         let gridItem = document.createElement('button');
         gridItem.classList.add("gridItem");
+
         let name = document.createElement('p');
-        name.innerHTML = element.name ?? ''; //.replace(/(.+?)(\s|$)/g, '<nobr>$1</nobr>$2');
+        if(element.costumeName && yokaiHashes[element.name?.replace(/\s/g, '')] != element) {
+            name.innerHTML = element.name + " ("+element.costumeName+")";
+        } else {
+            name.innerHTML = element.name ?? '';
+        }
         name.classList.add('name');
         gridItem.appendChild(name);
 
@@ -57,7 +75,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             gridItem.appendChild(medalContainer);
         }
 
-        gridItem.setAttribute('id',element.name?.replace(/\s/g, '') ?? element.id?.replace(/\s/g, '') ?? 'Yo-kai'+element.number);
+        gridItem.setAttribute('id',yokaiHash);
+
         gridItem.classList.add(element.tribe);
 
         if(element.hidden) {
@@ -74,10 +93,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         gridItem.onclick = function(){openInfoPopup(this.yokai)};
     })
+    console.log(yokaiHashes)
 
     console.log(location.hash);
     let foundYokai;
-    if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai;
+    if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai ?? yokaiHashes[location.hash.replace('#','')];
     console.log(foundYokai);
     if(foundYokai) openInfoPopup(foundYokai);
 })
@@ -87,7 +107,7 @@ window.addEventListener('hashchange', () => {
     let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
     if(!location.hash) {yokaiInfoContainer.className = 'closed'; return;}
 
-    let yokai = document.getElementById(location.hash.replace('#',''))?.yokai;
+    let yokai = document.getElementById(location.hash.replace('#',''))?.yokai ?? yokaiHashes[location.hash.replace('#','')];
     if(yokai && (yokaiInfoContainer.yokaiId !== yokai.id || yokaiInfoContainer.className!=='open')) {openInfoPopup(yokai);}
 
 })
@@ -100,14 +120,20 @@ document.addEventListener('keydown', function(e){
 })
 
 function openInfoPopup(yokai) {
-    history.replaceState(null, null, '#'+yokai.name?.replace(/\s/g, ''));
+    let yokaiHash = yokai.costumeName ? yokai.name?.replace(/\s/g, '') + "(" + yokai.costumeName.replace(/\s/g, '') + ')' :
+        yokai.name?.replace(/\s/g, '') ?? yokai.id?.replace(/\s/g, '') ?? 'Yo-kai'+yokai.number;
+    if(yokai.costumeName && yokaiHashes[yokaiHash] == yokaiHashes[yokai.name?.replace(/\s/g, '')]) {
+        yokaiHash = yokai.name?.replace(/\s/g, '');
+    }
+    history.replaceState(null, null, '#'+yokaiHash);
+    if(!yokai) return;
     console.log(yokai);
 
-    if(yokai.hidden) {
+    if(yokai.hidden && !yokai.costumeName) {
         let DOMElement = document.getElementById(yokai.name?.replace(/\s/g, '')) ??
             document.getElementById(yokai.id?.replace(/\s/g, '')) ?? document.getElementById('Yo-kai'+yokai.number);
 
-        DOMElement?.classList.remove('hidden');
+        DOMElement?.classList?.remove('hidden');
 
         localStorage.setItem(yokai.id?.replace(/\s/g, ''), "not-hidden");
     }
@@ -131,6 +157,19 @@ function openInfoPopup(yokai) {
 
     medalBorder.src = "/images/medalParts/y_medal_"+ (yokai.isLegend?"lege":yokai.isRare?"rare":"nml") + "0" + tribeNumbers[yokai.tribe] +".xi.00.png";
     medalBorder.alt = tribeNumbers[yokai.tribe]+" Tribe "+(yokai.isLegend?"Legendary":yokai.isRare?"Rare":"Normal")+" medal border";
+
+
+    let costumeSelector = document.getElementById('costumeSelection');
+    costumeSelector.classList.toggle('noCostumes',!yokai.costumes?.length);
+    while(costumeSelector.hasChildNodes()) costumeSelector.removeChild(costumeSelector.firstChild);
+    for(let i=0; i<yokai.costumes?.length; i++){
+        let option = document.createElement("option");
+        option.innerText = yokai.costumes[i].name;
+        option.value = yokai.costumes[i].charaParamId;
+        option.selected = yokai.costumes[i].charaParamId === yokai.id;
+        costumeSelector.appendChild(option);
+    }
+
 
     let rankIcon = document.getElementById("yokaiInfoRankIcon");
     rankIcon.classList.add('loading');
@@ -159,36 +198,6 @@ function openInfoPopup(yokai) {
     document.getElementById('yokaiDEF').innerText = yokai.def;
     document.getElementById('yokaiSPD').innerText = yokai.spd;
 
-
-    /*let screenCover = document.getElementById("screenCover");
-    screenCover.yokaiId = yokai.id;
-    screenCover.scrollTop = 0;
-    screenCover.className = 'open';
-    screenCover.focus();*/
-
-    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
-    yokaiInfoContainer.yokaiId = yokai.id;
-    yokaiInfoContainer.scrollTop = 0;
-    yokaiInfoContainer.showModal();
-
-    let yokaiInfoElement = document.getElementById('yokaiInfo');
-    yokaiInfoElement.classList.remove('hasDetails');
-    yokaiInfoContainer.classList.add('open');
-
-    showYokaiDetails(yokai.id).then(function(){yokaiInfoElement.classList.add('hasDetails')});
-}
-
-async function showYokaiDetails(id) {
-    console.log(yokaiCache[id]);
-    let yokai;
-    if(!yokaiCache[id]) {
-        yokai = await fetch('/data-sources/yo-kai-info/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
-        yokaiCache[yokai.id] = yokai;
-    }
-    else yokai = yokaiCache[id];
-    console.log(yokai);
-
-
     let bio = document.getElementById("medalliumBio");
     bio.classList.toggle('noBio',!(yokai.bio && yokai.bio.length))
     bio.innerText = yokai.bio;
@@ -211,6 +220,7 @@ async function showYokaiDetails(id) {
     for(let i=0; i<5; i++) {
         if (!yokai.moves || !yokai.moves[i] || yokai.moves[i]?.name === 'No Move') {
             document.getElementById('move'+i).classList.add('noMove');
+            document.getElementById('move'+i+'Text').innerText = '';
             continue;
         }
         document.getElementById('move'+i).classList.remove('noMove');
@@ -234,6 +244,35 @@ async function showYokaiDetails(id) {
     soultInspirit.textContent = yokai.soultimate?.inspiritEffects;
     if(yokai.soultimate?.inspiritEffects === "") soultInspirit.classList.add('empty')
     else soultInspirit.classList.remove('empty');
+
+
+    /*let screenCover = document.getElementById("screenCover");
+    screenCover.yokaiId = yokai.id;
+    screenCover.scrollTop = 0;
+    screenCover.className = 'open';
+    screenCover.focus();*/
+
+    let yokaiInfoContainer = document.getElementById('yokaiInfoPopupContainer');
+    yokaiInfoContainer.yokaiId = yokai.id;
+    if(yokaiInfoContainer.className!=='open') yokaiInfoContainer.scrollTop = 0;
+    yokaiInfoContainer.showModal();
+
+    let yokaiInfoElement = document.getElementById('yokaiInfo');
+    //yokaiInfoElement.classList.remove('hasDetails');
+    yokaiInfoContainer.classList.add('open');
+
+}
+
+async function showYokaiDetails(id) {
+    console.log(yokaiCache[id]);
+    let yokai;
+    if(!yokaiCache[id]) {
+        yokai = await fetch('/data-sources/yo-kai-info/'+id.replace(/\s*/g,'')+'.json').then(response => response.json());
+        yokaiCache[yokai.id] = yokai;
+    }
+    else yokai = yokaiCache[id];
+    console.log(yokai);
+
 
 }
 
