@@ -1,377 +1,201 @@
-<!Doctype html>
-<html lang="en">
-    <head>
-        <title>Blasters Plus Plus: Yo-kai Info</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="only light">
-        <meta name="description" content="Find out detailed information on all playable Yo-kai in Blasters ++, including their stats, moves, and skill.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../style-global.css">
-        <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="../backgrounds.css">
-        <script rel="text/javascript" src="./yokaiInfo.js"></script>
-    </head>
-    <body>
+---
+---
+<html lang="pusi">
+<head>
+    <title>sex</title>
+    <style>
+        * {
+            outline: 1px solid red;
+        }
+
+        #div1 {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            background-color: lightblue;
+            gap: 10px;
+        }
+
+        div:not(#div1) {
+            background-color: lightgreen;
+            height: 100px;
+        }
+
+        #div2 {
+            width: 200px;
+        }
+
+        #div3 {
+            width: 500px;
+        }
+
+        #div4 {
+            width: 8000px;
+        }
+        #div5 {
+            width: 300px;
+        }
+
+
+        .l {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 1em;
+
+            >div:nth-child(1) {
+                flex-shrink: 0;
+            }
+        }
+
+        .sub {
+            flex-shrink: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            text-wrap: nowrap;
+        }
+    </style>
+</head>
+<body>
     {% include header.html %}
-        <div class="bodyContents">
-            <noscript>
-                <div class="whiteOverWindow">
-                    JavaScript is disabled in your browser.<br>
-                    To view this page, please enable JavaScript.
-                </div>
-            </noscript>
-
-            <datalist id="yo-kai-options" for>
-            </datalist>
-
-            <div id="grid-options-container">
-                <div id="search-options-container" class="whiteOverWindow shadow">
-                    <div id="basic-search-options">
-                        <div class="search-sort-wrapper">
-                            <label for="yo-kai-name-search">Search Yo-kai:</label>
-                            <input type="search" id="yo-kai-name-search" list="yo-kai-options">
-                        </div>
-                        <div class="search-sort-wrapper">
-                            <label for="yo-kai-sort-options">Sort by:</label>
-                            <select id="yo-kai-sort-options">
-                                <option selected>Number</option>
-                                <option>Name</option>
-                                <option>Rank</option>
-                                <option>Tribe</option>
-                                <option>Role</option>
-                                <option>Tribe</option>
-                                <option>Tier</option>
-                                <option>STR</option>
-                                <option>SPR</option>
-                                <option>DEF</option>
-                                <option>SPD</option>
-                                <option>Stat total</option>
-                            </select>
-
-                            <div class="sort-arrow">
-                                ↑
-                            </div>
-                        </div>
-                        <div class="search-sort-wrapper">
-                            <p>Advanced search... <span class="downArrow">▼</span></p>
-                        </div>
-                    </div>
-                    <div class="advanced-search-container">
-
-                    </div>
-                </div>
-
-                <main id="yokaiGrid"></main>
-            </div>
-
-
-                <dialog id="yokaiInfoPopupContainer" closedby="none" autofocus>
-                    <div id="closePopupContainer" class="focus-inside">
-                        <button id="closePopup" onclick="closeInfoPopup()"></button>
-                    </div>
-                    <div id="yokaiInfo" class="normal">
-                        <div id="yokaiInfoPaddingContainer">
-                            <p id="yokaiInfoTitle"><span class="numberComponents"><span id="yokaiNumber"></span> — </span><span
-                                    id="yokaiInfoName"></span></p>
-                            <div class="yokaiMedal">
-                                <img id="yokaiInfoMedalBackground" class="medalBackground" loading="eager" src="../images/medalParts/y_medal_bg.xi.00.png" alt="Yo-kai medal background">
-                                <img id="yokaiInfoMedalFaceIcon" class="medalFaceIcon" loading="eager" onload="this.classList.remove('loading')"
-                                     onerror="this.classList.remove('loading')">
-                                <img id="yokaiInfoMedalBorder" class="medalBorder" loading="eager" src="../images/medalParts/y_medal_nml09.xi.00.png" alt="Yo-kai medal border">
-
-                            </div>
-
-                            <select id="costumeSelection" onchange="openInfoPopup(yokaiCache[this.value]);">
-                            </select>
-
-
-
-                            <div id="rankTribeAttributes">
-                                <div><img id="yokaiInfoRankIcon" loading="lazy"
-                                          onload="this.classList.remove('loading')"
-                                          onerror="this.classList.remove('loading')">
-                                    <p id="yokaiInfoRank"></p></div>
-                                <div id="role">
-                                    <div><img id="yokaiInfoRoleIcon" loading="lazy"
-                                              onload="this.classList.remove('loading')"
-                                              onerror="this.classList.remove('loading')"></div>
-                                    <p id="yokaiInfoRole"></p></div>
-
-                                <div><img id="yokaiInfoTribeIcon" loading="lazy"
-                                          onload="this.classList.remove('loading')"
-                                          onerror="this.classList.remove('loading')">
-                                    <p id="yokaiInfoTribe"></p></div>
-                            </div>
-
-                            <div id="medalliumBio" class="noBio">
-                            </div>
-
-                            <div id="statsSkill">
-                                <div class="statData HP">
-                                    <div class="hexagonTitle HP">HP</div>
-                                    <div class="stat" id="yokaiHP"></div>
-                                    <hr>
-                                </div>
-                                <div class="elements">
-                                    <div class="strongEL">Str.</div>
-                                    <img id="strongElement" loading="lazy"
-                                         src="../images/attributeIcons/attribute-.png" alt="No Attribute"
-                                         onload="this.classList.remove('loading')"
-                                         onerror="this.classList.remove('loading')">
-                                    <hr class="strongEL">
-                                    <div class="weakEL">Wk.</div>
-                                    <img id="weakElement" loading="lazy"
-                                         src="../images/attributeIcons/attribute-.png" alt="No Attribute"
-                                         onload="this.classList.remove('loading')"
-                                         onerror="this.classList.remove('loading')">
-                                    <hr class="weakEL">
-                                </div>
-                                <div class="statData STR">
-                                    <div class="hexagonTitle STR">STR</div>
-                                    <div class="stat" id="yokaiSTR"></div>
-                                    <hr>
-                                </div>
-                                <div class="statData SPR">
-                                    <div class="hexagonTitle SPR">SPR</div>
-                                    <div class="stat" id="yokaiSPR"></div>
-                                    <hr>
-                                </div>
-                                <div class="statData DEF">
-                                    <div class="hexagonTitle DEF">DEF</div>
-                                    <div class="stat" id="yokaiDEF"></div>
-                                    <hr>
-                                </div>
-                                <div class="statData SPD">
-                                    <div class="hexagonTitle SPD">SPD</div>
-                                    <div class="stat" id="yokaiSPD"></div>
-                                    <hr>
-                                </div>
-                                <div class="skillTitle">
-                                    <div class="hexagonTitle Skill">SKILL</div>
-                                    <div id="skillName"></div>
-                                    <hr>
-                                </div>
-                                <div id="skillDescriptionContainer">
-                                    <div id="skillDescription"></div>
-                                </div>
-                            </div>
-
-
-                            <div id="movesSoultimateWrapper">
-                                <div id="Movelist">
-                                    <div class="move AMove" id="move0">
-                                        <div class="moveHexagonBorder"></div>
-                                        <div class="moveIconContainer">
-                                            <img class="moveIcon" loading="lazy" id="move0Icon"
-                                                 onload="this.classList.remove('loading')"
-                                                 onerror="this.classList.remove('loading')">
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="move0Text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="move XMove" id="move1">
-                                        <div class="moveHexagonBorder"></div>
-                                        <div class="moveIconContainer">
-                                            <img class="moveIcon" loading="lazy" id="move1Icon"
-                                                 onload="this.classList.remove('loading')"
-                                                 onerror="this.classList.add('loading')">
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="move1Text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="move YMove" id="move2">
-                                        <div class="moveHexagonBorder"></div>
-                                        <div class="moveIconContainer">
-                                            <img class="moveIcon" loading="lazy" id="move2Icon"
-                                                 onload="this.classList.remove('loading')"
-                                                 onerror="this.classList.add('loading')">
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="move2Text"></div>
-                                        </div>
-                                    </div>
-                                    <div id="move3" class="move learnableMove">
-                                        <div class="moveHexagonBorder"></div>
-                                        <div class="moveIconContainer">
-                                            <img class="moveIcon" loading="lazy" id="move3Icon"
-                                                 onload="this.classList.remove('loading')"
-                                                 onerror="this.classList.add('loading')">
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="move3Text"></div>
-                                        </div>
-                                    </div>
-                                    <div id="move4" class="move learnableMove">
-                                        <div class="moveHexagonBorder"></div>
-                                        <div class="moveIconContainer">
-                                            <img class="moveIcon" loading="lazy" id="move4Icon"
-                                                 onload="this.classList.remove('loading')"
-                                                 onerror="this.classList.add('loading')">
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="move4Text"></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="soultimateMoveData">
-                                    <div class="moveTitle" id="SoultimateMoveTitle">
-                                        <div class="SoultimateIconWrapper">
-                                            <div class="soultimateIconBorder"></div>
-                                            <div class="SoultimateIconContainer">
-                                                <img class="moveIcon" id="SoultimateIcon"
-                                                     alt="Soultimate"
-                                                     src="../images/other_assets/soultimateWispGlow.png">
-                                                <div class="SoultimateIconText">
-                                                    Soultimate
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="moveNameContainer">
-                                            <div class="moveName" id="soultimateMoveName"></div>
-                                        </div>
-                                    </div>
-                                    <div class="moveDescription" id="soultimateMoveDescription">
-                                    </div>
-
-                                    <div class="soultimateMoveDetails">
-                                        <div class="soultimateMoveInfo">
-                                            <div class="infoTitle">Class</div>
-                                            <div class="infoValue text" id="soultimateMoveClass"></div>
-                                        </div>
-
-                                        <div class="soultimateMoveInfo">
-                                            <div class="infoTitle">Gauge</div>
-                                            <div class="infoValue numeric" id="soultimateMoveCharge"></div>
-                                        </div>
-
-                                        <div class="soultimateMoveInfo notStatus">
-                                            <div class="infoTitle">Power</div>
-                                            <div class="infoValue numeric" id="soultimateMovePower"></div>
-                                        </div>
-
-                                        <div class="soultimateMoveInfo notStatus notHeal">
-                                            <div class="infoTitle">Crit Rate</div>
-                                            <div class="infoValue numeric" id="soultimateMoveCritRate"></div>
-                                        </div>
-
-                                        <div class="soultimateMoveInfo notStatus">
-                                            <div class="infoTitle">Scaling</div>
-                                            <div class="infoValue text" id="soultimateMoveScaling"></div>
-                                        </div>
-
-                                        <div class="soultimateMoveInfo notStatus notHeal">
-                                            <div class="infoTitle">Attribute</div>
-                                            <div class="infoValue text" id="soultimateMoveAttribute"></div>
-                                        </div>
-                                    </div>
-
-                                    <div class="inspirit" id="soultimateInspirit">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </dialog>
-
+    <div id="div1">
+        <div id="div2" class="l">
+            <div class="sub">Pusi</div>
         </div>
-        <footer>
-            <div id="footerContents">
-                <div id="footerLeftSide" class="footerHalf">
-                    <div id="backgroundSelector">
-                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
-                        <div id="backgroundContainer">
-                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
-                            localStorage.setItem('bgType', this.value);
-                            if(this.value === 'random') {
-                                bgType = Math.floor(Math.random() * 14);
-                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
-                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
-                            }">
-                                <option value="random" class="noJS">Random</option>
-                                <option value="plain" selected>Plain</option>
-                                <option value="0">FluffBlast</option>
-                                <option value="1">Cool Star</option>
-                                <option value="2">Heart</option>
-                                <option value="3a">Red Cat</option>
-                                <option value="3b">White Dog</option>
-                                <option value="4">Sergeant</option>
-                                <option value="5">Sparkling</option>
-                                <option value="6">Stilldark?</option>
-                                <option value="7">Cool&starf;KJ</option>
-                                <option value="8">Chase!</option>
-                                <option value="9">Momotaro</option>
-                                <option value="10">G of Enma</option>
-                                <option value="11">Sunshine</option>
-                                <option value="12">King</option>
-                            </select>
-                        </div>
-                        <div class="checkboxContainer focus-inside">
-                            <input checked id="animateBG" type="checkbox"
-                                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
-                            <label for="animateBG">Animate Background</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="footerRightSide" class="footerHalf">
-                    <div id="footerNavigation">
-                        <div id="footerNavigationContainer" class="footerContainer">
-                            <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
-                            <nav class="links">
-                                <div class="navItem"><a href="/">Home</a></div>
-                                <div class="navItem"><a href="/about">About</a></div>
-                                <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
-                                <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
-                                </div>
-                            </nav>
-                        </div>
-                        <div id="footerResourcesContainer" class="footerContainer">
-                            <div class="footerTitle">Resources</div>
-                            <nav class="links">
-                                <div class="navItem"><a href="/faq">FAQ</a></div>
-                                <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
-                                <div class="navItem"><a href="/equipment">Equipment</a></div>
-                                <div class="navItem"><a target="_blank"
-                                                        href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                    B++ Spreadsheet</a></div>
-                            </nav>
-                        </div>
-                    </div>
-                    <div id="footerSocialsLogo">
-                        <div id="footerSocialsContainer" class="footerContainer">
-                            <div class="footerTitle">Socials</div>
-                            <nav class="links">
-                                <div class="navItem"><a class="icon discord" target="_blank"
-                                                        href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                                <div class="navItem"><a class="icon twitter" target="_blank"
-                                                        href="https://x.com/Blastersplusmod"></a></div>
-                                <div class="navItem"><a class="icon bsky" target="_blank"
-                                                        href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
-                                </div>
-                                <!--div class="navItem"><a class="icon youtube" target="_blank"
-                                                        href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
-                                </div-->
-                            </nav>
-                        </div>
-                        <div id="footerLogoContainer">
-                            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
-                                 aria-hidden="true">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="/script-footer.js"></script>
-            <div class="footerNotice">
-                Yo-kai Watch Blasters ++ 2023-2025
-            </div>
+        <div id="div3" class="l">
+            <div class="sub">Pusi</div>
+            <div class="sub">Pusi
+                ibe:
+                Role:
+                Added in:
 
-        </footer>
-    </body>
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+            </div>
+        </div>
+        <div id="div4" class="l">
+            <div class="sub">Pusi
+                ibe:
+                Role:
+                Added in:
+
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+            </div>
+            <div class="sub">Pusi
+                ibe:
+                Role:
+                Added in:
+
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+                ibe:
+                Role:
+                Added in:
+
+            </div>
+        </div>
+        <div id="div5" class="l"></div>
+    </div>
+</body>
 </html>
