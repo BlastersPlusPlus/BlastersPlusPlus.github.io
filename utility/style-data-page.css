@@ -109,7 +109,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     #basic-search-options {
         align-items: stretch;
         display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(20em,1fr));
+        grid-template-columns: repeat(auto-fit,minmax(7.5em,1fr));
         gap: 20px;
 
         >.search-sort-wrapper:last-child {
