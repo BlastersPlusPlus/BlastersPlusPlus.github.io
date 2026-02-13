@@ -1,79 +1,17 @@
-<!Doctype html>
+---
+---
 <html lang="en">
     <head>
+        {% include default-head.html %}
         <title>Blasters Plus Plus: Yo-kai Info</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="only light">
         <meta name="description" content="Find out detailed information on all playable Yo-kai in Blasters ++, including their stats, moves, and skill.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="../backgrounds.css">
+        <link rel="stylesheet" href="/utility/style-data-page.css">
+        <link href="/utility/multi-select.css" rel="stylesheet" type="text/css">
         <script rel="text/javascript" src="./yokaiInfo.js"></script>
     </head>
     <body>
-    <header>
-        <div class="headerLogoContainer">
-            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
-        </div>
-        <nav class="headerNavigationContainer">
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle">
-                    <a href="https://gamebanana.com/mods/457241">Download</a>
-                </h1>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/changelog">Changelog</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection small">
-                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </nav>
-        <script src="/script-header.js" defer></script>
-    </header>
+        {% include header.html %}
         <div class="bodyContents">
             <noscript>
                 <div class="whiteOverWindow">
@@ -81,17 +19,161 @@
                     To view this page, please enable JavaScript.
                 </div>
             </noscript>
-            <main id="yokaiGrid"></main>
+
+            <datalist id="search-options">
+            </datalist>
+
+            <div id="grid-options-container">
+                <div id="search-options-container" class="whiteOverWindow shadow">
+                    <div id="basic-search-options">
+                        <div class="search-sort-wrapper">
+                            <label for="name-search">Search Yo-kai:</label>
+                            <input type="search" id="name-search" list="search-options" onchange="generateGrid()">
+                        </div>
+                        <div class="search-sort-wrapper">
+                            <label for="sort-options">Sort by:</label>
+                            <select id="sort-options" onchange="generateGrid()">
+                                <option selected>Medallium Number</option>
+                                <option>Name</option>
+                                <option>Rank</option>
+                                <option>Tribe</option>
+                                <option>Role</option>
+                                <option>Tier</option>
+                                <option>HP</option>
+                                <option>STR</option>
+                                <option>SPR</option>
+                                <option>DEF</option>
+                                <option>SPD</option>
+                                <option>Stat total</option>
+                            </select>
+
+                            <button class="sort-arrow" title="Ascending"
+                                 onclick="this.classList.toggle('Descending');
+                                 this.setAttribute('title',this.classList.contains('Descending') ? 'Descending' : 'Ascending');
+                                 descending*=-1;
+                                 generateGrid();">
+                                ↑
+                            </button>
+                        </div>
+                        <div class="search-sort-wrapper">
+                            <button class="advanced-search-toggle" onclick="document.getElementById('advanced-search-container').classList.toggle('open')">
+                                Advanced search... <span class="downArrow">▼</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="advanced-search-container" class="advanced-search-container">
+                        <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
+                            <div class="search-option-label">Rank: </div>
+                            <multi-select id="rankFilter" name="rankFilter" placeholder="Filter by rank..."  search="false">
+                                <option value="E" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_e.png" alt="E"></div>
+                                </option>
+                                <option value="D" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_d.png" alt="D"></div>
+                                </option>
+                                <option value="C" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_c.png" alt="C"></div>
+                                </option>
+                                <option value="B" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_b.png" alt="B"></div>
+                                </option>
+                                <option value="A" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_a.png" alt="A"></div>
+                                </option>
+                                <option value="S" selected>
+                                    <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_s.png" alt="S"></div>
+                                </option>
+                            </multi-select>
+                        </div>
+                        <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
+                            <div class="search-option-label">Tribe: </div>
+                            <multi-select id="tribeFilter" name="tribeFilter" placeholder="Filter by tribe..."  search="false">
+                                <option selected value="Brave">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Brave.png" alt="Brave"></div>
+                                </option>
+                                <option selected value="Mysterious">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Mysterious.png" alt="Mysterious"></div>
+                                </option>
+                                <option selected value="Tough">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Tough.png" alt="Tough"></div>
+                                </option>
+                                <option selected value="Charming">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Charming.png" alt="Charming"></div>
+                                </option>
+                                <option selected value="Heartful">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Heartful.png" alt="Heartful"></div>
+                                </option>
+                                <option selected value="Shady">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Shady.png" alt="Shady"></div>
+                                </option>
+                                <option selected value="Eerie">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Eerie.png" alt="Eerie"></div>
+                                </option>
+                                <option selected value="Slippery">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Slippery.png" alt="Slippery"></div>
+                                </option>
+                                <option selected value="Wicked">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Wicked.png" alt="Wicked"></div>
+                                </option>
+                                <option selected value="Enma">
+                                    <div class="inline-icon"><img src="/images/tribeIcons/Enma.png" alt="Enma"></div>
+                                </option>
+                            </multi-select>
+                        </div>
+                        <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
+                            <div class="search-option-label">Role: </div>
+                            <multi-select id="roleFilter" name="roleFilter" placeholder="Filter by role..."  search="false">
+                                <option selected>Fighter</option>
+                                <option selected>Tank</option>
+                                <option selected>Healer</option>
+                                <option selected>Ranger</option>
+                            </multi-select>
+                        </div>
+                        <div class="advanced-search-item-wrapper movesFilter" style="--select-width: 10rem;">
+                            <div class="search-option-label">Moves: </div>
+                            <multi-select id="AMoveFilter" name="AMoveFilter" placeholder="Filter by A move..." search listAll="false">
+                                <option selected>No Move</option>
+                            </multi-select>
+                            <span>and</span>
+                            <multi-select id="Move1Filter" name="Move1Filter" placeholder="Filter by move..." search listAll="false">
+                                <option selected>No Move</option>
+                            </multi-select>
+                            <span>and</span>
+                            <multi-select id="Move2Filter" name="Move2Filter" placeholder="Filter by move..." search listAll="false">
+                                <option selected>No Move</option>
+                            </multi-select>
+                            <span>and</span>
+                            <multi-select id="Move3Filter" name="Move3Filter" placeholder="Filter by move..." search listAll="false">
+                                <option selected>No Move</option>
+                            </multi-select>
+                            <span>and</span>
+                            <multi-select id="Move4Filter" name="Move4Filter" placeholder="Filter by move..." search listAll="false">
+                                <option selected>No Move</option>
+                            </multi-select>
+                        </div>
+                        <!--div class="advanced-search-item-wrapper" style="--select-width: 27rem;">
+                            <div class="search-option-label">Added in: </div>
+                            <multi-select id="additionFilter" name="additionFilter" data-placeholder="Filter based on addition..."  data-search="false">
+                                <option selected>Vanilla Blasters</option>
+                                <option selected>Moon Rabbit Crew</option>
+                                <option selected>Blasters ++</option>
+                            </multi-select>
+                        </div-->
+                    </div>
+                </div>
+
+                <main id="grid"></main>
+            </div>
 
 
-                <dialog id="yokaiInfoPopupContainer" closedby="none" autofocus>
+            <dialog id="infoPopupContainer" closedby="none" autofocus>
                     <div id="closePopupContainer" class="focus-inside">
                         <button id="closePopup" onclick="closeInfoPopup()"></button>
                     </div>
-                    <div id="yokaiInfo" class="normal">
-                        <div id="yokaiInfoPaddingContainer">
-                            <p id="yokaiInfoTitle"><span class="numberComponents"><span id="yokaiNumber"></span> — </span><span
-                                    id="yokaiInfoName"></span></p>
+                    <div id="infoPopup" class="normal">
+                        <div id="infoInnerContainer">
+                            <p id="infoTitle"><span class="numberComponents"><span id="infoNumber"></span> — </span><span
+                                    id="infoName"></span></p>
                             <div class="yokaiMedal">
                                 <img id="yokaiInfoMedalBackground" class="medalBackground" loading="eager" src="../images/medalParts/y_medal_bg.xi.00.png" alt="Yo-kai medal background">
                                 <img id="yokaiInfoMedalFaceIcon" class="medalFaceIcon" loading="eager" onload="this.classList.remove('loading')"
@@ -102,7 +184,6 @@
 
                             <select id="costumeSelection" onchange="openInfoPopup(yokaiCache[this.value]);">
                             </select>
-
 
 
                             <div id="rankTribeAttributes">
@@ -122,7 +203,7 @@
                                     <p id="yokaiInfoTribe"></p></div>
                             </div>
 
-                            <div id="medalliumBio" class="noBio">
+                            <div id="infoPopupDescription" class="noDesc">
                             </div>
 
                             <div id="statsSkill">
@@ -178,7 +259,7 @@
 
                             <div id="movesSoultimateWrapper">
                                 <div id="Movelist">
-                                    <div class="move AMove" id="move0">
+                                    <div class="move AMove" id="move0" title="A Move">
                                         <div class="moveHexagonBorder"></div>
                                         <div class="moveIconContainer">
                                             <img class="moveIcon" loading="lazy" id="move0Icon"
@@ -189,7 +270,7 @@
                                             <div class="moveName" id="move0Text"></div>
                                         </div>
                                     </div>
-                                    <div class="move XMove" id="move1">
+                                    <div class="move XMove" id="move1" title="Move 1">
                                         <div class="moveHexagonBorder"></div>
                                         <div class="moveIconContainer">
                                             <img class="moveIcon" loading="lazy" id="move1Icon"
@@ -200,7 +281,7 @@
                                             <div class="moveName" id="move1Text"></div>
                                         </div>
                                     </div>
-                                    <div class="move YMove" id="move2">
+                                    <div class="move YMove" id="move2" title="Move 2">
                                         <div class="moveHexagonBorder"></div>
                                         <div class="moveIconContainer">
                                             <img class="moveIcon" loading="lazy" id="move2Icon"
@@ -211,7 +292,7 @@
                                             <div class="moveName" id="move2Text"></div>
                                         </div>
                                     </div>
-                                    <div id="move3" class="move learnableMove">
+                                    <div id="move3" class="move learnableMove" title="Learnable Move 1">
                                         <div class="moveHexagonBorder"></div>
                                         <div class="moveIconContainer">
                                             <img class="moveIcon" loading="lazy" id="move3Icon"
@@ -222,7 +303,7 @@
                                             <div class="moveName" id="move3Text"></div>
                                         </div>
                                     </div>
-                                    <div id="move4" class="move learnableMove">
+                                    <div id="move4" class="move learnableMove" title="Learnable Move 2">
                                         <div class="moveHexagonBorder"></div>
                                         <div class="moveIconContainer">
                                             <img class="moveIcon" loading="lazy" id="move4Icon"
@@ -236,7 +317,7 @@
                                 </div>
 
                                 <div id="soultimateMoveData">
-                                    <div class="moveTitle" id="SoultimateMoveTitle">
+                                    <div class="moveTitle" id="SoultimateMoveTitle" title="Soultimate Move">
                                         <div class="SoultimateIconWrapper">
                                             <div class="soultimateIconBorder"></div>
                                             <div class="SoultimateIconContainer">
@@ -292,101 +373,22 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="tierData">
+                                <div id="tierContainer">
+                                    <div id="tierShadow"></div>
+                                    <div id="tier" class="Spp"></div>
+                                </div>
+                                <div id="metaDescription">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </dialog>
 
         </div>
-        <footer>
-            <div id="footerContents">
-                <div id="footerLeftSide" class="footerHalf">
-                    <div id="backgroundSelector">
-                        <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
-                        <div id="backgroundContainer">
-                            <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
-                            localStorage.setItem('bgType', this.value);
-                            if(this.value === 'random') {
-                                bgType = Math.floor(Math.random() * 14);
-                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
-                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
-                            }">
-                                <option value="random" class="noJS">Random</option>
-                                <option value="plain" selected>Plain</option>
-                                <option value="0">FluffBlast</option>
-                                <option value="1">Cool Star</option>
-                                <option value="2">Heart</option>
-                                <option value="3a">Red Cat</option>
-                                <option value="3b">White Dog</option>
-                                <option value="4">Sergeant</option>
-                                <option value="5">Sparkling</option>
-                                <option value="6">Stilldark?</option>
-                                <option value="7">Cool&starf;KJ</option>
-                                <option value="8">Chase!</option>
-                                <option value="9">Momotaro</option>
-                                <option value="10">G of Enma</option>
-                                <option value="11">Sunshine</option>
-                                <option value="12">King</option>
-                            </select>
-                        </div>
-                        <div class="checkboxContainer focus-inside">
-                            <input checked id="animateBG" type="checkbox"
-                                   onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
-                            <label for="animateBG">Animate Background</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="footerRightSide" class="footerHalf">
-                    <div id="footerNavigation">
-                        <div id="footerNavigationContainer" class="footerContainer">
-                            <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
-                            <nav class="links">
-                                <div class="navItem"><a href="/">Home</a></div>
-                                <div class="navItem"><a href="/about">About</a></div>
-                                <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
-                                <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
-                                </div>
-                            </nav>
-                        </div>
-                        <div id="footerResourcesContainer" class="footerContainer">
-                            <div class="footerTitle">Resources</div>
-                            <nav class="links">
-                                <div class="navItem"><a href="/faq">FAQ</a></div>
-                                <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
-                                <div class="navItem"><a href="/equipment">Equipment</a></div>
-                                <div class="navItem"><a target="_blank"
-                                                        href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                    B++ Spreadsheet</a></div>
-                            </nav>
-                        </div>
-                    </div>
-                    <div id="footerSocialsLogo">
-                        <div id="footerSocialsContainer" class="footerContainer">
-                            <div class="footerTitle">Socials</div>
-                            <nav class="links">
-                                <div class="navItem"><a class="icon discord" target="_blank"
-                                                        href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                                <div class="navItem"><a class="icon twitter" target="_blank"
-                                                        href="https://x.com/Blastersplusmod"></a></div>
-                                <div class="navItem"><a class="icon bsky" target="_blank"
-                                                        href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
-                                </div>
-                                <!--div class="navItem"><a class="icon youtube" target="_blank"
-                                                        href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
-                                </div-->
-                            </nav>
-                        </div>
-                        <div id="footerLogoContainer">
-                            <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
-                                 aria-hidden="true">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="/script-footer.js"></script>
-            <div class="footerNotice">
-                Yo-kai Watch Blasters ++ 2023-2025
-            </div>
+        {% include footer.html %}
 
-        </footer>
+    <script src="/utility/multi-select.js"></script>
     </body>
 </html>

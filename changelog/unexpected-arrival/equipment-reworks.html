@@ -1,17 +1,10 @@
-<!Doctype html>
+---
+---
 <html lang="en">
     <head>
+        {% include default-head.html %}
         <title>Blasters Plus Plus: Unexpected Arrival Equipment Reworks</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="only light">
         <meta name="description" content="Details on all Equipment reworks in the Blasters ++ Unexpected Arrival update.">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../../style-global.css">
-        <link rel="stylesheet" href="../../backgrounds.css">
         <script defer>
             HTMLElement.prototype.toggleOpen = function() {
                 this.classList.toggle('open');
@@ -256,64 +249,7 @@
         </style>
     </head>
     <body>
-    <header>
-        <div class="headerLogoContainer">
-            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
-        </div>
-        <nav class="headerNavigationContainer">
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle">
-                    <a href="https://gamebanana.com/mods/457241">Download</a>
-                </h1>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/changelog">Changelog</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection small">
-                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </nav>
-        <script src="/script-header.js" defer></script>
-    </header>
+        {% include header.html %}
 
         <div class="bodyContents">
             <main class="whiteOverWindow shadow">
@@ -368,6 +304,7 @@
                             <li><a href="/equipment#PlasmaCharm">Plasma Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_30_3.png" alt="Plasma Charm's icon."></div></a></li>
                             <li><a href="/equipment#Hero'sCharm">Hero's Charm <div class="inline-icon"><img src="/images/itemIcons/item_1_30_4.png" alt="Hero's Charm's icon."></div></a></li>
                             <li><a href="/equipment#MountainGodBoon">Mountain God Boon <div class="inline-icon"><img src="/images/itemIcons/item_1_30_1.png" alt="Mountain God Boon's icon."></div></a></li>
+                            <li><a href="/equipmentUpper#BoatmanBauble">Boatman Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_6.png" alt="Boatman Bauble's icon."></div></a></li>
                             <li><a href="/equipment#GlacierBauble">Glacier Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_8.png" alt="Glacier Bauble's icon."></div></a></li>
                             <li><a href="/equipment#EvilBauble">Evil Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_10.png" alt="Evil Bauble's icon."></div></a></li>
                             <li><a href="/equipment#SwirliousBauble">Swirlious Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_11.png" alt="Swirlious Bauble's icon."></div></a></li>
@@ -1230,43 +1167,6 @@
                     </div>
                 </section>
                 <hr>
-                <section id="BoatmanBauble" class="equipmentSection">
-                    <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
-                        <h2><a href="/equipmentUpper#BoatmanBauble">Boatman Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_6.png"></div></a></h2>
-                        <button class="downArrow"></button>
-                    </div>
-                    <div class="answerContainer">
-                                                    <div class="stats">
-                            <div class="statData HP">
-                                <div class="hexagonTitle HP">HP</div>
-                                <div class="stat">215 → 333</div>
-                                <hr>
-                            </div>
-                            <div class="statData STR">
-                                <div class="hexagonTitle STR">STR</div>
-                                <div class="stat">66 → 101</div>
-                                <hr>
-                            </div>
-                            <div class="statData SPR">
-                                <div class="hexagonTitle SPR">SPR</div>
-                                <div class="stat">66 → 101</div>
-                                <hr>
-                            </div>
-                            <div class="statData DEF">
-                                <div class="hexagonTitle DEF">DEF</div>
-                                <div class="stat">66 → 101</div>
-                                <hr>
-                            </div>
-                            </div>
-                        <div class="skillDescription">
-                            Skill: Increases amount of HP absorbed by 25%. →<br>Lowers enemies' Attack by 15%.
-                        </div>
-                        <div class="changeMotivation">
-                            Sucking life from hostile beings sounds like it'd make those hostile beings deal less damage... just saying.
-                        </div>
-                    </div>
-                </section>
-                <hr>
                 <section id="InvocationBauble" class="equipmentSection">
                     <div class="equipmentSectionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
                         <h2><a href="/equipment#InvocationBauble">Invocation Bauble <div class="inline-icon"><img src="/images/itemIcons/item_1_30_7.png"></div></a></h2>
@@ -1380,96 +1280,6 @@
             </main>
         </div>
 
-    <footer>
-        <div id="footerContents">
-            <div id="footerLeftSide" class="footerHalf">
-                <div id="backgroundSelector">
-                    <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
-                    <div id="backgroundContainer">
-                        <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
-                            localStorage.setItem('bgType', this.value);
-                            if(this.value === 'random') {
-                                bgType = Math.floor(Math.random() * 14);
-                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
-                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
-                            }">
-                            <option value="random" class="noJS">Random</option>
-                            <option value="plain" selected>Plain</option>
-                            <option value="0">FluffBlast</option>
-                            <option value="1">Cool Star</option>
-                            <option value="2">Heart</option>
-                            <option value="3a">Red Cat</option>
-                            <option value="3b">White Dog</option>
-                            <option value="4">Sergeant</option>
-                            <option value="5">Sparkling</option>
-                            <option value="6">Stilldark?</option>
-                            <option value="7">Cool&starf;KJ</option>
-                            <option value="8">Chase!</option>
-                            <option value="9">Momotaro</option>
-                            <option value="10">G of Enma</option>
-                            <option value="11">Sunshine</option>
-                            <option value="12">King</option>
-                        </select>
-                    </div>
-                    <div class="checkboxContainer focus-inside">
-                        <input checked id="animateBG" type="checkbox"
-                               onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
-                        <label for="animateBG">Animate Background</label>
-                    </div>
-                </div>
-            </div>
-            <div id="footerRightSide" class="footerHalf">
-                <div id="footerNavigation">
-                    <div id="footerNavigationContainer" class="footerContainer">
-                        <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
-                        <nav class="links">
-                            <div class="navItem"><a href="/">Home</a></div>
-                            <div class="navItem"><a href="/about">About</a></div>
-                            <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
-                            <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
-                            </div>
-                        </nav>
-                    </div>
-                    <div id="footerResourcesContainer" class="footerContainer">
-                        <div class="footerTitle">Resources</div>
-                        <nav class="links">
-                            <div class="navItem"><a href="/faq">FAQ</a></div>
-                            <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
-                            <div class="navItem"><a href="/equipment">Equipment</a></div>
-                            <div class="navItem"><a target="_blank"
-                                                    href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></div>
-                        </nav>
-                    </div>
-                </div>
-                <div id="footerSocialsLogo">
-                    <div id="footerSocialsContainer" class="footerContainer">
-                        <div class="footerTitle">Socials</div>
-                        <nav class="links">
-                            <div class="navItem"><a class="icon discord" target="_blank"
-                                                    href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                            <div class="navItem"><a class="icon twitter" target="_blank"
-                                                    href="https://x.com/Blastersplusmod"></a></div>
-                            <div class="navItem"><a class="icon bsky" target="_blank"
-                                                    href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
-                            </div>
-                            <!--div class="navItem"><a class="icon youtube" target="_blank"
-                                                    href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
-                            </div-->
-                        </nav>
-                    </div>
-                    <div id="footerLogoContainer">
-                        <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
-                             aria-hidden="true">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="/script-footer.js"></script>
-        <div class="footerNotice">
-            Yo-kai Watch Blasters ++ 2023-2025
-        </div>
-
-    </footer>
+        {% include footer.html %}
     </body>
 </html>

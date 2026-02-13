@@ -1,18 +1,12 @@
-<!Doctype html>
+---
+---
 <html lang="en">
     <head>
+        {% include default-head.html %}
         <title>Blasters Plus Plus: Changelog</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="color-scheme" content="only light">
-        <meta name="description" content="See what's new in the lates Blasters ++ version!">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico">
-        <link rel="stylesheet" href="../style-global.css">
         <link rel="stylesheet" href="./style.css">
-        <link rel="stylesheet" href="../backgrounds.css">
+        <meta name="description" content="See what's new in the latest Blasters ++ version!">
+
         <script defer>
             HTMLElement.prototype.toggleOpen = function() {
                 this.classList.toggle('open');
@@ -33,64 +27,7 @@
         </script>
     </head>
     <body>
-    <header>
-        <div class="headerLogoContainer">
-            <a href="/"><img class="headerLogo" src="/images/logos/logo.png" alt="Blasters ++ Logo" aria-hidden="true"></a>
-        </div>
-        <nav class="headerNavigationContainer">
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle">
-                    <a href="https://gamebanana.com/mods/457241">Download</a>
-                </h1>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Blasters <span class="bukotsu">++</span></h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/changelog">Changelog</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection wide">
-                <h1 class="headerNavigationTitle headerNavigationPopupTrigger">Resources</h1>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="headerNavigationSection small">
-                <button tabindex="-1" onclick="this.classList.toggle('open');" class="headerDownArrow headerNavigationPopupTrigger"></button>
-                <div class="headerNavigationPopupContainer">
-                    <nav class="whiteOverWindow links">
-                        <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/about">About</a></li>
-                            <li><a href="/meet-the-team">Meet the Team!</a></li>
-                            <li><a href="https://gamebanana.com/mods/457241">Download</a></li>
-                            <li><a href="/faq">FAQ</a></li>
-                            <li><a href="/yo-kai-info">Yo-kai Info</a></li>
-                            <li><a href="/equipment">Equipment</a></li>
-                            <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </nav>
-        <script src="/script-header.js" defer></script>
-    </header>
+        {% include header.html %}
 
         <div class="bodyContents">
             <main class="whiteOverWindow shadow">
@@ -129,22 +66,22 @@
                     </div>
                     <div class="answerContainer">
                         <ul>
-                            <li>Abyss <a href="/yo-kai-info#Lie-inHeart">Lie-in Heart</a> <div class="inline-icon"><img src="/images/faceIcon/y240010.xi.00.png" alt="Abyss Lie-in Hearts's face icon."></div></li>
-                            <li><a href="/yo-kai-info#LuckyEverfore">Lucky Everfore</a> <div class="inline-icon"><img src="/images/faceIcon/y193020.xi.00.png" alt="Lucky Everfore's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#Gabby">Gabby</a> <div class="inline-icon"><img src="/images/faceIcon/y674010.xi.00.png" alt="Celebratory Gabby's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#Zazel">Zazel</a> <div class="inline-icon"><img src="/images/faceIcon/y487030.xi.00.png" alt="Celebratory Zazel's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#Aristokat">Aristokat</a> <div class="inline-icon"><img src="/images/faceIcon/y489010.xi.00.png" alt="Celebratory Aristokat's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#DukeDoggy">Duke Doggy</a> <div class="inline-icon"><img src="/images/faceIcon/y488010.xi.00.png" alt="Celebratory Duke Doggy's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#Gilgaros">Gilgaros</a> <div class="inline-icon"><img src="/images/faceIcon/y226010.xi.00.png" alt="Celebratory Gilgaros's face icon."></div></li>
-                            <li>Hero <a href="/yo-kai-info#Unfairy">Unfairy</a> <div class="inline-icon"><img src="/images/faceIcon/y335010.xi.00.png" alt="Hero Unfairy's face icon."></div></li>
-                            <li>Hero <a href="/yo-kai-info#Unkaind">Unkaind</a> <div class="inline-icon"><img src="/images/faceIcon/y336020.xi.00.png" alt="Hero Unkaind's face icon."></div></li>
-                            <li>Hero <a href="/yo-kai-info#Untidy">Untidy</a> <div class="inline-icon"><img src="/images/faceIcon/y337010.xi.00.png" alt="Hero Untidy's face icon."></div></li>
-                            <li>Hero <a href="/yo-kai-info#Unpleasant">Unpleasant</a> <div class="inline-icon"><img src="/images/faceIcon/y338010.xi.00.png" alt="Hero Unpleasant's face icon."></div></li>
-                            <li>Hero <a href="/yo-kai-info#Unkeen">Unkeen</a> <div class="inline-icon"><img src="/images/faceIcon/y339010.xi.00.png" alt="Hero Unkeen's face icon."></div></li>
-                            <li>Reunion <a href="/yo-kai-info#Komashura">Komashura</a> <div class="inline-icon"><img src="/images/faceIcon/y223010.xi.00.png" alt="Reunion Komashura's face icon."></div></li>
-                            <li>Elegant <a href="/yo-kai-info#PrincessPearl">Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648010.xi.00.png" alt="Elegant Princess Pearl's face icon."></div></li>
-                            <li>Ornament <a href="/yo-kai-info#PrincessPearl">Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648020.xi.00.png" alt="Ornament Princess Pearl's face icon."></div></li>
-                            <li>Celebratory <a href="/yo-kai-info#PrincessPearl">Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648030.xi.00.png" alt="Celebratory Princess Pearl's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Lie-inHeart(AbyssalCostume)">Abyss Lie-in Heart</a> <div class="inline-icon"><img src="/images/faceIcon/y240010.xi.00.png" alt="Abyss Lie-in Hearts's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Everfore(LuckyCostume)">Lucky Everfore</a> <div class="inline-icon"><img src="/images/faceIcon/y193020.xi.00.png" alt="Lucky Everfore's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Gabby(CelebratoryCostume)">Celebratory Gabby</a> <div class="inline-icon"><img src="/images/faceIcon/y674010.xi.00.png" alt="Celebratory Gabby's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Zazel(CelebratoryCostume)">Celebratory Zazel</a> <div class="inline-icon"><img src="/images/faceIcon/y487030.xi.00.png" alt="Celebratory Zazel's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Aristokat(CelebratoryCostume)">Celebratory Aristokat</a> <div class="inline-icon"><img src="/images/faceIcon/y489010.xi.00.png" alt="Celebratory Aristokat's face icon."></div></li>
+                            <li><a href="/yo-kai-info#DukeDoggy(CelebratoryCostume)">Celebratory Duke Doggy</a> <div class="inline-icon"><img src="/images/faceIcon/y488010.xi.00.png" alt="Celebratory Duke Doggy's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Gilgaros(CelebratoryCostume)">Celebratory Gilgaros</a> <div class="inline-icon"><img src="/images/faceIcon/y226010.xi.00.png" alt="Celebratory Gilgaros's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Unfairy(HeroCostume)">Hero Unfairy</a> <div class="inline-icon"><img src="/images/faceIcon/y335010.xi.00.png" alt="Hero Unfairy's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Unkaind(HeroCostume)">Hero Unkaind</a> <div class="inline-icon"><img src="/images/faceIcon/y336020.xi.00.png" alt="Hero Unkaind's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Untidy(HeroCostume)">Hero Untidy</a> <div class="inline-icon"><img src="/images/faceIcon/y337010.xi.00.png" alt="Hero Untidy's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Unpleasant(HeroCostume)">Hero Unpleasant</a> <div class="inline-icon"><img src="/images/faceIcon/y338010.xi.00.png" alt="Hero Unpleasant's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Unkeen(HeroCostume)">Hero Unkeen</a> <div class="inline-icon"><img src="/images/faceIcon/y339010.xi.00.png" alt="Hero Unkeen's face icon."></div></li>
+                            <li><a href="/yo-kai-info#Komashura(ReunionCostume)">Reunion Komashura</a> <div class="inline-icon"><img src="/images/faceIcon/y223010.xi.00.png" alt="Reunion Komashura's face icon."></div></li>
+                            <li><a href="/yo-kai-info#PrincessPearl(ElegantCostume)">Elegant Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648010.xi.00.png" alt="Elegant Princess Pearl's face icon."></div></li>
+                            <li><a href="/yo-kai-info#PrincessPearl(OrnamentCostume)">Ornament Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648020.xi.00.png" alt="Ornament Princess Pearl's face icon."></div></li>
+                            <li><a href="/yo-kai-info#PrincessPearl(CelebratoryCostume)">Celebratory Princess Pearl</a> <div class="inline-icon"><img src="/images/faceIcon/y648030.xi.00.png" alt="Celebratory Princess Pearl's face icon."></div></li>
                         </ul>
                     </div>
                 </section>
@@ -222,6 +159,14 @@
                             <li><a href="/yo-kai-info#Casanono">Casanono <div class="inline-icon"><img src="/images/faceIcon/y124010.xi.00.png" alt="Casanono's face icon."></div></a></li>
                             <li><a href="/yo-kai-info#PapaBolt">Papa Bolt <div class="inline-icon"><img src="/images/faceIcon/y181000.xi.00.png" alt="Papa Bolt's face icon."></div></a></li>
                             <li><a href="/yo-kai-info#UncleInfinite">Uncle Infinite <div class="inline-icon"><img src="/images/faceIcon/y181010.xi.00.png" alt="Uncle Infinite's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Darknyan">Darknyan <div class="inline-icon"><img src="/images/faceIcon/y342000.xi.00.png" alt="Darknyan's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Poofessor">Poofessor <div class="inline-icon"><img src="/images/faceIcon/y330000.xi.00.png" alt="Poofessor's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Sailornyan">Sailornyan <div class="inline-icon"><img src="/images/faceIcon/y346000.xi.00.png" alt="Sailornyan's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#NoSandkyu">No Sandkyu <div class="inline-icon"><img src="/images/faceIcon/y412000.xi.00.png" alt="No Sandkyu's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Badude">Badude <div class="inline-icon"><img src="/images/faceIcon/y190000.xi.00.png" alt="Badude's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Bruff">Bruff <div class="inline-icon"><img src="/images/faceIcon/y190020.xi.00.png" alt="Bruff's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Clodzilla">Clodzilla <div class="inline-icon"><img src="/images/faceIcon/y646010.xi.00.png" alt="Clodzilla's face icon."></div></a></li>
+                            <li><a href="/yo-kai-info#Bomblewok">Bomblewok <div class="inline-icon"><img src="/images/faceIcon/x192000.xi.00.png" alt="Bomblewok's face icon."></div></a></li>
                         </ul>
                     </div>
                 </section>
@@ -237,7 +182,7 @@
                             <li>One-Two Punch's damage has been increased to 44.</li>
                             <li>That All You Got? and Hit and Run now last until death.</li>
                             <li>Cicada Soul's effect duration has been reduced to 4 seconds.</li>
-                            <li>Troubled Waters is now a holdable moves.</li>
+                            <li>Troubled Waters is now a holdable move.</li>
                             <li>Adjusted the multi boost inspirit from Cat Cast Call.</li>
                         </ul>
                     </div>
@@ -284,96 +229,6 @@
             </main>
         </div>
 
-    <footer>
-        <div id="footerContents">
-            <div id="footerLeftSide" class="footerHalf">
-                <div id="backgroundSelector">
-                    <div class="footerTitle" id="backgroundSelectorTitle">Background</div>
-                    <div id="backgroundContainer">
-                        <select id="background" aria-labelledby="backgroundSelectorTitle" onChange="
-                            localStorage.setItem('bgType', this.value);
-                            if(this.value === 'random') {
-                                bgType = Math.floor(Math.random() * 14);
-                                bgType = (bgType - (bgType >= 4 ? 1 : 0)) + (bgType === 3 ? 'a' : bgType === 4 ? 'b' : '');
-                                document.documentElement.className = document.documentElement.className.replace(/bg\d+[ab]?|bgplain/g, 'bg'+bgType);
-                            }">
-                            <option value="random" class="noJS">Random</option>
-                            <option value="plain" selected>Plain</option>
-                            <option value="0">FluffBlast</option>
-                            <option value="1">Cool Star</option>
-                            <option value="2">Heart</option>
-                            <option value="3a">Red Cat</option>
-                            <option value="3b">White Dog</option>
-                            <option value="4">Sergeant</option>
-                            <option value="5">Sparkling</option>
-                            <option value="6">Stilldark?</option>
-                            <option value="7">Cool&starf;KJ</option>
-                            <option value="8">Chase!</option>
-                            <option value="9">Momotaro</option>
-                            <option value="10">G of Enma</option>
-                            <option value="11">Sunshine</option>
-                            <option value="12">King</option>
-                        </select>
-                    </div>
-                    <div class="checkboxContainer focus-inside">
-                        <input checked id="animateBG" type="checkbox"
-                               onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
-                        <label for="animateBG">Animate Background</label>
-                    </div>
-                </div>
-            </div>
-            <div id="footerRightSide" class="footerHalf">
-                <div id="footerNavigation">
-                    <div id="footerNavigationContainer" class="footerContainer">
-                        <div class="footerTitle">Blasters <span class="bukotsu">++</span></div>
-                        <nav class="links">
-                            <div class="navItem"><a href="/">Home</a></div>
-                            <div class="navItem"><a href="/about">About</a></div>
-                            <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
-                            <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
-                            </div>
-                        </nav>
-                    </div>
-                    <div id="footerResourcesContainer" class="footerContainer">
-                        <div class="footerTitle">Resources</div>
-                        <nav class="links">
-                            <div class="navItem"><a href="/faq">FAQ</a></div>
-                            <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
-                            <div class="navItem"><a href="/equipment">Equipment</a></div>
-                            <div class="navItem"><a target="_blank"
-                                                    href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
-                                B++ Spreadsheet</a></div>
-                        </nav>
-                    </div>
-                </div>
-                <div id="footerSocialsLogo">
-                    <div id="footerSocialsContainer" class="footerContainer">
-                        <div class="footerTitle">Socials</div>
-                        <nav class="links">
-                            <div class="navItem"><a class="icon discord" target="_blank"
-                                                    href="https://discord.gg/nxCvVJ6fgt"></a></div>
-                            <div class="navItem"><a class="icon twitter" target="_blank"
-                                                    href="https://x.com/Blastersplusmod"></a></div>
-                            <div class="navItem"><a class="icon bsky" target="_blank"
-                                                    href="https://bsky.app/profile/blastersplusmod.bsky.social"></a>
-                            </div>
-                            <!--div class="navItem"><a class="icon youtube" target="_blank"
-                                                    href="https://www.youtube.com/channel/UCteLCoLLl1ZcsVo_3d2auzQ"></a>
-                            </div-->
-                        </nav>
-                    </div>
-                    <div id="footerLogoContainer">
-                        <img id="footerLogo" src="/images/logos/smallLogo.png" alt="Blasters ++'s logo."
-                             aria-hidden="true">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="/script-footer.js"></script>
-        <div class="footerNotice">
-            Yo-kai Watch Blasters ++ 2023-2025
-        </div>
-
-    </footer>
+        {% include footer.html %}
     </body>
 </html>

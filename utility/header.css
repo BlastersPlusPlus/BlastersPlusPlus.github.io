@@ -1,0 +1,147 @@
+header {
+    --header-height: 8em;
+    color: white;
+    z-index: 2;
+    margin-bottom: 20px;
+    width: 100%;
+    /*min-width: fit-content;*/
+    height: var(--header-height);
+    /*position: relative;*/
+
+    transition: top 0.3s ease;
+    position: sticky;
+    left: 0;
+    &.nav-down {top: 0;}
+    &.nav-up {top: -8em; }
+    &:has(:focus-visible) {top:0;}
+
+    &.stuck.nav-up {
+        .headerNavigationPopupContainer {height: 0 !important; min-height: 0 !important; nav{min-height: 0 !important;}}
+    }
+
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-inline: 15px;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: stretch;
+    column-gap: min(50px,10vw);
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
+        background-size: 100% 100%;
+        mask-image: url("/images/other_assets/topDecoration.svg"), linear-gradient(white, white);
+        mask-repeat: repeat-x;
+        mask-size: auto 50px, 100% calc(100% - 40px);
+        mask-position: center bottom, top center;
+    }
+
+    .headerLogoContainer {
+        position: relative;
+        max-width: 50vw;
+        display: flex;
+        align-items: center;
+        >a {display: block; position: relative; >.headerLogo {display: block; max-height: calc(var(--header-height) - 35px); max-width: 100%;}}}
+
+    .headerNavigationContainer {
+        display: flex;
+        justify-self: end;
+        align-items: center;
+        gap: 30px;
+        margin-right: 50px;
+        >.headerNavigationSection {
+            position: relative;
+            .headerNavigationTitle {
+                font-family: var(--font-yuruka), sans-serif;
+                margin-block: 0;
+                cursor: pointer;
+                a {color: inherit;text-decoration: none;}
+                a:hover, a:active, a:focus {text-decoration: underline}
+                a:active {color: cyan};
+                text-wrap: nowrap;
+            }
+
+            .headerDownArrow {
+                width: 2em;
+                height: 3em;
+                background-color: white;
+                appearance: none;
+                border: none;
+                mask-image: url("/images/other_assets/downArrow.svg");
+                mask-repeat: no-repeat;
+                mask-size: contain;
+                mask-position: center;
+                transition: transform 0.3s ease;
+            }
+
+            .headerNavigationPopupContainer {
+                height: 0;
+                overflow: hidden;
+
+                nav {
+                    max-height: 100%;
+                    box-sizing: content-box;
+                    box-shadow: none;
+                    padding: 1em;
+                    border-radius: 25px;
+                }
+
+                position: absolute;
+                right: -20px;
+                min-width: 100%;
+                padding-top: 0;
+                transition: height 0.3s ease;
+                ul {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    border: none;
+                    * {border: none;}
+                }
+            }
+
+            .headerNavigationPopupTrigger.headerDownArrow:has(+ .headerNavigationPopupContainer:hover, + .headerNavigationPopupContainer :focus-visible) {
+                transform: rotate(180deg);
+            }
+
+            @media (scripting: enabled) {
+                .headerNavigationPopupTrigger.headerDownArrow.open {
+                    transform: rotate(180deg);
+                }
+            }
+
+            @media (scripting: none) {
+                .headerNavigationPopupTrigger.headerDownArrow {
+                    transform: rotate(180deg);
+                }
+                .headerNavigationPopupTrigger:hover + .headerNavigationPopupContainer {
+                    height: 200px;
+                    min-height: min-content;
+                    nav {height: min-content;}
+                }
+            }
+
+            .headerNavigationTitle:hover + .headerNavigationPopupContainer,
+            .headerNavigationPopupTrigger.open + .headerNavigationPopupContainer,
+            .headerNavigationPopupContainer:has(nav:hover) {
+                height: 200px;
+                min-height: min-content;
+                nav {height: min-content;}
+            }
+
+            .headerNavigationPopupContainer:has(:focus-visible) {
+                height: 200px !important;
+                min-height: min-content;
+                nav {height: min-content;}
+            }
+        };
+    }
+}
