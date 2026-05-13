@@ -72,7 +72,7 @@ function generateGrid() {
     let main = document.querySelector('main');
     while(main.hasChildNodes()) main.removeChild(main.firstChild);
 
-    let searchValue = document.getElementById('name-search').value;
+    let searchValue = normalizeString(document.getElementById('name-search')?.value?.toLowerCase());
     let compareValue = document.getElementById('sort-options').value;
 
     let rankFilters = new Set(document.getElementById('rankFilter').selectedValues);
@@ -85,7 +85,8 @@ function generateGrid() {
 
 
     let sortedData = data
-        .filter(equip => equip.name?.toLowerCase()?.includes(searchValue.toLowerCase()) &&
+        .filter(equip =>
+            normalizeString(equip.name?.toLowerCase())?.includes(searchValue) &&
             rankFilters.has(equip.rank.toString()) &&
             skillFilters.has(equip.skill || 'No Skill') &&
             upgradesFilters.has(equip.upgradesInto?.length ? 'Yes' : 'No') &&
@@ -371,4 +372,8 @@ function generateMaterialElement(material) {
     materialName.appendChild(materialNameElement);
 
     return materialElement;
+}
+
+function normalizeString(str) {
+    return str?.normalize("NFD")?.replace(/[\u0300-\u036f]/g, "");
 }

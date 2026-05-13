@@ -1,26 +1,26 @@
-@media all and (max-width: 600px) {
+@media all and (max-width: 6000px) {
     #grid>.gridItem {
         .name {font-size: 1.5em;}
         .number {font-size: 1em;}
     }
     #infoPopup {
         #infoTitle {font-size: 1.5em;}
-        #infoInnerContainer {margin-inline: 5%;}
+        #infoInnerContainer {margin-inline: max(10%,10px);}
         #infoPopupDescription {font-size: 1em;}
     }
 }
 
-@media all and (min-width: 600px) {
+/*@media all and (min-width: 600px) {
     #grid>.gridItem {
         .name {font-size: 2em;}
         .number {font-size: 1.25em;}
     }
     #infoPopup {
         #infoTitle {font-size: 2em;}
-        #infoInnerContainer {margin-inline: 10%;}
+        #infoInnerContainer {margin-inline: max(10%,10px);}
         #infoPopupDescription {font-size: 1.3em;}
     }
-}
+}*/
 
 body {
     min-width: fit-content;
@@ -108,14 +108,21 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 
     #basic-search-options {
         align-items: stretch;
-        display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(7.5em,1fr));
-        gap: 20px;
+        justify-content: stretch;
+        /*display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(7.5em,1fr));*/
+        column-gap: 20px;
+        row-gap: 10px;
 
-        >.search-sort-wrapper:last-child {
-            grid-column-end: -1;
-            justify-content: end;
+        display: flex;
+
+        flex-flow: row wrap;
+
+        :nth-last-child(2) {
+            margin-right: auto;
         }
+
+
 
         .search-sort-wrapper {
             display: flex;
@@ -152,6 +159,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
                 border: none;
                 font-family: inherit;
                 font-size: inherit;
+                padding: 0;
                 .downArrow {
                     transition: transform 0.25s ease-in-out;
                     display: inline-block;
@@ -170,7 +178,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
             background: none;
             font-family: var(--font-marugo), sans-serif;
             font-size: 1rem;
-            line-height: 1rem;
             margin-inline-start: 0.5rem;
             padding-inline-start: 0.5rem;
             flex-grow: 1;
@@ -393,400 +400,5 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     #infoPopupDescription {
         text-align: center;
         &.noDesc {display: none};
-    }
-
-    #movesSoultimateWrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        width: fit-content;
-    }
-
-    #statsSkill {
-        width: fit-content;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: auto;
-        align-items: stretch;
-        justify-items: stretch;
-        text-align: center;
-        row-gap: 10px;
-
-        .hexagonTitle, .stat, #skillName {
-            display: flex;
-            align-items: center;
-
-            &.hexagonTitle, &.stat {justify-content: center}
-            &#skillName {justify-content: left}
-        }
-
-        .statData {
-            position: relative;
-            font-family: var(--font-yuruka), sans-serif;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            line-height: 1;
-            align-items: stretch;
-            justify-items: stretch;
-            :not(hr) {z-index: 1};
-            hr {position: absolute; bottom: 0; left:5.5%; width: 85%; z-index: 0; height: 3px; border-radius: 3px; border: none; margin: 0}
-            .stat {margin-right: 15px};
-            &.HP hr {background: rgb(22,158,0)}
-            &.STR hr{background: #a01818;}
-            &.SPR hr{background: #6d18a0;}
-            &.DEF hr{background: #093cb3;}
-            &.SPD hr{background: #139b8a;}
-            &.Skill hr{background: #a46207;}
-
-            &.SPD .stat {letter-spacing: -0.05em;}
-        }
-        .elements{
-            font-family: var(--font-yuruka), sans-serif;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            line-height: 1;
-            align-items: center;
-            position: relative;
-            :not(hr) {z-index: 1};
-            hr {position: absolute; bottom: 0; width: 40%; z-index: 0; height: 3px; border-radius: 3px; border: none; margin: 0}
-            hr.strongEL{background: rgb(22,158,0); left: 2.5%}
-            hr.weakEL{background: #a01818; left: 52.5%}
-            .strongEL {color: rgb(22,158,0)}
-            .weakEL {color: #a01818}
-        }
-        .skillTitle {
-            font-family: var(--font-marugo),sans-serif;
-            position: relative;
-            line-height: 1;
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            #skillName {
-                grid-column: span 3;
-                font-weight: 500;
-                text-align: left;
-                margin-left: 20px;
-            }
-            :not(hr) {z-index: 1};
-            hr {position: absolute; bottom: 0; left:5.5%; width: 89%; z-index: 0; height: 3px; border-radius: 3px;
-                border: none; margin: 0; background: #a46207;}
-        }
-        #skillDescriptionContainer {
-            font-family: var(--font-marugo), sans-serif;
-            grid-column: span 2;
-            text-wrap: wrap;
-
-            max-width: 100% !important;
-        }
-
-
-    }
-
-    #Movelist {
-        display: grid;
-        grid-auto-rows: var(--move-height);
-        gap: 10px;
-        min-width: 70%;
-
-        .move {
-            min-width: min-content;
-            max-width: 100%;
-            text-overflow: ellipsis;
-            position: relative;
-            display: flex;
-            height: var(--move-height);
-
-            .moveIconContainer {
-                height: var(--move-height);
-                width: var(--move-height);
-                mask-image: url("/images/other_assets/regularHexagon.svg");
-                mask-size: 100% 100%;
-                mask-position: center center;
-                mask-repeat: no-repeat;
-                margin-right: 5px;
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 1;
-                img {
-                    height: 80%;
-                }
-            }
-            .moveHexagonBorder {
-                height: calc(var(--move-height) + 0.5em);
-                width: calc(var(--move-height) + 0.5em);
-                position: absolute;
-                top: -0.25em;
-                left: -0.25em;
-                mask-image: url("/images/other_assets/regularHexagon.svg");
-                mask-size: 100% 100%;
-                mask-position: center center;
-                mask-repeat: no-repeat;
-                z-index: 1;
-            }
-            .moveNameContainer {
-                max-width: 100%;
-                text-overflow: ellipsis;
-                font-family: var(--font-marugo), sans-serif;
-                align-self: flex-end;
-                margin-left: calc(var(--move-height) / 2);
-                margin-bottom: 1%;
-                padding-left: calc(var(--move-height) / 2 + 10px);
-                padding-right: 1em;
-                min-width: calc(100% - var(--move-height) - 30px); height: 65%;
-                margin-right: 20px;
-                border-radius: 0 500px 500px 0;
-                z-index: 0;
-                background-image: url("/images/other_assets/moveDecoration.png");
-                background-size: auto 50%;
-                background-repeat: repeat-x;
-                background-position-y: bottom;
-
-                .moveName {
-                    max-width: 100%;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    height: 100%;
-                    line-height: 100%;
-                    box-sizing: border-box;
-                }
-            }
-        }
-
-        .AMove {
-            grid-column: 1/-1;
-            .moveIconContainer {background-color: #f26635}
-            .moveNameContainer {background-color: #eeb69f}
-            .moveHexagonBorder {background-color: #994433;}
-        }
-        .XMove {
-            .moveIconContainer {background-color: #2fb3e5}
-            .moveNameContainer {background-color: #6facee}
-            .moveHexagonBorder {background-color: #1c7798;}
-        }
-        .YMove {
-            .moveIconContainer {background-color: #48c427}
-            .moveNameContainer {background-color: #85e875};
-            .moveHexagonBorder {background-color: #3c7e2b};
-        }
-        .learnableMove {
-            .moveIconContainer {background-color: #ac51f7}
-            .moveNameContainer {background-color: #cda5ee}
-            .moveHexagonBorder {background-color: #6a4489}
-        }
-        .noMove {
-            img, .moveName {display: none;}
-            .moveIconContainer {background-color: #aaaaaa}
-            .moveNameContainer { background-color: #cccccc;}
-            .moveHexagonBorder {background-color: #888888}
-            .moveName {display: none;}
-        }
-    }
-
-    #soultimateMoveData {
-        display: flex;
-        flex-direction: column;
-        min-width: 70%;
-
-        .moveTitle {
-            height: var(--move-height);
-            position: relative;
-            display: flex;
-
-            .SoultimateIconWrapper {
-                height: var(--move-height);
-                width: var(--move-height);
-                position: absolute;
-                top: 0;
-                left: 0;
-
-                .SoultimateIconContainer {
-                    height: 100%;
-                    width: calc(var(--move-height)*1.8);
-                    background-image: linear-gradient(0deg, #fff49f 0%, #ffe659 20%, #b8a23e 40%, #ffe861 50%, #ffffd3 100%);
-                    mask-image: url("/images/other_assets/soultimateIconOutline.svg");
-                    mask-size: auto 100%;
-                    mask-position: right;
-                    -webkit-mask-position: right;
-                    mask-repeat: no-repeat;
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    z-index: 1;
-                    img {
-                        height: 100%;
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                    }
-                    .SoultimateIconText {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        height: 50%;line-height: 100%;
-                        font-family: var(--font-marugo), sans-serif;
-                        display: flex;
-                        align-items: center;
-                        letter-spacing: -0.5px;
-                        padding-left: 10%;
-                    }
-                }
-            }
-
-
-            .soultimateIconBorder {
-                height: calc(var(--move-height) + 0.5em);
-                width: calc(var(--move-height)*1.8 + 0.5em);
-                position: absolute;
-                top: -0.25em;
-                right: -0.25em;
-                background-color: transparent;
-                mask-image: url("/images/other_assets/soultimateIconOutline.svg");
-                mask-size: auto 100%;
-                mask-position: right;
-                mask-repeat: no-repeat;
-                z-index: 1;
-            }
-            .moveNameContainer {
-                font-family: var(--font-marugo), sans-serif;
-                align-self: flex-end;
-                margin-left: calc(var(--move-height) / 2);
-                margin-bottom: 1%;
-                padding-left: calc(var(--move-height) / 2 + 10px);
-                padding-right: 1em;
-                min-width: calc(100% - var(--move-height) - 30px); height: 65%;
-                margin-right: 20px;
-                border-radius: 0 500px 500px 0;
-                z-index: 0;
-                background-image: url("/images/other_assets/moveDecoration.png");
-                background-size: auto 50%;
-                background-repeat: repeat-x;
-                background-position-y: bottom;
-                background-color: #fff49f;
-
-                .moveName {
-                    white-space: nowrap;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    height: 100%;
-                    line-height: 100%;
-                    box-sizing: border-box;
-                }
-            }
-        }
-        .moveDescription, .inspirit {
-            font-family: var(--font-marugo), sans-serif;
-            text-align: center;
-        }
-
-        .soultimateMoveDetails {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            width: fit-content;
-            min-width: 60%;
-            margin-block: 15px;
-            align-self: center;
-
-            align-items: center;
-            justify-items: center;
-        }
-
-        .soultimateMoveInfo {
-            width: min-content;
-            min-width: 50%;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            .infoTitle {
-                font-size: 1em;
-                line-height: 1.5;
-                background-color: #cbcbcb;
-                letter-spacing: -0.5px;
-                mask-image: url("/images/other_assets/stretchedHexagon.svg");
-                mask-size: auto 100%;
-                mask-position: center;
-                mask-repeat: no-repeat;
-                font-family: var(--font-standard), sans-serif;
-                font-weight: bold;
-
-                min-width: min-content;
-                white-space: nowrap;
-
-                aspect-ratio: 230/70;
-            }
-            .infoValue {
-                &.text {font-family: var(--font-marugo), sans-serif;}
-                &.numeric {font-family: var(--font-yuruka), sans-serif;}
-            }
-        }
-
-        &.Status {.notStatus{display: none;}}
-        &.Heal {.notHeal{display: none;}}
-
-    }
-
-    #tierData {
-        margin-top: 20px;
-
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-
-        #tierContainer {
-            font-size: 2em;
-            font-family: var(--font-yuruka), sans-serif;
-            position: relative;
-            z-index: 0;
-            line-height: 1;
-
-            #tierShadow {
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                text-shadow: 2px 2px 0 black;
-                z-index: -1;
-
-                &:has(~ #tier.Sppp) {text-shadow: 2px 2px 0 rgba(100,209,248,1);}
-
-
-            }
-
-            #tier {
-                background-size: auto 100%;
-                background-clip: text;
-                color: black;
-                -webkit-text-stroke-width: 1px;
-                -webkit-text-fill-color: transparent;
-                z-index: 0;
-
-                &.Spp {background-image: linear-gradient(167deg, rgba(255,171,0,1) 0%, rgba(255,255,40,1) 25%, rgba(130,239,248,1) 100%); }
-                &.Sp {background-image: linear-gradient(166deg,rgba(255, 82, 114, 1) 10%, rgba(214, 9, 108, 1) 44%, rgba(255, 82, 177, 1) 92%);}
-                &.S {background-image: linear-gradient(168deg, #013cfe 23%, #00e4ff 50%, #013cfe 77%);}
-                &.A {background-image: linear-gradient(to bottom,white 0%,#f9bb00 66%,#fef767 100%)}
-                &.B {background-image: linear-gradient(to bottom,#ff3b29,#ffc72a);}
-                &.C {background-image: radial-gradient(circle, #2AF359 91%, #CAFCD5 100%);}
-                &.D {background-image: radial-gradient(circle, #00c0ff 91%, #9fe7ff 100%);}
-                &.E {background-image: radial-gradient(circle, #bbbbbb 91%, #eaeaea 100%);}
-                &.F {background-image: radial-gradient(circle, #8e7f6c 91%, #b2a99d 100%);}
-            }
-        }
-
-
-        #metaDescription {
-            text-align: justify;
-        }
-
-
     }
 }

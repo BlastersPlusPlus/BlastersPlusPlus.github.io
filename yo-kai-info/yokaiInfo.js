@@ -155,7 +155,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 function generateGrid() {
     let main = document.querySelector('main');
 
-    let searchValue = document.getElementById('name-search').value;
+    let searchValue = normalizeString(document.getElementById('name-search')?.value?.toLowerCase());
+    console.log(searchValue);
     let compareValue = document.getElementById('sort-options').value;
 
     let rankFilters = new Set(document.getElementById('rankFilter').selectedValues);
@@ -170,20 +171,28 @@ function generateGrid() {
 
     MovesFilters = MovesFilters.map(filter => new Set(filter));
 
-    let showCostumes = searchValue !== '' ||
-        compareValue === 'Tribe' || compareValue === 'Role' ||
-        compareValue === 'Tier' || Array.from(document.querySelectorAll("#search-options-container multi-select")).reduce((acum,value) => acum || !value.areAllSelected(),false);
+    let showCostumes =
+        searchValue !== ''
+        || compareValue === 'Tribe'
+        || compareValue === 'Role'
+        || compareValue === 'Tier'
+        || Array.from(document.querySelectorAll("#search-options-container multi-select")).reduce((acum,value) => acum || !value.areAllSelected(),false);
 
+    // Filters Yo-kai who should be shown
     sortedData = data
-        .filter(yokai => yokai?.searchName?.toLowerCase()?.includes(searchValue.toLowerCase()) && !(compareValue === 'Tier' && yokai.score === undefined) &&
-            rankFilters.has(yokai.rank) && tribeFilters.has(yokai.tribe) && roleFilters.has(yokai.role)
-            && AMoveFilters.has(yokai.moves[0].name)
-            && MovesFilters.reduce((acum,filter) => {
+        .filter(yokai =>
+            normalizeString(yokai?.searchName?.toLowerCase())?.includes(searchValue) // Normalized search name includes normalized search string
+            && !(compareValue === 'Tier' && yokai.score === undefined) // Doesn't show Yo-kai without a score when sorting by tier
+            && rankFilters.has(yokai.rank) // Yo-kai abides by rank filter
+            && tribeFilters.has(yokai.tribe) // Yo-kai abides by tribe filter
+            && roleFilters.has(yokai.role) // Yo-kai abides by role filter
+            && AMoveFilters.has(yokai.moves[0].name) // Yo-kai abides by A Move filter
+            && MovesFilters.reduce((acum,filter) => { // Yo-kai abides by all move filters
                 let newAcum = false;
                 for(let j=1; j<=4; j++) newAcum |= filter.has(yokai.moves[j].name);
                 return acum && newAcum;
             },true)
-            && yokai.moves.slice(1,5).reduce((acum,move) => {
+            && yokai.moves.slice(1,5).reduce((acum,move) => { // All of the Yo-kai's moves are in at least one move filter
                 let newAcum = false;
                 for(let j=0; j<4; j++) newAcum |= MovesFilters[j].has(move.name);
                 return acum && newAcum;
@@ -195,9 +204,6 @@ function generateGrid() {
     while(main.hasChildNodes()) main.removeChild(main.firstChild);
 
     main.classList.toggle('tiers',compareValue === 'Tier');
-
-
-
 
 
     sortedData.forEach(element => {
@@ -482,6 +488,10 @@ function getTier(score) {
     return score >= 95 ? "S++": score >= 90 ? "S+":
             score >= 80 ? "S": score >= 70 ? "A": score >= 60 ? "B":
             score >= 45 ? "C": score >= 30 ? "D": score >= 10 ? "E": "F";
+}
+
+function normalizeString(str) {
+    return str?.normalize("NFD")?.replace(/[\u0300-\u036f]/g, "");
 }
 
 

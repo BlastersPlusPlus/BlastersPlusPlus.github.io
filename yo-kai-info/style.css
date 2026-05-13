@@ -2,7 +2,7 @@
     #infoPopup #Movelist {grid-template-columns: 1fr;}
 }
 
-@media all and (max-width: 600px) {
+/*@media all and (max-width: 600px) {
     #infoPopup {
         #rankTribeAttributes {
             --image-size: 2.5em;
@@ -22,13 +22,13 @@
         .SoultimateIconText {font-size: 0.7em;}
         .soultimateMoveInfo .infoValue {font-size: 1em;}
     }
-}
+}*/
 
 @media all and (min-width: 800px) {
     #infoPopup #Movelist {grid-template-columns: 1fr 1fr;}
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 0px) {
     #infoPopup {
         #rankTribeAttributes {
             --image-size: 4em;
