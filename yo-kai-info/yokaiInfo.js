@@ -57,7 +57,7 @@ const tierNumbers = {
 }
 const sortFunctions = {
     'Medallium Number' : (a,b) => (0)*descending,
-    'Name': (a,b) => (a.name.localeCompare(b.name))*descending,
+    'Name': (a,b) => ((a.searchName ?? a.name).localeCompare(b.searchName ?? b.name))*descending,
     'Rank': (a,b) => (rankNumbers[a.rank] - rankNumbers[b.rank])*descending,
     'Tribe': (a,b) => (tribeNumbers[a.tribe] - tribeNumbers[b.tribe])*descending,
     'Role': (a,b) => (roleNumbers[a.role] - roleNumbers[b.role])*descending,
@@ -674,7 +674,7 @@ function closeInfoPopup() {
         this.close();
     },{once:true});
     yokaiInfoContainer.classList.remove('open');
-    history.replaceState(null,null,location.pathname+location.search);
+    history.pushState(null,null,location.pathname+location.search);
 }
 
 function getTier(score) {

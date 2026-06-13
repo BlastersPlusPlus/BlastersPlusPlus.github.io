@@ -312,7 +312,7 @@ function closeInfoPopup() {
         this.close();
     },{once:true});
     equipmentInfoContainer.classList.remove('open');
-    history.replaceState(null,null,location.pathname+location.search);
+    history.pushState(null,null,location.pathname+location.search);
 }
 
 function generateMaterialElement(material) {
