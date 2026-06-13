@@ -55,7 +55,6 @@
 }
 
 #infoPopup.rank2::before, #infoPopup.rank2::after {
-    content: "PUSI!!!!";
     background-image: linear-gradient(to bottom, black 20%, rgba(245,228,75,1))
 }
 #infoPopup.rank3::before, #infoPopup.rank3::after {background-image: linear-gradient(to bottom, black 20%, rgba(251,166,64,1))}

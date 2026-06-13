@@ -70,10 +70,20 @@ const sortFunctions = {
     'Tier': (a,b) => (tierNumbers[getTier(a.score)] - tierNumbers[getTier(b.score)])*descending
 }
 
+let itemIconsPromise, itemIDsPromise;
+
+
+
 document.addEventListener('DOMContentLoaded', async () => {
-    fetch('/data-sources/item-icons.json').then(response => response.json()).then(value => itemIcons = value);
-    fetch('/data-sources/item-ids.json').then(response => response.json()).then(value => itemIds = value);
+    let minWaitTime = 500+(Math.random()**2)*2000;
+    //console.log("Waiting for at least "+(minWaitTime/1000)+" seconds before data is loaded");
+    let minWait = new Promise(resolve => setTimeout(resolve, minWaitTime));
+
+
+    itemIconsPromise = fetch('/data-sources/item-icons.json').then(response => response.json()).then(value => itemIcons = value);
+    itemIDsPromise = fetch('/data-sources/item-ids.json').then(response => response.json()).then(value => itemIds = value);
     data = await fetch('/data-sources/yo-kai-info.json').then(response => response.json());
+    await minWait;
 
     let foundNames = new Map();
     let datalist = document.getElementById('search-options');
@@ -144,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid))
 
     //sortedData = data;
+    document.getElementById('loadContainer').classList.add('closed');
     generateGrid()
     console.log(location.hash);
     let foundYokai;
@@ -292,11 +303,14 @@ document.addEventListener('keydown', function(e){
         }
 })
 
-function openInfoPopup(yokai) {
+async function openInfoPopup(yokai) {
     let yokaiHash = yokai.searchName?.replace(/\s/g, '') ?? yokai.id?.replace(/\s/g, '') ?? 'Yo-kai'+yokai.number;
     history.replaceState(null, null, '#'+yokaiHash);
     if(!yokai) return;
     console.log(yokai);
+
+    await itemIDsPromise;
+    await itemIconsPromise;
 
     if(yokai.hidden && !yokai.costumeName) {
         let DOMElement = document.getElementById(yokai.name?.replace(/\s/g, '')) ??
@@ -443,6 +457,185 @@ function openInfoPopup(yokai) {
 
     document.getElementById("tierData").classList.toggle('hidden',!yokai.score);
     metaElement.classList.toggle('hidden',!fixedMetaDescription);
+
+
+    let obtentionSection = document.getElementById("obtentionSection");
+    obtentionSection.classList.toggle('hidden',Object.keys(yokai.obtention).length === 0 && !yokai.costumeName);
+
+    let obtentionMethods = document.getElementById("obtentionMethods");
+    obtentionMethods.innerHTML = '';
+    if(yokai.costumeName) {
+        let costumeText = document.createElement('p')
+        costumeText.innerHTML = 'Change costume in the basement (unlocks after beating Captain Thunder)'
+        obtentionMethods.appendChild(costumeText);
+    }
+
+    yokai.obtention.evolution?.forEach((evolutionData) => {
+        let evolutionText = document.createElement('p')
+
+        let referenced = yokaiCache[evolutionData.yokaiId];
+        if(!referenced) return;
+
+        let yokaiModelInfo = referenced?.modelInfo;
+        let yokaiSearchName = referenced?.searchName;
+
+        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+
+        evolutionText.innerHTML = `Evolves from ${yokaiLink} at level ${evolutionData.level}`
+        obtentionMethods.appendChild(evolutionText);
+    })
+    yokai.obtention.fusion?.forEach((fusionData) => {
+        let fusionText = document.createElement('p')
+
+        let part1, part2;
+
+        if(yokaiCache[fusionData.part1]) {
+            let referenced = yokaiCache[fusionData.part1];
+            if(!referenced) return;
+
+            let yokaiModelInfo = referenced?.modelInfo;
+            let yokaiSearchName = referenced?.searchName;
+
+            part1 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+        } else {
+            let referenced = itemIcons[fusionData.part1];
+            if(!referenced) return;
+
+            part1 = `the ${referenced.name} <div class="inline-icon"><img src="/images/itemIcons/item_${referenced.sheet}_${referenced.iconRow}_${referenced.iconCol}.png" alt="${referenced.name}'s icon"></div>`;
+        }
+
+        if(yokaiCache[fusionData.part2]) {
+            let referenced = yokaiCache[fusionData.part2];
+            if(!referenced) return;
+
+            let yokaiModelInfo = referenced?.modelInfo;
+            let yokaiSearchName = referenced?.searchName;
+
+            part2 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+        } else {
+            let referenced = itemIcons[fusionData.part2];
+            if(!referenced) return;
+
+            part2 = `the ${referenced.name} <div class="inline-icon"><img src="/images/itemIcons/item_${referenced.sheet}_${referenced.iconRow}_${referenced.iconCol}.png" alt="${referenced.name}'s icon"></div>`;
+        }
+
+        fusionText.innerHTML = `Fuse ${part1} with ${part2}`
+        obtentionMethods.appendChild(fusionText);
+    })
+    new Set(yokai.obtention.patrol)?.forEach((patrolText) => {
+        let patrolElement = document.createElement('p');
+        patrolElement.innerText = patrolText;
+        obtentionMethods.appendChild(patrolElement);
+    })
+    new Set(yokai.obtention.missionReward)?.forEach((rewardText) => {
+        let rewardElement = document.createElement('p');
+        rewardElement.innerText = rewardText;
+        obtentionMethods.appendChild(rewardElement);
+    })
+    yokai.obtention.crank?.forEach((crankData) => {
+        let crankElement = document.createElement('p');
+
+        let isRegularCrank = crankData.crank === 'Crank-a-kai';
+        let crankName = isRegularCrank ? '' : crankData.crank;
+
+        let coinName = '';
+        if(crankData.coin === '0A 00 00 00') coinName = "Play Coins"
+        else {
+            let coinRef = itemIcons[crankData.coin];
+            if(coinRef) {
+                coinName = `${coinRef.name} <div class="inline-icon"><img src="/images/itemIcons/item_${coinRef.sheet}_${coinRef.iconRow}_${coinRef.iconCol}.png" alt="${coinRef.name}'s icon"></div>`
+            }
+        }
+
+        crankElement.innerHTML = isRegularCrank ? `${coinName} ${crankData.prize.toLowerCase()} prize` : `${crankName} ${crankData.prize.toLowerCase()} prize`
+        obtentionMethods.appendChild(crankElement);
+    })
+    yokai.obtention.circleReward?.forEach((circleData) => {
+        let circleElement = document.createElement('p');
+
+        circleElement.innerHTML = `${circleData.name} Yo-kai Circle (`
+        circleData.yokai.forEach(yokai => {
+            let referenced = yokaiCache[yokai];
+            if(!referenced) return;
+
+            let yokaiModelInfo = referenced?.modelInfo;
+            let yokaiSearchName = referenced?.searchName;
+
+            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+
+            circleElement.innerHTML += yokaiLink+`,</nobr> `;
+        })
+
+        circleElement.innerHTML = circleElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
+
+        obtentionMethods.appendChild(circleElement);
+    })
+    yokai.obtention.legendSeal?.forEach((legendData) => {
+        let legendElement = document.createElement('p');
+
+        legendElement.innerHTML = `Legendary Seal (`
+        legendData.forEach(yokai => {
+            let referenced = yokaiCache[yokai];
+            if(!referenced) return;
+
+            let yokaiModelInfo = referenced?.modelInfo;
+            let yokaiSearchName = referenced?.searchName;
+
+            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+
+            legendElement.innerHTML += yokaiLink+`,</nobr> `;
+        })
+
+        legendElement.innerHTML = legendElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
+
+        obtentionMethods.appendChild(legendElement);
+    })
+
+    let evolutions = document.getElementById('evolutions');
+    evolutions.classList.toggle('hidden',!yokai.evolution && yokai.fusion.length == 0);
+    evolutions.innerHTML = '';
+    if(yokai.evolution) ifBlock: {
+        let evolutionText = document.createElement('p')
+
+        let referenced = yokaiCache[yokai.evolution.yokaiID];
+        if(!referenced) break ifBlock;
+
+        let yokaiModelInfo = referenced?.modelInfo;
+        let yokaiSearchName = referenced?.searchName;
+
+        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+
+        evolutionText.innerHTML = `Evolves into ${yokaiLink} at level ${yokai.evolution.level}`
+        evolutions.appendChild(evolutionText);
+    }
+    yokai.fusion?.forEach(fusionData => {
+        let fusionText = document.createElement('p')
+
+        let result = yokaiCache[fusionData.result];
+        if(!result) return;
+        let resultModelInfo = result?.modelInfo;
+        let resultSearchName = result?.searchName;
+        let resultLink =  `<a href="#${resultSearchName.replaceAll(" ","")}">${resultSearchName}</a>`+(resultModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${resultModelInfo}.xi.00.png" alt="${resultSearchName}'s face icon"></div>` : '')
+
+        let other;
+        if(yokaiCache[fusionData.other]) {
+            let referenced = yokaiCache[fusionData.other];
+            if(!referenced) return;
+            let yokaiModelInfo = referenced?.modelInfo;
+            let yokaiSearchName = referenced?.searchName;
+            other =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+        } else {
+            let referenced = itemIcons[fusionData.other];
+            if(!referenced) return;
+
+            other = `the ${referenced.name} <div class="inline-icon"><img src="/images/itemIcons/item_${referenced.sheet}_${referenced.iconRow}_${referenced.iconCol}.png" alt="${referenced.name}'s icon"></div>`;
+        }
+
+        fusionText.innerHTML = `Evolves into ${resultLink} when fused with ${other}`
+        evolutions.appendChild(fusionText);
+    })
+
+
 
 
     /*let screenCover = document.getElementById("screenCover");

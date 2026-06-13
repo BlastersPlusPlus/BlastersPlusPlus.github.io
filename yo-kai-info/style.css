@@ -594,8 +594,6 @@
     }
 
     #tierData {
-        margin-top: 20px;
-
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -616,7 +614,7 @@
                 text-shadow: 2px 2px 0 black;
                 z-index: -1;
 
-                &:has(~ #tier.Sppp) {text-shadow: 2px 2px 0 rgba(100,209,248,1);}
+                &:has(~ #tier.Spp) {text-shadow: 2px 2px 0 rgb(59, 88, 99);}
 
 
             }
@@ -647,6 +645,24 @@
         }
 
 
+    }
+
+    #obtentionSection {
+        text-align: center;
+        text-wrap: balance;
+        h1 {
+            font-size: 2em;
+            font-family: var(--font-yuruka), sans-serif;
+            position: relative;
+            z-index: 0;
+            line-height: 1;
+        }
+    }
+
+    #evolutions {
+        margin-top: 1em;
+        text-align: center;
+        text-wrap: balance;
     }
 }
 

@@ -16,7 +16,13 @@ const sortFunctions = {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    let minWaitTime = 500+(Math.random()**2)*2000;
+    //console.log("Waiting for at least "+(minWaitTime/1000)+" seconds before data is loaded");
+    let minWait = new Promise(resolve => setTimeout(resolve, minWaitTime));
+
     data = await fetch('/data-sources/equipment.json').then(response => response.json());
+    await minWait;
+
     let datalist = document.getElementById('search-options');
     let skillsSet = new Set();
     let materialsSet = new Set();
@@ -58,6 +64,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }).toSorted((a, b) => a.text?.localeCompare(b.text)))
 
+
+    document.getElementById('loadContainer').classList.add('closed');
     document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid))
     generateGrid();
 

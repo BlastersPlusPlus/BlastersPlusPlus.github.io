@@ -1,16 +1,16 @@
 @font-face {
     font-family: YurukaStd;
-    src: url("../fonts/FOT-YurukaStd-UB.otf") format("opentype");
+    src: url("/fonts/FOT-YurukaStd-UB.otf") format("opentype");
 }
 
 @font-face {
     font-family: UDMarugo;
-    src: url("../fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
+    src: url("/fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
 }
 
 @font-face {
     font-family: Bukotsu;
-    src: url("../fonts/HOT-Bukotsu Std U.otf");
+    src: url("/fonts/HOT-Bukotsu Std U.otf") format("opentype");
 }
 
 .bukotsu {font-family: Bukotsu, YurukaStd, sans-serif; }

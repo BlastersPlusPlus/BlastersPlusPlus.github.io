@@ -1,6 +1,6 @@
 lsi: false
 safe: true
-incremental: false
+incremental: true
 highlighter: rouge
 gist:
   noscript: false
