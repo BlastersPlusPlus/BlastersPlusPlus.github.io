@@ -654,7 +654,7 @@ function generateMoveDetails(cmd,forceParam,technicType,wrapContainer = false,le
             let randomData = cmd.random[i];
             let randomCMD = orge_technic_cmd_data[randomData.id];
 
-            if(randomCMD == null) continue;
+            if(randomCMD == null || hasNoEffect(randomCMD)) continue;
 
 
             if(i>0) elementText += `<hr class="${level >= 2 ? 'thick-separator' : level == 1 ? 'thin-separator' : 'no-separator'}">`;
@@ -676,7 +676,7 @@ function generateMoveDetails(cmd,forceParam,technicType,wrapContainer = false,le
 
         for(let i=0; i<cmd?.chain?.length; i++) {
             let chainCMD = orge_technic_cmd_data[cmd.chain[i]];
-            if(chainCMD == null) continue;
+            if(chainCMD == null || hasNoEffect(chainCMD)) continue;
 
 
             if(i>0) elementText += `<hr class="${level >= 2 ? 'thick-separator' : level == 1 ? 'thin-separator' : 'no-separator'}">`;
