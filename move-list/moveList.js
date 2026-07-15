@@ -570,7 +570,7 @@ function generateMoveDetails(cmd,forceParam,technicType,wrapContainer = false,le
         let moveCritRate = !noPower && cmd.effect?.crit_rate ? cmd.effect.crit_rate+'%' : '---';
 
         let numHits = cmd?.effect?.number_of_hits || 1;
-        let moveSoulGain = cmd.soulMeter?.meterCharge + (numHits > 1 ? 'x'+numHits : '') ?? '---';
+        let moveSoulGain = cmd.soulMeter && cmd.soulMeter?.meterCharge > 0 ? cmd.soulMeter?.meterCharge + (numHits > 1 ? 'x'+numHits : '') : '---';
         let moveSoulGauge = cmd.soulMeter?.chargeNeeded ?? '---';
 
         let moveScaling = cmd.effect?.scaling && cmd.effect?.scaling !== 'None' ? cmd.effect?.scaling : '---';
