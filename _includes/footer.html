@@ -32,7 +32,8 @@
         </div>
         <div class="checkboxContainer focus-inside">
           <input checked id="animateBG" type="checkbox"
-                 onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');">
+                 onchange="localStorage.setItem('bgAnimate', this.checked); document.documentElement.classList.toggle('animatedBG');"
+                 style="--checkbox-color: white;">
           <label for="animateBG">Animate Background</label>
         </div>
       </div>
@@ -44,6 +45,7 @@
           <nav class="links">
             <div class="navItem"><a href="/">Home</a></div>
             <div class="navItem"><a href="/about">About</a></div>
+              <div class="navItem"><a href="/changelog">Changelog</a></div>
             <div class="navItem"><a href="/meet-the-team">Meet the Team!</a></div>
             <div class="navItem"><a href="https://gamebanana.com/mods/457241">Download</a>
             </div>
@@ -55,6 +57,7 @@
             <div class="navItem"><a href="/faq">FAQ</a></div>
             <div class="navItem"><a href="/yo-kai-info">Yo-kai Info</a></div>
             <div class="navItem"><a href="/equipment">Equipment</a></div>
+              <div class="navItem"><a href="/move-list">Move List</a></div>
             <div class="navItem"><a target="_blank"
                                     href="https://docs.google.com/spreadsheets/d/1HRMd3yBihsKb9xU73TMvC7dGEwBugOR_MZzq_hNAZ_s/edit?gid=1682209704#gid=1682209704">
               B++ Spreadsheet</a></div>
@@ -86,7 +89,7 @@
   </div>
   <script src="/utility/script-footer.js"></script>
   <div class="footerNotice">
-    Yo-kai Watch Blasters ++ 2023-2025
+    Yo-kai Watch Blasters ++ 2023-2026
   </div>
 
 </footer>

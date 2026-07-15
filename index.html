@@ -82,7 +82,7 @@
                             "Hero Unfairy",
                             "Hero Untidy",
                             "Reunion Komashura",
-                        ]
+                        ];
 
                         for(let i=0; i<=1; i++) {
                             let randomNumber = Math.floor(Math.random() * yokaiInfoImages.length);
@@ -97,7 +97,7 @@
                 <div class="pageLinkSection">
                     <div class="images-container" id="equipment-images">
                         <div class="iconContainer" style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
-                            <img src="/images/itemIcons/item_1_13_5.png" alt="Oni Smasher Sky"></div>
+                            <img src="/images/itemIcons/item_1_13_5.png" alt="Oni Smasher (Sky)"></div>
                         <div class="iconContainer" style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
                             <img src="/images/itemIcons/item_1_31_17.png" alt="Imperial Launcher"></div>
                     </div>
@@ -125,6 +125,42 @@
                 </div>
 
                 <div class="pageLinkSection">
+                    <div class="images-container" id="move-list-images">
+                        <img src="/images/moveIcons/image6.png" alt="Triple Attack icon" style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
+                        <img src="/images/moveIcons/soultimateWisp.png" alt="Soultimate Move icon" style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: 0deg; --distance: 175%; --scale: 1.5;">
+                    </div>
+                    <a href="/move-list">
+                        Move List
+                    </a>
+                    <script>
+                        let moveListElement = document.getElementById("move-list-images");
+
+                        let iconAltList = [
+                            ['image1','Attack'],
+                            ['image6','Triple Attack'],
+                            ['image11','Laser Beam'],
+                            ['image58','Offensive Stance'],
+                            ['image64','Healing Circle'],
+                            ['image81','Trap'],
+                            ['image84','Guard'],
+                            ['image88','Dodge'],
+                            ['image90','Counter'],
+                            ['soultimateWisp','Soultimate Move']
+                        ];
+
+
+                        for(let i=0; i<=1; i++) {
+                            let randomNumber = Math.floor(Math.random() * iconAltList.length);
+                            let iconData = iconAltList.splice(randomNumber, 1)[0];
+                            console.log(iconData);
+
+                            moveListElement.children[i].src = '/images/moveIcons/'+iconData[0]+'.png';
+                            moveListElement.children[i].alt = iconData[1]+' icon';
+                        }
+                    </script>
+                </div>
+
+                <div class="pageLinkSection">
                     <div class="images-container meet-the-team" id="meet-the-team-images">
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: -135deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/YounesPFP.jpg" alt="Younes's profile picture">
                         <img style="--height: 50%; --top: unset; --right: unset; --left: calc(var(--link-height)/4); --bottom: unset; --angle: 0deg; --angle-move: 180deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/StitchesPFP.png" alt="Stiches' profile picture">
@@ -134,8 +170,8 @@
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -45deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/J4PFP.png" alt="J4's profile picture">
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 0deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/FrenPFP.png" alt="Fren's profile picture">
                         <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 45deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/LightPFP.jpg" alt="Light's profile picture">
-                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/MemelordPFP.jpg" alt="Light's profile picture">
-                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/UnderScorePFP.png" alt="Light's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: 90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/MemelordPFP.jpg" alt="Memelord's profile picture">
+                        <img style="--height: 50%; --top: unset; --right: calc(var(--link-height)/4); --left: unset; --bottom: unset; --angle: 0deg; --angle-move: -90deg; --angle-rotate: 0deg; --distance: 180%; --scale: 1;" src="/meet-the-team/pfps/UnderScorePFP.png" alt="UnderScore's profile picture">
                     </div>
                     <a href="/meet-the-team">
                         Meet the Team!

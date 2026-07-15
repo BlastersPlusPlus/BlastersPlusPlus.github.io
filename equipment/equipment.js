@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     let equipment;
     if(location.hash) equipment = document.getElementById(location.hash.replace('#',''))?.equipment;
     console.log(equipment);
-    if(equipment) openInfoPopup(equipment);
+    if(equipment) {
+        openInfoPopup(equipment);
+        let equipElement = document.getElementById(equipment.name);
+        window.scrollBy(0,equipElement?.getBoundingClientRect()?.top ?? 0);
+    }
 })
 
 function generateGrid() {

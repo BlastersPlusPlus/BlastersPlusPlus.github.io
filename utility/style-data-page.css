@@ -64,7 +64,7 @@ body {
 
     #closePopupContainer{
         position: fixed;
-        --min-size: 5vmin;
+        --min-size: 3vmax;
         top: calc(var(--min-size)/2);
         right: calc(var(--min-size)/2 + 10px);
         height: var(--min-size);
@@ -109,8 +109,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     #basic-search-options {
         align-items: stretch;
         justify-content: stretch;
-        /*display: grid;
-        grid-template-columns: repeat(auto-fit,minmax(7.5em,1fr));*/
         column-gap: 20px;
         row-gap: 10px;
 
@@ -247,14 +245,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
         .advanced-search-item-wrapper {
             display: flex;
             flex-flow: row nowrap;
-
-            &.movesFilter {
-                flex-wrap: wrap;
-            }
-
-            #rankFilter {
-                .inline-icon {height: 2em;}
-            }
+            align-items: center;
 
             gap: 0.5em;
             &>* {max-height: 3em;}
@@ -263,6 +254,8 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 
             .search-option-label {
                 flex-shrink: 0;
+
+                &:has(~ input[type=checkbox]) {cursor: pointer};
             }
 
             multi-select {
@@ -317,6 +310,11 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
         pointer-events: none;
         user-select: none;
         aspect-ratio: 1;
+
+        &:not(.custom-size) img {
+            width: 100%;
+            height: 100%;
+        }
     }
 
     .name {
@@ -370,6 +368,8 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     border-radius: 50px;
     padding-block: 40px;
 
+    --element-gap: 20px;
+
     font-family: var(--font-marugo), sans-serif;
 
     img.loading {visibility: hidden};
@@ -378,7 +378,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: var(--element-gap);
         margin-block: 30px;
     }
 

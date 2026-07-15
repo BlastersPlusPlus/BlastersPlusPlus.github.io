@@ -160,7 +160,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     let foundYokai;
     if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai ?? yokaiHashes[location.hash.replace('#','')];
     console.log(foundYokai);
-    if(foundYokai) openInfoPopup(foundYokai);
+    if(foundYokai) {
+        openInfoPopup(foundYokai);
+        let yokaiElement = document.getElementById(foundYokai.name);
+        window.scrollBy(0,yokaiElement?.getBoundingClientRect()?.top ?? 0);
+    }
 })
 
 function generateGrid() {
@@ -241,6 +245,7 @@ function generateGrid() {
             let medalContainer = document.createElement('div');
             medalContainer.classList.add('gridItemIcon');
             medalContainer.classList.add('yokaiMedal')
+            medalContainer.classList.add('custom-size')
 
 
             let medalFaceIcon = document.createElement('img');
@@ -408,24 +413,25 @@ async function openInfoPopup(yokai) {
         }
         document.getElementById('move'+i).classList.remove('noMove');
         document.getElementById('move'+i+'Icon').src = "/images/moveIcons/image"+yokai.moves[i]?.icon+".png"
-        document.getElementById('move'+i+'Text').innerText = yokai.moves[i]?.name;
+        document.getElementById('move'+i+'Text').innerHTML = `<a href="/move-list#${yokai.moves[i]?.id}">${yokai.moves[i]?.name}</a>`;
     }
 
-    document.getElementById('soultimateMoveName').textContent = yokai.soultimate?.name;
-    let soultDesc = document.getElementById('soultimateMoveDescription')
-    soultDesc.textContent = yokai.soultimate?.description;
-    if(yokai.soultimate.description === "") soultDesc.classList.add('empty')
-    else soultDesc.classList.remove('empty');
-    document.getElementById('soultimateMoveData').className = yokai.soultimate?.class;
-    document.getElementById('soultimateMovePower').textContent = yokai.soultimate?.power?.replaceAll(/\s*\+\s*/g,"/");
-    document.getElementById('soultimateMoveClass').textContent = yokai.soultimate?.class;
+    document.getElementById('soultimateMoveName').innerHTML = `<a href="/move-list#${yokai.soultimate?.id}">${yokai.soultimate?.name}</a>`;
+    //let soultDesc = document.getElementById('soultimateMoveDescription');
+    //soultDesc.textContent = yokai.soultimate?.description;
+    //if(yokai.soultimate.description === "") soultDesc.classList.add('empty');
+
+    /*else soultDesc.classList.remove('empty');
+    document.getElementById('soultimateMoveData').className = yokai.soultimate?.class;*/
+    //document.getElementById('soultimateMovePower').textContent = yokai.soultimate?.power?.replaceAll(/\s*\+\s*/g,"/");
+    /*document.getElementById('soultimateMoveClass').textContent = yokai.soultimate?.class;
     document.getElementById('soultimateMoveCharge').textContent = yokai.soultimate?.gauge;
-    document.getElementById('soultimateMoveCritRate').textContent = yokai.soultimate?.critRate;
-    document.getElementById('soultimateMoveScaling').textContent = yokai.soultimate?.scaling?.replaceAll(/\s*\|\s*/g,"/");
-    document.getElementById('soultimateMoveAttribute').textContent = yokai.soultimate?.attribute?.replaceAll(/\s*\|\s*/g,"/");
-    let soultInspirit = document.getElementById('soultimateInspirit');
+    document.getElementById('soultimateMoveCritRate').textContent = yokai.soultimate?.critRate;*/
+    //document.getElementById('soultimateMoveScaling').textContent = yokai.soultimate?.scaling?.replaceAll(/\s*\|\s*/g,"/");
+    //document.getElementById('soultimateMoveAttribute').textContent = yokai.soultimate?.attribute?.replaceAll(/\s*\|\s*/g,"/");
+    /*let soultInspirit = document.getElementById('soultimateInspirit');
     soultInspirit.textContent = yokai.soultimate?.inspiritEffects;
-    soultInspirit.classList.toggle('empty',yokai.soultimate?.inspiritEffects === "");
+    soultInspirit.classList.toggle('empty',yokai.soultimate?.inspiritEffects === "");*/
 
     let tier = getTier(yokai.score)
 

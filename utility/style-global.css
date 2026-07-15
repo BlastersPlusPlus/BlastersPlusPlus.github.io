@@ -215,6 +215,30 @@ a.reddit::after{content:"Reddit"}
     &.Skill{background:linear-gradient(180deg, #6a4815 0%, #a46207 100%);}
 }
 
+input[type=checkbox] {
+    appearance: unset;
+    height: 1.5em;
+    background-color: transparent;
+    border-radius: 20%;
+    aspect-ratio: 1;
+    border: 2px solid var(--checkbox-color, black);
+    box-sizing: border-box;
+    margin:0;
+
+    cursor: pointer;
+
+    &:focus-visible {outline: none;}
+}
+input[type=checkbox]:checked {
+    background-color: var(--checkbox-color, black);
+    mask-image: linear-gradient(var(--checkbox-color, black), var(--checkbox-color, black)), url("../images/other_assets/checkmark.svg");
+    mask-size: 100% 100%, contain;
+    mask-origin: border-box;
+    mask-position: 0 0, center;
+    mask-repeat: no-repeat;
+    mask-composite: subtract;
+}
+
 :root {
     --focus-outline: auto 5px black;
 

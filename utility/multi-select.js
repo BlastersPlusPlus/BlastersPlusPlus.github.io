@@ -175,7 +175,7 @@ class MultiSelect extends HTMLElement {
                     ${optionsHTML}
                 </div>
         `;
-        this.className = this.name;
+        this.classList.add(this.name);
         this.setAttribute("role","combobox");
         this.setAttribute("aria-haspopup", "listbox");
         this.setAttribute("aria-expanded","false");

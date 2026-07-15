@@ -1,0 +1,267 @@
+---
+---
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        {% include default-head.html %}
+        <title>Blasters Plus Plus: Move List</title>
+        <meta name="description" content="Find out detailed information on all usable moves in Blasters ++.">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="/utility/style-data-page.css">
+        <link href="/utility/multi-select.css" rel="stylesheet" type="text/css">
+        <script rel="text/javascript" src="./moveList.js"></script>
+    </head>
+    <body>
+        {% include header.html %}
+        <div class="bodyContents">
+            <noscript>
+                <div class="whiteOverWindow">
+                    JavaScript is disabled in your browser.<br>
+                    To view this page, please enable JavaScript.
+                </div>
+            </noscript>
+
+            <datalist id="search-options">
+            </datalist>
+
+            <div id="grid-options-container">
+                <div id="search-options-container" class="whiteOverWindow shadow">
+                    <div id="basic-search-options">
+                        <div class="search-sort-wrapper">
+                            <label for="name-search">Search Moves:</label>
+                            <input type="search" id="name-search" list="search-options" onchange="generateGrid()">
+                        </div>
+                        <div class="search-sort-wrapper">
+                            <label for="sort-options">Sort by:</label>
+                            <select id="sort-options" onchange="generateGrid()">
+                                <option selected>Name</option>
+                                <option value="Power">Total Power</option>
+                                <option>Number of Yo-kai</option>
+                            </select>
+
+                            <button class="sort-arrow" title="Ascending"
+                                 onclick="this.classList.toggle('Descending');
+                                 this.setAttribute('title',this.classList.contains('Descending') ? 'Descending' : 'Ascending');
+                                 descending*=-1;
+                                 generateGrid();">
+                                ↑
+                            </button>
+                        </div>
+                        <div class="search-sort-wrapper">
+                            <button class="advanced-search-toggle" onclick="document.getElementById('advanced-search-container').classList.toggle('open')">
+                                Advanced search... <span class="downArrow">▼</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="advanced-search-container" class="advanced-search-container">
+                        <div class="advanced-search-item-wrapper" style="--select-width: 15rem;">
+                            <div class="search-option-label">Type: </div>
+                            <multi-select class="search-options-input" id="typeFilter" name="typeFilter" placeholder="Filter by move type..."  search="false">
+                                <option selected>
+                                    A Move
+                                </option>
+                                <option selected>
+                                    Selectable Move
+                                </option>
+                                <option>
+                                    Soultimate Move
+                                </option>
+                            </multi-select>
+                        </div>
+                        <div class="advanced-search-item-wrapper" style="--select-width: 8rem;">
+                            <div class="search-option-label">Class: </div>
+                            <multi-select class="search-options-input" id="classFilter" name="classFilter" placeholder="Filter by move class..."  search="false">
+                                <option selected>
+                                    Attack
+                                </option>
+                                <option selected>
+                                    Heal
+                                </option>
+                                <option selected>
+                                    Status
+                                </option>
+                            </multi-select>
+                        </div>
+                        <div class="advanced-search-item-wrapper focus-inside">
+                            <label for="hideDuplicates" class="search-option-label">Hide moves with the same effect: </label>
+                            <input type="checkbox" class="search-options-input" id="hideDuplicates">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="loadContainer" ontransitionend="this.classList.add('no-animation')">
+                    Loading<span class="loadPeriod">.</span><span class="loadPeriod">.</span><span class="loadPeriod">.</span>
+                    <div class="inline-icon"><img src="/images/other_assets/load.gif" alt="An animated GIF of Komasan and Komajiro walking"></div>
+                </div>
+
+                <main id="grid"></main>
+            </div>
+
+
+            <dialog id="infoPopupContainer" closedby="none" autofocus>
+                    <div id="closePopupContainer" class="focus-inside">
+                        <button id="closePopup" onclick="closeInfoPopup()"></button>
+                    </div>
+                    <div id="infoPopup" class="moveList">
+                        <div id="infoInnerContainer">
+                            <div id="infoTitle">
+                                    <div class="inline-icon">
+                                        <img id="moveIcon" loading="eager" src="/images/moveIcons/image1.png"
+                                             alt="Move icon">
+                                    </div>
+                                    <span id="infoName">Attack</span>
+                            </div>
+
+                            <div id="infoPopupDescription">
+                            </div>
+
+                            <div class="tabsContainer" id="tabsContainer">
+                                <div id="tabList" class="tabList">
+                                    <button class="tabButton active" data-tab="overviewTab" onclick="switchTab(this);">
+                                        Overview
+                                    </button>
+                                    <button class="tabButton" data-tab="detailsTab" onclick="switchTab(this);">Details
+                                    </button>
+                                </div>
+                                <div class="moveDataTab active" id="overviewTab">
+                                    <div class="moveDataContainer">
+                                        <div id="gaugeText" class="data-text">This move can be held for up to <span class="numeric" id="gaugeUptime"></span> at a time.</div>
+                                        <div id="hitboxText" class="data-text">This move has a hitbox that lasts for <span class="numeric" id="hitboxTime"></span>, with <span class="numeric" id="timeBetweenHits"></span> between each hit.</div>
+                                        <div id="drainText" class="data-text">This move heals the user by <span class="numeric">25%</span> of the damage dealt.</div>
+                                        <div id="moveStats-main" class="moveStats">
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Class</div>
+                                                <div class="infoValue text" id="moveClass"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Target</div>
+                                                <div class="infoValue" id="moveTarget"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Power</div>
+                                                <div class="infoValue numeric" id="movePower"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Cooldown</div>
+                                                <div class="infoValue numeric" id="moveCooldown"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Crit Rate</div>
+                                                <div class="infoValue numeric" id="moveCritRate"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only noSoultimate">
+                                                <div class="infoTitle">Soul Gain</div>
+                                                <div class="infoValue numeric" id="moveSoulGain"></div>
+                                            </div>
+
+                                            <div class="moveInfo soultimate">
+                                                <div class="infoTitle">Gauge</div>
+                                                <div class="infoValue numeric" id="soultimateGauge"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Scaling</div>
+                                                <div class="infoValue text" id="moveScaling"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Attribute</div>
+                                                <div class="infoValue text" id="moveAttribute"></div>
+                                            </div>
+                                        </div>
+                                        <div id="moveInspirits" class="data-text"></div>
+                                    </div>
+                                    <div class="moveDataContainer" id="chargedDataContainer">
+                                        <div id="chargeText" class="data-text">This move can be charged and has a charge time of <span class="numeric" id="chargeTime"></span>. When charged, it has the following stats.</div>
+                                        <div id="hitboxText-charged" class="data-text">This move has a hitbox that lasts for <span class="numeric" id="hitboxTime-charged"></span>, with <span class="numeric" id="timeBetweenHits-charged"></span> between each hit.</div>
+                                        <div id="drainText-charged" class="data-text">This move heals the user by <span class="numeric">25%</span> of the damage dealt.</div>
+                                        <div id="moveStats-charged" class="moveStats">
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Class</div>
+                                                <div class="infoValue text" id="moveClass-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Target</div>
+                                                <div class="infoValue" id="moveTarget-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Power</div>
+                                                <div class="infoValue numeric" id="movePower-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Cooldown</div>
+                                                <div class="infoValue numeric" id="moveCooldown-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Crit Rate</div>
+                                                <div class="infoValue numeric" id="moveCritRate-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only noSoultimate">
+                                                <div class="infoTitle">Soul Gain</div>
+                                                <div class="infoValue numeric" id="moveSoulGain-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo soultimate">
+                                                <div class="infoTitle">Gauge</div>
+                                                <div class="infoValue numeric" id="soultimateGauge-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo">
+                                                <div class="infoTitle">Scaling</div>
+                                                <div class="infoValue text" id="moveScaling-charged"></div>
+                                            </div>
+
+                                            <div class="moveInfo param-only">
+                                                <div class="infoTitle">Attribute</div>
+                                                <div class="infoValue text" id="moveAttribute-charged"></div>
+                                            </div>
+                                        </div>
+                                        <div id="moveInspirits-charged" class="data-text"></div>
+                                    </div>
+
+                                </div>
+                                <div class="moveDataTab" id="detailsTab">
+                                </div>
+                            </div>
+
+                            <div class="moveDetailsSection" id="learnedBySection">
+                                <div class="detailsHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                                    <h1>Learned By<button class="downArrow"></button></h1>
+                                </div>
+
+                                <div class="detailsContent">
+                                    <p class="yokaiCountText"><span id="yokaiCount"></span> Yo-kai</p>
+                                    <div id="learnedBy"></div>
+                                </div>
+                            </div>
+
+                            <div class="moveDetailsSection" id="duplicateMovesSection">
+                                <div class="detailsHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                                    <h1>Moves with the same effect<button class="downArrow"></button></h1>
+                                </div>
+
+                                <div class="detailsContent">
+                                    <div id="duplicateMoves"></div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </dialog>
+
+        </div>
+        {% include footer.html %}
+
+    <script src="/utility/multi-select.js"></script>
+    </body>
+</html>

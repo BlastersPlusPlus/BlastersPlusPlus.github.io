@@ -259,6 +259,7 @@
         flex-direction: column;
         gap: 20px;
         width: fit-content;
+        margin-block-end: 20px;
     }
 
     #statsSkill {
@@ -339,6 +340,14 @@
         }
 
 
+    }
+
+    .moveName a {
+        color: black;
+        text-decoration: none;
+
+        &:hover {text-decoration: underline};
+        &:active {color: blue;}
     }
 
     #Movelist {
@@ -446,17 +455,9 @@
             .moveHexagonBorder {background-color: #888888}
             .moveName {display: none;}
         }
-    }
 
-    #soultimateMoveData {
-        display: flex;
-        flex-direction: column;
-        min-width: 70%;
-
-        .moveTitle {
-            height: var(--move-height);
-            position: relative;
-            display: flex;
+        #soultimateMove {
+            grid-column: 1/-1;
 
             .SoultimateIconWrapper {
                 height: var(--move-height);
@@ -497,8 +498,6 @@
                     }
                 }
             }
-
-
             .soultimateIconBorder {
                 height: calc(var(--move-height) + 0.5em);
                 width: calc(var(--move-height)*1.8 + 0.5em);
@@ -539,6 +538,20 @@
                     box-sizing: border-box;
                 }
             }
+        }
+    }
+
+    #soultimateMoveData {
+        display: flex;
+        flex-direction: column;
+        min-width: 70%;
+
+        .moveTitle {
+            height: var(--move-height);
+            position: relative;
+            display: flex;
+
+
         }
         .moveDescription, .inspirit {
             font-family: var(--font-marugo), sans-serif;
@@ -663,6 +676,16 @@
         margin-top: 1em;
         text-align: center;
         text-wrap: balance;
+    }
+}
+
+.advanced-search-item-wrapper {
+    &.movesFilter {
+        flex-wrap: wrap;
+    }
+
+    #rankFilter {
+        .inline-icon {height: 2em;}
     }
 }
 
