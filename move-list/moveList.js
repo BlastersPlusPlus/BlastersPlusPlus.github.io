@@ -247,6 +247,7 @@ async function openInfoPopup(move) {
 
     // Gets the cooldown of the original move
     let previousCooldown = cmd.timing?.cooldown;
+    let previousChargeNeeded = cmd.soulMeter?.chargeNeeded;
     let previousChargeTime = cmd.timing?.charge_time ?? 0;
 
     let newLinkArray = cmd.link?.filter(linkData => !hasNoEffect(orge_technic_cmd_data[linkData.move_ID]));
@@ -347,7 +348,7 @@ async function openInfoPopup(move) {
         cmd.soulMeter?.meterCharge && isSimpleMove ?
             cmd.soulMeter.meterCharge + (numHits > 1 ? 'x'+numHits : '') :
             '---';
-    document.getElementById('soultimateGauge').innerText = cmd.soulMeter?.chargeNeeded ?? '---';
+    document.getElementById('soultimateGauge').innerText = previousChargeNeeded ?? cmd.soulMeter?.chargeNeeded ?? '---';
 
     let moveScaling = document.getElementById('moveScaling');
     moveScaling.innerText =
