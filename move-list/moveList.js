@@ -710,6 +710,8 @@ function generateMoveDetails(cmd,forceParam,technicType,wrapContainer = false,le
 
             let linkData = newLinkArray[i];
 
+            if(hasNoEffect(orge_technic_cmd_data[linkData.move_ID])) continue;
+
             if (i > 0) elementText += `<hr class="${level >= 2 ? 'thick-separator' : level == 1 ? 'thin-separator' : 'no-separator'}">`;
 
             elementText +=
