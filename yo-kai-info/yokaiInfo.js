@@ -12,7 +12,7 @@ const tribeMedalNumbers = {
     "Slippery": 8,
     "Wicked": 9,
     "Enma": 9
-}
+};
 const tribeNumbers = {
     "Brave": 1,
     "Mysterious": 2,
@@ -24,7 +24,7 @@ const tribeNumbers = {
     "Slippery": 8,
     "Wicked": 9,
     "Enma": 10
-}
+};
 const rankNumbers = {
     "E": 0,
     "D": 1,
@@ -32,18 +32,18 @@ const rankNumbers = {
     "B": 3,
     "A": 4,
     "S": 5
-}
+};
 const roleNumbers = {
     'Fighter': 1,
     'Tank': 2,
     'Healer': 3,
     'Ranger': 4
-}
+};
 const speedNumbers = {
     'Fast': 2,
     'Normal': 1,
     'Slow': 0
-}
+};
 const tierNumbers = {
     'F': 0,
     'E': 1,
@@ -54,7 +54,7 @@ const tierNumbers = {
     'S': 6,
     'S+': 7,
     'S++': 8
-}
+};
 const sortFunctions = {
     'Medallium Number' : (a,b) => (0)*descending,
     'Name': (a,b) => ((a.searchName ?? a.name).localeCompare(b.searchName ?? b.name))*descending,
@@ -68,7 +68,7 @@ const sortFunctions = {
     'SPD': (a,b) => (speedNumbers[a.spd] - speedNumbers[b.spd])*descending,
     'Stat total': (a,b) => ((a.hp + a.str + a.spr + a.def) - (b.hp + b.str + b.spr + b.def))*descending,
     'Tier': (a,b) => (tierNumbers[getTier(a.score)] - tierNumbers[getTier(b.score)])*descending
-}
+};
 
 let itemIconsPromise, itemIDsPromise;
 
@@ -116,19 +116,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             option.value = item.searchName;
             datalist.appendChild(option);
         }
-    })
+    });
     let AMovesSet = new Set(), AllMovesSet = new Set();
 
     let moveIcons = {};
     data.forEach(yokai => {
         moveIcons[yokai.moves[0]?.name] = yokai.moves[0]?.icon;
-        AMovesSet.add(yokai.moves[0]?.name)
+        AMovesSet.add(yokai.moves[0]?.name);
 
         for(let i=1; i<yokai.moves.length; i++) {
             moveIcons[yokai.moves[i]?.name] = yokai.moves[i]?.icon;
             AllMovesSet.add(yokai.moves[i]?.name)
         }
-    })
+    });
 
     document.getElementById('AMoveFilter').addItems(AMovesSet.values().toArray().filter(moveName => moveName !== 'No Move').toSorted().map(moveName => {
         return {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             value: moveName,
             selected: true,
             html: (moveIcons[moveName] ? `<div class="inline-icon"><img src="/images/moveIcons/image${moveIcons[moveName]}.png"></div>` : '') + moveName
-        }
+        };
     }));
 
     // Calculates the array several times. Otherwise, the object references would be the same and they'd break the selectors. This way they don't have to be cloned.
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 value: moveName,
                 selected: true,
                 html: (moveIcons[moveName] ? `<div class="inline-icon"><img src="/images/moveIcons/image${moveIcons[moveName]}.png"></div>` : '') + moveName
-            }
+            };
         }));
     }
 
@@ -471,7 +471,7 @@ async function openInfoPopup(yokai) {
     let obtentionMethods = document.getElementById("obtentionMethods");
     obtentionMethods.innerHTML = '';
     if(yokai.costumeName) {
-        let costumeText = document.createElement('p')
+        let costumeText = document.createElement('p');
         costumeText.innerHTML = 'Change costume in the basement (unlocks after beating Captain Thunder)'
         obtentionMethods.appendChild(costumeText);
     }
@@ -489,7 +489,7 @@ async function openInfoPopup(yokai) {
 
         evolutionText.innerHTML = `Evolves from ${yokaiLink} at level ${evolutionData.level}`
         obtentionMethods.appendChild(evolutionText);
-    })
+    });
     yokai.obtention.fusion?.forEach((fusionData) => {
         let fusionText = document.createElement('p')
 
@@ -527,17 +527,17 @@ async function openInfoPopup(yokai) {
 
         fusionText.innerHTML = `Fuse ${part1} with ${part2}`
         obtentionMethods.appendChild(fusionText);
-    })
+    });
     new Set(yokai.obtention.patrol)?.forEach((patrolText) => {
         let patrolElement = document.createElement('p');
         patrolElement.innerText = patrolText;
         obtentionMethods.appendChild(patrolElement);
-    })
+    });
     new Set(yokai.obtention.missionReward)?.forEach((rewardText) => {
         let rewardElement = document.createElement('p');
         rewardElement.innerText = rewardText;
         obtentionMethods.appendChild(rewardElement);
-    })
+    });
     yokai.obtention.crank?.forEach((crankData) => {
         let crankElement = document.createElement('p');
 
@@ -555,7 +555,7 @@ async function openInfoPopup(yokai) {
 
         crankElement.innerHTML = isRegularCrank ? `${coinName} ${crankData.prize.toLowerCase()} prize` : `${crankName} ${crankData.prize.toLowerCase()} prize`
         obtentionMethods.appendChild(crankElement);
-    })
+    });
     yokai.obtention.circleReward?.forEach((circleData) => {
         let circleElement = document.createElement('p');
 
@@ -570,12 +570,12 @@ async function openInfoPopup(yokai) {
             let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
 
             circleElement.innerHTML += yokaiLink+`,</nobr> `;
-        })
+        });
 
         circleElement.innerHTML = circleElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
 
         obtentionMethods.appendChild(circleElement);
-    })
+    });
     yokai.obtention.legendSeal?.forEach((legendData) => {
         let legendElement = document.createElement('p');
 
@@ -590,12 +590,12 @@ async function openInfoPopup(yokai) {
             let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
 
             legendElement.innerHTML += yokaiLink+`,</nobr> `;
-        })
+        });
 
         legendElement.innerHTML = legendElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
 
         obtentionMethods.appendChild(legendElement);
-    })
+    });
 
     let evolutions = document.getElementById('evolutions');
     evolutions.classList.toggle('hidden',!yokai.evolution && yokai.fusion.length == 0);
@@ -639,7 +639,7 @@ async function openInfoPopup(yokai) {
 
         fusionText.innerHTML = `Evolves into ${resultLink} when fused with ${other}`
         evolutions.appendChild(fusionText);
-    })
+    });
 
 
 

@@ -202,8 +202,9 @@ a.reddit::after{content:"Reddit"}
 .hexagonTitle {
     color: white;
     font-family: YurukaStd, sans-serif;
-    mask: url("../images/other_assets/stretchedHexagon.svg");
-    mask-size: 100% 100%;
+    /*mask: url("../images/other_assets/stretchedHexagon.svg");
+    mask-size: 100% 100%;*/
+    clip-path: polygon(0 50%, 10.87% 0, 89.13% 0, 100% 50%, 89.13% 100%, 10.87% 100%);
     text-align: center;
     width: auto;
     aspect-ratio: 230/70;

@@ -244,7 +244,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 
         .advanced-search-item-wrapper {
             display: flex;
-            flex-flow: row nowrap;
+            flex-direction: row;
             align-items: center;
 
             gap: 0.5em;
@@ -266,6 +266,11 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
             }
         }
     }
+}
+.advanced-search-item-wrapper {
+    flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
 }
 
 #grid {

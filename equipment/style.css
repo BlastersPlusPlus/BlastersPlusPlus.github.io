@@ -223,6 +223,7 @@
             text-overflow: ellipsis;
             position: relative;
             display: flex;
+            align-items: center;
             height: var(--mat-height);
 
             .hexagonImageContainer {
@@ -252,31 +253,38 @@
 
                 .hexagonBackground {
                     height: 100%;
-                    width: 100%;
+                    /*width: 100%;
                     mask-image: url("/images/other_assets/regularHexagon.svg");
                     mask-size: 100% 100%;
                     mask-position: center center;
                     mask-repeat: no-repeat;
-                    margin-right: 5px;
+                    margin-right: 5px;*/
                     position: absolute;
-                    top: 0;
+                    /*top: 0;*/
                     left: 0;
                     z-index: 1;
+
+                    aspect-ratio: 1 / cos(30deg);
+                    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 
                     background-color: rgb(193,144,71);
                 }
 
                 .hexagonBorder {
                     height: calc(100% + 0.5em);
-                    width: calc(100% + 0.5em);
+                    /*width: calc(100% + 0.5em);*/
                     position: absolute;
-                    top: -0.25em;
+                    /*top: -0.25em;*/
                     left: -0.25em;
-                    mask-image: url("/images/other_assets/regularHexagon.svg");
+                    /*mask-image: url("/images/other_assets/regularHexagon.svg");
                     mask-size: 100% 100%;
                     mask-position: center center;
-                    mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;*/
                     z-index: 1;
+
+
+                    aspect-ratio: 1 / cos(30deg);
+                    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 
                     background-color: rgb(117,87,43);
                 }
@@ -287,8 +295,7 @@
                 text-overflow: ellipsis;
                 font-family: var(--font-marugo), sans-serif;
                 align-self: flex-end;
-                margin-left: calc(var(--mat-height) / 2);
-                margin-bottom: 1%;
+                margin-left: calc(var(--mat-height) / 2 + 20px);
                 min-width: calc(100% - var(--mat-height)/2);
                 height: 65%;
                 border-radius: 0 500px 500px 0;
@@ -373,6 +380,12 @@
         gap: 1em;
         h1 {font-family: var(--font-yuruka), sans-serif; margin-block: 0; text-align: center;}
     }
+}
+
+.advanced-search-item-wrapper.materialsFilter {
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
 }
 
 

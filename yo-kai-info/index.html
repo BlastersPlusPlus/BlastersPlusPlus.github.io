@@ -12,6 +12,18 @@
     </head>
     <body>
         {% include header.html %}
+
+        <svg height="0" width="0">
+            <defs>
+                <clipPath id="soultimateIconClipPath" clipPathUnits="objectBoundingBox">
+
+                    <polygon points="0.5,0.5 0.75,-0.5 1,0.5 0.75,1.5"></polygon>
+                    <polygon points="0,0.75 0.0694,0.5 0.75,0.5 0.75,1 0.0694,1"></polygon>
+
+                </clipPath>
+            </defs>
+        </svg>
+
         <div class="bodyContents">
             <noscript>
                 <div class="whiteOverWindow">
@@ -193,18 +205,18 @@
 
                             <div id="rankTribeAttributes">
                                 <div><img id="yokaiInfoRankIcon" loading="lazy"
-                                          onload="this.classList.remove('loading')"
-                                          onerror="this.classList.remove('loading')">
+                                          onload="this.classList.remove('loading');"
+                                          onerror="this.classList.remove('loading');">
                                     <p id="yokaiInfoRank"></p></div>
                                 <div id="role">
                                     <div><img id="yokaiInfoRoleIcon" loading="lazy"
-                                              onload="this.classList.remove('loading')"
-                                              onerror="this.classList.remove('loading')"></div>
+                                              onload="this.classList.remove('loading');"
+                                              onerror="this.classList.remove('loading');"></div>
                                     <p id="yokaiInfoRole"></p></div>
 
                                 <div><img id="yokaiInfoTribeIcon" loading="lazy"
-                                          onload="this.classList.remove('loading')"
-                                          onerror="this.classList.remove('loading')">
+                                          onload="this.classList.remove('loading');"
+                                          onerror="this.classList.remove('loading');">
                                     <p id="yokaiInfoTribe"></p></div>
                             </div>
 

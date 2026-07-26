@@ -362,38 +362,45 @@
             text-overflow: ellipsis;
             position: relative;
             display: flex;
+            align-items: center;
             height: var(--move-height);
 
             .moveIconContainer {
                 height: var(--move-height);
-                width: var(--move-height);
-                mask-image: url("/images/other_assets/regularHexagon.svg");
+                /*width: var(--move-height);
                 mask-size: 100% 100%;
                 mask-position: center center;
                 mask-repeat: no-repeat;
-                margin-right: 5px;
+                margin-right: 5px;*/
                 position: absolute;
-                top: 0;
+                /*top: 0;*/
                 left: 0;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 z-index: 1;
+
+                aspect-ratio: 1 / cos(30deg);
+                clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+
+
                 img {
                     height: 80%;
                 }
             }
             .moveHexagonBorder {
                 height: calc(var(--move-height) + 0.5em);
-                width: calc(var(--move-height) + 0.5em);
+                /*width: calc(var(--move-height) + 0.5em);*/
                 position: absolute;
-                top: -0.25em;
+                /*top: -0.25em;*/
                 left: -0.25em;
-                mask-image: url("/images/other_assets/regularHexagon.svg");
+                /*mask-image: url("/images/other_assets/regularHexagon.svg");
                 mask-size: 100% 100%;
                 mask-position: center center;
-                mask-repeat: no-repeat;
+                mask-repeat: no-repeat;*/
                 z-index: 1;
+                aspect-ratio: 1 / cos(30deg);
+                clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
             }
             .moveNameContainer {
                 max-width: 100%;
@@ -401,8 +408,7 @@
                 font-family: var(--font-marugo), sans-serif;
                 align-self: flex-end;
                 margin-left: calc(var(--move-height) / 2);
-                margin-bottom: 1%;
-                padding-left: calc(var(--move-height) / 2 + 10px);
+                padding-left: calc(var(--move-height) / 2 + 20px);
                 padding-right: 1em;
                 min-width: calc(100% - var(--move-height) - 30px); height: 65%;
                 margin-right: 20px;
@@ -461,29 +467,33 @@
 
             .SoultimateIconWrapper {
                 height: var(--move-height);
-                width: var(--move-height);
+                /*width: var(--move-height);*/
+                aspect-ratio: 1/cos(30deg);
                 position: absolute;
                 top: 0;
                 left: 0;
 
                 .SoultimateIconContainer {
                     height: 100%;
-                    width: calc(var(--move-height)*1.8);
+                    aspect-ratio: 2 / cos(30deg);
                     background-image: linear-gradient(0deg, #fff49f 0%, #ffe659 20%, #b8a23e 40%, #ffe861 50%, #ffffd3 100%);
-                    mask-image: url("/images/other_assets/soultimateIconOutline.svg");
+                    /*mask-image: url("/images/other_assets/soultimateIconOutline.svg");
                     mask-size: auto 100%;
                     mask-position: right;
                     -webkit-mask-position: right;
-                    mask-repeat: no-repeat;
+                    mask-repeat: no-repeat;*/
                     position: absolute;
                     top: 0;
                     right: 0;
                     z-index: 1;
+
+                    clip-path: url(#soultimateIconClipPath);
+
                     img {
                         height: 100%;
                         position: absolute;
                         top: 0;
-                        right: 0;
+                        right: calc(var(--move-height) * (1 - cos(30deg)) / 2);
                     }
                     .SoultimateIconText {
                         position: absolute;
@@ -515,8 +525,7 @@
                 font-family: var(--font-marugo), sans-serif;
                 align-self: flex-end;
                 margin-left: calc(var(--move-height) / 2);
-                margin-bottom: 1%;
-                padding-left: calc(var(--move-height) / 2 + 10px);
+                padding-left: calc(var(--move-height) / 2 + 20px);
                 padding-right: 1em;
                 min-width: calc(100% - var(--move-height) - 30px); height: 65%;
                 margin-right: 20px;
@@ -682,6 +691,8 @@
 .advanced-search-item-wrapper {
     &.movesFilter {
         flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        -webkit-flex-wrap: wrap;
     }
 
     #rankFilter {
