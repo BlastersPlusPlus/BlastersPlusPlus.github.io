@@ -2,7 +2,7 @@ html {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 0 0;
-    background-size: 100lvw 100lvh;
+    background-size: 100% calc(100lvh + 100lvh - 100svh);
 
     &.bgplain, &:has(select#background > option[value="plain"]:checked) {background-image: linear-gradient(167deg, rgba(255,191,140,1) 0%, rgba(255,255,140,1) 42%, rgba(180,229,248,1) 100%, rgba(255,255,140,1) 158%, rgba(255,191,140,1) 200%,);}
     &.bg0, &:has(select#background > option[value="0"]:checked) {background-image: linear-gradient(45deg, #fff5a2 0%, #b5dede 50%, #baaaff 100%, #b5dede 150%, #fff5a2 200%);}
