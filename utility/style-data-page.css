@@ -11,7 +11,7 @@
     #infoPopup {
         width: 100%;
         margin: 0;
-        height: 100%;
+        min-height: 100%;
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: 20px;}
         #infoPopupDescription {font-size: 1em;}

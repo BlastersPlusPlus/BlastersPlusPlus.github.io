@@ -2,6 +2,10 @@
     header {
         --header-height: 4em;
         --negative-header-height: -4em;
+        .headerNavigationTitle{font-size: 1.5em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1em;}
+        .headerNavigationSection.wide{display: none;}
+        .headerNavigationSection.small{display: block}
     }
 }
 
@@ -9,8 +13,13 @@
     header {
         --header-height: 8em;
         --negative-header-height: -8em;
+        .headerNavigationTitle{font-size: 2em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1.25em;}
+        .headerNavigationSection.small{display: none;}
+        .headerNavigationSection.wide{display: block;}
     }
 }
+
 
 
 header {
@@ -20,6 +29,7 @@ header {
     width: 100%;
     /*min-width: fit-content;*/
     height: var(--header-height);
+    grid-template-rows: 100%;
     /*position: relative;*/
 
     transition: top 0.3s ease;
@@ -157,23 +167,5 @@ header {
                 nav {height: min-content;}
             }
         };
-    }
-}
-
-@media all and (max-width: 650px) {
-    header {
-        .headerNavigationTitle{font-size: 1.5em;}
-        .headerNavigationPopupContainer ul>li {font-size: 1em;}
-        .headerNavigationSection.wide{display: none;}
-        .headerNavigationSection.small{display: block}
-    }
-}
-
-@media all and (min-width: 650px) {
-    header {
-        .headerNavigationTitle{font-size: 2em;}
-        .headerNavigationPopupContainer ul>li {font-size: 1.25em;}
-        .headerNavigationSection.small{display: none;}
-        .headerNavigationSection.wide{display: block;}
     }
 }
