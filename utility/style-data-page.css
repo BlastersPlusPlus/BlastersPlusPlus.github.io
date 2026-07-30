@@ -197,7 +197,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
             p {margin-block: 0;}
 
             label {
-                text-wrap: nowrap;
+                /*text-wrap: nowrap;*/
             }
 
             .sort-arrow {
@@ -321,7 +321,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 
 
             .search-option-label {
-                flex-shrink: 0;
+                /*flex-shrink: 0;*/
 
                 &:has(~ input[type=checkbox]) {cursor: pointer};
             }
