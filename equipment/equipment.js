@@ -355,7 +355,7 @@ function generateMaterialElement(material) {
     let iconContainer = document.createElement('div');
     iconContainer.classList.add('iconContainer');
     if(material.glade) iconContainer.classList.add('glade'+material.glade);
-    hexagonImageContainer.appendChild(iconContainer);
+    hexagonBackground.appendChild(iconContainer);
 
     let materialIcon = document.createElement('img');
     materialIcon.classList.add('materialIcon');

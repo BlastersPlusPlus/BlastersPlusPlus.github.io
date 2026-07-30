@@ -167,6 +167,7 @@ header {
             }
         };
 
-        .headerNavigationSection.wide:last-child {margin-right: 50px;}
+        .headerNavigationSection.wide:nth-last-child(2) {margin-right: 50px;}
+        .headerNavigationSection:last-child {margin-right: 15px;}
     }
 }

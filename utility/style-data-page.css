@@ -17,7 +17,8 @@
         #infoPopupDescription {font-size: 1em;}
     }
     #infoPopup::before, #infoPopup::after {width: 100%;}
-
+    #infoPopup::before {top: 0;}
+    #infoPopup::after {bottom: 0;}
 }
 
 @media only screen and (min-width: 768px) {
@@ -43,8 +44,8 @@
         border-top-right-radius: 50px;
         width: 100.2%;
     }
-    #infoPopup::before {left: -0.1%;}
-    #infoPopup::after {right: -0.1%;}
+    #infoPopup::before {left: -0.1%; top: -1px;}
+    #infoPopup::after {right: -0.1%; bottom: -1px;}
 }
 
 /*@media all and (min-width: 600px) {
@@ -104,39 +105,49 @@ body {
         transition-delay: 0s;
     }
 
-    #closePopupContainer{
+
+
+    #closePopup {
         position: fixed;
         --min-size: 50px;
         top: calc(var(--min-size)/2);
         right: calc(var(--min-size)/2 + 10px);
         height: var(--min-size);
         width: var(--min-size);
-        border-radius: var(--min-size);
+
+        background: none;
 
         z-index: 3;
 
-        #closePopup {
+
+        cursor: pointer;
+        transform: rotate(45deg);
+        /*mask-image: url("/images/other_assets/cross.svg");
+        mask-size: 100% 100%;*/
+        appearance: unset;
+        border: none;
+        &:hover {filter: brightness(0.8);}
+        &:active {filter: brightness(0.7);}
+        /*&:focus-visible {outline: none;}*/
+        border-radius: 100%;
+        padding: 0;
+        /*background-color: #aaaaaa;
+
+        @supports (border-shape: polygon(0 0, 100% 100%, 100% 100%, 0% 100%)) {
+            background-color: white;
+            mask: none;
+            border-shape: shape(from 40% 40%, vline to 10%, arc to 60% 10% of 10% cw, vline to 40%, hline to 90%, arc to 90% 60% of 10% cw, hline to 60%, vline to 90%, arc to 40% 90% of 10% cw, vline to 60%, hline to 10%, arc to 10% 40% of 10% cw, close)
+        }*/
+
+
+        svg {
             height: 100%;
             width: 100%;
-            cursor: pointer;
-            transform: rotate(45deg);
-            mask-image: url("/images/other_assets/cross.svg");
-            mask-size: 100% 100%;
-            appearance: unset;
-            border: none;
-            box-shadow: var(--standard-shadow);
-            &:hover {filter: brightness(0.8);}
-            &:active {filter: brightness(0.7);}
-            &:focus-visible {outline: none;}
-            background-color: #aaaaaa;
-
-            @supports (border-shape: polygon(0 0, 100% 100%, 100% 100%, 0% 100%)) {
-                background-color: white;
-                mask: none;
-                border-shape: shape(from 40% 40%, vline to 10%, arc to 60% 10% of 10% cw, vline to 40%, hline to 90%, arc to 90% 60% of 10% cw, hline to 60%, vline to 90%, arc to 40% 90% of 10% cw, vline to 60%, hline to 10%, arc to 10% 40% of 10% cw, close)
-            }
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: drop-shadow(0 0 2px);
         }
-        &:has(:focus-visible) {outline: var(--focus-outline);}
     }
 
     scrollbar-color: white transparent;
@@ -400,12 +411,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 }
 
 
-#infoPopup::before {
-    top: -1px;
-}
-
 #infoPopup::after {
-    bottom: -1px;
     transform: rotate(180deg);
 }
 

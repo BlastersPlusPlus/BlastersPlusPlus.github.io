@@ -236,6 +236,24 @@
 
                 z-index: 1;
 
+
+                @supports (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                    .hexagonBackground {
+                        border-width: 2px;
+                        border-style: solid;
+                        border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+                    }
+                    .hexagonBorder {
+                        display: none;
+                    }
+                }
+                @supports not (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                    .hexagonBackground {
+                        clip-path: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%);
+                        border: none;
+                    }
+                }
+
                 .iconContainer {
                     display: flex;
                     align-items: center;
@@ -249,35 +267,25 @@
 
                 .hexagonBackground {
                     height: 100%;
-                    /*width: 100%;
-                    mask-image: url("/images/other_assets/regularHexagon.svg");
-                    mask-size: 100% 100%;
-                    mask-position: center center;
-                    mask-repeat: no-repeat;
-                    margin-right: 5px;*/
                     position: absolute;
-                    /*top: 0;*/
                     left: 0;
                     z-index: 1;
 
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
                     aspect-ratio: 1 / cos(30deg);
-                    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 
                     background-color: rgb(193,144,71);
+                    border-color: rgb(117,87,43);
                 }
 
                 .hexagonBorder {
-                    height: calc(100% + 0.5em);
-                    /*width: calc(100% + 0.5em);*/
+                    height: calc(100% + 4px);
                     position: absolute;
-                    /*top: -0.25em;*/
-                    left: -0.25em;
-                    /*mask-image: url("/images/other_assets/regularHexagon.svg");
-                    mask-size: 100% 100%;
-                    mask-position: center center;
-                    mask-repeat: no-repeat;*/
+                    left: -2px;
                     z-index: 1;
-
 
                     aspect-ratio: 1 / cos(30deg);
                     clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);

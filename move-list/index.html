@@ -99,9 +99,17 @@
 
 
             <dialog id="infoPopupContainer" closedby="none" autofocus>
-                    <div id="closePopupContainer" class="focus-inside">
-                        <button id="closePopup" onclick="closeInfoPopup()"></button>
-                    </div>
+                    <button id="closePopup" onclick="closeInfoPopup();">
+                        <svg class="closePopupCross"
+                             height="100" width="100"
+                             viewBox="0 0 100 100"
+                             preserveAspectRatio="xMidYMid meet">
+                            <path fill="white" d="M 40,40 L 40,10 A 10 10 0 0 1 60 10
+                                    L 60,40 90,40 A 10 10 0 0 1 90 60
+                                    L 60,60 60,90 A 10 10 0 0 1 40 90
+                                    L 40,60 10,60 A 10 10 0 0 1 10 40Z"/>
+                        </svg>
+                    </button>
                     <div id="infoPopup" class="moveList">
                         <div id="infoInnerContainer">
                             <div id="infoTitle">
