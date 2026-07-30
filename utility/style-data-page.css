@@ -19,6 +19,10 @@
     #infoPopup::before, #infoPopup::after {width: 100%;}
     #infoPopup::before {top: 0;}
     #infoPopup::after {bottom: 0;}
+
+    #closePopup {
+        position: absolute;
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -46,6 +50,10 @@
     }
     #infoPopup::before {left: -0.1%; top: -1px;}
     #infoPopup::after {right: -0.1%; bottom: -1px;}
+
+    #closePopup {
+        position: fixed;
+    }
 }
 
 /*@media all and (min-width: 600px) {
@@ -70,8 +78,8 @@ body {
     opacity: 0;
     position: fixed;
     width: 100%;
-    min-height: 100vh;
-    height: 100vh;
+    min-height: 100dvh;
+    height: 100dvh;
     top: 0;
     left: 0;
     overflow-y: scroll;
@@ -108,10 +116,9 @@ body {
 
 
     #closePopup {
-        position: fixed;
         --min-size: 50px;
-        top: calc(var(--min-size)/2);
-        right: calc(var(--min-size)/2 + 10px);
+        top: 5vmin;
+        right: calc(5vmin + 10px);
         height: var(--min-size);
         width: var(--min-size);
 
