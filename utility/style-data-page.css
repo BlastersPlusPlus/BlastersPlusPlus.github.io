@@ -1,9 +1,35 @@
-@media all and (max-width: 6000px) {
+@media only screen and (max-width: 768px) {
+    #loadContainer {
+        font-size: 2em;
+    }
+
+    #grid {grid-auto-rows: 6em;}
+    #grid>.gridItem {
+        .name {font-size: 1.2em;}
+        .number {font-size: 1em;}
+    }
+    #infoPopup {
+        width: 100%;
+        margin: 0;
+        #infoTitle {font-size: 1.5em;}
+        #infoInnerContainer {margin-inline: 20px;}
+        #infoPopupDescription {font-size: 1em;}
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #loadContainer {
+        font-size: 3em;
+    }
+
+    #grid {grid-auto-rows: 10em;}
     #grid>.gridItem {
         .name {font-size: 1.5em;}
         .number {font-size: 1em;}
     }
     #infoPopup {
+        width: min(95%, 800px);
+        margin: 50px auto 50px auto;
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: max(10%,10px);}
         #infoPopupDescription {font-size: 1em;}
@@ -37,6 +63,11 @@ body {
     top: 0;
     left: 0;
     overflow-y: scroll;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
 
     --transition-speed: 0.5s;
 
@@ -276,7 +307,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 #grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(min(300px,100vw),1fr));
-    grid-auto-rows: 10em;
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 
@@ -368,8 +398,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 #infoPopup {
     position: relative;
     background-color: white;
-    width: min(95%, 800px);
-    margin: 50px auto 50px auto;
     border-radius: 50px;
     padding-block: 40px;
 
@@ -421,7 +449,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 #loadContainer {
     margin-inline: auto;
     font-family: var(--font-yuruka);
-    font-size: 3em;
     text-align: center;
     line-height: 1;
     margin-bottom: 20px;

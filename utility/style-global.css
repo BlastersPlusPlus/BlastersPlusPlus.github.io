@@ -5,6 +5,7 @@
 
 @font-face {
     font-family: UDMarugo;
+    size-adjust: 90%;
     src: url("/fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
 }
 
@@ -15,9 +16,46 @@
 
 .bukotsu {font-family: Bukotsu, YurukaStd, sans-serif; }
 
+
+:root {
+    --focus-outline: auto 5px black;
+
+    --brave-color: rgba(255,145,145,0.7);
+    --mysterious-color: rgba(255,255,63,0.7);
+    --tough-color: rgba(255,145,63,0.7);
+    --charming-color: rgba(255,145,200,0.7);
+    --heartful-color: rgba(63,255,63,0.7);
+    --shady-color: rgba(145,145,255,0.7);
+    --eerie-color: rgba(230,145,255,0.7);
+    --slippery-color: rgba(63,255,255,0.7);
+    --wicked-color: rgba(46,46,46,0.7);
+    --enma-color: rgba(145,0,58,0.7);
+
+    --font-standard: Noto Sans, system-ui, arial;
+    --font-yuruka: YurukaStd, Roboto, system-ui, arial;
+    --font-marugo: UDMarugo, Roboto, system-ui, arial;
+
+    --standard-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+
+html {
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+}
+
+
+
+
+
 @media (scripting: none) {
     .noJS {display: none}
 }
+
+
+
+
 
 * {-webkit-tap-highlight-color: transparent;}
 
@@ -51,36 +89,6 @@ body {
 
 header,footer {
     flex-shrink: 0;
-}
-
-@media all and (max-width: 650px) {
-    header {
-        .headerNavigationTitle{font-size: 1.5em;}
-        .headerNavigationPopupContainer ul>li {font-size: 1em;}
-        .headerNavigationSection.wide{display: none;}
-        .headerNavigationSection.small{display: block}
-    }
-
-    footer {
-        .navItem {font-size: 1em};
-        .footerTitle {font-size: 1.25em;}
-        #background {font-size: 1em;min-height: 2em;line-height: 2em;}
-    }
-}
-
-@media all and (min-width: 650px) {
-    header {
-        .headerNavigationTitle{font-size: 2em;}
-        .headerNavigationPopupContainer ul>li {font-size: 1.5em;}
-        .headerNavigationSection.small{display: none;}
-        .headerNavigationSection.wide{display: block;}
-    }
-
-    footer {
-        .navItem {font-size: 1.25em};
-        .footerTitle {font-size: 1.5em;}
-        #background {font-size: 1.5em;min-height: 2em;line-height: 2em;}
-    }
 }
 
 
@@ -240,26 +248,6 @@ input[type=checkbox]:checked {
     mask-composite: subtract;
 }
 
-:root {
-    --focus-outline: auto 5px black;
-
-    --brave-color: rgba(255,145,145,0.7);
-    --mysterious-color: rgba(255,255,63,0.7);
-    --tough-color: rgba(255,145,63,0.7);
-    --charming-color: rgba(255,145,200,0.7);
-    --heartful-color: rgba(63,255,63,0.7);
-    --shady-color: rgba(145,145,255,0.7);
-    --eerie-color: rgba(230,145,255,0.7);
-    --slippery-color: rgba(63,255,255,0.7);
-    --wicked-color: rgba(46,46,46,0.7);
-    --enma-color: rgba(145,0,58,0.7);
-
-    --font-standard: Noto Sans, system-ui, arial;
-    --font-yuruka: YurukaStd, Roboto, system-ui, arial;
-    --font-marugo: UDMarugo, Roboto, system-ui, arial;
-
-    --standard-shadow: 0 0 6px rgba(0,0,0,0.8);
-}
 
 @keyframes fadeIn {
     0% {

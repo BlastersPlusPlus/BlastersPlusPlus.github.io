@@ -1,5 +1,21 @@
+@media only screen and (max-width: 768px) {
+    header {
+        --header-height: 4em;
+        --negative-header-height: -4em;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    header {
+        --header-height: 8em;
+        --negative-header-height: -8em;
+    }
+}
+
+
 header {
     --header-height: 8em;
+    --negative-header-height: -8em;
     color: white;
     z-index: 2;
     margin-bottom: 20px;
@@ -12,7 +28,7 @@ header {
     position: sticky;
     left: 0;
     &.nav-down {top: 0;}
-    &.nav-up {top: -8em; }
+    &.nav-up {top: var(--negative-header-height); }
     &:has(:focus-visible) {top:0;}
 
     &.stuck.nav-up {
@@ -22,7 +38,7 @@ header {
     box-sizing: border-box;
     padding-top: 10px;
     padding-inline: 15px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: stretch;
@@ -143,5 +159,23 @@ header {
                 nav {height: min-content;}
             }
         };
+    }
+}
+
+@media all and (max-width: 650px) {
+    header {
+        .headerNavigationTitle{font-size: 1.5em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1em;}
+        .headerNavigationSection.wide{display: none;}
+        .headerNavigationSection.small{display: block}
+    }
+}
+
+@media all and (min-width: 650px) {
+    header {
+        .headerNavigationTitle{font-size: 2em;}
+        .headerNavigationPopupContainer ul>li {font-size: 1.25em;}
+        .headerNavigationSection.small{display: none;}
+        .headerNavigationSection.wide{display: block;}
     }
 }
