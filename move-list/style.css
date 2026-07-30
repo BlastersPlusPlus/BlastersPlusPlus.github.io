@@ -210,6 +210,7 @@
             &.numeric, &.noValue {font-family: var(--font-yuruka), sans-serif;}
             justify-self: start;
 
+            max-width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
         }
