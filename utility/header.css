@@ -14,8 +14,6 @@
 
 
 header {
-    --header-height: 8em;
-    --negative-header-height: -8em;
     color: white;
     z-index: 2;
     margin-bottom: 20px;
