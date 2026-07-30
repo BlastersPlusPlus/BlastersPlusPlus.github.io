@@ -37,7 +37,7 @@
         .infoValue {font-size: 1em;}
         .detailsHeader {font-size: 1.5em}
         .yokaiCountText {font-size: 1em}
-
+        #learnedBy, #duplicateMoves {font-size: 0.8em}
     }
 }
 
@@ -49,6 +49,7 @@
         .infoValue {font-size: 1.25em;}
         .detailsHeader {font-size: 2em;}
         .yokaiCountText {font-size: 1em}
+        #learnedBy, #duplicateMoves {font-size: 1em}
 
     }
 
