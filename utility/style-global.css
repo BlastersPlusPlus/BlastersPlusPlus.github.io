@@ -6,6 +6,7 @@
 @font-face {
     font-family: UDMarugo;
     size-adjust: 90%;
+    ms-size-adjust: 90%;
     src: url("/fonts/FOT-UDMarugo_LargePr6N-DB.otf") format("opentype");
 }
 

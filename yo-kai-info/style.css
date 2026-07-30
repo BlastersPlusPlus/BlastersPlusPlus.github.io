@@ -16,8 +16,21 @@
         }
         .moveName {font-size: 1.2em;}
         .moveDescription, .inspirit {font-size: 1em;}
-        .SoultimateIconText {font-size: 0.7em;}
+        .soultimateIconContainer {aspect-ratio: 1/cos(30deg);}
+        .SoultimateIconText {display: none;}
         .soultimateMoveInfo .infoValue {font-size: 1em;}
+    }
+
+
+    @supports (border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%)) {
+        .soultimateIconContainer {
+            border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+        }
+    }
+    @supports not (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+        .soultimateIconContainer {
+            clip-path: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+        }
     }
 }
 
@@ -39,8 +52,20 @@
         }
         .moveName {font-size: 1.5em;}
         .moveDescription, .inspirit {font-size: 1.2em;}
-        .SoultimateIconText {font-size: 1em;}
+        .SoultimateIconText {font-size: 1em; display: flex;}
+        .soultimateIconContainer {aspect-ratio: 2/cos(30deg);}
         .soultimateMoveInfo .infoValue {font-size: 1.5em;}
+    }
+
+    @supports (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+        .soultimateIconContainer {
+            border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%);
+        }
+    }
+    @supports not (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+        .soultimateIconContainer {
+            clip-path: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%);
+        }
     }
 }
 
@@ -359,6 +384,31 @@
             align-items: center;
             height: var(--move-height);
 
+            @supports (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                .moveIconContainer {
+                    border-width: 2px;
+                    border-style: solid;
+                    border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
+                }
+                .moveHexagonBorder {
+                    display: none;
+                }
+
+                .soultimateIconContainer {
+                    border-width: 2px;
+                    border-style: solid;
+                }
+            }
+            @supports not (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                .moveIconContainer {
+                    clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+                    border: none;
+                }
+                .soultimateIconContainer {
+                    border: none;
+                }
+            }
+
             .moveIconContainer {
                 height: var(--move-height);
                 /*width: var(--move-height);
@@ -375,7 +425,6 @@
                 z-index: 1;
 
                 aspect-ratio: 1 / cos(30deg);
-                clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
 
 
                 img {
@@ -383,11 +432,11 @@
                 }
             }
             .moveHexagonBorder {
-                height: calc(var(--move-height) + 0.5em);
+                height: calc(var(--move-height) + 4px);
                 /*width: calc(var(--move-height) + 0.5em);*/
                 position: absolute;
                 /*top: -0.25em;*/
-                left: -0.25em;
+                left: -2px;
                 /*mask-image: url("/images/other_assets/regularHexagon.svg");
                 mask-size: 100% 100%;
                 mask-position: center center;
@@ -429,92 +478,78 @@
 
         .AMove {
             grid-column: 1/-1;
-            .moveIconContainer {background-color: #f26635}
-            .moveNameContainer {background-color: #eeb69f}
+            .moveIconContainer {background-color: #f26635; border-color: #994433}
+            .moveNameContainer {background-color: #eeb69f;}
             .moveHexagonBorder {background-color: #994433;}
         }
         .XMove {
-            .moveIconContainer {background-color: #2fb3e5}
-            .moveNameContainer {background-color: #6facee}
+            .moveIconContainer {background-color: #2fb3e5; border-color: #1c7798}
+            .moveNameContainer {background-color: #6facee;}
             .moveHexagonBorder {background-color: #1c7798;}
         }
         .YMove {
-            .moveIconContainer {background-color: #48c427}
-            .moveNameContainer {background-color: #85e875};
-            .moveHexagonBorder {background-color: #3c7e2b};
+            .moveIconContainer {background-color: #48c427; border-color: #3c7e2b}
+            .moveNameContainer {background-color: #85e875;}
+            .moveHexagonBorder {background-color: #3c7e2b;}
         }
         .learnableMove {
-            .moveIconContainer {background-color: #ac51f7}
+            .moveIconContainer {background-color: #ac51f7; border-color: #6a4489}
             .moveNameContainer {background-color: #cda5ee}
             .moveHexagonBorder {background-color: #6a4489}
         }
         .noMove {
             img, .moveName {display: none;}
-            .moveIconContainer {background-color: #aaaaaa}
+            .moveIconContainer {background-color: #aaaaaa; border-color: #888888}
             .moveNameContainer { background-color: #cccccc;}
-            .moveHexagonBorder {background-color: #888888}
+            .moveHexagonBorder {background-color: #888888;}
             .moveName {display: none;}
         }
 
         #soultimateMove {
             grid-column: 1/-1;
 
+            .SoultimateIconContainer {
+                height: 100%;
+                background-image: linear-gradient(0deg, #fff49f 0%, #ffe659 20%, #b8a23e 40%, #ffe861 50%, #ffffd3 100%);
+                /*mask-image: url("/images/other_assets/soultimateIconOutline.svg");
+                mask-size: auto 100%;
+                mask-position: right;
+                -webkit-mask-position: right;
+                mask-repeat: no-repeat;*/
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 1;
+                box-sizing: border-box;
+                border-color: black;
+
+                img {
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    right: calc(var(--move-height) * (1 - cos(30deg)) / 2);
+                }
+                .SoultimateIconText {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    height: 50%;line-height: 100%;
+                    font-family: var(--font-marugo), sans-serif;
+                    align-items: center;
+                    letter-spacing: -0.5px;
+                    padding-left: 10%;
+                }
+            }
+
             .SoultimateIconWrapper {
-                height: var(--move-height);
+                height: calc(var(--move-height) + 4px);
                 /*width: var(--move-height);*/
                 aspect-ratio: 1/cos(30deg);
                 position: absolute;
                 top: 0;
                 left: 0;
-
-                .SoultimateIconContainer {
-                    height: 100%;
-                    aspect-ratio: 2 / cos(30deg);
-                    background-image: linear-gradient(0deg, #fff49f 0%, #ffe659 20%, #b8a23e 40%, #ffe861 50%, #ffffd3 100%);
-                    /*mask-image: url("/images/other_assets/soultimateIconOutline.svg");
-                    mask-size: auto 100%;
-                    mask-position: right;
-                    -webkit-mask-position: right;
-                    mask-repeat: no-repeat;*/
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    z-index: 1;
-
-                    clip-path: url(#soultimateIconClipPath);
-
-                    img {
-                        height: 100%;
-                        position: absolute;
-                        top: 0;
-                        right: calc(var(--move-height) * (1 - cos(30deg)) / 2);
-                    }
-                    .SoultimateIconText {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        height: 50%;line-height: 100%;
-                        font-family: var(--font-marugo), sans-serif;
-                        display: flex;
-                        align-items: center;
-                        letter-spacing: -0.5px;
-                        padding-left: 10%;
-                    }
-                }
             }
-            .soultimateIconBorder {
-                height: calc(var(--move-height) + 0.5em);
-                width: calc(var(--move-height)*1.8 + 0.5em);
-                position: absolute;
-                top: -0.25em;
-                right: -0.25em;
-                background-color: transparent;
-                mask-image: url("/images/other_assets/soultimateIconOutline.svg");
-                mask-size: auto 100%;
-                mask-position: right;
-                mask-repeat: no-repeat;
-                z-index: 1;
-            }
+
             .moveNameContainer {
                 font-family: var(--font-marugo), sans-serif;
                 align-self: flex-end;

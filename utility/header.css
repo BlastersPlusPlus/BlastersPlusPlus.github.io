@@ -80,7 +80,6 @@ header {
         justify-self: end;
         align-items: center;
         gap: 30px;
-        margin-right: 50px;
         >.headerNavigationSection {
             position: relative;
             .headerNavigationTitle {
@@ -167,5 +166,7 @@ header {
                 nav {height: min-content;}
             }
         };
+
+        .headerNavigationSection.wide:last-child {margin-right: 50px;}
     }
 }

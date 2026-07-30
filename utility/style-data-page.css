@@ -16,6 +16,8 @@
         #infoInnerContainer {margin-inline: 20px;}
         #infoPopupDescription {font-size: 1em;}
     }
+    #infoPopup::before, #infoPopup::after {width: 100%;}
+
 }
 
 @media only screen and (min-width: 768px) {
@@ -31,10 +33,18 @@
     #infoPopup {
         width: min(95%, 800px);
         margin: 50px auto 50px auto;
+        border-radius: 50px;
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: max(10%,10px);}
         #infoPopupDescription {font-size: 1em;}
     }
+    #infoPopup::before, #infoPopup::after {
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        width: 100.2%;
+    }
+    #infoPopup::before {left: -0.1%;}
+    #infoPopup::after {right: -0.1%;}
 }
 
 /*@media all and (min-width: 600px) {
@@ -96,7 +106,7 @@ body {
 
     #closePopupContainer{
         position: fixed;
-        --min-size: 3vmax;
+        --min-size: 50px;
         top: calc(var(--min-size)/2);
         right: calc(var(--min-size)/2 + 10px);
         height: var(--min-size);
@@ -118,6 +128,13 @@ body {
             &:hover {filter: brightness(0.8);}
             &:active {filter: brightness(0.7);}
             &:focus-visible {outline: none;}
+            background-color: #aaaaaa;
+
+            @supports (border-shape: polygon(0 0, 100% 100%, 100% 100%, 0% 100%)) {
+                background-color: white;
+                mask: none;
+                border-shape: shape(from 40% 40%, vline to 10%, arc to 60% 10% of 10% cw, vline to 40%, hline to 90%, arc to 90% 60% of 10% cw, hline to 60%, vline to 90%, arc to 40% 90% of 10% cw, vline to 60%, hline to 10%, arc to 10% 40% of 10% cw, close)
+            }
         }
         &:has(:focus-visible) {outline: var(--focus-outline);}
     }
@@ -211,6 +228,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
             margin-inline-start: 0.5rem;
             padding-inline-start: 0.5rem;
             flex-grow: 1;
+            height: 2em;
         }
 
         select, option {
@@ -372,33 +390,28 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
 
 #infoPopup::before, #infoPopup::after {
     content: "";
-    width: 100.2%;
     height: 50px;
     position: absolute;
 
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
     background-image: linear-gradient(0deg, black 0%, black 30%, #391849 100%);
     mask: url("/images/other_assets/topDecoration.svg");
     mask-repeat: repeat-x;
     mask-size: auto 50px;
 }
 
+
 #infoPopup::before {
     top: -1px;
-    left: -0.1%;
 }
 
 #infoPopup::after {
     bottom: -1px;
-    right: -0.1%;
     transform: rotate(180deg);
 }
 
 #infoPopup {
     position: relative;
     background-color: white;
-    border-radius: 50px;
     padding-block: 40px;
     box-sizing: border-box;
 
