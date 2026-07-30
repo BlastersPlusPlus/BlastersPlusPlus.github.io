@@ -1,16 +1,18 @@
-@media all and (max-width: 600px) {
+@media all and (max-width: 768px) {
+    #craftingDataContainer .materialData {grid-template-columns: 1fr;}
     #infoPopup {
         #rankTribeAttributes {
             --image-size: 2.5em;
         }
         #stats { .statData {font-size: 1em;} }
         #skillDescription {font-size: 1em;}
-        #craftingDataContainer .materialData {--mat-height: 3em;        }
+        #craftingDataContainer .materialData {--mat-height: 3em;}
         #craftingDataContainer .baseItem .iconContainer, #craftingDataContainer .upgrade .iconContainer {height: 3em; width: 3em;}
     }
 }
 
-@media all and (min-width: 600px) {
+@media all and (min-width: 768px) {
+    #craftingDataContainer .materialData {grid-template-columns: 1fr 1fr;}
     #infoPopup {
         #rankTribeAttributes {
             --image-size: 4em;
@@ -22,13 +24,9 @@
     }
 }
 
-@media all and (max-width: 800px) {
-    #craftingDataContainer .materialData {grid-template-columns: 1fr;}
-}
 
-@media all and (min-width: 800px) {
-    #craftingDataContainer .materialData {grid-template-columns: 1fr 1fr;}
-}
+
+
 
 /*#infoPopupContainer {
     &:not(.hasDetails) .detail {display: none !important;};
@@ -209,8 +207,6 @@
     }
 
     .materialData {
-        --mat-height: 4em;
-
         display: grid;
         grid-auto-rows: var(--mat-height);
         row-gap: 10px;
@@ -236,7 +232,7 @@
                 left: 0;
 
                 height: 100%;
-                aspect-ratio: 1;
+                aspect-ratio: 1 / cos(30deg);
 
                 z-index: 1;
 
@@ -295,8 +291,8 @@
                 text-overflow: ellipsis;
                 font-family: var(--font-marugo), sans-serif;
                 align-self: flex-end;
-                margin-left: calc(var(--mat-height) / 2 + 20px);
-                min-width: calc(100% - var(--mat-height)/2);
+                margin-left: calc(var(--mat-height) * cos(30deg) / 2 + 20px);
+                min-width: calc(100% - var(--mat-height) * cos(30deg));
                 height: 65%;
                 border-radius: 0 500px 500px 0;
                 z-index: 0;
@@ -308,7 +304,7 @@
                 background-color: rgb(230,209,171);
 
                 .materialName {
-                    margin-left: calc(var(--mat-height) / 2 + 10px);;
+                    margin-left: calc(var(--mat-height) * cos(30deg) / 2 + 10px);;
                     margin-right: 1em;
                     max-width: 100%;
                     text-overflow: ellipsis;

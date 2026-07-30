@@ -3,7 +3,7 @@
         font-size: 2em;
     }
 
-    #grid {grid-auto-rows: 6em;}
+    #grid {grid-auto-rows: 6em; grid-row-gap: 15px}
     #grid>.gridItem {
         .name {font-size: 1.2em;}
         .number {font-size: 1em;}
@@ -11,6 +11,7 @@
     #infoPopup {
         width: 100%;
         margin: 0;
+        height: 100%;
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: 20px;}
         #infoPopupDescription {font-size: 1em;}
@@ -22,7 +23,7 @@
         font-size: 3em;
     }
 
-    #grid {grid-auto-rows: 10em;}
+    #grid {grid-auto-rows: 10em; grid-row-gap: 30px}
     #grid>.gridItem {
         .name {font-size: 1.5em;}
         .number {font-size: 1em;}
@@ -400,6 +401,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     background-color: white;
     border-radius: 50px;
     padding-block: 40px;
+    box-sizing: border-box;
 
     --element-gap: 20px;
 
