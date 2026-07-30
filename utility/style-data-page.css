@@ -197,7 +197,7 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
             p {margin-block: 0;}
 
             label {
-                /*text-wrap: nowrap;*/
+                text-wrap: nowrap;
             }
 
             .sort-arrow {
