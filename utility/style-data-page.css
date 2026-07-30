@@ -309,7 +309,6 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(min(300px,100vw),1fr));
     grid-column-gap: 30px;
-    grid-row-gap: 30px;
 
     justify-content: center;
     align-items: center;
