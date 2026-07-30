@@ -3,19 +3,19 @@ body {
     overflow-x: hidden;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     main{gap:25px;}
-    main>.pageLinkSection {
+    main {
         --link-height: 100px;
-        >a {font-size: 1.5em}
+        >.pageLinkSection>a {font-size: 1.5em}
     }
 }
 
-@media (min-width: 600px) {
+@media (min-width: 768px) {
     main{gap:50px;}
-    main>.pageLinkSection {
+    main {
         --link-height: 200px;
-        >a {font-size: 3.5em}
+        >.pageLinkSection>a {font-size: 3.5em}
     }
 }
 
@@ -35,7 +35,7 @@ body {
 }
 
 main {
-    width: min(600px,90vw);
+    width: min(600px,90vw,calc(100% - var(--link-height) - 50px));
     margin-inline: auto;
     margin-block: 30px;
     display: flex;
