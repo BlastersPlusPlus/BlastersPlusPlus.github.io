@@ -29,6 +29,31 @@
     .downArrow {display: none;}
 }
 
+@media all and (max-width: 768px) {
+    #infoPopup {
+        .moveStats {grid-template-columns: 1fr;}
+        .data-text {font-size: 1em}
+        .infoTitle {font-size: 0.8em}
+        .infoValue {font-size: 1em;}
+        .detailsHeader {font-size: 1.5em}
+        .yokaiCountText {font-size: 1em}
+
+    }
+}
+
+@media all and (min-width: 768px) {
+    #infoPopup {
+        .moveStats {grid-template-columns: 1fr 1fr;}
+        .data-text {font-size: 1.15em}
+        .infoTitle {font-size: 1em}
+        .infoValue {font-size: 1.25em;}
+        .detailsHeader {font-size: 2em;}
+        .yokaiCountText {font-size: 1em}
+
+    }
+
+}
+
 
 
 #grid>.gridItem {
@@ -66,10 +91,6 @@
 #infoPopup {
     #infoTitle {
         font-family: var(--font-marugo), sans-serif;
-    }
-
-    #infoInnerContainer #infoPopupDescription {
-        font-size: 1.25em;
     }
 
     .tabsContainer {
@@ -140,7 +161,7 @@
 
         &:not(.active) {display: none}
 
-        .data-text {font-size: 1.15em}
+
 
 
         hr {
@@ -165,6 +186,7 @@
         text-align: center;
         align-items: center;
         gap: 10px;
+        overflow: hidden;
         .infoTitle {
             background-color: #cbcbcb;
             letter-spacing: -0.5px;
@@ -178,7 +200,7 @@
             min-width: 5.5em;
             white-space: nowrap;
 
-            font-size: 1em;
+
             line-height: calc(5.5em*0.7/2.3);
 
             aspect-ratio: 230/70;
@@ -187,7 +209,9 @@
             &.text {font-family: var(--font-marugo), sans-serif;}
             &.numeric, &.noValue {font-family: var(--font-yuruka), sans-serif;}
             justify-self: start;
-            font-size: 1.25em;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
     .hidden {
@@ -195,7 +219,6 @@
     }
     .moveStats {
         display: grid;
-        grid-template-columns: 1fr 1fr;
         column-gap: 20px;
         row-gap: 5px;
         width: fit-content;
@@ -228,7 +251,6 @@
         display: flex;
         align-items: stretch;
         justify-content: center;
-        font-size: 2em;
         font-family: var(--font-yuruka), sans-serif;
 
         > h1 {
@@ -271,12 +293,10 @@
     .yokaiCountText {
         #yokaiCount {font-family: var(--font-yuruka), sans-serif;}
         text-align: center;
-        font-size: 1.25em;
     }
     .detailsContent, .moveDataTab .data-text {
         text-align: center;
         text-wrap: balance;
-
     }
 
 
