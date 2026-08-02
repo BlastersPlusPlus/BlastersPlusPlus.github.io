@@ -237,7 +237,7 @@
                 z-index: 1;
 
 
-                @supports (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                @supports (border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%)) {
                     .hexagonBackground {
                         border-width: 2px;
                         border-style: solid;
@@ -247,9 +247,9 @@
                         display: none;
                     }
                 }
-                @supports not (border-shape: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%)) {
+                @supports not (border-shape: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%)) {
                     .hexagonBackground {
-                        clip-path: polygon(50% 50%, 62.5% 0, 87.5% 0, 100% 50%, 87.5% 100%, 6.94% 100%, 0 75%, 6.94% 50%);
+                        clip-path: polygon(0 50%, 25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%);
                         border: none;
                     }
                 }
