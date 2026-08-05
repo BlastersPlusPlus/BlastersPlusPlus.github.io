@@ -417,8 +417,8 @@ async function openInfoPopup(yokai) {
     }
 
     document.getElementById('soultimateMoveName').innerHTML = `<a href="/move-list#${yokai.soultimate?.id}">${yokai.soultimate?.name}</a>`;
-    //let soultDesc = document.getElementById('soultimateMoveDescription');
-    //soultDesc.textContent = yokai.soultimate?.description;
+    let soultDesc = document.getElementById('soultimateMoveDescription');
+    soultDesc.textContent = yokai.soultimate?.description;
     //if(yokai.soultimate.description === "") soultDesc.classList.add('empty');
 
     /*else soultDesc.classList.remove('empty');

@@ -577,6 +577,14 @@
                 }
             }
         }
+
+        #soultimateMoveDescription {
+            font-size: 1.2em;
+            grid-column: 1 / -1;
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
 
     #soultimateMoveData {
