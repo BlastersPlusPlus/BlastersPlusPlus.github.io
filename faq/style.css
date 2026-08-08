@@ -22,7 +22,7 @@ main {
 }
 
 @media (scripting: enabled) {
-    .FAQQuestion>.answerContainer, .FAQQuestion iframe, .FAQQuestion>.answerContainer .code {
+    .FAQQuestion>.answerContainer, .FAQQuestion iframe, .FAQQuestion>.answerContainer .code, .FAQQuestion>.answerContainer img {
         /* fade out, then shrink */
         transition: opacity .25s,
         font-size .25s .25s,
@@ -35,7 +35,9 @@ main {
     .FAQQuestion.open iframe,
     .FAQQuestion>.answerContainer:has(:focus-visible) iframe,
     .FAQQuestion.open>.answerContainer .code,
-    .FAQQuestion>.answerContainer:has(:focus-visible) .code {
+    .FAQQuestion>.answerContainer:has(:focus-visible) .code,
+    .FAQQuestion.open>.answerContainer img,
+    .FAQQuestion>.answerContainer:has(:focus-visible) img {
         transition: font-size .25s,
         margin .25s,
         padding .25s,
@@ -47,7 +49,7 @@ main {
         margin: 0;
         opacity: 0;
         padding: 0;
-        iframe {width: 0;}
+        iframe, img {width: 0;}
         .code {font-size: 0;}
     }
 }
@@ -110,14 +112,17 @@ main {
             .code {font-size: 12px; font-family: monospace; word-break: break-all;}
         }
 
-        iframe {
+        iframe, img {
             display: block;
             width: 560px;
             max-width: 100%;
             height: auto;
-            aspect-ratio: 16/9;
             margin-inline: auto;
         }
+
+        iframe {aspect-ratio: 16/9;}
+
+
     }
 }
 

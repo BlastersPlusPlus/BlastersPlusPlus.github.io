@@ -4,7 +4,7 @@ html {
     background-position: 0 0;
     background-size: 100% 100lvh;
 
-    &.bgplain, &:has(select#background > option[value="plain"]:checked) {background-image: linear-gradient(167deg, rgba(255,191,140,1) 0%, rgba(255,255,140,1) 42%, rgba(180,229,248,1) 100%, rgba(255,255,140,1) 158%, rgba(255,191,140,1) 200%,);}
+    &.bgplain, &:has(select#background > option[value="plain"]:checked) {background-image: linear-gradient(167deg, rgba(255,191,140,1) 0%, rgba(255,255,140,1) 42%, rgba(180,229,248,1) 100%, rgba(255,255,140,1) 158%, rgba(255,191,140,1) 200%);}
     &.bg0, &:has(select#background > option[value="0"]:checked) {background-image: linear-gradient(45deg, #fff5a2 0%, #b5dede 50%, #baaaff 100%, #b5dede 150%, #fff5a2 200%);}
     &.bg1, &:has(select#background > option[value="1"]:checked) {background-image: linear-gradient(20deg, #bbfdfd 0%, #7ea0ff 100%, #bbfdfd 200%);}
     &.bg2, &:has(select#background > option[value="2"]:checked) {background-image: linear-gradient(30deg, #ffeee6 0%, #e87da6 100%, #ffeee6 200%);}
@@ -29,7 +29,7 @@ html {
                 linear-gradient(0deg, #164869 0%, #eaf2b9 100%, #164869 200%);
     }
 
-    &:has(select#background > option[value="plain"]:checked)::before {background-image: none;}
+    &.bgplain::before, &:has(select#background > option[value="plain"]:checked)::before {background-image: none;}
     &.bg0::before, &:has(select#background > option[value="0"]:checked)::before {background-image: url("/backgrounds/003.000.png");}
     &.bg1::before, &:has(select#background > option[value="1"]:checked)::before {background-image: url("/backgrounds/003.001.png");}
     &.bg2::before, &:has(select#background > option[value="2"]:checked)::before {background-image: url("/backgrounds/003.002.png");}

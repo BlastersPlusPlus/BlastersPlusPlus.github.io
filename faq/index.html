@@ -14,14 +14,14 @@
                 } else {
                     history.replaceState(null,null,location.pathname+location.search);
                 }
-            }
+            };
             
             document.addEventListener('DOMContentLoaded', () => {
                 let question;
                 if(!location.hash) return;
                 question = document.getElementById(location.hash.replace('#',''));
                 question?.classList.add('open');
-            })
+            });
         </script>
     </head>
     <body>
@@ -60,13 +60,13 @@
                                     Make sure 'Enable game patching' is set (marked as (x)). If it's not, enable it and save the changes.</li>
                             </ol>
                         </section>
-                        <section><h2>Citra</h2>
+                        <section><h2>Citra forks</h2>
                             <ol>
                                 <li>Download the mod file.</li>
-                                <li>Open Citra, and right-click on your copy of YO-KAI WATCH BLASTERS.
+                                <li>Open your emulator, and right-click on your copy of YO-KAI WATCH BLASTERS.
                                     Select the option that says 'Open Mods Location.'</li>
                                 <li>Open the mod file that you downloaded earlier with an appropiate program. Inside it there will be a 'romfs' folder. Drag
-                                    this folder into the folder that Citra has just opened.</li>
+                                    this folder into the folder that the emulator has just opened.</li>
                                 <li>Make sure you don't have any mods in your mods folder.</li>
                             </ol>
                         </section>
@@ -156,23 +156,43 @@
                             <h2>3DS</h2>
                             <p>The 3DS online servers shut down in April of 2024, but there are custom-built servers for several games.
                                 For Blasters, there is Level256 network, which disables game patching, meaning that <strong>you cannot regularly use Blasters ++ and Level256 at the same</strong>.<br>
-                                At the time of writing, Pretendo Network does <b>not</b> support Blasters yet.</p>
+                                At the time, Pretendo Network does <b>not</b> support Blasters yet.</p>
                         </section>
                         <section>
-                            <h2>Citra</h2>
-                            <p>You can play online on Citra by changing some configurations to enable the use of different lobbies</p>
-                            <p>In order to do this, you need to open the <span class="code">qt-config.ini</span> Citra configuration file.
-                                On Windows, this file is found at <span class="code">C:\Users\&lt;your username&gt;\AppData\Roaming\Citra\config</span>.
+                            <h2>Citra forks</h2>
+                            <p>You can play online on Citra forks by changing some configurations to enable the use of different lobbies</p>
+                            <p>In order to do this, you need to open the <span class="code">qt-config.ini</span> configuration file.
+                                On Windows, this file is found at <span class="code">C:\Users\&lt;your username&gt;\AppData\Roaming\&lt;your fork&gt;\config</span>.
                                 Open it using Notepad and search for WebService (you can do this with the shortcut Ctrl+F if your device is in English).
                                 Replace the <span class="code">web_api_url</span> lines with the following:</p>
                             <p><span class="code">web_api_url\default=false<br>
                                     web_api_url=http:/88.198.47.46:5000</span></p>
-                            <p>After saving your changes (and ensuring the save was succesful!), you should be able to join multiplayer rooms. If Citra is currently open, you will need to close and reopen it to let the changes take place.</p>
+                            <p>After saving your changes (and ensuring the save was succesful!), you should be able to join multiplayer rooms. If the program is currently open, you will need to close and reopen it to let the changes take place.</p>
                             <p>To play with others, you will need to join a room. In the multiplayer menu, you can either browse public rooms or directly join one given its address and port. Once in the room, you can open the game and go to <strong>local multiplayer</strong> to start playing.</p>
                         </section>
                         <section>
-                            <p>Note that, when playing with others without the mod, they won't be able to see Blasters ++ Yo-kai. Depending on who hosts the room, other behaviors will also change.<br>
+                            <p>Note that, when playing with others without the mod, they won't be able to see Blasters ++ Yo-kai. Depending on who hosts the room, other unexpected behaviors will occur, leading to and including game crashes.<br>
                             When playing Blasters ++ online, make sure to avoid playing with users without the mod (or with different versions of it) so as to not ruin their experience. Likewise, follow the guidelines of whatever online service you are using.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="PretendoNetwork" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
+                        <h1>How can I use Blasters <span class="bukotsu">++</span> with Pretendo Network when the service is active?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>In order to play Blasters ++ online using Pretendo Network, you will need to first install the service. You can do so by following <a href="https://pretendo.network/docs/install" target="_blank">their installation guide</a>.</p>
+                            <p>The Pretendo Network team has developed a patch to ensure that Blasters ++ players can use the service without disrupting vanilla players. When using Blasters ++ and their service, <b>you must apply this patch</b>.<br>
+                            There are two versions depending on your game region: <a href="code_na.ips" download="code.ips" target="_blank">NA</a> and <a href="code_pal.ips" download="code.ips" target="_blank">PAL</a>. To install the patch, simply download the version for your region from the corresponding link and place it in your title ID folder, ensuring it's named <span class="code">code.ips</span>.
+                            The patches will also be provided alongside future releases of the mod.<br>
+                            The result should look as pictured below, with the title ID corresponding to your game version.</p>
+                            <img src="code.ips_installation_example.webp" alt="Installation example of the code.ips patch.">
+                            <p>Ensure that, while using the service, you follow Pretendo Networks's rules and code of conduct.
+                                If you play with a modded version without the patch and your usage of the mod without the patch creates issues for unmodded players, <b>you are liable to being reported and potentially banned from Pretendo Network services</b>.<br>
+                                At the same time, <b>Pretendo Network is not liable to settle issues regarding disturbance of service like players using different mod versions or different mods entirely within the matchmaking environment of the code.ips patch</b>.
+                                That said, please do still report other issues like players using vulgar names to Pretendo Network using their <a href="https://preten.do/hacker-report">report form</a>.</p>
                         </section>
                     </div>
                 </article>
