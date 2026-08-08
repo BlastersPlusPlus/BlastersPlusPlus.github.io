@@ -1,43 +1,11 @@
 
-@media (scripting: enabled) {
-    .detailsContent {
-        /* fade out, then shrink */
-        transition: opacity .25s,
-        font-size .25s .25s,
-        margin .25s .25s,
-        padding .25s .25s,
-        width .25s .25s;
-    }
-    .moveDetailsSection.open>.detailsContent,
-    .moveDetailsSection>.detailsContent:has(:focus-visible) {
-        transition: font-size .25s,
-        margin .25s,
-        padding .25s,
-        width .5s,
-        opacity .5s .25s;
-    }
-    .moveDetailsSection:not(.open)>.detailsContent:not(:has(:focus-visible)) {
-        font-size: 0;
-        margin: 0;
-        opacity: 0;
-        padding: 0;
-        iframe {width: 0;}
-        .code {font-size: 0;}
-    }
-}
-@media (scripting: none) {
-    .downArrow {display: none;}
-}
-
 @media all and (max-width: 768px) {
     #infoPopup {
         .moveStats {grid-template-columns: 1fr;}
         .data-text {font-size: 1em}
         .infoTitle {font-size: 0.8em}
         .infoValue {font-size: 1em;}
-        .detailsHeader {font-size: 1.5em}
         .yokaiCountText {font-size: 1em}
-        #learnedBy, #duplicateMoves {font-size: 0.8em}
     }
 }
 
@@ -47,10 +15,7 @@
         .data-text {font-size: 1.15em}
         .infoTitle {font-size: 1em}
         .infoValue {font-size: 1.25em;}
-        .detailsHeader {font-size: 2em;}
         .yokaiCountText {font-size: 1em}
-        #learnedBy, #duplicateMoves {font-size: 1em}
-
     }
 
 }
@@ -241,62 +206,12 @@
         }
     }
 
-    .moveDetailsSection.noContent {
-        display: none;
-    }
-    .moveDetailsSection.open .downArrow {
-        transform: rotate(180deg);
-    }
-    .detailsHeader {
-        cursor: pointer;
-        position: relative;
-        display: flex;
-        align-items: stretch;
-        justify-content: center;
-        font-family: var(--font-yuruka), sans-serif;
 
-        > h1 {
-            text-align: center;
-            margin-block: 0;
-            text-wrap: balance;
-            font-size: 1em;
-        } ;
-
-        .downArrow {
-            /*position: absolute;
-            right: 0;*/
-            display: inline-block;
-            margin-inline: 0.5em;
-            appearance: none;
-            cursor: inherit;
-
-            transition: transform 0.5s ease-in-out;
-
-            background: black;
-            mask-image: url("/images/other_assets/downArrow.svg");
-            mask-size: contain;
-            mask-repeat: no-repeat;
-            mask-position: center;
-
-            width: 1em;
-            height: 1em;
-            padding: 0;
-            border: none;
-            vertical-align: middle;
-            font-size: inherit;
-        }
-
-        &:has(~ .detailsContent :focus-visible) {
-             .downArrow {
-                transform: rotate(180deg);
-            }
-        }
-    }
     .yokaiCountText {
         #yokaiCount {font-family: var(--font-yuruka), sans-serif;}
         text-align: center;
     }
-    .detailsContent, .moveDataTab .data-text {
+    .moveDataTab .data-text {
         text-align: center;
         text-wrap: balance;
     }

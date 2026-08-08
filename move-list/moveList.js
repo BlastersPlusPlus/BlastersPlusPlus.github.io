@@ -756,7 +756,7 @@ function closeInfoPopup() {
     let infoContainer = document.getElementById('infoPopupContainer');
     infoContainer.addEventListener('transitionend', function () {
         this.close();
-        let moveDetails = document.getElementsByClassName('moveDetailsSection');
+        let moveDetails = document.getElementsByClassName('collapsableSection');
         for(let i= 0; i < moveDetails.length; i++) moveDetails[i].classList.remove('open');
     },{once:true});
     infoContainer.classList.remove('open');

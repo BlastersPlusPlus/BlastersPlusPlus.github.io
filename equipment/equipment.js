@@ -1,5 +1,12 @@
-let data, equipmentCache = {};
+let data = fetch('/data-sources/equipment.json').then(response => response.json());
+let equipmentCache = {};
 let equipmentHashes = {};
+let yokaiDictionary = fetch('/data-sources/yokai-dictionary.json').then(response => response.json());
+
+HTMLElement.prototype.toggleOpen = function() {
+    this.classList.toggle('open');
+};
+
 
 let descending = 1;
 
@@ -13,14 +20,15 @@ const sortFunctions = {
     'DEF': (a,b) => (a.def - b.def)*descending,
     'SPD': (a,b) => (speedNumbers[a.spd] - speedNumbers[b.spd])*descending,
     'Stat total': (a,b) => ((a.hp + a.str + a.spr + a.def) - (b.hp + b.str + b.spr + b.def))*descending,
-}
+};
 
 document.addEventListener('DOMContentLoaded', async () => {
     let minWaitTime = 500+(Math.random()**2)*2000;
     //console.log("Waiting for at least "+(minWaitTime/1000)+" seconds before data is loaded");
     let minWait = new Promise(resolve => setTimeout(resolve, minWaitTime));
 
-    data = await fetch('/data-sources/equipment.json').then(response => response.json());
+    data = await data;
+    yokaiDictionary = await yokaiDictionary;
     await minWait;
 
     let datalist = document.getElementById('search-options');
@@ -78,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let equipElement = document.getElementById(equipment.name);
         window.scrollBy(0,equipElement?.getBoundingClientRect()?.top ?? 0);
     }
-})
+});
 
 function generateGrid() {
     let main = document.querySelector('main');
@@ -160,14 +168,14 @@ window.addEventListener('hashchange', () => {
     let equipment = equipmentHashes[location.hash.replace('#','')];
     if(equipment && (equipmentInfoContainer.equipmentId !== equipment.id || equipmentInfoContainer.className!=='open')) {openInfoPopup(equipment);}
 
-})
+});
 
 document.addEventListener('keydown', function(e){
         let equipmentInfoContainer = document.getElementById('infoPopupContainer');
         if(e.code === 'Escape' && equipmentInfoContainer.classList.contains('open')){
             closeInfoPopup();
         }
-})
+});
 
 function openInfoPopup(equipment) {
     history.replaceState(null, null, '#'+(equipment.name ? equipment.name.replace(/\s/g, '') : equipment.id.replace(/\s/g, '')));
@@ -201,12 +209,23 @@ function openInfoPopup(equipment) {
     let defElement = document.getElementById('equipmentDEF');
     defElement.innerText = equipment.def; defElement.parentElement.style.display = equipment.def !== 0 ? '' : 'none';
 
-    document.getElementById('skillDescription').innerText = equipment.skill ?? '';
+    let skillDescription = document.getElementById('skillDescription');
+    skillDescription.innerText = equipment.skill ?? '';
+    if(equipment.transformation) {
+        let transformationReference = yokaiDictionary[equipment.transformation];
+        if(!transformationReference) return;
+
+        let transformationModel = transformationReference?.modelInfo;
+        let transformationSearchName = transformationReference?.searchName;
+        let transformationLink =  `<a href="/yo-kai-info#${transformationSearchName.replaceAll(" ","")}">${transformationSearchName}</a>`+(transformationModel ? ` <div class="inline-icon"><img src="/images/faceIcon/${transformationModel}.xi.00.png" alt="${transformationSearchName}'s face icon"></div>` : '');
+
+        skillDescription.innerHTML += `<br>Transforms the user into ${transformationLink}.`;
+    }
 
     let createSection = document.getElementById('createSection');
     if(equipment.createData?.length) {
-        createSection.classList.remove('noContent')
-        createSection.innerHTML = "<h2>Create</h2>"
+        createSection.classList.remove('noContent');
+        createSection.innerHTML = "<h2>Create</h2>";
 
         equipment.createData.forEach((data) => {
             let materialData = document.createElement("div");
@@ -221,7 +240,7 @@ function openInfoPopup(equipment) {
             createSection.appendChild(oniOrbs);
         })
 
-    } else(createSection.classList.add('noContent'))
+    } else(createSection.classList.add('noContent'));
 
     let strengthenSection = document.getElementById('strengthenSection');
     if(equipment.upgradeData?.length) {
@@ -260,7 +279,7 @@ function openInfoPopup(equipment) {
             oniOrbs.textContent = 'Oni Orbs x'+data.oniOrbs;
             strengthenSection.appendChild(oniOrbs);
         })
-    } else(strengthenSection.classList.add('noContent'))
+    } else(strengthenSection.classList.add('noContent'));
 
     let upgradesElement = document.getElementById('upgrades');
     if(equipment.upgradesInto?.length) {
@@ -285,7 +304,26 @@ function openInfoPopup(equipment) {
 
             upgradesElement.appendChild(item);
         })
-    } else(upgradesElement.classList.add('noContent'))
+    } else(upgradesElement.classList.add('noContent'));
+
+
+    let equippableBy = document.getElementById('equippableBy');
+    equippableBy.innerHTML = '';
+    document.getElementById('equippableBySection').classList.toggle('noContent',!(equipment.equippableBy?.length > 1));
+    equipment.equippableBy?.forEach((baseID) => {
+        for(const key in yokaiDictionary) {
+            let yokai = yokaiDictionary[key];
+            if(yokai.chara_base_ID !== baseID) continue;
+
+            let searchName = yokai?.searchName;
+            let modelInfo = yokai?.modelInfo;
+
+            equippableBy.innerHTML += `<a href="/yo-kai-info#${searchName.replaceAll(" ","")}">${searchName}</a>`+(modelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${modelInfo}.xi.00.png" alt="${searchName}'s face icon"></div>` : '');
+            equippableBy.innerHTML += `<br>`;
+        }
+    });
+    equippableBy.innerHTML = equippableBy.innerHTML.replace(/<br>$/,'');
+
 
 
     let equipmentInfoContainer = document.getElementById('infoPopupContainer');

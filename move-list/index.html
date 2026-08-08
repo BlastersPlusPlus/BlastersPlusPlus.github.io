@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div id="loadContainer" ontransitionend="this.classList.add('no-animation')">
+                <div id="loadContainer" ontransitionend="this.classList.add('no-animation');">
                     Loading<span class="loadPeriod">.</span><span class="loadPeriod">.</span><span class="loadPeriod">.</span>
                     <div class="inline-icon"><img src="/images/other_assets/load.gif" alt="An animated GIF of Komasan and Komajiro walking"></div>
                 </div>
@@ -242,23 +242,23 @@
                                 </div>
                             </div>
 
-                            <div class="moveDetailsSection" id="learnedBySection">
-                                <div class="detailsHeader" onclick="this.parentElement.toggleOpen()">
+                            <div class="collapsableSection" id="learnedBySection">
+                                <div class="collapsableSectionHeader" onclick="this.parentElement.toggleOpen()">
                                     <h1 class="focus-inside">Learned By<button class="downArrow"></button></h1>
                                 </div>
 
-                                <div class="detailsContent">
+                                <div class="collapsableSectionContent">
                                     <p class="yokaiCountText"><span id="yokaiCount"></span> Yo-kai</p>
                                     <div id="learnedBy"></div>
                                 </div>
                             </div>
 
-                            <div class="moveDetailsSection" id="duplicateMovesSection">
-                                <div class="detailsHeader" onclick="this.parentElement.toggleOpen()">
+                            <div class="collapsableSection" id="duplicateMovesSection">
+                                <div class="collapsableSectionHeader" onclick="this.parentElement.toggleOpen()">
                                     <h1 class="focus-inside">Moves with the same effect<button class="downArrow"></button></h1>
                                 </div>
 
-                                <div class="detailsContent">
+                                <div class="collapsableSectionContent">
                                     <div id="duplicateMoves"></div>
                                 </div>
                             </div>

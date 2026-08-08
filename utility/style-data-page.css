@@ -15,6 +15,8 @@
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: 20px;}
         #infoPopupDescription {font-size: 1em;}
+        .collapsableSectionHeader {font-size: 1.5em}
+        .collapsableSectionContent {font-size: 0.8em}
     }
     #infoPopup::before, #infoPopup::after {width: 100%;}
     #infoPopup::before {top: 0;}
@@ -42,6 +44,8 @@
         #infoTitle {font-size: 1.5em;}
         #infoInnerContainer {margin-inline: max(10%,10px);}
         #infoPopupDescription {font-size: 1em;}
+        .collapsableSectionHeader {font-size: 2em;}
+        .collapsableSectionContent {font-size: 1em}
     }
     #infoPopup::before, #infoPopup::after {
         border-top-left-radius: 50px;
@@ -56,17 +60,36 @@
     }
 }
 
-/*@media all and (min-width: 600px) {
-    #grid>.gridItem {
-        .name {font-size: 2em;}
-        .number {font-size: 1.25em;}
+@media (scripting: enabled) {
+    .collapsableSectionContent {
+        /* fade out, then shrink */
+        transition: opacity .25s,
+        font-size .25s .25s,
+        margin .25s .25s,
+        padding .25s .25s,
+        width .25s .25s;
     }
-    #infoPopup {
-        #infoTitle {font-size: 2em;}
-        #infoInnerContainer {margin-inline: max(10%,10px);}
-        #infoPopupDescription {font-size: 1.3em;}
+    .collapsableSection.open>.collapsableSectionContent,
+    .collapsableSection>.collapsableSectionContent:has(:focus-visible) {
+        transition: font-size .25s,
+        margin .25s,
+        padding .25s,
+        width .5s,
+        opacity .5s .25s;
     }
-}*/
+    #infoPopup{.collapsableSection:not(.open)>.collapsableSectionContent:not(:has(:focus-visible)) {
+        font-size: 0 ;
+        margin: 0;
+        opacity: 0;
+        padding: 0;
+        iframe {width: 0;}
+        .code {font-size: 0;}
+    }}
+}
+@media (scripting: none) {
+    .downArrow {display: none;}
+}
+
 
 body {
     min-width: fit-content;
@@ -116,7 +139,7 @@ body {
 
 
     #closePopup {
-        --min-size: 50px;
+        --min-size: 40px;
         top: 5vmin;
         right: calc(5vmin + 10px);
         height: var(--min-size);
@@ -460,6 +483,99 @@ body:has(#infoPopupContainer.open) {overflow: hidden;}
     #infoPopupDescription {
         text-align: center;
         &.noDesc {display: none};
+    }
+
+    .infoPopupSelector {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        cursor: pointer;
+        padding-inline: 1rem;
+        padding-block: 0.5rem;
+        border-radius: 2rem;
+        text-align: center;
+
+        border: 1px solid gray;
+        font-size: 1rem;
+        font-family: var(--font-marugo), sans-serif;
+
+        >option.defaultText {font-style: italic; color: gray;}
+
+        /*background-color: rgba(230,230,230);
+        box-shadow: var(--standard-shadow);*/
+    }
+
+    .pContainer {
+        text-align: center;
+        text-wrap: balance;
+        h1 {
+            font-size: 2em;
+            font-family: var(--font-yuruka), sans-serif;
+            position: relative;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        p {
+            margin-block: 0;
+        }
+    }
+
+    .collapsableSection.noContent {
+        display: none;
+    }
+    .collapsableSection.open .downArrow {
+        transform: rotate(180deg);
+    }
+    .collapsableSectionHeader {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        font-family: var(--font-yuruka), sans-serif;
+
+        > h1 {
+            text-align: center;
+            margin-block: 0;
+            text-wrap: balance;
+            font-size: 1em;
+        } ;
+
+        .downArrow {
+            /*position: absolute;
+            right: 0;*/
+            display: inline-block;
+            margin-inline: 0.5em;
+            appearance: none;
+            cursor: inherit;
+
+            transition: transform 0.5s ease-in-out;
+
+            background: black;
+            mask-image: url("/images/other_assets/downArrow.svg");
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+
+            width: 1em;
+            height: 1em;
+            padding: 0;
+            border: none;
+            vertical-align: middle;
+            font-size: inherit;
+        }
+
+        &:has(~ .collapsableSectionContent :focus-visible) {
+            .downArrow {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    .collapsableSectionContent {
+        text-align: center;
+        text-wrap: balance;
     }
 }
 

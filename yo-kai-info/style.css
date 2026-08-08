@@ -209,28 +209,6 @@
         font-family: var(--font-yuruka), sans-serif;
     }
 
-    #costumeSelection {
-        &.noCostumes{display: none;}
-
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-
-        cursor: pointer;
-        padding-inline: 1rem;
-        padding-block: 0.5rem;
-        border-radius: 2rem;
-        text-align: center;
-        font-style: italic;
-
-        border: 1px solid gray;
-        font-size: 1rem;
-        font-family: var(--font-marugo), sans-serif;
-
-        /*background-color: rgba(230,230,230);
-        box-shadow: var(--standard-shadow);*/
-    }
-
     #rankTribeAttributes {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -706,22 +684,8 @@
 
     }
 
-    #obtentionSection {
-        text-align: center;
-        text-wrap: balance;
-        h1 {
-            font-size: 2em;
-            font-family: var(--font-yuruka), sans-serif;
-            position: relative;
-            z-index: 0;
-            line-height: 1;
-        }
-    }
-
-    #evolutions {
-        margin-top: 1em;
-        text-align: center;
-        text-wrap: balance;
+    #obtentionSection{
+        margin-block: 2em;
     }
 }
 

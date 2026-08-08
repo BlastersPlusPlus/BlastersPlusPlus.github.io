@@ -1,4 +1,7 @@
-let data, sortedData, yokaiCache = {}, yokaiHashes = {}, itemIcons, itemIds;
+let data = fetch('/data-sources/yo-kai-info.json').then(response => response.json()),
+    sortedData, yokaiCache = {}, yokaiHashes = {},
+    itemIcons = fetch('/data-sources/item-icons.json').then(response => response.json()),
+    itemIds = fetch('/data-sources/item-ids.json').then(response => response.json());
 let descending = 1;
 
 const tribeMedalNumbers = {
@@ -80,19 +83,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     let minWait = new Promise(resolve => setTimeout(resolve, minWaitTime));
 
 
-    itemIconsPromise = fetch('/data-sources/item-icons.json').then(response => response.json()).then(value => itemIcons = value);
-    itemIDsPromise = fetch('/data-sources/item-ids.json').then(response => response.json()).then(value => itemIds = value);
-    data = await fetch('/data-sources/yo-kai-info.json').then(response => response.json());
+    itemIcons = await itemIcons;
+    itemIds = await itemIds;
+    data = await data;
     await minWait;
 
     let foundNames = new Map();
     let datalist = document.getElementById('search-options');
     data.forEach(item => {
         yokaiCache[item.id] = item;
+        item.isEquipTransformation = item.obtention?.transformation && Object.keys(item.obtention).length === 1;
+
 
         item.searchName =
-            item.modelInfo === "y473010" ? item.name + ' (Blade)' :
             item.costumeName ? item.name + " (" + item.costumeName + ')' :
+            item.isEquipTransformation ? item.name + ' (' + itemIcons[item.obtention.transformation[0].equip].name + ')':
             item.isWhite ? 'White ' + item.name:
             item.name ?? item.id ?? 'Yo-kai '+item.number;
 
@@ -109,6 +114,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             yokaiHashes[item.searchName?.replace(/\s/g, '')] = item;
             item.searchName = item.name;
         }
+        else if(item.isEquipTransformation && !yokaiHashes[item.name?.replace(/\s/g, '')]) {
+            yokaiHashes[item.searchName?.replace(/\s/g, '')] = item;
+            item.searchName = item.name;
+        }
+
         yokaiHashes[item.searchName?.replace(/\s/g, '')] = item;
 
         if(!item.hidden) {
@@ -126,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         for(let i=1; i<yokai.moves.length; i++) {
             moveIcons[yokai.moves[i]?.name] = yokai.moves[i]?.icon;
-            AllMovesSet.add(yokai.moves[i]?.name)
+            AllMovesSet.add(yokai.moves[i]?.name);
         }
     });
 
@@ -151,11 +161,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }));
     }
 
-    document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid))
+    document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid));
 
     //sortedData = data;
     document.getElementById('loadContainer').classList.add('closed');
-    generateGrid()
+    generateGrid();
     console.log(location.hash);
     let foundYokai;
     if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai ?? yokaiHashes[location.hash.replace('#','')];
@@ -165,7 +175,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         let yokaiElement = document.getElementById(foundYokai.name);
         window.scrollBy(0,yokaiElement?.getBoundingClientRect()?.top ?? 0);
     }
-})
+});
 
 function generateGrid() {
     let main = document.querySelector('main');
@@ -182,7 +192,7 @@ function generateGrid() {
         document.getElementById('Move1Filter').selectedValues,
         document.getElementById('Move2Filter').selectedValues,
         document.getElementById('Move3Filter').selectedValues,
-        document.getElementById('Move4Filter').selectedValues]
+        document.getElementById('Move4Filter').selectedValues];
 
     MovesFilters = MovesFilters.map(filter => new Set(filter));
 
@@ -192,6 +202,8 @@ function generateGrid() {
         || compareValue === 'Role'
         || compareValue === 'Tier'
         || Array.from(document.querySelectorAll("#search-options-container multi-select")).reduce((acum,value) => acum || !value.areAllSelected(),false);
+
+    let showTransformations = showCostumes || compareValue === 'Stat total';
 
     // Filters Yo-kai who should be shown
     sortedData = data
@@ -223,6 +235,7 @@ function generateGrid() {
 
     sortedData.forEach(element => {
         if(element.costumeName && element.hidden && !showCostumes) return;
+        if(element.isEquipTransformation && element.hidden && !showTransformations) return;
         if(element.costumeName && compareValue === 'Tier' && element.sameMeta && searchValue === '') return;
 
 
@@ -244,8 +257,8 @@ function generateGrid() {
         if(element.modelInfo) {
             let medalContainer = document.createElement('div');
             medalContainer.classList.add('gridItemIcon');
-            medalContainer.classList.add('yokaiMedal')
-            medalContainer.classList.add('custom-size')
+            medalContainer.classList.add('yokaiMedal');
+            medalContainer.classList.add('custom-size');
 
 
             let medalFaceIcon = document.createElement('img');
@@ -260,7 +273,7 @@ function generateGrid() {
 
             medalFaceIcon.onload = function () {
                 this.parentElement.classList.add("loaded");
-            }
+            };
 
 
             medalContainer.appendChild(document.getElementById("yokaiInfoMedalBackground")?.cloneNode(true));
@@ -287,8 +300,8 @@ function generateGrid() {
         main.appendChild(gridItem);
 
 
-        gridItem.onclick = function(){openInfoPopup(this.yokai)};
-    })
+        gridItem.onclick = function(){openInfoPopup(this.yokai);};
+    });
 }
 
 window.addEventListener('hashchange', () => {
@@ -296,26 +309,25 @@ window.addEventListener('hashchange', () => {
     let yokaiInfoContainer = document.getElementById('infoPopupContainer');
     if(!location.hash) {yokaiInfoContainer.className = 'closed'; return;}
 
-    let yokai = yokaiHashes[location.hash.replace('#','')];
+    let hash = decodeURIComponent(location.hash.replace('#',''));
+    let yokai = yokaiHashes[hash] ?? yokaiCache[hash];
+    if(yokai && yokai.id === hash) location.hash = yokai.searchName.replaceAll(' ','');
     if(yokai && (yokaiInfoContainer.yokaiId !== yokai.id || yokaiInfoContainer.className!=='open')) {openInfoPopup(yokai);}
 
-})
+});
 
 document.addEventListener('keydown', function(e){
         let yokaiInfoContainer = document.getElementById('infoPopupContainer');
         if(e.code === 'Escape' && yokaiInfoContainer.classList.contains('open')){
             closeInfoPopup();
         }
-})
+});
 
 async function openInfoPopup(yokai) {
     let yokaiHash = yokai.searchName?.replace(/\s/g, '') ?? yokai.id?.replace(/\s/g, '') ?? 'Yo-kai'+yokai.number;
     history.replaceState(null, null, '#'+yokaiHash);
     if(!yokai) return;
     console.log(yokai);
-
-    await itemIDsPromise;
-    await itemIconsPromise;
 
     if(yokai.hidden && !yokai.costumeName) {
         let DOMElement = document.getElementById(yokai.name?.replace(/\s/g, '')) ??
@@ -338,7 +350,7 @@ async function openInfoPopup(yokai) {
 
     let faceIcon = document.getElementById('yokaiInfoMedalFaceIcon');
     faceIcon.classList.add('loading');
-    faceIcon.src = "/images/faceIcon/"+yokai.modelInfo+".xi.00.png"
+    faceIcon.src = "/images/faceIcon/"+yokai.modelInfo+".xi.00.png";
     faceIcon.alt = "Yo-kai "+yokai.name+"'s face icon";
 
     let medalBorder = document.getElementById('yokaiInfoMedalBorder');
@@ -348,7 +360,7 @@ async function openInfoPopup(yokai) {
 
 
     let costumeSelector = document.getElementById('costumeSelection');
-    costumeSelector.classList.toggle('noCostumes',!yokai.costumes?.length);
+    costumeSelector.classList.toggle('hidden',!yokai.costumes?.length);
     while(costumeSelector.hasChildNodes()) costumeSelector.removeChild(costumeSelector.firstChild);
     for(let i=0; i<yokai.costumes?.length; i++){
         let option = document.createElement("option");
@@ -387,18 +399,18 @@ async function openInfoPopup(yokai) {
     document.getElementById('yokaiSPD').innerText = yokai.spd;
 
     let bio = document.getElementById("infoPopupDescription");
-    bio.classList.toggle('noDesc',!(yokai.bio && yokai.bio.length))
+    bio.classList.toggle('noDesc',!(yokai.bio && yokai.bio.length));
     bio.innerText = yokai.bio;
 
-    let strongAtt = document.getElementById('strongElement')
+    let strongAtt = document.getElementById('strongElement');
     strongAtt.classList.add('loading');
-    strongAtt.src = "/images/attributeIcons/attribute"+yokai.strongTo+".png"
+    strongAtt.src = "/images/attributeIcons/attribute"+yokai.strongTo+".png";
     strongAtt.alt = yokai.strongTo+" Attribute";
     strongAtt.title = yokai.strongTo+" Attribute";
 
-    let weakAtt = document.getElementById('weakElement')
+    let weakAtt = document.getElementById('weakElement');
     weakAtt.classList.add('loading');
-    weakAtt.src = "/images/attributeIcons/attribute"+yokai.weakTo+".png"
+    weakAtt.src = "/images/attributeIcons/attribute"+yokai.weakTo+".png";
     weakAtt.alt = yokai.weakTo+" Attribute";
     weakAtt.title = yokai.weakTo+" Attribute";
 
@@ -412,14 +424,14 @@ async function openInfoPopup(yokai) {
             continue;
         }
         document.getElementById('move'+i).classList.remove('noMove');
-        document.getElementById('move'+i+'Icon').src = "/images/moveIcons/image"+yokai.moves[i]?.icon+".png"
+        document.getElementById('move'+i+'Icon').src = "/images/moveIcons/image"+yokai.moves[i]?.icon+".png";
         document.getElementById('move'+i+'Text').innerHTML = `<a href="/move-list#${yokai.moves[i]?.id}">${yokai.moves[i]?.name}</a>`;
     }
 
     document.getElementById('soultimateMoveName').innerHTML = `<a href="/move-list#${yokai.soultimate?.id}">${yokai.soultimate?.name}</a>`;
     let soultDesc = document.getElementById('soultimateMoveDescription');
     soultDesc.textContent = yokai.soultimate?.description;
-    //if(yokai.soultimate.description === "") soultDesc.classList.add('empty');
+    if(yokai.soultimate?.description === "") soultDesc.classList.add('empty');
 
     /*else soultDesc.classList.remove('empty');
     document.getElementById('soultimateMoveData').className = yokai.soultimate?.class;*/
@@ -433,7 +445,7 @@ async function openInfoPopup(yokai) {
     soultInspirit.textContent = yokai.soultimate?.inspiritEffects;
     soultInspirit.classList.toggle('empty',yokai.soultimate?.inspiritEffects === "");*/
 
-    let tier = getTier(yokai.score)
+    let tier = getTier(yokai.score);
 
     let tierHTML = (tier+" Tier").replace(/(\++)/,`<span class="bukotsu">$1</span>`);
 
@@ -447,12 +459,12 @@ async function openInfoPopup(yokai) {
 
     let fixedMetaDescription = yokai.metaDescription?.replaceAll(/#\[([^,]+?)]/g,"#[$1,$1]")?.replaceAll(/[*_](.+?)[*_]/g,`<i>$1</i>`)?.replaceAll(/yk#\[(.+?),(.+?)]/g,(match,group1,group2) => {
         let yokaiModelInfo = yokaiHashes[group2.replaceAll(/\s+/g,'')]?.modelInfo;
-        return `<a href="#${group2.replaceAll(/\s+/g,'')}">${group1}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${group1}'s face icon"></div>` : '')
+        return `<a href="#${group2.replaceAll(/\s+/g,'')}">${group1}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${group1}'s face icon"></div>` : '');
     })?.replaceAll(/(eq|sl|item)#\[(.+?),(.+?)]/g,(match,group1,group2,group3) => {
         let itemIconInfo = itemIds && itemIcons ? itemIcons[itemIds[group3]] : null;
-        let inlineIconHTML = (itemIconInfo ? ` <div class="inline-icon"><img src="/images/itemIcons/item_${itemIconInfo.sheet}_${itemIconInfo.iconRow}_${itemIconInfo.iconCol}.png" alt="${group2}'s icon"></div>` : '')
+        let inlineIconHTML = (itemIconInfo ? ` <div class="inline-icon"><img src="/images/itemIcons/item_${itemIconInfo.sheet}_${itemIconInfo.iconRow}_${itemIconInfo.iconCol}.png" alt="${group2}'s icon"></div>` : '');
         if(group1 === 'eq') {
-            return `<a href="/equipment#${group3.replaceAll(/\s+/g,'')}">${group3}</a>`+inlineIconHTML
+            return `<a href="/equipment#${group3.replaceAll(/\s+/g,'')}">${group3}</a>`+inlineIconHTML;
         } else {
             return `${group2}${inlineIconHTML}`;
         }
@@ -472,12 +484,12 @@ async function openInfoPopup(yokai) {
     obtentionMethods.innerHTML = '';
     if(yokai.costumeName) {
         let costumeText = document.createElement('p');
-        costumeText.innerHTML = 'Change costume in the basement (unlocks after beating Captain Thunder)'
+        costumeText.innerHTML = 'Change costume in the basement (unlocks after beating Captain Thunder)';
         obtentionMethods.appendChild(costumeText);
     }
 
-    yokai.obtention.evolution?.forEach((evolutionData) => {
-        let evolutionText = document.createElement('p')
+    yokai.obtention?.evolution?.forEach((evolutionData) => {
+        let evolutionText = document.createElement('p');
 
         let referenced = yokaiCache[evolutionData.yokaiId];
         if(!referenced) return;
@@ -485,13 +497,13 @@ async function openInfoPopup(yokai) {
         let yokaiModelInfo = referenced?.modelInfo;
         let yokaiSearchName = referenced?.searchName;
 
-        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
 
-        evolutionText.innerHTML = `Evolves from ${yokaiLink} at level ${evolutionData.level}`
+        evolutionText.innerHTML = `Evolves from ${yokaiLink} at level ${evolutionData.level}`;
         obtentionMethods.appendChild(evolutionText);
     });
-    yokai.obtention.fusion?.forEach((fusionData) => {
-        let fusionText = document.createElement('p')
+    yokai.obtention?.fusion?.forEach((fusionData) => {
+        let fusionText = document.createElement('p');
 
         let part1, part2;
 
@@ -502,7 +514,7 @@ async function openInfoPopup(yokai) {
             let yokaiModelInfo = referenced?.modelInfo;
             let yokaiSearchName = referenced?.searchName;
 
-            part1 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+            part1 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
         } else {
             let referenced = itemIcons[fusionData.part1];
             if(!referenced) return;
@@ -517,7 +529,7 @@ async function openInfoPopup(yokai) {
             let yokaiModelInfo = referenced?.modelInfo;
             let yokaiSearchName = referenced?.searchName;
 
-            part2 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+            part2 =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
         } else {
             let referenced = itemIcons[fusionData.part2];
             if(!referenced) return;
@@ -525,41 +537,41 @@ async function openInfoPopup(yokai) {
             part2 = `the ${referenced.name} <div class="inline-icon"><img src="/images/itemIcons/item_${referenced.sheet}_${referenced.iconRow}_${referenced.iconCol}.png" alt="${referenced.name}'s icon"></div>`;
         }
 
-        fusionText.innerHTML = `Fuse ${part1} with ${part2}`
+        fusionText.innerHTML = `Fuse ${part1} with ${part2}`;
         obtentionMethods.appendChild(fusionText);
     });
-    new Set(yokai.obtention.patrol)?.forEach((patrolText) => {
+    new Set(yokai.obtention?.patrol)?.forEach((patrolText) => {
         let patrolElement = document.createElement('p');
         patrolElement.innerText = patrolText;
         obtentionMethods.appendChild(patrolElement);
     });
-    new Set(yokai.obtention.missionReward)?.forEach((rewardText) => {
+    new Set(yokai.obtention?.missionReward)?.forEach((rewardText) => {
         let rewardElement = document.createElement('p');
         rewardElement.innerText = rewardText;
         obtentionMethods.appendChild(rewardElement);
     });
-    yokai.obtention.crank?.forEach((crankData) => {
+    yokai.obtention?.crank?.forEach((crankData) => {
         let crankElement = document.createElement('p');
 
         let isRegularCrank = crankData.crank === 'Crank-a-kai';
         let crankName = isRegularCrank ? '' : crankData.crank;
 
         let coinName = '';
-        if(crankData.coin === '0A 00 00 00') coinName = "Play Coins"
+        if(crankData.coin === '0A 00 00 00') coinName = "Play Coins";
         else {
             let coinRef = itemIcons[crankData.coin];
             if(coinRef) {
-                coinName = `${coinRef.name} <div class="inline-icon"><img src="/images/itemIcons/item_${coinRef.sheet}_${coinRef.iconRow}_${coinRef.iconCol}.png" alt="${coinRef.name}'s icon"></div>`
+                coinName = `${coinRef.name} <div class="inline-icon"><img src="/images/itemIcons/item_${coinRef.sheet}_${coinRef.iconRow}_${coinRef.iconCol}.png" alt="${coinRef.name}'s icon"></div>`;
             }
         }
 
-        crankElement.innerHTML = isRegularCrank ? `${coinName} ${crankData.prize.toLowerCase()} prize` : `${crankName} ${crankData.prize.toLowerCase()} prize`
+        crankElement.innerHTML = isRegularCrank ? `${coinName} ${crankData.prize.toLowerCase()} prize` : `${crankName} ${crankData.prize.toLowerCase()} prize`;
         obtentionMethods.appendChild(crankElement);
     });
-    yokai.obtention.circleReward?.forEach((circleData) => {
+    yokai.obtention?.circleReward?.forEach((circleData) => {
         let circleElement = document.createElement('p');
 
-        circleElement.innerHTML = `${circleData.name} Yo-kai Circle (`
+        circleElement.innerHTML = `${circleData.name} Yo-kai Circle (`;
         circleData.yokai.forEach(yokai => {
             let referenced = yokaiCache[yokai];
             if(!referenced) return;
@@ -567,19 +579,19 @@ async function openInfoPopup(yokai) {
             let yokaiModelInfo = referenced?.modelInfo;
             let yokaiSearchName = referenced?.searchName;
 
-            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
 
             circleElement.innerHTML += yokaiLink+`,</nobr> `;
         });
 
-        circleElement.innerHTML = circleElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
+        circleElement.innerHTML = circleElement.innerHTML.replace(/,<\/nobr>\s?$/,")");
 
         obtentionMethods.appendChild(circleElement);
     });
-    yokai.obtention.legendSeal?.forEach((legendData) => {
+    yokai.obtention?.legendSeal?.forEach((legendData) => {
         let legendElement = document.createElement('p');
 
-        legendElement.innerHTML = `Legendary Seal (`
+        legendElement.innerHTML = `Legendary Seal (`;
         legendData.forEach(yokai => {
             let referenced = yokaiCache[yokai];
             if(!referenced) return;
@@ -587,21 +599,37 @@ async function openInfoPopup(yokai) {
             let yokaiModelInfo = referenced?.modelInfo;
             let yokaiSearchName = referenced?.searchName;
 
-            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+            let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
 
             legendElement.innerHTML += yokaiLink+`,</nobr> `;
         });
 
-        legendElement.innerHTML = legendElement.innerHTML.replace(/,<\/nobr>\s?$/,")")
+        legendElement.innerHTML = legendElement.innerHTML.replace(/,<\/nobr>\s?$/,")");
 
         obtentionMethods.appendChild(legendElement);
+    });
+    yokai.obtention?.transformation?.forEach((transformation) => {
+        let yokaiReference = yokaiCache[transformation.from];
+        let equipReference = itemIcons[transformation.equip];
+        if(!yokaiReference || !equipReference) return;
+
+        let yokaiModelInfo = yokaiReference?.modelInfo;
+        let yokaiSearchName = yokaiReference?.searchName;
+
+        let transformationElement = document.createElement('p');
+
+        let yokaiLink =  `<nobr><a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
+        let equipLink = `<a href="/equipment#${equipReference.name.replaceAll(/\s+/g,'')}">${equipReference.name}</a> <div class="inline-icon"><img src="/images/itemIcons/item_${equipReference.sheet}_${equipReference.iconRow}_${equipReference.iconCol}.png" alt="${equipReference.name}'s icon"></div>`;
+
+        transformationElement.innerHTML = `Equip ${yokaiLink} with the ${equipLink}`;
+        obtentionMethods.appendChild(transformationElement);
     });
 
     let evolutions = document.getElementById('evolutions');
     evolutions.classList.toggle('hidden',!yokai.evolution && yokai.fusion.length == 0);
     evolutions.innerHTML = '';
     if(yokai.evolution) ifBlock: {
-        let evolutionText = document.createElement('p')
+        let evolutionText = document.createElement('p');
 
         let referenced = yokaiCache[yokai.evolution.yokaiID];
         if(!referenced) break ifBlock;
@@ -609,19 +637,19 @@ async function openInfoPopup(yokai) {
         let yokaiModelInfo = referenced?.modelInfo;
         let yokaiSearchName = referenced?.searchName;
 
-        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
 
-        evolutionText.innerHTML = `Evolves into ${yokaiLink} at level ${yokai.evolution.level}`
+        evolutionText.innerHTML = `Evolves into ${yokaiLink} at level ${yokai.evolution.level}`;
         evolutions.appendChild(evolutionText);
     }
     yokai.fusion?.forEach(fusionData => {
-        let fusionText = document.createElement('p')
+        let fusionText = document.createElement('p');
 
         let result = yokaiCache[fusionData.result];
         if(!result) return;
         let resultModelInfo = result?.modelInfo;
         let resultSearchName = result?.searchName;
-        let resultLink =  `<a href="#${resultSearchName.replaceAll(" ","")}">${resultSearchName}</a>`+(resultModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${resultModelInfo}.xi.00.png" alt="${resultSearchName}'s face icon"></div>` : '')
+        let resultLink =  `<a href="#${resultSearchName.replaceAll(" ","")}">${resultSearchName}</a>`+(resultModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${resultModelInfo}.xi.00.png" alt="${resultSearchName}'s face icon"></div>` : '');
 
         let other;
         if(yokaiCache[fusionData.other]) {
@@ -629,7 +657,7 @@ async function openInfoPopup(yokai) {
             if(!referenced) return;
             let yokaiModelInfo = referenced?.modelInfo;
             let yokaiSearchName = referenced?.searchName;
-            other =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '')
+            other =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
         } else {
             let referenced = itemIcons[fusionData.other];
             if(!referenced) return;
@@ -637,28 +665,40 @@ async function openInfoPopup(yokai) {
             other = `the ${referenced.name} <div class="inline-icon"><img src="/images/itemIcons/item_${referenced.sheet}_${referenced.iconRow}_${referenced.iconCol}.png" alt="${referenced.name}'s icon"></div>`;
         }
 
-        fusionText.innerHTML = `Evolves into ${resultLink} when fused with ${other}`
+        fusionText.innerHTML = `Evolves into ${resultLink} when fused with ${other}`;
         evolutions.appendChild(fusionText);
+    });
+
+
+    let transformations = document.getElementById('transformations');
+    transformations.classList.toggle('hidden',!(yokai.transformation?.length > 1));
+    transformations.innerHTML = '';
+    yokai.transformation?.forEach(({transformationID,equipID}) => {
+        let transformationText = document.createElement('p');
+
+        let yokaiReference = yokaiCache[transformationID];
+        let equipReference = itemIcons[equipID];
+        if(!equipReference || !yokaiReference) return;
+
+        let yokaiModelInfo = yokaiReference?.modelInfo;
+        let yokaiSearchName = yokaiReference?.searchName;
+        let yokaiLink =  `<a href="#${yokaiSearchName.replaceAll(" ","")}">${yokaiSearchName}</a>`+(yokaiModelInfo ? ` <div class="inline-icon"><img src="/images/faceIcon/${yokaiModelInfo}.xi.00.png" alt="${yokaiSearchName}'s face icon"></div>` : '');
+        let equipLink = `<a href="/equipment#${equipReference.name.replaceAll(/\s+/g,'')}">${equipReference.name}</a> <div class="inline-icon"><img src="/images/itemIcons/item_${equipReference.sheet}_${equipReference.iconRow}_${equipReference.iconCol}.png" alt="${equipReference.name}'s icon"></div>`;
+
+        transformationText.innerHTML = `Transforms into ${yokaiLink} when equipped with the ${equipLink}`;
+
+        transformations.appendChild(transformationText);
     });
 
 
 
 
-    /*let screenCover = document.getElementById("screenCover");
-    screenCover.yokaiId = yokai.id;
-    screenCover.scrollTop = 0;
-    screenCover.className = 'open';
-    screenCover.focus();*/
 
     let yokaiInfoContainer = document.getElementById('infoPopupContainer');
     yokaiInfoContainer.yokaiId = yokai.id;
     yokaiInfoContainer.scrollTop = 0;
     yokaiInfoContainer.showModal();
-
-    let yokaiInfoElement = document.getElementById('infoPopup');
-    //yokaiInfoElement.classList.remove('hasDetails');
     yokaiInfoContainer.classList.add('open');
-
 }
 
 async function showYokaiDetails(id) {
