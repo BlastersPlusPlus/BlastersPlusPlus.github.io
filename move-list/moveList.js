@@ -125,10 +125,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-    let hash = decodeURIComponent(location.hash.replace('#',''));
+    let hash = decodeURIComponent(location.hash.substring(1));
 
     let move = moveHashes[hash] ?? orge_technic_info[hash];
-    if(move && move.id === hash) location.hash = move.name;
+    if(move && move.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+move.name);
     if(move) {
         openInfoPopup(move);
         let moveElement = document.getElementById(move.name);
@@ -211,10 +211,10 @@ window.addEventListener('hashchange', () => {
     let infoContainer = document.getElementById('infoPopupContainer');
     if(!location.hash) {infoContainer.className = 'closed'; return;}
 
-    let hash = decodeURIComponent(location.hash.replace('#',''));
+    let hash = decodeURIComponent(location.hash.substring(1));
 
     let move = moveHashes[hash] ?? orge_technic_info[hash];
-    if(move.id === hash) location.hash = move.name;
+    if(move.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+move.name);
     if(move && (infoContainer.itemId !== move.id || infoContainer.className !=='open')) {openInfoPopup(move);}
 
 });

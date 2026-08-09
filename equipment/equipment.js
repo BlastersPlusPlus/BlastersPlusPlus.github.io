@@ -44,22 +44,23 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         equipmentHashes[item.name.replace(/\s/g, '')] = item;
+        equipmentCache[item.id] = item;
         if(item.skill) skillsSet.add(item.skill);
         item.createData?.concat(item.upgradeData)?.forEach((data) =>
             data.materials?.forEach(material => {
                 materialsSet.add(material.id);
                 itemIcons[material.id] = material;
             })
-        )
-    })
+        );
+    });
 
     document.getElementById('skillFilter').addItems(skillsSet.values().toArray().toSorted().map(skillName => {
         return {
             text: skillName,
             value: skillName,
             selected: true,
-        }
-    }))
+        };
+    }));
 
 
     for (let i = 1; i <= 4; i++) document.getElementById('mat' + i + 'Filter')?.addItems(materialsSet.values().toArray().map(id => {
@@ -69,18 +70,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             value: material?.name,
             selected: true,
             html: `<div class="inline-icon glade${material.glade}"><img src="/images/itemIcons/item_${material?.sheet ?? 1}_${material?.iconRow}_${material?.iconCol}.png"></div>` + material?.name
-        }
-    }).toSorted((a, b) => a.text?.localeCompare(b.text)))
+        };
+    }).toSorted((a, b) => a.text?.localeCompare(b.text)));
 
 
     document.getElementById('loadContainer').classList.add('closed');
     document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid))
     generateGrid();
 
-    console.log(location.hash);
     let equipment;
-    if(location.hash) equipment = document.getElementById(location.hash.replace('#',''))?.equipment;
-    console.log(equipment);
+    let hash = decodeURIComponent(location.hash.substring(1));
+    if(location.hash) equipment = equipmentHashes[hash] ?? equipmentCache[hash];
+    if(equipment && equipment.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+equipment.name.replaceAll(' ',''));
+
+
+
     if(equipment) {
         openInfoPopup(equipment);
         let equipElement = document.getElementById(equipment.name);
@@ -162,12 +166,14 @@ function generateGrid() {
 
 window.addEventListener('hashchange', () => {
     console.log(location.hash);
+
     let equipmentInfoContainer = document.getElementById('infoPopupContainer');
     if(!location.hash) {equipmentInfoContainer.className = 'closed'; return;}
 
-    let equipment = equipmentHashes[location.hash.replace('#','')];
+    let hash = decodeURIComponent(location.hash.substring(1));
+    let equipment = equipmentHashes[hash] ?? equipmentCache[hash];
+    if(equipment && equipment.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+equipment.name.replaceAll(' ',''));
     if(equipment && (equipmentInfoContainer.equipmentId !== equipment.id || equipmentInfoContainer.className!=='open')) {openInfoPopup(equipment);}
-
 });
 
 document.addEventListener('keydown', function(e){
@@ -178,7 +184,7 @@ document.addEventListener('keydown', function(e){
 });
 
 function openInfoPopup(equipment) {
-    history.replaceState(null, null, '#'+(equipment.name ? equipment.name.replace(/\s/g, '') : equipment.id.replace(/\s/g, '')));
+    history.replaceState(null, null, '#'+(equipment.name ? equipment.name.replace(/\s/g, '') : equipment.id));
 
     document.getElementById('infoPopup').className = 'rank'+equipment.rank;
     document.getElementById('infoTitle').innerText = equipment.name ?? '';

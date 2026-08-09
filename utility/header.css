@@ -155,13 +155,13 @@ header {
             .headerNavigationTitle:hover + .headerNavigationPopupContainer,
             .headerNavigationPopupTrigger.open + .headerNavigationPopupContainer,
             .headerNavigationPopupContainer:has(nav:hover) {
-                height: 200px;
+                height: 16em;
                 min-height: min-content;
                 nav {height: min-content;}
             }
 
             .headerNavigationPopupContainer:has(:focus-visible) {
-                height: 200px !important;
+                height: 16em !important;
                 min-height: min-content;
                 nav {height: min-content;}
             }

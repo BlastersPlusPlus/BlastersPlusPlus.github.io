@@ -65,7 +65,7 @@
                     <div id="advanced-search-container" class="advanced-search-container">
                         <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
                             <div class="search-option-label">Rank: </div>
-                            <multi-select id="rankFilter" name="rankFilter" placeholder="Filter by rank..."  search="false">
+                            <multi-select id="rankFilter" class="search-options-input" name="rankFilter" placeholder="Filter by rank..."  search="false">
                                 <option value="E" selected>
                                     <div class="inline-icon"><img src="/images/rankIcons/all_text_rank01_e.png" alt="E"></div>
                                 </option>
@@ -88,7 +88,7 @@
                         </div>
                         <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
                             <div class="search-option-label">Tribe: </div>
-                            <multi-select id="tribeFilter" name="tribeFilter" placeholder="Filter by tribe..."  search="false">
+                            <multi-select id="tribeFilter" class="search-options-input" name="tribeFilter" placeholder="Filter by tribe..."  search="false">
                                 <option selected value="Brave">
                                     <div class="inline-icon"><img src="/images/tribeIcons/Brave.png" alt="Brave"></div>
                                 </option>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="advanced-search-item-wrapper" style="--select-width: 7.5rem;">
                             <div class="search-option-label">Role: </div>
-                            <multi-select id="roleFilter" name="roleFilter" placeholder="Filter by role..."  search="false">
+                            <multi-select id="roleFilter" class="search-options-input" name="roleFilter" placeholder="Filter by role..."  search="false">
                                 <option selected>Fighter</option>
                                 <option selected>Tank</option>
                                 <option selected>Healer</option>
@@ -132,23 +132,23 @@
                         </div>
                         <div class="advanced-search-item-wrapper movesFilter" style="--select-width: 10rem;">
                             <div class="search-option-label">Moves: </div>
-                            <multi-select id="AMoveFilter" name="AMoveFilter" placeholder="Filter by A move..." search listAll="false">
+                            <multi-select id="AMoveFilter" class="search-options-input" name="AMoveFilter" placeholder="Filter by A move..." search listAll="false">
                                 <option selected>No Move</option>
                             </multi-select>
                             <span>and</span>
-                            <multi-select id="Move1Filter" name="Move1Filter" placeholder="Filter by move..." search listAll="false">
+                            <multi-select id="Move1Filter" class="search-options-input" name="Move1Filter" placeholder="Filter by move..." search listAll="false">
                                 <option selected>No Move</option>
                             </multi-select>
                             <span>and</span>
-                            <multi-select id="Move2Filter" name="Move2Filter" placeholder="Filter by move..." search listAll="false">
+                            <multi-select id="Move2Filter" class="search-options-input" name="Move2Filter" placeholder="Filter by move..." search listAll="false">
                                 <option selected>No Move</option>
                             </multi-select>
                             <span>and</span>
-                            <multi-select id="Move3Filter" name="Move3Filter" placeholder="Filter by move..." search listAll="false">
+                            <multi-select id="Move3Filter" class="search-options-input" name="Move3Filter" placeholder="Filter by move..." search listAll="false">
                                 <option selected>No Move</option>
                             </multi-select>
                             <span>and</span>
-                            <multi-select id="Move4Filter" name="Move4Filter" placeholder="Filter by move..." search listAll="false">
+                            <multi-select id="Move4Filter" class="search-options-input" name="Move4Filter" placeholder="Filter by move..." search listAll="false">
                                 <option selected>No Move</option>
                             </multi-select>
                         </div>
@@ -160,6 +160,14 @@
                                 <option selected>Blasters ++</option>
                             </multi-select>
                         </div-->
+                        <div class="advanced-search-item-wrapper focus-inside">
+                            <label for="showCostumes" class="search-option-label">Show costumes: </label>
+                            <input type="checkbox" class="search-options-input" id="showCostumes">
+                        </div>
+                        <div class="advanced-search-item-wrapper focus-inside">
+                            <label for="showEquipTransformations" class="search-option-label">Show equip transformations </label>
+                            <input type="checkbox" class="search-options-input" id="showEquipTransformations">
+                        </div>
                     </div>
                 </div>
 

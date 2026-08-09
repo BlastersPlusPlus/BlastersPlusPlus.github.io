@@ -161,18 +161,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         }));
     }
 
-    document.querySelectorAll("#search-options-container multi-select").forEach(element => element.addEventListener('change', generateGrid));
+    document.querySelectorAll("#search-options-container .search-options-input").forEach(element => element.addEventListener('change', generateGrid));
 
     //sortedData = data;
     document.getElementById('loadContainer').classList.add('closed');
     generateGrid();
-    console.log(location.hash);
+
+
+    let hash = decodeURIComponent(location.hash.substring(1));
+
     let foundYokai;
-    if(location.hash) foundYokai = document.getElementById(location.hash.replace('#',''))?.yokai ?? yokaiHashes[location.hash.replace('#','')];
-    console.log(foundYokai);
+    if(location.hash) foundYokai = yokaiHashes[hash] ?? yokaiCache[hash];
+    if(foundYokai && foundYokai.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+foundYokai.searchName.replaceAll(' ',''));
+
     if(foundYokai) {
         openInfoPopup(foundYokai);
-        let yokaiElement = document.getElementById(foundYokai.name);
+        let yokaiElement = document.getElementById(foundYokai.searchName.replaceAll(' ',''));
         window.scrollBy(0,yokaiElement?.getBoundingClientRect()?.top ?? 0);
     }
 });
@@ -196,14 +200,15 @@ function generateGrid() {
 
     MovesFilters = MovesFilters.map(filter => new Set(filter));
 
-    let showCostumes =
+    let showCostumesTransformationsBase =
         searchValue !== ''
         || compareValue === 'Tribe'
         || compareValue === 'Role'
         || compareValue === 'Tier'
         || Array.from(document.querySelectorAll("#search-options-container multi-select")).reduce((acum,value) => acum || !value.areAllSelected(),false);
 
-    let showTransformations = showCostumes || compareValue === 'Stat total';
+    let showCostumes = showCostumesTransformationsBase || document.getElementById('showCostumes').checked;
+    let showTransformations = showCostumesTransformationsBase || document.getElementById('showEquipTransformations').checked;
 
     // Filters Yo-kai who should be shown
     sortedData = data
@@ -309,9 +314,9 @@ window.addEventListener('hashchange', () => {
     let yokaiInfoContainer = document.getElementById('infoPopupContainer');
     if(!location.hash) {yokaiInfoContainer.className = 'closed'; return;}
 
-    let hash = decodeURIComponent(location.hash.replace('#',''));
+    let hash = decodeURIComponent(location.hash.substring(1));
     let yokai = yokaiHashes[hash] ?? yokaiCache[hash];
-    if(yokai && yokai.id === hash) location.hash = yokai.searchName.replaceAll(' ','');
+    if(yokai && yokai.id === hash) history.replaceState(null, null, location.origin+location.pathname+'#'+yokai.searchName.replaceAll(' ',''));
     if(yokai && (yokaiInfoContainer.yokaiId !== yokai.id || yokaiInfoContainer.className!=='open')) {openInfoPopup(yokai);}
 
 });
@@ -324,12 +329,12 @@ document.addEventListener('keydown', function(e){
 });
 
 async function openInfoPopup(yokai) {
-    let yokaiHash = yokai.searchName?.replace(/\s/g, '') ?? yokai.id?.replace(/\s/g, '') ?? 'Yo-kai'+yokai.number;
+    let yokaiHash = yokai.searchName?.replace(/\s/g, '') ?? yokai.id;
     history.replaceState(null, null, '#'+yokaiHash);
     if(!yokai) return;
     console.log(yokai);
 
-    if(yokai.hidden && !yokai.costumeName) {
+    if(yokai.hidden && !yokai.costumeName && !yokai.isEquipTransformation) {
         let DOMElement = document.getElementById(yokai.name?.replace(/\s/g, '')) ??
             document.getElementById(yokai.id?.replace(/\s/g, '')) ?? document.getElementById('Yo-kai'+yokai.number);
 
@@ -671,7 +676,7 @@ async function openInfoPopup(yokai) {
 
 
     let transformations = document.getElementById('transformations');
-    transformations.classList.toggle('hidden',!(yokai.transformation?.length > 1));
+    transformations.classList.toggle('hidden',!(yokai.transformation?.length > 0));
     transformations.innerHTML = '';
     yokai.transformation?.forEach(({transformationID,equipID}) => {
         let transformationText = document.createElement('p');
