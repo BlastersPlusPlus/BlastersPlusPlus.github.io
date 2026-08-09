@@ -1,14 +1,22 @@
-@media all and (max-width: 600px) {
-    .FAQQuestion>.FAQQuestionHeader{
-        &>h1{font-size: 1em;}
-        &>.downArrow{width: 1em;}
+@media all and (max-width: 768px) {
+    .FAQQuestion{
+        border-radius: 3.25em;
+        &>.FAQQuestionHeader {
+            font-size: 1.25rem;
+            border-radius: 1em;
+        }
+        font-size: 0.8rem;
     }
 }
 
-@media all and (min-width: 600px) {
-    .FAQQuestion>.FAQQuestionHeader{
-        &>h1{font-size: 2em;}
-        &>.downArrow{width: 2em;}
+@media all and (min-width: 768px) {
+    .FAQQuestion{
+        border-radius: 4em;
+        &>.FAQQuestionHeader {
+            font-size: 2rem;
+            border-radius: 1em;
+        }
+        font-size: 1rem;
     }
 }
 
@@ -58,8 +66,7 @@ main {
 }
 
 .FAQQuestion {
-    padding: 1.5em;
-    border-radius: 50px;
+    padding: 2em;
     font-family: var(--font-standard), sans-serif;
     height: min-content;
     >.FAQQuestionHeader {
@@ -71,9 +78,11 @@ main {
         >h1 {
             text-align: center; margin-block: 0;
             margin-inline: 1em;
-            text-wrap: balance;
+            text-wrap: pretty;
+            font-size: 1em;
         };
         >.downArrow {
+            width: 1em;
             position: absolute;
             right: 0;
             height: 100%;
@@ -101,6 +110,36 @@ main {
         flex-direction: column;
         align-items: stretch;
         gap:2em;
+        border-bottom-left-radius: calc(50px - 2em);
+        -webkit-border-bottom-left-radius: calc(50px - 2em);
+        -moz-border-radius-bottomleft: calc(50px - 2em);
+
+        border-bottom-right-radius: calc(50px - 2em);
+        -webkit-border-bottom-right-radius: calc(50px - 2em);
+        -moz-border-radius-bottomright: calc(50px - 2em);
+
+        /*p:last-child {
+            border-bottom-left-radius: calc(50px - 2em);
+            -webkit-border-bottom-left-radius: calc(50px - 2em);
+            -moz-border-radius-bottomleft: calc(50px - 2em);
+
+            border-bottom-right-radius: calc(50px - 2em);
+            -webkit-border-bottom-right-radius: calc(50px - 2em);
+            -moz-border-radius-bottomright: calc(50px - 2em);
+
+            &::after {
+                content: '';
+                float: left;
+                float-wrap: wrap;
+                width: calc(50px - 2em);
+                height: calc(50px - 2em);
+
+                outline: 1px solid red;
+                corner-shape: scoop;
+                shape-outside: border-box;
+            }
+        }*/
+
 
         >section {
             font-size: 1em;
@@ -121,6 +160,14 @@ main {
         }
 
         iframe {aspect-ratio: 16/9;}
+
+
+        #tokenValue {
+            text-wrap: nowrap;
+            cursor: pointer;
+            &:hover, &:focus {text-decoration: underline};
+            &:active {color: blue}
+        }
 
 
     }

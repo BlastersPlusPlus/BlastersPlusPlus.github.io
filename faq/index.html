@@ -22,6 +22,15 @@
                 question = document.getElementById(location.hash.replace('#',''));
                 question?.classList.add('open');
             });
+
+
+            window.addEventListener('hashchange', () => {
+                let hash = decodeURIComponent(location.hash.substring(1));
+                let element = document.getElementById(hash);
+                if(element) {
+                    element.classList.add('open');
+                }
+            });
         </script>
     </head>
     <body>
@@ -30,7 +39,7 @@
         <div class="bodyContents">
             <main class="FAQContainer">
                 <article id="InstallMod" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>How do I install Blasters <span class="bukotsu">++</span>?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -41,11 +50,11 @@
                                 <li><a href="https://gamebanana.com/mods/457241" target="_blank">Download the mod file</a> and access your 3DS's SD Card. This can be done by placing it into
                                     your PC, or, on New 3DS consoles, accessing it via the Internet through System Settings
                                     → Data Management.</li>
-                                <li>Navigate through your 3DS's SD Card by going to 'luma/titles.' In short, you should be
-                                    inside the titles folder, with your full folder path being '[SD Card]/luma/titles.'</li>
+                                <li>Navigate through your 3DS's SD Card by going to <span class="code">/luma/titles</span>. In short, you should be
+                                    inside the titles folder, with your full folder path being <span class="code">[SD Card]/luma/titles</span>.</li>
                                 <li>Locate your YO-KAI WATCH BLASTERS titleID. This can vary depending on the version and
                                     region you have. If the titleID folder you need does not exist, create one with the
-                                    titleID you need. Here are the titleIDs for the international releases of the game:
+                                    titleID you need. Here are the titleIDs for the supported international releases of the game:
                                     <ul>
                                         <li>RCC PAL: 00040000001CEC00</li>
                                         <li>RCC NA: 00040000001CEB00</li>
@@ -54,8 +63,9 @@
                                     </ul>
                                     Once you've located or created your titleID
                                     folder, go inside this folder.</li>
-                                <li>Open the mod file that you downloaded earlier using an appropiate program such as WinRAR. Inside it there will be a 'romfs' folder. Drag
-                                    this folder into the folder you're in.</li>
+                                <li>Open the mod file that you downloaded earlier using an appropiate program such as WinRAR. Inside it there will be a folder named <span class="code">romfs</span>
+                                    and two files named <span class="code">code_eur.ips</span> and <span class="code">code_na.ips</span>. Drag the <span class="code">romfs</span> folder and the <span class="code">.ips</span> file corresponding to your region into the folder you're in.
+                                <strong>Rename the <span class="code">.ips</span> file to simply <span class="code">code.ips</span></strong>.</li>
                                 <li>Power off your console. With the SD card inserted, hold SELECT while powering it on. This should open the Luma menu.
                                     Make sure 'Enable game patching' is set (marked as (x)). If it's not, enable it and save the changes.</li>
                             </ol>
@@ -82,7 +92,7 @@
                     </div>
                 </article>
                 <article id="GameVersions" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>What game versions does Blasters <span class="bukotsu">++</span> support?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -95,7 +105,7 @@
                     </div>
                 </article>
                 <article id="ModNotWorking" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>Blasters <span class="bukotsu">++</span> isn't working, how do I fix it?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -106,22 +116,47 @@
                                 <li>Your console is modded and has CFW.</li>
                                 <li>Game Patching is enabled in Luma Settings (access the Luma menu by holding SELECT while powering on the console).</li>
                                 <li>You are using the correct title ID for your game (e.g. use title ID 00040000001CEB00 for Red Cat Corps North American version).</li>
-                                <li>Your file path looks as follows: <span class="code">root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</span></li>
+                                <li>Your file path looks as follows: <span class="code">root/luma/titles/&lt;TITLE_ID&gt;/romfs/&lt;MOD_FILES&gt;</span>.</li>
                                 <li>You are playing on the latest update.</li>
                             </ol>
                         </section>
-                        <section><h2>Citra</h2>
+                        <section><h2>Citra forks</h2>
                             <ol>
                                 <li>You placed the "romfs" folder into the game's mods folder</li>
+                                <li>You have the Moon Rabbit Crew update installed. If not, see <a href="#FatalError">Why do I get a fatal error when opening Blasters ++ on Citra or Azahar?</a>.</li>
                             </ol>
                         </section>
                         <section>
-                            <p>If the above doesn't work, you can ask for support in <a target="_blank" href="https://discord.gg/nxCvVJ6fgt">our Discord server</a>.</p>
+                            <p>If the above doesn't work, you can ask for support in <a target="_blank" href="https://discord.gg/nxCvVJ6fgt">our Discord server</a>'s help forum.</p>
+                        </section>
+                    </div>
+                </article>
+                <article id="FatalError" class="FAQQuestion whiteOverWindow shadow">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
+                        <h1>Why do I get a fatal error when opening Blasters <span class="bukotsu">++</span> on Citra or Azahar?</h1>
+                        <button class="downArrow"></button>
+                    </div>
+                    <div class="answerContainer">
+                        <section>
+                            <p>This usually happens because you don't have the Moon Rabbit Crew update installed.
+                                To do so, you will need to get the <span class="code">.cia</span> file for it. You can do so by <a href="https://3ds.hacks.guide/dumping-titles-and-game-cartridges.html">dumping it from your system</a>.
+                                Afterwards, you can install it on the emulator like any other title.<br>
+                            The title ID of the update is different than that of the base game. Here are the title IDs for the supported international released of the update:</p>
+                            <ul>
+                                <li>RCC PAL: 0004000E001CEC00</li>
+                                <li>RCC NA: 0004000E001CEB00</li>
+                                <li>WDS PAL: 0004000E001CF000</li>
+                                <li>WDS NA: 0004000E001CEF00</li>
+                            </ul>
+                        </section>
+                        <section>
+                            <p>If the above doesn't work, you can ask for support in <a target="_blank" href="https://discord.gg/nxCvVJ6fgt">our Discord server</a>'s help forum.<br>
+                            <strong>The Blasters ++ team does not endorse piracy. Do not pirate the game or the update, and do not ask for help with piracy in the Discord server.</strong></p>
                         </section>
                     </div>
                 </article>
                 <article id="UpdateMod" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>How do I update Blasters <span class="bukotsu">++</span>?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -132,7 +167,7 @@
                     </div>
                 </article>
                 <article id="TurnOffMod" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>If I turn off Blasters <span class="bukotsu">++</span>, will I lose my Yo-kai?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -147,7 +182,7 @@
                     </div>
                 </article>
                 <article id="PlayOnline" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>Can I play Blasters <span class="bukotsu">++</span> online?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -155,8 +190,9 @@
                         <section>
                             <h2>3DS</h2>
                             <p>The 3DS online servers shut down in April of 2024, but there are custom-built servers for several games.
-                                For Blasters, there is Level256 network, which disables game patching, meaning that <strong>you cannot regularly use Blasters ++ and Level256 at the same</strong>.<br>
-                                At the time, Pretendo Network does <b>not</b> support Blasters yet.</p>
+                            Pretendo Network offers free custom servers for Yo-kai Watch Blasters, which can be used to play Blasters ++ online.
+                                You can learn how to use the service alongside the mod <a href="#PretendoNetwork">here</a>.</p>
+                            <p>There are other custom servers, namely the ones by Level256. However, this service disables game patching, meaning that <b>you cannot regularly use Blasters ++ and Level256 at the same time.</b></p>
                         </section>
                         <section>
                             <h2>Citra forks</h2>
@@ -167,8 +203,28 @@
                                 Replace the <span class="code">web_api_url</span> lines with the following:</p>
                             <p><span class="code">web_api_url\default=false<br>
                                     web_api_url=http:/88.198.47.46:5000</span></p>
+                            <p>Below these lines, you will also find <span class="code">citra_username</span> and <span class="code">citra_token</span>.
+                            Add your preferred username (must be between 4 and 20 alphanumeric characters) and a Citra token.
+                                <span class="noJS">You can use the following randomly generated token (click to copy to your clipboard): <span id="tokenValue" class="code" onclick="navigator.clipboard.writeText(this.innerText);"></span>.</span></p>
                             <p>After saving your changes (and ensuring the save was succesful!), you should be able to join multiplayer rooms. If the program is currently open, you will need to close and reopen it to let the changes take place.</p>
                             <p>To play with others, you will need to join a room. In the multiplayer menu, you can either browse public rooms or directly join one given its address and port. Once in the room, you can open the game and go to <strong>local multiplayer</strong> to start playing.</p>
+                            <script>
+                                let tokenValue = document.getElementById('tokenValue');
+                                let baseToken = '47fc3831-8f68-1d7f-b189-81652ff6a56b';
+                                let newToken = '';
+                                for(let i = 0; i < baseToken.length; i++) {
+                                    if(baseToken.charAt(i) == '-') newToken+='-';
+                                    else newToken += Math.floor(Math.random()*16).toString(16);
+                                }
+
+                                tokenValue.innerText = newToken;
+                            </script>
+                        </section>
+                        <section>
+                            <h2>Cross-platform multiplayer</h2>
+                            <p>Console and emulator players are unable to play together if the emulator player is using the method outlined before.
+                            However, cross-platform multiplayer is supported by Pretendo Network on Azahar with some prior setup.<br>
+                            You can learn how use the service alongside the mod, including an installation guide for Azahar <a href="#PretendoNetwork">here</a>.</p>
                         </section>
                         <section>
                             <p>Note that, when playing with others without the mod, they won't be able to see Blasters ++ Yo-kai. Depending on who hosts the room, other unexpected behaviors will occur, leading to and including game crashes.<br>
@@ -178,15 +234,17 @@
                 </article>
                 <article id="PretendoNetwork" class="FAQQuestion whiteOverWindow shadow">
                     <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
-                        <h1>How can I use Blasters <span class="bukotsu">++</span> with Pretendo Network when the service is active?</h1>
+                        <h1>How can I use Blasters <span class="bukotsu">++</span> with Pretendo Network?</h1>
                         <button class="downArrow"></button>
                     </div>
                     <div class="answerContainer">
                         <section>
                             <p>In order to play Blasters ++ online using Pretendo Network, you will need to first install the service. You can do so by following <a href="https://pretendo.network/docs/install" target="_blank">their installation guide</a>.</p>
                             <p>The Pretendo Network team has developed a patch to ensure that Blasters ++ players can use the service without disrupting vanilla players. When using Blasters ++ and their service, <b>you must apply this patch</b>.<br>
-                            There are two versions depending on your game region: <a href="code_na.ips" download="code.ips" target="_blank">NA</a> and <a href="code_pal.ips" download="code.ips" target="_blank">PAL</a>. To install the patch, simply download the version for your region from the corresponding link and place it in your title ID folder, ensuring it's named <span class="code">code.ips</span>.
-                            The patches will also be provided alongside future releases of the mod.<br>
+                            There are two versions depending on your game region: <a href="code_na.ips" download="code.ips" target="_blank">NA</a> and <a href="code_pal.ips" download="code.ips" target="_blank">PAL</a>.
+                                To install the patch, simply download the version for your region from the corresponding link and place it in your title ID folder,
+                                <strong>ensuring it's named <span class="code">code.ips</span></strong>.
+                            The patches are also included in the latest release and will be provided alongside future releases of the mod.<br>
                             The result should look as pictured below, with the title ID corresponding to your game version.</p>
                             <img src="code.ips_installation_example.webp" alt="Installation example of the code.ips patch.">
                             <p>Ensure that, while using the service, you follow Pretendo Networks's rules and code of conduct.
@@ -197,7 +255,7 @@
                     </div>
                 </article>
                 <article id="NewMedalliumEntries" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>Why can't I see the new Yo-kai in the Medallium?</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -211,7 +269,7 @@
                     </div>
                 </article>
                 <article id="JibanyanKomasanB" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>I don't have access to Jibanyan B and Komasan B after beating Whisped Cream</h1>
                         <button class="downArrow"></button>
                     </div>
@@ -222,7 +280,7 @@
                     </div>
                 </article>
                 <article id="Level256" class="FAQQuestion whiteOverWindow shadow">
-                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen()">
+                    <div class="FAQQuestionHeader focus-inside" onclick="this.parentElement.toggleOpen();">
                         <h1>Blasters <span class="bukotsu">++</span> doesn't work with Level256 or after installing it</h1>
                         <button class="downArrow"></button>
                     </div>
